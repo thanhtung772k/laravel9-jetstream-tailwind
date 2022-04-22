@@ -595,39 +595,6 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-.container {
-  width: 100%;
-}
-@media (min-width: 640px) {
-
-  .container {
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px) {
-
-  .container {
-    max-width: 768px;
-  }
-}
-@media (min-width: 1024px) {
-
-  .container {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px) {
-
-  .container {
-    max-width: 1280px;
-  }
-}
-@media (min-width: 1536px) {
-
-  .container {
-    max-width: 1536px;
-  }
-}
 .prose {
   color: var(--tw-prose-body);
   max-width: 65ch;
@@ -1116,9 +1083,6 @@ select {
 .h-20 {
   height: 5rem;
 }
-.h-\[\] {
-  height: ;
-}
 .h-\[56px\] {
   height: 56px;
 }
@@ -1173,11 +1137,11 @@ select {
 .w-\[100\%\] {
   width: 100%;
 }
-.w-\[1280px\] {
-  width: 1280px;
-}
 .w-\[115px\] {
   width: 115px;
+}
+.w-\[256px\] {
+  width: 256px;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1190,6 +1154,9 @@ select {
 }
 .max-w-xl {
   max-width: 36rem;
+}
+.max-w-\[100\%\] {
+  max-width: 100%;
 }
 .max-w-6xl {
   max-width: 72rem;
@@ -1431,6 +1398,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(235 237 239 / var(--tw-bg-opacity));
 }
+.bg-\[\#303c54\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(48 60 84 / var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -1543,9 +1514,6 @@ select {
 .pb-1 {
   padding-bottom: 0.25rem;
 }
-.pt-12 {
-  padding-top: 3rem;
-}
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1588,18 +1556,11 @@ select {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
 .font-medium {
   font-weight: 500;
 }
 .font-semibold {
   font-weight: 600;
-}
-.font-bold {
-  font-weight: 700;
 }
 .uppercase {
   text-transform: uppercase;
@@ -1689,10 +1650,6 @@ select {
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-.text-\[\#ffa400\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 164 0 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -2198,11 +2155,6 @@ select {
 
   .md\:col-span-1 {
     grid-column: span 1 / span 1;
-  }
-
-  .md\:mx-auto {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .md\:mt-0 {
