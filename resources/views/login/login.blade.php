@@ -9,7 +9,7 @@
         </div>
 
         <div class="w-[115px]">
-            <select class="form-control" name="" id="">
+            <select class="form-control w-[112px]" name="" id="">
                 <option value="en">Tiếng Anh</option>
                 <option value="jp">Tiếng Việt</option>
                 <option value="vi">Tiếng Nhật</option>

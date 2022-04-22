@@ -1,0 +1,152 @@
+.custom-center {
+    margin: auto;
+}
+
+.nav__menu {
+    color: #fff;
+}
+
+.menu-items__backgound {
+    background-color: #3c4b64;
+    height: 770px;
+    color: #d8dbe0;
+    font-size: 15px;
+}
+
+.menu-items__list, .menu-items__list1 {
+    height: 48px;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    display: flex;
+}
+
+.menu-items__list1 {
+    text-decoration: none;
+}
+
+.menu-items__list2 {
+    height: 48px;
+    align-items: center;
+    position: relative;
+    padding-left: 52px;
+    display: flex;
+    background-color: #3b4659;
+}
+
+.menu-items__list2:hover {
+    color: #fff;
+    background-color: #321fdb;
+    cursor: pointer;
+}
+
+.menu-items__icon {
+    padding: 16px;
+    transition: 0.4s;
+    transform: rotate(0deg);
+}
+
+.menu-items__nav {
+    animation: dilen 0.4s forwards;
+    color: #fff;
+    padding-left: 10px;
+}
+
+@keyframes dilen {
+    from {
+        opacity: 0;
+        margin-left: 0;
+    }
+    to {
+        opacity: 1;
+        margin-left: -270px;
+    }
+}
+
+.header__list-bar {
+    padding-left: 1.25rem;
+}
+
+.header__list-bar:hover {
+    cursor: pointer;
+}
+
+.menu-items__icon--tranform {
+    transition: 0.2s;
+    transform: rotate(-90deg);
+    transform-origin: 17% 50%
+}
+
+.menu-items__list:hover {
+    color: #fff;
+    background-color: #321fdb;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menu-items__title {
+    width: 100%;
+    position: absolute;
+    top: 27px;
+    padding-left: 14px;
+    font-size: 13px;
+}
+
+.menu-items__footer {
+    line-height: 44px;
+    text-align: right;
+    padding-left: 10px;
+}
+
+.menu-items__footer:hover {
+    background-color: #2a3446;
+    cursor: pointer;
+}
+
+.menu-items__footer:hover i{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.header-navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-navbar__right {
+    display: flex;
+    justify-content: space-between;
+    width: 260px;
+}
+
+.header-navbar__notify, .header-navbar__acount {
+    font-size: 30px;
+    opacity: 0.7;
+    margin-right: 20px;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.subheader-nav {
+    border-top: 1px solid #d8dbe0;
+    margin-top: 2px;
+}
+
+.subheader-nav__space {
+    color: #807676;
+    padding: 0 10px;
+}
+
+.cus-btn-style {
+    color: #413d3d;
+    font-size: 14px;
+    border: none;
+    width: 120px;
+    height: 36px;
+}
+
+.cus-select-btn {
+    font-size: 16px;
+    width: 112px;
+    margin-top: 12px;
+}

@@ -1,20 +1,47 @@
+<script>
+    $(document).ready(function () {
+
+    })
+</script>
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+
+    <div class="header-navbar pt-1">
+        <div class="header__list-bar shrink-0 flex items-center">
+            <i class="fa-solid fa-bars opacity-40 text-xl"></i>
+        </div>
+
+        <div class="header-navbar__right">
+            <div class="header-navbar__notify">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+
+            <div class="header-navbar__languages form-group cus-select-btn">
+                <select class="form-control text-xs" id="exampleFormControlSelect1">
+                    <option>Tiếng Anh</option>
+                    <option>Tiếng Việt</option>
+                    <option>Tiếng Nhật</option>
+                </select>
+            </div>
+
+            <div class="header-navbar__acount">
+                <i class="fa-solid fa-user-large"></i>
+            </div>
+        </div>
+    </div>
+
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    <div class="subheader-nav" style="">
+        <div class="flex justify-between h-16 items-center">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
-                    </a>
-                </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
+                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+                    <a href="" class="opacity-80">Trang chủ </a>
+                    <span class="subheader-nav__space">/</span>
+                    <a href="" class="opacity-80">Công số </a>
+                    <span class="subheader-nav__space">/</span>
+                    Danh sách công số
                 </div>
             </div>
 
@@ -139,9 +166,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+
             </x-jet-responsive-nav-link>
         </div>
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
