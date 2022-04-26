@@ -55,12 +55,12 @@
                     </div>
                 </div>
                 <div class="col-sm-3 mt-[24px]">
-                    <button type="button" class="btn btn-primary cus-btn-style bg-[#c2f2ff]" >Tìm kiếm</button>
-                    <button type="button" class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]" >Đặt lại</button>
+                    <button type="button" class="btn btn-primary cus-btn-style bg-[#c2f2ff]" >@lang('lang.search')</button>
+                    <button type="button" class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]">@lang('lang.reset')</button>
                 </div>
                 <div class="col-sm- mt-[24px] float-right">
-                    <button type="button" class="btn btn-primary cus-btn-style bg-[#c2f2ff]" >Check in</button>
-                    <button type="button" class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]" >Check out</button>
+                    <button type="button" class="btn btn-primary cus-btn-style bg-[#c2f2ff]" >@lang('lang.checkin')</button>
+                    <button type="button" class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]" >@lang('lang.checkout')</button>
                 </div>
             </div>
         </div>
