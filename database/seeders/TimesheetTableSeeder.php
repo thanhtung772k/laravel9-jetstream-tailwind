@@ -20,7 +20,7 @@ class TimesheetTableSeeder extends Seeder
         User::factory()->count(2)->create()->each(function ($user): void {
             $month = now();
             $start = now()->parse($month)->startOfMonth();
-            $end = now()->parse($month)->endOfMonth();
+            $end = now();
             $dates = [];
             $i = -1;
             // sử dụng cách này có thể lấy được ngày và tháng theo chỉ định. còn nếu tháng hiện tại thì now()->format xong explode()

@@ -21,6 +21,7 @@
                     <tr class="text-center items-center">
                         <th scope="col">#</th>
                         <th scope="col">Ngày</th>
+                        <th scope="col">Thứ</th>
                         <th scope="col">Thời gian bắt đầu</th>
                         <th scope="col">Thời gian kết thúc</th>
                         <th scope="col">Giờ bắt đầu tính công</th>
@@ -33,234 +34,51 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{--                        @forelse ($users as $user)--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>-</td>
-                        <td>
-                            -
-                        </td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @empty--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @endforelse--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @empty--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @endforelse--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @empty--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @endforelse--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @empty--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @endforelse--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @empty--}}
-                    <tr class="text-center">
-                        <th scope="row">13213</th>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>Tuhng</td>
-                        <td>Mail</td>
-                        <td>
-                            12312
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary text-xs">Bổ sung công</butt
-                        </td>
-                    </tr>
-                    {{--                        @endforelse--}}
+                    @foreach ($data as $index => $value)
+                        <tr class="text-center">
+                            <th scope="row">{{$index+1}}</th>
+                            <td class="whitespace-nowrap">{{$value->date}}</td>
+                            <td class="whitespace-nowrap">{{now()->parse($value->date)->format('l')}}</td>
+                            @if($value->check_in != null)
+                                <td>{{ $value->check_in }}</td>
+                            @else
+                                <td>-</td>
+                            @endif
+                            @if($value->check_out != null)
+                                <td>{{ $value->check_out }}</td>
+                            @else
+                                <td>-</td>
+                            @endif
+                            @if($value->check_out != null && $value->check_in != null)
+                                <td>17:30</td>
+                            @else
+                                <td>-</td>
+                            @endif
+                            @if($value->check_out != null && $value->check_in != null)
+                                <td>08:00</td>
+                            @else
+                                <td>-</td>
+                            @endif
+                            @if(isset($value->check_out) && isset($value->check_in) && now()->parse($value->check_out)->diffInHours(now()->parse($value->check_in)) > 4)
+                                <td>01:30</td>
+                            @else
+                                <td>-</td>
+                            @endif
+                            <td>{{$value->actual_working_time}}</td>
+                            <td>{{$value->paid_working_time}}</td>
+                            <td>{{$value->note}}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-primary text-xs">@lang('lang.timekeeping')</button>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
-                <div>
-                    {{--                    {{ $users->links('pagination::bootstrap-4') }}--}}
-                </div>
             </div>
-        </div>
 
+        </div>
+        <div class="flex justify-center">
+            {{ $data->links("pagination::bootstrap-4") }}
+        </div>
     </div>
 </div>

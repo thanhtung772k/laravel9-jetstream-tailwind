@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\User\UserIndex;
+use App\Http\Controllers\TimesheetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +28,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/ecs', function () {
-    return view('login.login');
-});
+Route::get('/home', [TimesheetController::class,'index']);
+

@@ -25,13 +25,20 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * Index the repository
+     */
+    public function getTimesheet()
+    {
+        return $this->model->paginate(10);
     }
 
 }

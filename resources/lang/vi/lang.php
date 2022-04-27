@@ -17,4 +17,5 @@ return [
     'reset' => 'Đặt lại',
     'checkin' => 'Check in',
     'checkout' => 'Check out',
+    'timekeeping' => 'Bổ sung công',
 ];

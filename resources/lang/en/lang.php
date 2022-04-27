@@ -17,5 +17,5 @@ return [
     'reset' => 'Reset',
     'checkin' => 'Check in',
     'checkout' => 'Check out',
-
+    'timekeeping' => 'Additional Timesheet',
 ];
