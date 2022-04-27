@@ -24,6 +24,14 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         return Timesheet::class;
     }
 
+    /**
+     * Index the repository
+     */
+    public function getTimesheet()
+    {
+        return $this->model->get();
+    }
+
 
 
     /**
