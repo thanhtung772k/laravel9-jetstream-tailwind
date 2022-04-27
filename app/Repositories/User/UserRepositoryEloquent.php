@@ -34,4 +34,12 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    /**
+     * Index all user the repository
+     */
+    public function getAllUser()
+    {
+        return $this->model->all();
+    }
+
 }

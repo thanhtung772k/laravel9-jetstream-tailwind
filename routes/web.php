@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\User\UserIndex;
+use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\CommandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +24,18 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home.dashboard');
-    })->name('dashboard');
+//    Route::get('/dashboard', function () {
+//        return view('home.dashboard');
+//    })->name('dashboard');
+    // ........................ route home ........................
+    Route::get('/home', [TimesheetController::class,'index'])->name('dashboard');
+    Route::post('/home-checkin',[TimesheetController::class,'checkIn'])->name('check_in');
+    Route::post('/home-checkout',[TimesheetController::class,'checkOut'])->name('check_out');
+});
+Route::get('batch_01', [CommandController::class,'insert'])->name('batch_01');
+Route::get('/test',function (){
+    $a= gmdate('H:i:s', 7200);
+    return $a;
 });
 
-Route::get('/ecs', function () {
-    return view('login.login');
-});
+
