@@ -29,4 +29,15 @@ class TimesheetService extends BaseService
     {
         return $this->repository->getTimesheet();
     }
+
+    /**
+     * search date Timesheet
+     * @param $fromDate
+     * @param $toDate
+     * @return mixed
+     */
+    public function searchDateTimesheet($fromDate, $toDate)
+    {
+        return $this->repository->searchDateTimesheet($fromDate, $toDate);
+    }
 }

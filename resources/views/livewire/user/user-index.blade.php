@@ -1,5 +1,6 @@
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
+
         <div class="form-group w-[72px] ">
             <select class="form-control text-sm" id="exampleFormControlSelect1">
                 <option>10</option>
@@ -9,6 +10,7 @@
             </select>
         </div>
         <span class="text-sm">Hiển thị 1 đến 10 của 25 bản ghi</span>
+
     </div>
     <div class="mt-2 text-sm text-gray-500">
         <div class="row">
@@ -77,8 +79,14 @@
             </div>
 
         </div>
-        <div class="flex justify-center">
-            {{ $data->links("pagination::bootstrap-4") }}
-        </div>
+        @if(count($data) > 0 )
+            <div class="flex justify-center">
+                {{ $data->links("pagination::bootstrap-4")}}
+            </div>
+        @else
+            <div class="flex justify-center">
+                Không tìm thấy dữ liệu
+            </div>
+        @endif
     </div>
 </div>

@@ -41,4 +41,15 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         return $this->model->paginate(10);
     }
 
+    /**
+     * Search date the repository
+     * @param $fromDate
+     * @param $toDate
+     * @return string
+     */
+    public function searchDateTimesheet($fromDate, $toDate)
+    {
+        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->paginate(10);
+    }
+
 }

@@ -27,6 +27,7 @@ Route::middleware([
         return view('home.dashboard');
     })->name('dashboard');
 });
-
+// ........................ route home ........................
 Route::get('/home', [TimesheetController::class,'index']);
+Route::post('/home', [TimesheetController::class,'search']);
 
