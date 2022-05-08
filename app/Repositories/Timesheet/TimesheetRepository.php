@@ -15,4 +15,28 @@ interface TimesheetRepository extends RepositoryInterface
      * Index the repository
      */
     public function getTimesheet();
+
+    /**
+     * Search date the repository
+     * @param $fromDate
+     * @param $toDate
+     * @return mixed
+     */
+    public function searchDateTimesheet($fromDate,$toDate);
+
+    /**
+     * checkin date the repository
+     * @param $checkInDate
+     * @param $checkInHour
+     * @return mixed
+     */
+    public function checkIndateTimesheet($checkInDate, $checkInHour);
+
+    /**
+     * checkout date the repository
+     * @param $checkOutDate
+     * @param $checkOutHour
+     * @return mixed
+     */
+    public function checkOutdateTimesheet($checkOutDate, $checkOutHour);
 }

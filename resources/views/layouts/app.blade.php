@@ -94,23 +94,23 @@
         </div>
     </div>
     <div class="nav__sub-menu min-h-screen bg-gray-100 ml-64">
-        <div class="fixed z-10 w-full">
+        <div class="fixed z-[11] w-full nav__sub-menu-width">
             @livewire('navigation-menu')
         </div>
 
-        <!-- Page Heading -->
-        @if (isset($header))
+        <div class="nav__sub-header">
+            <!-- Page Heading -->
             <header class="bg-white shadow pt-[120px]">
                 <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
-    @endif
 
-    <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
     </div>
 </div>
 <script>
@@ -122,9 +122,10 @@
             $(this).children('i').toggleClass('menu-items__icon--tranform ')
         });
         $('.header__list-bar').click(function () {
-            console.log(12312)
             $('.nav__menu').toggleClass('menu-items__nav');
             $('.nav__sub-menu').toggleClass('ml-64', 200);
+            $('.fixed.w-full').toggleClass('nav__sub-menu-width',200);
+            $('.nav__sub-header').toggleClass('w-[1691px]',200);
         });
     });
 </script>

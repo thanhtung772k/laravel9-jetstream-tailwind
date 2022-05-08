@@ -23,10 +23,17 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home.dashboard');
-    })->name('dashboard');
+//    Route::get('/dashboard', function () {
+//        return view('home.dashboard');
+//    })->name('dashboard');
+    // ........................ route home ........................
+    Route::get('/home', [TimesheetController::class,'index'])->name('dashboard');
+    Route::post('/home', [TimesheetController::class,'search']);
+    Route::post('/home-checkin',[TimesheetController::class,'checkIn'])->name('check_in');
+    Route::post('/home-checkout',[TimesheetController::class,'checkOut'])->name('check_out');
 });
 
-Route::get('/home', [TimesheetController::class,'index']);
-
+Route::get('/test',function (){
+    $a= gmdate('H:i:s', 7200);
+    return $a;
+});

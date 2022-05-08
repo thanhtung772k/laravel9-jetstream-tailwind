@@ -18,4 +18,13 @@ return [
     'checkin' => 'Check in',
     'checkout' => 'Check out',
     'timekeeping' => 'Bổ sung công',
+    'date' => 'Ngày',
+    'dayofweek' => 'Thứ',
+    'checkin_pay' => 'Giờ bắt đầu tính công',
+    'checkout_pay' => 'Giờ kết thúc tính công',
+    'lunch_break_time' => 'Thời gian nghỉ trưa',
+    'actual_working_time' => 'Giờ công thực tế',
+    'paid_working_time' => 'Giờ công tính lương',
+    'note' => 'Chi tiết',
+    'action' => 'Hoạt động',
 ];

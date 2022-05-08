@@ -18,4 +18,13 @@ return [
     'checkin' => 'Check in',
     'checkout' => 'Check out',
     'timekeeping' => 'Additional Timesheet',
+    'date' => 'date',
+    'dayofweek' => 'Day of week',
+    'checkin_pay' => 'Checkin pay',
+    'checkout_pay' => 'Checkout pay',
+    'lunch_break_time' => 'Lunch break time',
+    'actual_working_time' => 'Actual working time',
+    'paid_working_time' => 'Paid working time',
+    'note' => 'Note',
+    'action' => 'Action',
 ];
