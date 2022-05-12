@@ -11,5 +11,8 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface UserRepository extends RepositoryInterface
 {
-    //
+    /**
+     * Index the repository
+     */
+    public function getAllUser();
 }
