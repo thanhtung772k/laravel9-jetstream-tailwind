@@ -69,8 +69,42 @@ class TimesheetService extends BaseService
      * @param $userID
      * @return mixed
      */
-    public function createDate($date,$userID)
+    public function createDate($date, $userID)
     {
-        return $this->repository->createDate($date,$userID);
+        return $this->repository->createDate($date, $userID);
+    }
+
+    /**
+     * get AddTimesheet Index Service
+     * @param $timesheetID
+     * @return mixed
+     */
+    public function getIDTimesheet($timesheetID)
+    {
+        return $this->repository->getIDTimesheet($timesheetID);
+    }
+
+    /**
+     * get date timesheet now
+     * @param $dateTime
+     * @return mixed
+     */
+    public function dateTimesheet($dateTime)
+    {
+        return $this->repository->dateTimesheet($dateTime);
+    }
+
+    /**
+     * get date timsheet early
+     * @return mixed
+     */
+    public function dateTimesheetEarly()
+    {
+        return $this->repository->dateTimesheetEarly();
+    }
+
+    public function countTimesheet()
+    {
+        return $this->repository->countTimesheet();
     }
 }

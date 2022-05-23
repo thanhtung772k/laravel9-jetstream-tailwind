@@ -42,8 +42,12 @@ class Timesheet extends Model
     {
         $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_in']));
         $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_out']));
-        if ((config('constant.thirteem_haftpast_PM') - $sumOut) <= 0 && (config('constant.twelfth_PM') - $sumIn) >= 0) {
+        if ($this->attributes['check_in'] === null || $this->attributes['check_out'] === null) {
+            $lunchBreak = null;
+        } elseif ((config('constant.thirteem_haftpast_PM') - $sumOut) <= config('constant.positive_integer') && (config('constant.twelfth_PM') - $sumIn) >= config('constant.positive_integer')) {
             $lunchBreak = config('constant.one_haftpast_hour');
+        } elseif ((config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
+            $lunchBreak = null;
         } else {
             $lunchBreak = null;
         }
@@ -57,6 +61,7 @@ class Timesheet extends Model
      */
     public function getCheckoutPayAttribute()
     {
+        $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_in']));
         $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_out']));
         if (config('constant.twelfth_PM') < $sumOut && $sumOut <= config('constant.thirteem_haftpast_PM')) {
             $sumOut = config('constant.twelfth_PM');
@@ -64,7 +69,7 @@ class Timesheet extends Model
         if (config('constant.seventeen_haftpast_PM') < $sumOut) {
             $sumOut = config('constant.seventeen_haftpast_PM');
         }
-        if ($this->attributes['check_out'] === null) {
+        if ($this->attributes['check_out'] === null || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
             $sumOut = null;
         }
         return $sumOut;
@@ -78,15 +83,16 @@ class Timesheet extends Model
     public function getCheckinPayAttribute()
     {
         $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_in']));
+        $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_out']));
         //check in before 8h
-        if ((config('constant.eight_AM') - $sumIn) > 0) {
+        if ((config('constant.eight_AM') - $sumIn) > config('constant.positive_integer')) {
             $sumIn = config('constant.eight_AM');
         }
         //check in from 12h to 13h30
         if (config('constant.twelfth_PM') <= $sumIn && $sumIn <= config('constant.thirteem_haftpast_PM')) {
             $sumIn = config('constant.thirteem_haftpast_PM');
         }
-        if ($this->attributes['check_out'] === null) {
+        if ($this->attributes['check_out'] === null || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer') || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
             $sumIn = null;
         }
         return $sumIn;
@@ -101,18 +107,20 @@ class Timesheet extends Model
     {
         $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_in']));
         $sum = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['paid_working_time']));
-        if ($sum !== config('constant.eight_AM')) {
+        if ($this->attributes['check_in'] === null || $this->attributes['paid_working_time'] === null || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
+            $note = null;
+        } elseif ($sum !== config('constant.eight_AM')) {
             $sumNote = config('constant.eight_AM') - $sum;
             $note = __('lang.early') . gmdate("H:i:s", $sumNote);
-        } elseif (config('constant.twelfth_PM') - $sumIn <= 0) {
-            if (config('constant.thirteem_haftpast_PM') - $sumIn >= 0) {
+        } elseif (config('constant.twelfth_PM') - $sumIn <= config('constant.positive_integer')) {
+            if (config('constant.thirteem_haftpast_PM') - $sumIn >= config('constant.positive_integer')) {
                 $sumIn = config('constant.thirteem_haftpast_PM');
             }
             $sumNote = config('constant.seventeen_haftpast_PM') - $sumIn;
             if ($sumNote == config('constant.four_hour')) {
                 $note = null;
             } else {
-                $note = __('lang.early'). gmdate("H:i:s", $sumNote);
+                $note = __('lang.early') . gmdate("H:i:s", $sumNote);
             }
         } else {
             $note = null;

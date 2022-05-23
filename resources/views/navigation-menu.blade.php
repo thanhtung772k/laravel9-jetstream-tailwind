@@ -76,18 +76,10 @@
 
     <!-- Primary Navigation Menu -->
     <div class="subheader-nav" style="">
-        <div class="flex justify-between h-16 items-center">
+        <div class="flex justify-between h-16 items-center cus-border-b">
             <div class="flex">
-                <!-- Logo -->
-
-                <!-- Navigation Links -->
-                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-                    <a href="" class="opacity-80">@lang('lang.dashboard')  </a>
-                    <span class="subheader-nav__space">/</span>
-                    <a href="" class="opacity-80">@lang('lang.timesheets') </a>
-                    <span class="subheader-nav__space">/</span>
-                    @lang('lang.list_timesheets')
-                </div>
+                <!-- Navigation breadcrumb links -->
+                @yield('breadcrumb')
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

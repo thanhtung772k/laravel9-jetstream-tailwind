@@ -17,12 +17,13 @@ class CreateAddTimesheetsTable extends Migration
             $table->id();
             $table->foreignId('timesheet_id');
             $table->foreignId('user_id');
-            $table->time('check_in_real');
-            $table->time('check_out_real');
-            $table->time('check_int_request');
-            $table->time('check_out_request');
-            $table->string('evidence',255);
-            $table->string('description',255);
+            $table->time('check_in_real')->nullable();
+            $table->time('check_out_real')->nullable();
+            $table->time('check_int_request')->nullable();
+            $table->time('check_out_request')->nullable();
+            $table->string('evidence', 255)->nullable();
+            $table->string('description', 255);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

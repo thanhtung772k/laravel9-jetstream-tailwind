@@ -11,7 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/home.js', 'public/js')
+    .js('resources/js/timesheet/add-timesheet.js', 'public/js/timesheet')
+    .js('resources/js/timesheet/add-timesheet-edit.js', 'public/js/timesheet')
+    .sass('resources/sass/main.scss', 'public/css')
+    .sass('resources/sass/timesheet/add-timesheet.scss', 'public/css/timesheet')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
@@ -20,3 +24,4 @@ mix.js('resources/js/app.js', 'public/js')
 if (mix.inProduction()) {
     mix.version();
 }
+
