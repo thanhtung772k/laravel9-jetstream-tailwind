@@ -1,0 +1,72 @@
+.add_timesheet-title {
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.carb-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+}
+
+.cus-min-height {
+    min-height: 110vh;
+}
+
+.cus-border-btn {
+    border: 2px solid #413d3d;
+}
+
+.cus-with-btn {
+    width: 100% !important;
+}
+
+.carb-body-title {
+    border-bottom: 2px solid #ea8910;
+    text-align: center;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.carb-body_header-title {
+    width: 40%;
+    color: #333;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.carb-body_header-content {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.image-evidence {
+    height: 90px;
+    width: auto;
+    max-width: 300px;
+    border-radius: 2px;
+    box-shadow: 1px 1px 3px 1px rgb(0 0 0 / 50%);
+}
+
+.bg-accept {
+    background-color: #006400;
+}
+
+.bg-cancel {
+    background-color: #dc1313;
+}
+
+.bg-wait {
+    background-color: #ced2d8;
+    color: #4f5d73;
+    font-weight: 700;
+}
+
+.cus-border-b {
+    border-bottom: 1px solid #d8dbe0;
+}

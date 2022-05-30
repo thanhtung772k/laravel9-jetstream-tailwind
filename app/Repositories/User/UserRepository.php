@@ -11,5 +11,14 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface UserRepository extends RepositoryInterface
 {
-    //
+    /**
+     * Index the repository
+     */
+    public function getAllUser();
+
+    /**
+     * get all user admin
+     * @return mixed
+     */
+    public function getAllUserAdmin();
 }

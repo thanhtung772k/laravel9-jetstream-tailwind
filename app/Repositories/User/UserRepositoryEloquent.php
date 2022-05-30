@@ -25,7 +25,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -33,5 +32,23 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * Index all user the repository
+     */
+    public function getAllUser()
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * get all user admin
+     * @return mixed
+     */
+    public function getAllUserAdmin()
+    {
+        return $this->model->where('is_admin', config('constant.is_admin'))->get();
+    }
+
 
 }

@@ -1030,6 +1030,18 @@ select {
 .mr-2 {
   margin-right: 0.5rem;
 }
+.mt-8 {
+  margin-top: 2rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.ml-12 {
+  margin-left: 3rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -1132,12 +1144,6 @@ select {
 .h-\[56px\] {
   height: 56px;
 }
-.h-\[7\%\] {
-  height: 7%;
-}
-.h-\[44px\] {
-  height: 44px;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1167,6 +1173,9 @@ select {
 }
 .w-auto {
   width: auto;
+}
+.w-8 {
+  width: 2rem;
 }
 .w-4 {
   width: 1rem;
@@ -1203,9 +1212,6 @@ select {
 }
 .w-\[72px\] {
   width: 72px;
-}
-.w-\[110\%\] {
-  width: 110%;
 }
 .w-\[112px\] {
   width: 112px;
