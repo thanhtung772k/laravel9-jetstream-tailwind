@@ -1,4 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/home.js": "/js/home.js",
+    "/js/timesheet/add-timesheet.js": "/js/timesheet/add-timesheet.js",
+    "/js/timesheet/add-timesheet-edit.js": "/js/timesheet/add-timesheet-edit.js",
+    "/css/app.css": "/css/app.css",
+    "/css/timesheet/add-timesheet.css": "/css/timesheet/add-timesheet.css",
+    "/css/main.css": "/css/main.css"
 }
