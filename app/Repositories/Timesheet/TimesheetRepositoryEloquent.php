@@ -39,8 +39,8 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      */
     public function getTimesheet()
     {
-        $user = Auth::id();
-        return $this->model->where('user_id', $user)->paginate(config('constant.pagination_records'));
+        $userID = Auth::id();
+        return $this->model->where('user_id', $userID)->paginate(config('constant.pagination_records'));
     }
 
     /**
@@ -52,16 +52,15 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     {
         $fromDate = now()->startOfMonth()->format("Y-m-d");
         $toDate = now()->endOfMonth()->format("Y-m-d");
-        $paginate = $request->paginate;
+        $paginate = $request->paginate ? $request->paginate : 10;
         if (isset($request->fromDate) && isset($request->toDate) && isset($request->paginate)) {
             $fromDate = $request->fromDate;
             $toDate = $request->toDate;
-        }
-        elseif ($request->fromDate && $request->paginate) {
+        } elseif ($request->fromDate && $request->paginate) {
             $fromDate = $request->fromDate;
             $toDate = now()->endOfMonth()->format("Y-m-d");
         }
-        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->paginate(5);
+        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->paginate($paginate);
     }
 
     /**
@@ -93,8 +92,8 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      */
     public function checkOutdateTimesheet($checkOutDate, $checkOutHour)
     {
-        $user = Auth::id();
-        $timesheets = Timesheet::select()->where('user_id', $user)->get();
+        $userID = Auth::id();
+        $timesheets = Timesheet::select()->where('user_id', $userID)->get();
         //get check_in from db
         foreach ($timesheets as $value) {
             if ($value->date == $checkOutDate) {
@@ -107,17 +106,18 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($checkInHour));
         $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($checkOutHour));
         //Declare value =0
-        $morning = 0;
-        $afternoon = 0;
+        $morning = config('constant.default_number');
+        $afternoon = config('constant.default_number');
         //Check in before 12h
-        if ((config('constant.twelfth_PM') - $sumIn) >= 0) {
-            if ((config('constant.eight_AM') - $sumIn) > 0)
+        if ((config('constant.twelfth_PM') - $sumIn) >= config('constant.positive_integer')) {
+            if ((config('constant.eight_AM') - $sumIn) > config('constant.positive_integer')) {
                 $sumIn = config('constant.eight_AM');
+            }
             //checkout before 12h
-            if ((config('constant.twelfth_PM')) - $sumOut > 0) {
+            if ((config('constant.twelfth_PM')) - $sumOut > config('constant.positive_integer')) {
                 $morning = $sumOut - $sumIn;
             } //checkout after 12h
-            else if (((config('constant.thirteem_haftpast_PM')) - $sumOut) > 0 && ((config('constant.twelfth_PM')) - $sumOut) <= 0) {
+            else if (((config('constant.thirteem_haftpast_PM')) - $sumOut) > config('constant.positive_integer') && ((config('constant.twelfth_PM')) - $sumOut) <= config('constant.positive_integer')) {
                 $sumOut = config('constant.twelfth_PM');
                 $morning = $sumOut - $sumIn;
             } //checkout after 13h30
@@ -128,11 +128,13 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         } //check in after 12h
         else {
             //checkin from 12h to 13h30
-            if (((config('constant.thirteem_haftpast_PM')) - $sumIn) > 0)
+            if (((config('constant.thirteem_haftpast_PM')) - $sumIn) > config('constant.positive_integer')) {
                 $sumIn = config('constant.thirteem_haftpast_PM');
+            }
             //checkin after 17h30
-            if (((config('constant.seventeen_haftpast_PM')) - $sumOut) < 0)
+            if (((config('constant.seventeen_haftpast_PM')) - $sumOut) < config('constant.positive_integer')) {
                 $sumOut = config('constant.seventeen_haftpast_PM');
+            }
             $afternoon = $sumOut - $sumIn;
         }
         // Max paid = 4h
@@ -140,14 +142,52 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         $sumChieu = ($afternoon > config('constant.four_hour')) ? config('constant.four_hour') : $afternoon;
         $sum = $sumSang + $sumChieu;
         $paidWorkingTime = gmdate("H:i:s", $sum);
-        if (config('constant.eight_AM') - $sumOut > 0) {
+        if (config('constant.eight_AM') - $sumOut > config('constant.positive_integer') || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
             $actualWorkingTime = null;
             $paidWorkingTime = null;
         }
-        return $this->model->where('date', $checkOutDate)->where('user_id', $user)->update([
+        return $this->model->where('date', $checkOutDate)->where('user_id', $userID)->update([
             'check_out' => $checkOutHour,
             'actual_working_time' => $actualWorkingTime,
             'paid_working_time' => $paidWorkingTime,
         ]);
+    }
+
+    /**
+     * Get timeshet by id the repository
+     */
+    public function getIDTimesheet($timesheetID)
+    {
+        $userID = Auth::id();
+        return $this->model->where('user_id', $userID)->find($timesheetID);
+    }
+
+    /**
+     * get timesheet id
+     * @param $dateTime
+     * @return mixed
+     */
+    public function dateTimesheet($dateTime)
+    {
+        $userID = Auth::id();
+        return $this->model->where('date',$dateTime)->where('user_id', $userID)->first();
+    }
+
+    /**
+     * get date timsheet early
+     * @return mixed|void
+     */
+    public function dateTimesheetEarly()
+    {
+        return $this->model->where('user_id', Auth::id())->latest()->first();
+    }
+
+    /**
+     * count date timesheet
+     * @return mixed
+     */
+    public function countTimesheet()
+    {
+        return $this->model->where('user_id', Auth::id())->count();
     }
 }

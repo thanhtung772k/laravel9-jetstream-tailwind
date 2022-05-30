@@ -21,113 +21,13 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     @livewireStyles
-
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
-<x-jet-banner/>
-<div class="flex">
-    <div class="nav__menu fixed">
-        <div class="w-[256px] bg-[#303c54] flex items-center">
-            <a href="" class="text-center w-full left-16">
-                <img src="https://ecs.fabbi.io/img/fabbi_logo.031027dd.jpeg" alt="" width="118px" height="50px"
-                     class="text-center custom-center">
-            </a>
-        </div>
-        <div class="menu-items__backgound">
-            <ul>
-                <li class="menu-items__list">
-                            <span>
-                                <i class="menu-items__icon fa-solid fa-gauge-high pr-3 "></i>
-                                <a href="">@lang('lang.dashboard')</a>
-                            </span>
-                </li>
-                <li class="menu-items__list1">
-                    <span class="menu-items__title">MANAGEMENT</span>
+      @yield('main_header')
 
-                </li>
-                <li class="menu-items__list">
-                            <span>
-                                <i class="menu-items__icon fa-solid fa-gauge-high pr-3"></i>
-                                <a href="">@lang('lang.timesheets')</a>
-                            </span>
-                    <i class="fa-solid fa-angle-left text-xs pr-3"></i>
-
-                </li>
-                <li class="menu-items__list2 text-center w-full">
-                    @lang('lang.list_timesheets')
-                </li>
-                <li class="menu-items__list">
-                            <span>
-                                <i class="menu-items__icon fa-solid fa-clock  pr-3"></i>
-                                <a href="">@lang('lang.overtime')</a>
-                            </span>
-                    <i class="fa-solid fa-angle-left text-xs pr-3"></i>
-                </li>
-                <li class=" menu-items__list">
-                            <span>
-                                <i class="menu-items__icon fa-solid fa-file-circle-plus pr-3"></i>
-                                <a href="">@lang('lang.add_timesheet')</a>
-                            </span>
-                    <i class="fa-solid fa-angle-left text-xs pr-3"></i>
-                </li>
-                <li class=" menu-items__list">
-                            <span>
-                                <i class="menu-items__icon fa-solid fa-file pr-3"></i>
-                                <a href="">@lang('lang.sab_leave')</a>
-                            </span>
-                    <i class="fa-solid fa-angle-left text-xs pr-3"></i>
-                </li>
-                <li class=" menu-items__list">
-                            <span>
-                                <i class="menu-items__icon fa-solid fa-file pr-3"></i>
-                                <a href="">@lang('lang.instruction')</a>
-                            </span>
-                    <i class="fa-solid fa-angle-left text-xs pr-3"></i>
-                </li>
-            </ul>
-        </div>
-        <div class="menu-items__footer h-[56px] bg-[#303c54] pr-4">
-            <i class="fa-solid fa-angle-left text-xl opacity-50"></i>
-        </div>
-    </div>
-    <div class="nav__sub-menu min-h-screen bg-gray-100 ml-64">
-        <div class="fixed z-[11] w-full nav__sub-menu-width">
-            @livewire('navigation-menu')
-        </div>
-
-        <div class="nav__sub-header">
-            <!-- Page Heading -->
-            <header class="bg-white shadow pt-[120px]">
-                <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </div>
-</div>
 @push('script')
-    <script>
-        $(document).ready(function (event) {
-            $('.menu-items__list2').slideUp();
-            $('.menu-items__list').click(function () {
-                $(this).next().slideToggle(300);
-                $(this).toggleClass('bg-[#303c54]');
-                $(this).children('i').toggleClass('menu-items__icon--tranform ')
-            });
-            $('.header__list-bar').click(function () {
-                $('.nav__menu').toggleClass('menu-items__nav');
-                $('.nav__sub-menu').toggleClass('ml-64', 200);
-                $('.fixed.w-full').toggleClass('nav__sub-menu-width',200);
-                $('.nav__sub-header').toggleClass('w-[1691px]',200);
-            });
-        });
-    </script>
+    <script src="{{ asset('js/home.js') }}"></script>
 @endPush
 @stack('script')
 @stack('modals')

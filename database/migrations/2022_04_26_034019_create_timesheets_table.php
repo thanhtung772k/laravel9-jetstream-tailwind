@@ -15,12 +15,12 @@ class CreateTimesheetsTable extends Migration
     {
         Schema::create('timesheets', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('check_in');
-            $table->time('check_out');
-            $table->time('actual_working_time');
-            $table->time('paid_working_time');
-            $table->string('note',255);
+            $table->date('date')->nullable();
+            $table->time('check_in')->nullable();
+            $table->time('check_out')->nullable();
+            $table->time('actual_working_time')->nullable();
+            $table->time('paid_working_time')->nullable();
+            $table->string('note',255)->nullable();
             $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });

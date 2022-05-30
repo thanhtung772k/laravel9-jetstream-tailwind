@@ -1,3 +1,10 @@
+@section('breadcrumb')
+    <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+        {{ Breadcrumbs::render('timesheet-list') }}
+    </div>
+@endsection
+
+
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
@@ -19,7 +26,6 @@
             <div class="col-sm- mt-[24px] float-right flex">
                 <form action="{{route('check_in')}}" method="post" class="pr-1.5">
                     @csrf
-                    {{-- {{now('Asia/Ho_Chi_Minh')->format('H:i:s')}} --}}
                     <input name="checkin_date" type="hidden" value="{{now()->format('Y-m-d')}}">
                     <input name="checkin_hour" type="hidden" value="{{now()->format('H:i:s')}}">
                     <button type="submit" class="btn btn-primary cus-btn-style bg-[#c2f2ff]"
@@ -33,20 +39,19 @@
                             class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]">@lang('lang.checkout')</button>
                 </form>
             </div>
-            <span class="text-sm text-right absolute right-2.5">@lang('lang.showing') 1 @lang('lang.to') 10 @lang('lang.of') 25 @lang('lang.entries')</span>
+            <span class="text-sm text-right absolute right-2.5">@lang('lang.showing') {{$data->firstItem()}} @lang('lang.to') {{$data->lastItem()}} @lang('lang.of') {{$dataCount}} @lang('lang.entries')</span>
         </div>
-
 
     </div>
     <div class="mt-2 text-sm text-gray-500">
         <div class="row">
-            <div class="card  mx-auto" style="border-right: none; border-left: none">
+            <div class="card mx-auto w-full" style="border-right: none; border-left: none">
                 <div>
 
                 </div>
                 <table class="table" wire:loading.remove>
                     <thead>
-                    <tr class="text-center items-center">
+                    <tr class="text-center items-center whitespace-nowrap text-xs">
                         <th scope="col">#</th>
                         <th scope="col">@lang('lang.date')</th>
                         <th scope="col">@lang('lang.dayofweek')</th>
@@ -100,9 +105,7 @@
                             <td>{{ $value->note_check ? $value->note_check : '-' }}</td>
 
                             <td>
-                                <button type="button"
-                                        class="btn btn-outline-primary text-xs">@lang('lang.timekeeping')
-                                </button>
+                                <a href="{{ route('get_addtimesheet', $value->id) }}" class="btn btn-outline-primary text-xs">@lang('lang.timekeeping')</a>
                             </td>
                         </tr>
                     @endforeach

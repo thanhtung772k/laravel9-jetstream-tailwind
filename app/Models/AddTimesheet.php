@@ -14,7 +14,7 @@ class AddTimesheet extends Model
      *
      * @var string
      */
-    protected $table= 'add_timesheets';
+    protected $table = 'add_timesheets';
 
     /**
      * The attributes that are mass assignable.
@@ -31,4 +31,20 @@ class AddTimesheet extends Model
         'evidence',
         'description'
     ];
+
+    /**
+     * Get additional timesheet's confirm information.
+     * @return string
+     */
+    public function getConfirmInfoAttribute()
+    {
+        if ($this->attributes['status'] == config('constant.status_wait')) {
+            $confirmInfo = __('lang.pending');
+        } elseif ($this->attributes['status'] == config('constant.status_agree')) {
+            $confirmInfo = __('lang.agree');
+        } else {
+            $confirmInfo = __('lang.refuse');
+        }
+        return $confirmInfo;
+    }
 }

@@ -47,5 +47,31 @@ interface TimesheetRepository extends RepositoryInterface
      * @param $userID
      * @return mixed
      */
-    public function createDate($date,$userID);
+    public function createDate($date, $userID);
+
+    /**
+     * Get timeshet by id the repository
+     * @param $timesheetID
+     * @return mixed
+     */
+    public function getIDTimesheet($timesheetID);
+
+    /**
+     * get date timesheet now
+     * @param $dateTime
+     * @return mixed
+     */
+    public function dateTimesheet($dateTime);
+
+    /**
+     * get date timsheet early
+     * @return mixed
+     */
+    public function dateTimesheetEarly();
+
+    /**
+     * count date timesheet
+     * @return mixed
+     */
+    public function countTimesheet();
 }

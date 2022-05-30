@@ -7,49 +7,53 @@ use App\Services\Timesheet\TimesheetService;
 
 class TimesheetController extends Controller
 {
+    public function __construct(TimesheetService $timesheetService)
+    {
+        $this->timesheetService = $timesheetService;
+    }
+
     /**
      * index end search date Timesheets
      * @param Request $request
-     * @param UserRegisterService $userRegisterService
      * @return void
      */
-    public function index(Request $request, TimesheetService $timesheetService)
+    public function index(Request $request)
     {
         $fromDate = $request->fromDate;
         $toDate = $request->toDate;
         $paginateOption = config('constant.select_value');
-        $data = $timesheetService->searchDateTimesheet($request);
+        $data = $this->timesheetService->searchDateTimesheet($request);
+        $dataIDTimesheet = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'));
+        $dataCount = $this->timesheetService->countTimesheet();
         return view('home.dashboard', [
             'data' => $data,
             'paginate' => $paginateOption,
-        ])->with(compact('fromDate', 'toDate'));
+        ])->with(compact('fromDate', 'toDate','dataCount'));
     }
 
     /**
      * checkin date Timesheets
      * @param Request $request
-     * @param TimesheetService $timesheetService
      * @return \Illuminate\Contracts\Foundation\Application
      */
-    public function checkIn(Request $request, TimesheetService $timesheetService)
+    public function checkIn(Request $request)
     {
         $checkInDate = $request->input('checkin_date');
         $checkInHour = $request->input('checkin_hour');
-        $timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
+        $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
         return redirect()->back();
     }
 
     /**
      * checkout date Timesheets
      * @param Request $request
-     * @param TimesheetService $timesheetService
      * @return \Illuminate\Contracts\Foundation\Application
      */
-    public function checkOut(Request $request, TimesheetService $timesheetService)
+    public function checkOut(Request $request)
     {
         $checkOutDate = $request->input('checkout_date');
         $checkOutHour = $request->input('checkout_hour');
-        $timesheetService->checkOutdateTimesheet($checkOutDate, $checkOutHour);
+        $this->timesheetService->checkOutdateTimesheet($checkOutDate, $checkOutHour);
         return redirect()->back();
     }
 }

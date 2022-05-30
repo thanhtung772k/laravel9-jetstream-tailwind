@@ -1,7 +1,14 @@
-<x-app-layout>
-    <x-slot name="header">
-        <form action="{{route('dashboard')}}" method="GET">
-            <div class="w[110%]">
+@extends('layouts.main')
+
+
+@section('content')
+    <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
+    <div class="nav__sub-header absolute w-full">
+        <!-- Page Heading -->
+        <header class="bg-white pt-[120px]">
+            <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+                <form action="{{route('dashboard')}}" method="GET">
+                <div class="w[110%]">
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="header-search__text-date">
@@ -19,17 +26,6 @@
                                     </span>
                                 </div>
                             </section>
-
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datepicker').datepicker({
-                                        format: 'yyyy-mm-dd'
-                                    });
-                                    $('#datepicker-end').datepicker({
-                                        format: 'yyyy-mm-dd'
-                                    });
-                                });
-                            </script>
                         </div>
 
                     </div>
@@ -48,14 +44,6 @@
                                     </span>
                                 </div>
                             </section>
-
-                            <script type="text/javascript">
-                                $(function () {
-                                    $("#datepicker-end").datepicker({
-                                        format: 'yyyy-mm-dd'
-                                    });
-                                });
-                            </script>
                         </div>
                     </div>
                     <div class="col-sm-3 mt-[24px]">
@@ -68,12 +56,17 @@
                 </div>
             </div>
 
-    </x-slot>
-    <div class="py-8">
-        <div class="max-w-[100%] px-[12px]">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                @include('home.list-timsheet')
+
+        </header>
+        <main>
+        <div class="py-8">
+            <div class="max-w-[100%] px-[12px]">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    @include('home.list-timesheet')
+                </div>
             </div>
         </div>
 
-</x-app-layout>
+        </main>
+    </div>
+@stop
