@@ -23,7 +23,7 @@ class AddTimesheet extends Model
      */
     protected $fillable = [
         'timesheet_id',
-        'user_id',
+        'admin_id',
         'check_in_real',
         'check_out_real',
         'check_int_request',

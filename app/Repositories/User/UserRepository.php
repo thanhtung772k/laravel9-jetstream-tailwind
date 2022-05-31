@@ -21,4 +21,10 @@ interface UserRepository extends RepositoryInterface
      * @return mixed
      */
     public function getAllUserAdmin();
+
+    /**
+     * get info user
+     * @return void
+     */
+    public function getUser();
 }

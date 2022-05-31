@@ -37,6 +37,8 @@ Route::middleware([
     Route::get('/additional-timesheet-edit/{addTimeID}', [AddTimesheetController::class,'editAddTimesheet'])->name('edit_addtimesheet');
     Route::post('/additional-timesheet-edit/{addTimeID}', [AddTimesheetController::class,'updateAddTimesheet'])->name('update_addtimesheet');
     Route::get('/additional-timesheet-delete/{addTimeID}', [AddTimesheetController::class, 'deleteAddTimesheet'])->name('delete_addtimesheet');
+    Route::get('/additional-timesheet-approval', [AddTimesheetController::class, 'approvalTimesheet'])->name('addtimesheet_approval');
+
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {

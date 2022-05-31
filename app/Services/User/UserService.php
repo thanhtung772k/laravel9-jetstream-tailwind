@@ -38,4 +38,13 @@ class UserService extends BaseService
     {
         return $this->repository->getAllUserAdmin();
     }
+
+    /**
+     * get info user
+     * @return void
+     */
+    public function getUser()
+    {
+        return $this->repository->getUser();
+    }
 }

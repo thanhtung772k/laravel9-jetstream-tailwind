@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TimesheetRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Services\AddTimesheet\AddTimesheetService;
 use App\Services\Timesheet\TimesheetService;
@@ -20,7 +24,7 @@ class AddTimesheetController extends Controller
     /**
      * get id timesheet and call Users is admin
      * @param $timesheet_id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function insertAddTimesheet(Request $request, $timesheetID = null)
     {
@@ -38,7 +42,7 @@ class AddTimesheetController extends Controller
 
     /**
      * index list additional timesheet
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function listAddTimesheet()
     {
@@ -62,7 +66,7 @@ class AddTimesheetController extends Controller
     /**
      * List detail Additional timesheet
      * @param $timesheetID
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function listDetailAddTimesheet($timesheetID)
     {
@@ -75,7 +79,7 @@ class AddTimesheetController extends Controller
     /**
      * edit Additional timesheet  "timesheet_id" => null
      * @param $timesheetID
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function editAddTimesheet($timesheetID)
     {
@@ -91,7 +95,7 @@ class AddTimesheetController extends Controller
      * update Additional timesheet
      * @param $addTimeID
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function updateAddTimesheet($addTimeID, Request $request)
     {
@@ -104,12 +108,28 @@ class AddTimesheetController extends Controller
     /**
      * delete Additional timesheet
      * @param $addTimeID
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAddTimesheet($addTimeID)
     {
         $dataByIDAddTimesheet = $this->addTimeSheetService->findIDAddTimesheet($addTimeID);
         $this->addTimeSheetService->deleteAddTimesheet($addTimeID, $dataByIDAddTimesheet->evidence);
         return redirect()->route('get_create_addtimesheet');
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function approvalTimesheet()
+    {
+        $dataTimesheetApproval = $this->addTimeSheetService->getListApprovalTimesheet();
+        //dd($dataTimesheetApproval);
+        $isAdmin = $this->userService->getUser();
+        $user = $this->userService->getAllUser();
+        return view('home.add-timesheet.approval.add-timesheet-approval-dashbroad', [
+            'dataTimesheetApproval' => $dataTimesheetApproval,
+            'isAdmin' => $isAdmin,
+            'user' => $user,
+        ]);
     }
 }

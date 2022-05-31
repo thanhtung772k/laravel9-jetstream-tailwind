@@ -49,7 +49,7 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
             ],
             [
                 'timesheet_id' => $request->timesheet_id,
-                'user_id' => $request->adminID,
+                'admin_id' => $request->adminID,
                 'check_in_real' => $request->checkinReal,
                 'check_out_real' => $request->checkoutReal,
                 'check_int_request' => $request->checkinRequest,
@@ -67,7 +67,7 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
     {
         $userID = Auth::id();
         return $this->model->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
-            ->join('users', 'add_timesheets.user_id', '=', 'users.id')
+            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
             ->where('timesheets.user_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name')->get();
     }
 
@@ -78,7 +78,7 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
     public function getListDetailAddTimesheet($timesheetID)
     {
         return $this->model->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
-            ->join('users', 'add_timesheets.user_id', '=', 'users.id')
+            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
             ->select('add_timesheets.*', 'timesheets.date', 'timesheets.check_in', 'timesheets.check_out', 'users.name')->find($timesheetID);
     }
 
@@ -91,12 +91,12 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
      */
     public function updateAddTimesheet($addTimeID, $request, $imgEvidence)
     {
-        return $this->model->update(
+        return $this->model->updateOrCreate(
             [
                 'timesheet_id' => $request->timesheet_id,
             ],
             [
-                'user_id' => $request->adminID,
+                'admin_id' => $request->adminID,
                 'check_in_real' => $request->checkinReal,
                 'check_out_real' => $request->checkoutReal,
                 'check_int_request' => $request->checkinRequest,
@@ -125,5 +125,17 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
     public function deleteAddTimesheet($addTimeID)
     {
         return $this->model->find($addTimeID)->delete();
+    }
+
+    /**
+     * list approval timsheet
+     * @return void
+     */
+    public function getListApprovalTimesheet()
+    {
+        $userID = Auth::id();
+        return $this->model->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
+            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
+            ->where('add_timesheets.admin_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name','timesheets.user_id')->get();
     }
 }
