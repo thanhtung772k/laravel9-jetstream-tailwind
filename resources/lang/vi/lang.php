@@ -80,4 +80,5 @@ return [
     'id' => 'ID',
     'name' => 'Họ tên',
     'comment' => 'Bình luận',
+    'approval_All' => 'Duyệt tất cả',
 ];

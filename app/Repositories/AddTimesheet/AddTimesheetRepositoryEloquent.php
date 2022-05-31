@@ -135,7 +135,21 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
     {
         $userID = Auth::id();
         return $this->model->with('user')->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
-            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
-            ->where('add_timesheets.admin_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name','timesheets.user_id')->get();
+            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')->where('status', config('constant.status_wait'))
+            ->where('add_timesheets.admin_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name', 'timesheets.user_id')->get();
+    }
+
+    /**
+     * approval add timesheet
+     * @param $request
+     * @param $status
+     * @return void
+     */
+    public function updateAdd($request, $status)
+    {
+        return $this->model->where('timesheet_id', $request->timesheetID)->update([
+            'status' => $status,
+            'note' => $request->note
+        ]);
     }
 }

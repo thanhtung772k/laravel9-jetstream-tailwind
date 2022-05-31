@@ -3,7 +3,116 @@
         {{ Breadcrumbs::render('add_timesheet-waiting_list') }}
     </div>
 @endsection
+<script>
+    function approvalAddtimesheet(id) {
+        $.get('/additional-timesheet-approval/' + id, function (addtimsheet) {
+            $('#id').val(addtimsheet.id);
+            $('#timesheetID').val(addtimsheet.timesheet_id);
+            $('#checkInReq').val(addtimsheet.check_int_request);
+            $('#checkOutReq').val(addtimsheet.check_out_request);
+            $('#status').val(addtimsheet.status);
+            $('#modalComment').modal('toggle');
+        })
 
+        $('#addTimesheetApprovalForm').submit(function (e) {
+            e.preventDefault();
+            let id = $('#id').val();
+            let timesheetID = $('#timesheetID').val();
+            let checkInReq = $('#checkInReq').val();
+            let checkOutReq = $('#checkOutReq').val();
+            let note = $('#note').val();
+            $.ajax({
+                url: '/additional-timesheet-approval/' + id + '/' + {{config('constant.status_agree')}},
+                type: "PUT",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    timesheetID: timesheetID,
+                    checkInReq: checkInReq,
+                    checkOutReq: checkOutReq,
+                    note: note
+                },
+                success: function (response) {
+                    console.log(id, '#abc_' + id)
+                    console.log(response);
+                    $('#addTimesheetApprovalForm').modal('hide');
+                    // if(response.status){
+                    //     $('#abc_'+id).text('Approved')
+                    // }
+                    window.location.reload();
+                }, error: function (error) {
+                    console.log(error);
+                }
+            })
+        })
+    }
+
+    function rejectAddtimesheet(id) {
+        $.get('/additional-timesheet-approval/' + id, function (addtimsheet) {
+            $('#id').val(addtimsheet.id);
+            $('#timesheetID').val(addtimsheet.timesheet_id);
+            $('#checkInReq').val(addtimsheet.check_int_request);
+            $('#checkOutReq').val(addtimsheet.check_out_request);
+            $('#modalComment').modal('toggle');
+        })
+
+        $('#addTimesheetApprovalForm').submit(function (e) {
+            e.preventDefault();
+            let id = $('#id').val();
+            let timesheetID = $('#timesheetID').val();
+            let checkInReq = $('#checkInReq').val();
+            let checkOutReq = $('#checkOutReq').val();
+            let note = $('#note').val();
+            $.ajax({
+                url: '/additional-timesheet-approval/' + id + '/' + {{config('constant.status_reject')}},
+                type: "PUT",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    timesheetID: timesheetID,
+                    checkInReq: checkInReq,
+                    checkOutReq: checkOutReq,
+                    note: note
+                },
+                success: function (response) {
+                    console.log(id, '#abc_' + id)
+                    console.log(response);
+                    $('#addTimesheetApprovalForm').modal('hide');
+                    // if(response.status){
+                    //     $('#abc_'+id).text('Approved')
+                    // }
+                    window.location.reload();
+                }, error: function (error) {
+                    console.log(error);
+                }
+            })
+        })
+    }
+
+    function approvalAll() {
+        var allVals = [];
+        $('.checkboxItem:checked').each(function () {
+            allVals.push($(this).val());
+        });
+        {{--$.ajax({--}}
+        {{--    url: "{{route('updateAll')}}",--}}
+        {{--    method: 'PUT',--}}
+        {{--    cache: false,--}}
+        {{--    data: {--}}
+        {{--        _token: "{{ csrf_token() }}",--}}
+        {{--        product_id: allVals,--}}
+        {{--    },--}}
+        {{--    success: function (data) {--}}
+        {{--        console.log(data);--}}
+        {{--        location.reload();--}}
+        {{--    },--}}
+        {{--    error: function () {--}}
+        {{--        console.log("Có lỗi xảy ra, vui lòng thử lại.");--}}
+        {{--    }--}}
+        {{--});--}}
+        console.log(allVals);
+    }
+</script>
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
@@ -25,8 +134,16 @@
                 <span class="text-sm text-right absolute right-2.5">@lang('lang.showing') 1 @lang('lang.to') 10 @lang('lang.of') 25 @lang('lang.entries')</span>
             </div>
         </div>
-
-
+    </div>
+    <div class="row ml-[-24px]">
+        <div class="mb-3 ml-4">
+            <button type="sumit" class="text-xs btn btn-success btn-complete" onclick="approvalAll()"
+                    disabled>@lang('lang.approval_All')</button>
+        </div>
+        <div class="mb-3 ml-2">
+            <button type="submit" class="text-xs btn btn-danger btn-delete" onclick="deleteALl()"
+                    disabled>@lang('lang.approval_All')</button>
+        </div>
     </div>
     <div class="mt-2 text-sm text-gray-500">
         <div class="row">
@@ -35,7 +152,7 @@
                     <thead>
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <td class="col-sm-1 text-center float-left">
-                            <input type="checkbox" class="rounded" id="checkall" name="item[]">
+                            <input type="checkbox" class="rounded" id="checkboxAll" name="item[]">
                         </td>
                         <th scope="col">@lang('lang.id')</th>
                         <th scope="col">@lang('lang.name')</th>
@@ -50,77 +167,55 @@
                     </thead>
                     <tbody>
                     @if($getInfUser->is_admin == config('constant.is_admin') )
-                        @foreach($dataTimesheetApproval as $value)
-                            <tr class="text-center">
-                                <td class="col-sm-1 text-center float-left">
-                                    <input type="checkbox" class="rounded" id="checkall" name="item[]">
-                                </td>
+                        @if($dataTimesheetApproval->count() > 0)
+                            @foreach($dataTimesheetApproval as $value)
+                                <tr class="text-center">
+                                    <td class="col-sm-1 text-center float-left">
+                                        <input type="checkbox" class="checkboxItem rounded" name="item[]" value="{{$value->id}}">
+                                    </td>
 
-                                <td>{{ $value->user_id }}</td>
+                                    <td>{{ $value->user_id }}</td>
 
-                                <td>{{$value->user->name}}</td>
+                                    <td>{{$value->user->name}}</td>
 
-                                <td class="whitespace-nowrap">{{$value->date}}</td>
+                                    <td class="whitespace-nowrap">{{$value->date}}</td>
 
-                                <td>{{$value->check_int_request}}</td>
+                                    <td>{{$value->check_int_request}}</td>
 
-                                <td>{{$value->check_out_request}}</td>
+                                    <td>{{$value->check_out_request}}</td>
 
-                                <td class="max-w-[140px]">{{$value->description}}</td>
+                                    <td class="max-w-[140px]">{{$value->description}}</td>
 
-                                <td class="max-w-[240px]">- {{$value->name}}: {{$value->confirmInfo}}</td>
+                                    <td class="max-w-[240px]">- {{$value->name}}: {{$value->confirmInfo}}</td>
 
-                                <td class="whitespace-nowrap">
-                                    @if($value->status == config('constant.status_wait'))
-                                        <span class="text-xs px-1 bg-wait rounded">@lang('lang.not_approved')</span>
-                                    @elseif($value->status == config('constant.status_agree'))
-                                        <span class="text-xs px-1 bg-accept text-white rounded">@lang('lang.approved')</span>
-                                    @else
-                                        <span class="text-xs px-1 bg-cancel text-white rounded">@lang('lang.rejected')</span>
-                                    @endif
-                                </td>
+                                    <td class="whitespace-nowrap" id="abc_{{$value->id}}">
+                                        @if($value->status == config('constant.status_wait'))
+                                            <span class="text-xs px-1 bg-wait rounded">@lang('lang.not_approved')</span>
+                                        @elseif($value->status == config('constant.status_agree'))
+                                            <span
+                                                class="text-xs px-1 bg-accept text-white rounded">@lang('lang.approved')</span>
+                                        @else
+                                            <span
+                                                class="text-xs px-1 bg-cancel text-white rounded">@lang('lang.rejected')</span>
+                                        @endif
+                                    </td>
 
-                                <td class="min-w-[200px]">
-                                    @if($value->status == config('constant.status_wait'))
-                                        <a href="#" class=" text-xs btn btn-outline-info mx-[4px]" data-toggle="modal" data-target="#modalComment({{$value->id}})">@lang('lang.approved')</a>
-                                        <a href="{{route('delete_addtimesheet', $value->id)}}" class="text-xs btn btn-outline-danger ">@lang('lang.rejected')</a>
-                                    @else
-                                        <a href="{{route('detail_addtimesheet', $value->id)}}" class="text-xs btn btn-outline-primary ">@lang('lang.detail')</a>
-                                    @endif
-                                </td>
-                            </tr>
-                            {{-- Comment admin --}}
-                            <form action="" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal fade text-left" id="modalComment({{$value->id}})" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">@lang('lang.note')</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <p><strong>@lang('lang.comment'):</strong></p>
-                                                        <textarea class="form-control" name="" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="float-right">
-                                                    <button type="submit"
-                                                            class="btn btn-primary cus-btn-style bg-[#c2f2ff]">
-                                                        @lang('lang.save_info')
-                                                    </button>
-                                                    <button class="btn cus-btn-style bg-[##f8f9fa] cus-border-btn" data-dismiss="modal" aria-label="Close">
-                                                        @lang('lang.cancel')
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        @endforeach
+                                    <td class="min-w-[200px]">
+                                        @if($value->status == config('constant.status_wait'))
+                                            <a href="#" class=" text-xs btn btn-outline-info mx-[4px]"
+                                               onclick="approvalAddtimesheet({{$value->id}})" data-toggle="modal"
+                                               data-target="#modalComment">@lang('lang.approved')</a>
+                                            <a href="#" onclick="rejectAddtimesheet({{$value->id}})" data-toggle="modal"
+                                               data-target="#modalComment"
+                                               class="text-xs btn btn-outline-danger ">@lang('lang.rejected')</a>
+                                        @else
+                                            <a href="{{route('detail_addtimesheet', $value->id)}}"
+                                               class="text-xs btn btn-outline-primary ">@lang('lang.detail')</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     @else
                         <div class="flex justify-center">
                             @lang('lang.not_found')
@@ -130,7 +225,42 @@
                 </table>
             </div>
         </div>
+        {{-- Comment admin --}}
+        <form action="" id="addTimesheetApprovalForm">
+            @csrf
+            <div class="modal fade text-left" id="modalComment" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@lang('lang.note')</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <p><strong>@lang('lang.comment'):</strong></p>
+                                    <input type="hidden" id="id" name="id">
+                                    <input type="hidden" id="timesheetID" name="timesheetID">
+                                    <input type="hidden" id="checkInReq" name="checkInReq">
+                                    <input type="hidden" id="checkOutReq" name="checkOutReq">
+                                    <input type="hidden" id="status" name="status">
+                                    <textarea class="form-control" name="note" id="note"></textarea>
+                                </div>
+                            </div>
 
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-primary cus-btn-style bg-[#c2f2ff]">
+                                    @lang('lang.save_info')
+                                </button>
+                                <button class="btn cus-btn-style bg-[##f8f9fa] cus-border-btn" data-dismiss="modal"
+                                        aria-label="Close">
+                                    @lang('lang.cancel')
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         @if(count($dataTimesheetApproval) > config('constant.default_number') )
             <div class="flex justify-center">
             </div>

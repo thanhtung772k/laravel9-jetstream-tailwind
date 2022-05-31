@@ -4,6 +4,7 @@ namespace App\Services\Timesheet;
 
 use App\Repositories\Timesheet\TimesheetRepository;
 use App\Services\BaseService;
+use App\Traits\ManageFile;
 
 /**
  * Class TimesheetService
@@ -14,6 +15,8 @@ use App\Services\BaseService;
  */
 class TimesheetService extends BaseService
 {
+    use ManageFile;
+
     /**
      * @return string
      */
@@ -81,7 +84,11 @@ class TimesheetService extends BaseService
      */
     public function getIDTimesheet($timesheetID)
     {
-        return $this->repository->getIDTimesheet($timesheetID);
+        try {
+            return $this->repository->getIDTimesheet($timesheetID);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -103,8 +110,21 @@ class TimesheetService extends BaseService
         return $this->repository->dateTimesheetEarly();
     }
 
+    /**
+     * @return mixed
+     */
     public function countTimesheet()
     {
         return $this->repository->countTimesheet();
+    }
+
+    /**
+     * update timesheet
+     * @return void
+     */
+    public function approval($request)
+    {
+        $getTimesheet = $this->updateTimesheet($request->checkInReq, $request->checkOutReq);
+        return $this->repository->approval($request, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
     }
 }

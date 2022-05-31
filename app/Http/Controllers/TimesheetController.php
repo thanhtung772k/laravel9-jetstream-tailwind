@@ -28,7 +28,7 @@ class TimesheetController extends Controller
         return view('home.dashboard', [
             'data' => $data,
             'paginate' => $paginateOption,
-        ])->with(compact('fromDate', 'toDate','dataCount'));
+        ])->with(compact('fromDate', 'toDate', 'dataCount'));
     }
 
     /**
@@ -38,10 +38,14 @@ class TimesheetController extends Controller
      */
     public function checkIn(Request $request)
     {
-        $checkInDate = $request->input('checkin_date');
-        $checkInHour = $request->input('checkin_hour');
-        $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
-        return redirect()->back();
+        try {
+            $checkInDate = $request->input('checkin_date');
+            $checkInHour = $request->input('checkin_hour');
+            $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -51,9 +55,13 @@ class TimesheetController extends Controller
      */
     public function checkOut(Request $request)
     {
-        $checkOutDate = $request->input('checkout_date');
-        $checkOutHour = $request->input('checkout_hour');
-        $this->timesheetService->checkOutdateTimesheet($checkOutDate, $checkOutHour);
-        return redirect()->back();
+        try {
+            $checkOutDate = $request->input('checkout_date');
+            $checkOutHour = $request->input('checkout_hour');
+            $this->timesheetService->checkOutdateTimesheet($checkOutDate, $checkOutHour);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

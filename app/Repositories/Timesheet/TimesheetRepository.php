@@ -74,4 +74,13 @@ interface TimesheetRepository extends RepositoryInterface
      * @return mixed
      */
     public function countTimesheet();
+
+    /**
+     * approval timesheet
+     * @param $request
+     * @param $actWorking
+     * @param $paidWorking
+     * @return mixed
+     */
+    public function approval($request, $actWorking, $paidWorking);
 }

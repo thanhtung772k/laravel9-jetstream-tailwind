@@ -37,4 +37,28 @@ $(document).ready(function () {
     $('#datepicker,#datepicker-end').datepicker({
         format: 'yyyy-mm-dd'
     });
+
+    //check all
+    $('#checkboxAll').change(function () {
+        var ischeck = $(this).prop('checked');
+        $(".checkboxItem").prop('checked', ischeck);
+    });
+
+    //check each item
+    $('.checkboxItem').change(function () {
+        let isExistCheck = false;
+        $('.checkboxItem').each(function () {
+            if ($(this).is(":checked")) {
+                isExistCheck = true;
+            }
+        })
+        if ($(this).prop('checked') == false) {
+            $('#checkboxAll').prop('checked', false);
+        }
+        if ($('.checkboxItem:checked').length == $('.checkboxItem').length) {
+            $('#checkboxAll').prop('checked', true);
+        }
+    });
+
+
 })
