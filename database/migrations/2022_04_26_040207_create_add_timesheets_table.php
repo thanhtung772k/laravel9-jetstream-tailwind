@@ -16,7 +16,7 @@ class CreateAddTimesheetsTable extends Migration
         Schema::create('add_timesheets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('timesheet_id');
-            $table->foreignId('user_id');
+            $table->foreignId('admin_id');
             $table->time('check_in_real')->nullable();
             $table->time('check_out_real')->nullable();
             $table->time('check_int_request')->nullable();

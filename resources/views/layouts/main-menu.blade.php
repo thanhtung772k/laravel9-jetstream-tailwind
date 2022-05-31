@@ -59,7 +59,7 @@
                         <a href="{{url('additional-timesheet')}}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_list')</a>
                     </li>
                     <li class="text-center w-full">
-                        <a href="" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_approval')</a>
+                        <a href="{{route('addtimesheet_approval')}}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_approval')</a>
                     </li>
                     <li class="text-center w-full">
                         <a href="{{ route('get_addtimesheet') }}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_create')</a>

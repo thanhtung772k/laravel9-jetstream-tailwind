@@ -76,4 +76,8 @@ return [
     'delete' => 'Xóa',
     'save_info' => 'Lưu thông tin',
     'cancel' => 'Hủy tạo',
+    'id_name' => 'ID/Họ và tên',
+    'id' => 'ID',
+    'name' => 'Họ tên',
+    'comment' => 'Bình luận',
 ];

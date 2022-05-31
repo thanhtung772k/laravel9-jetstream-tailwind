@@ -76,4 +76,8 @@ return [
     'delete' => 'Delete',
     'save_info' => 'Save infomation',
     'cancel' => 'Cancel',
+    'id_name' => 'ID/Name',
+    'id' => 'ID',
+    'name' => 'Name',
+    'comment' => 'Comment',
 ];
