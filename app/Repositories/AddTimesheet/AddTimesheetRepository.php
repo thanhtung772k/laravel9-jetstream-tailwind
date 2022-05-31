@@ -54,4 +54,10 @@ interface AddTimesheetRepository extends RepositoryInterface
      * @return mixed
      */
     public function deleteAddTimesheet($addTimeID);
+
+    /**
+     * list approval timsheet
+     * @return void
+     */
+    public function getListApprovalTimesheet();
 }

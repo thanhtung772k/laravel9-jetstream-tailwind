@@ -46,3 +46,9 @@ Breadcrumbs::for('add_timesheet-update', function ($trail) {
     $trail->parent('add_timesheet');
     $trail->push(__('lang.update'), route('get_create_addtimesheet'));
 });
+
+// Home > Additional Timesheet > Waiting list for approval
+Breadcrumbs::for('add_timesheet-waiting_list', function ($trail) {
+    $trail->parent('add_timesheet');
+    $trail->push(__('lang.waiting_list'), route('get_create_addtimesheet'));
+});

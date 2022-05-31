@@ -23,7 +23,7 @@ class AddTimesheet extends Model
      */
     protected $fillable = [
         'timesheet_id',
-        'user_id',
+        'admin_id',
         'check_in_real',
         'check_out_real',
         'check_int_request',
@@ -31,6 +31,11 @@ class AddTimesheet extends Model
         'evidence',
         'description'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     /**
      * Get additional timesheet's confirm information.

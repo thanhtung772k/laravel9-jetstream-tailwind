@@ -93,4 +93,13 @@ class AddTimesheetService extends BaseService
         $this->removeFile($evidence, $path);
         return $this->repository->deleteAddTimesheet($addTimeID);
     }
+
+    /**
+     * list approval timsheet
+     * @return void
+     */
+    public function getListApprovalTimesheet()
+    {
+        return $this->repository->getListApprovalTimesheet();
+    }
 }
