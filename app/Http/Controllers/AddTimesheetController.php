@@ -130,4 +130,14 @@ class AddTimesheetController extends Controller
             'getInfUser' => $getInfUser,
         ]);
     }
+
+    /**
+     * get timesheet by id
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAddtimesheetById($id)
+    {
+        return response()->json($this->addTimeSheetService->findIDAddTimesheet($id));
+    }
 }

@@ -3,7 +3,20 @@
         {{ Breadcrumbs::render('add_timesheet-waiting_list') }}
     </div>
 @endsection
-
+    <script>
+        function approvalAddtimesheet(id)
+        {
+            console.log(id);
+            $.get('/additional-timesheet-approval/'+id,function (addtimsheet){
+                $('#id').val(addtimsheet.id);
+                $('#timesheetID').val(addtimsheet.timesheet_id);
+                $('#checkInReq').val(addtimsheet.check_int_request);
+                $('#checkOutReq').val(addtimsheet.check_out_request);
+                $('#modalComment').modal('toggle');
+                console.log(addtimsheet);
+            })
+        }
+    </script>
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
@@ -35,7 +48,7 @@
                     <thead>
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <td class="col-sm-1 text-center float-left">
-                            <input type="checkbox" class="rounded" id="checkall" name="item[]">
+                            <input type="checkbox" class="rounded" id="checkboxAll" name="item[]">
                         </td>
                         <th scope="col">@lang('lang.id')</th>
                         <th scope="col">@lang('lang.name')</th>
@@ -53,7 +66,7 @@
                         @foreach($dataTimesheetApproval as $value)
                             <tr class="text-center">
                                 <td class="col-sm-1 text-center float-left">
-                                    <input type="checkbox" class="rounded" id="checkall" name="item[]">
+                                    <input type="checkbox" class="checkboxItem rounded" name="item[]">
                                 </td>
 
                                 <td>{{ $value->user_id }}</td>
@@ -82,44 +95,13 @@
 
                                 <td class="min-w-[200px]">
                                     @if($value->status == config('constant.status_wait'))
-                                        <a href="#" class=" text-xs btn btn-outline-info mx-[4px]" data-toggle="modal" data-target="#modalComment({{$value->id}})">@lang('lang.approved')</a>
-                                        <a href="{{route('delete_addtimesheet', $value->id)}}" class="text-xs btn btn-outline-danger ">@lang('lang.rejected')</a>
+                                        <a href="#" class=" text-xs btn btn-outline-info mx-[4px]" onclick="approvalAddtimesheet({{$value->id}})" data-toggle="modal" data-target="#modalComment">@lang('lang.approved')</a>
+                                        <a href="" class="text-xs btn btn-outline-danger ">@lang('lang.rejected')</a>
                                     @else
                                         <a href="{{route('detail_addtimesheet', $value->id)}}" class="text-xs btn btn-outline-primary ">@lang('lang.detail')</a>
                                     @endif
                                 </td>
                             </tr>
-                            {{-- Comment admin --}}
-                            <form action="" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal fade text-left" id="modalComment({{$value->id}})" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">@lang('lang.note')</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                                    <div class="form-group">
-                                                        <p><strong>@lang('lang.comment'):</strong></p>
-                                                        <textarea class="form-control" name="" rows="3"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="float-right">
-                                                    <button type="submit"
-                                                            class="btn btn-primary cus-btn-style bg-[#c2f2ff]">
-                                                        @lang('lang.save_info')
-                                                    </button>
-                                                    <button class="btn cus-btn-style bg-[##f8f9fa] cus-border-btn" data-dismiss="modal" aria-label="Close">
-                                                        @lang('lang.cancel')
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                         @endforeach
                     @else
                         <div class="flex justify-center">
@@ -130,7 +112,41 @@
                 </table>
             </div>
         </div>
+        {{-- Comment admin --}}
+        <form action="" id="addTimesheetApprovalForm" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="modal fade text-left" id="modalComment" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">@lang('lang.note')</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <p><strong>@lang('lang.comment'):</strong></p>
+                                    <input type="text" id="id" name="id">
+                                    <input type="text" id="timesheetID" name="timesheetID">
+                                    <input type="text" id="checkInReq" name="checkInReq">
+                                    <input type="text" id="checkOutReq" name="checkOutReq">
+                                    <textarea class="form-control" name="note" id="note"></textarea>
+                                </div>
+                            </div>
 
+                            <div class="float-right">
+                                <button type="submit" onclick="approval()"
+                                        class="btn btn-primary cus-btn-style bg-[#c2f2ff]">
+                                    @lang('lang.save_info')
+                                </button>
+                                <button class="btn cus-btn-style bg-[##f8f9fa] cus-border-btn" data-dismiss="modal" aria-label="Close">
+                                    @lang('lang.cancel')
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         @if(count($dataTimesheetApproval) > config('constant.default_number') )
             <div class="flex justify-center">
             </div>
