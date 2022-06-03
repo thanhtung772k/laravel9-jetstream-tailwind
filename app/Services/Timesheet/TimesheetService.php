@@ -4,7 +4,7 @@ namespace App\Services\Timesheet;
 
 use App\Repositories\Timesheet\TimesheetRepository;
 use App\Services\BaseService;
-use App\Traits\ManageFile;
+use App\Traits\HandleDay;
 
 /**
  * Class TimesheetService
@@ -15,7 +15,7 @@ use App\Traits\ManageFile;
  */
 class TimesheetService extends BaseService
 {
-    use ManageFile;
+    use HandleDay;
 
     /**
      * @return string
@@ -126,5 +126,16 @@ class TimesheetService extends BaseService
     {
         $getTimesheet = $this->updateTimesheet($request->checkInReq, $request->checkOutReq);
         return $this->repository->approval($request, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
+    }
+
+    /**
+     * update many timesheets
+     * @param $data
+     * @return void
+     */
+    public function approvalMany($data)
+    {
+        $getTimesheet = $this->updateTimesheet($data->check_int_request, $data->check_out_request);
+        return $this->repository->approvalMany($data, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
     }
 }

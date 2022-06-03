@@ -83,4 +83,13 @@ interface TimesheetRepository extends RepositoryInterface
      * @return mixed
      */
     public function approval($request, $actWorking, $paidWorking);
+
+    /**
+     * update many timesheets
+     * @param $data
+     * @param $actWorking
+     * @param $paidWorking
+     * @return void
+     */
+    public function approvalMany($data, $actWorking, $paidWorking);
 }

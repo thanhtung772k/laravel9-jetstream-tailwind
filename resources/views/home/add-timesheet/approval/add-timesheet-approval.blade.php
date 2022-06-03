@@ -94,23 +94,55 @@
         $('.checkboxItem:checked').each(function () {
             allVals.push($(this).val());
         });
-        {{--$.ajax({--}}
-        {{--    url: "{{route('updateAll')}}",--}}
-        {{--    method: 'PUT',--}}
-        {{--    cache: false,--}}
-        {{--    data: {--}}
-        {{--        _token: "{{ csrf_token() }}",--}}
-        {{--        product_id: allVals,--}}
-        {{--    },--}}
-        {{--    success: function (data) {--}}
-        {{--        console.log(data);--}}
-        {{--        location.reload();--}}
-        {{--    },--}}
-        {{--    error: function () {--}}
-        {{--        console.log("Có lỗi xảy ra, vui lòng thử lại.");--}}
-        {{--    }--}}
-        {{--});--}}
-        console.log(allVals);
+        $('#addTimesheetApprovalForm').submit(function (e) {
+            e.preventDefault();
+            let note = $('#note').val();
+            $.ajax({
+                url: "{{route('updateAll',config('constant.status_agree'))}}",
+                method: 'PUT',
+                cache: false,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    addTimeId: allVals,
+                    note: note
+                },
+                success: function (data) {
+                    console.log(data);
+                    location.reload();
+                },
+                error: function () {
+                    console.log("Có lỗi xảy ra, vui lòng thử lại.");
+                }
+            });
+        })
+    }
+
+    function rejectedAll() {
+        var allVals = [];
+        $('.checkboxItem:checked').each(function () {
+            allVals.push($(this).val());
+        });
+        $('#addTimesheetApprovalForm').submit(function (e) {
+            e.preventDefault();
+            let note = $('#note').val();
+            $.ajax({
+                url: "{{route('updateAll',config('constant.status_reject'))}}",
+                method: 'PUT',
+                cache: false,
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    addTimeId: allVals,
+                    note: note
+                },
+                success: function (data) {
+                    console.log(data);
+                    location.reload();
+                },
+                error: function () {
+                    console.log("Có lỗi xảy ra, vui lòng thử lại.");
+                }
+            });
+        })
     }
 </script>
 <div class="p-6  bg-white border-b border-gray-200">
@@ -137,12 +169,14 @@
     </div>
     <div class="row ml-[-24px]">
         <div class="mb-3 ml-4">
-            <button type="sumit" class="text-xs btn btn-success btn-complete" onclick="approvalAll()"
+            <button class="text-xs btn btn-success btn-complete" onclick="approvalAll()"
+                    data-toggle="modal" data-target="#modalComment"
                     disabled>@lang('lang.approval_All')</button>
         </div>
         <div class="mb-3 ml-2">
-            <button type="submit" class="text-xs btn btn-danger btn-delete" onclick="deleteALl()"
-                    disabled>@lang('lang.approval_All')</button>
+            <button class="text-xs btn btn-danger btn-delete" onclick="rejectedAll()"
+                    data-toggle="modal" data-target="#modalComment"
+                    disabled>@lang('lang.rejected_All')</button>
         </div>
     </div>
     <div class="mt-2 text-sm text-gray-500">
@@ -171,7 +205,8 @@
                             @foreach($dataTimesheetApproval as $value)
                                 <tr class="text-center">
                                     <td class="col-sm-1 text-center float-left">
-                                        <input type="checkbox" class="checkboxItem rounded" name="item[]" value="{{$value->id}}">
+                                        <input type="checkbox" class="checkboxItem rounded" name="item[]"
+                                               value="{{$value->id}}">
                                     </td>
 
                                     <td>{{ $value->user_id }}</td>

@@ -81,4 +81,5 @@ return [
     'name' => 'Họ tên',
     'comment' => 'Bình luận',
     'approval_All' => 'Duyệt tất cả',
+    'rejected_All' => 'Từ chối tất cả',
 ];

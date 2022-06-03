@@ -172,10 +172,10 @@ class AddTimesheetController extends Controller
         try {
             if ($request->ajax()) {
                 if ($param == config('constant.status_agree')) {
-                    $this->addTimeSheetService->update($request, config('constant.status_agree'));
+                    $this->addTimeSheetService->update($request, $param);
                     $this->timesheetService->approval($request);
                 } elseif ($param == config('constant.status_reject')) {
-                    $this->addTimeSheetService->update($request, config('constant.status_reject'));
+                    $this->addTimeSheetService->update($request, $param);
                 } else {
                     return redirect()->back();
                 }
@@ -184,6 +184,37 @@ class AddTimesheetController extends Controller
                     'status' => true
                 ]);
             }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * update Additional Timesheets
+     * @param Request $request
+     * @param $param
+     * @return void
+     */
+    public function updateAll(Request $request, $param)
+    {
+        DB::beginTransaction();
+        try {
+            if ($param == config('constant.status_agree')) {
+                $this->addTimeSheetService->updateMany($request, $param);
+                foreach ($request->addTimeId as $id) {
+                    $data = $this->addTimeSheetService->findIDAddTimesheet($id);
+                    $this->timesheetService->approvalMany($data);
+                }
+            } elseif ($param == config('constant.status_reject')) {
+                $this->addTimeSheetService->updateMany($request, $param);
+            } else {
+                return redirect()->back();
+            }
+            DB::commit();
+            return response([
+                'status' => true
+            ]);
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()->back();

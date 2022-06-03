@@ -126,4 +126,14 @@ class AddTimesheetService extends BaseService
         return $this->repository->updateAdd($request, $status);
     }
 
+    /**
+     * update many add timesheet
+     * @param $request
+     * @param $param
+     * @return void
+     */
+    public function updateMany($request, $param)
+    {
+        return $this->repository->updateMany($request, $param);
+    }
 }
