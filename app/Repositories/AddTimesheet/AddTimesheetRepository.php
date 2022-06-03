@@ -60,4 +60,12 @@ interface AddTimesheetRepository extends RepositoryInterface
      * @return void
      */
     public function getListApprovalTimesheet();
+
+    /**
+     * approval add timesheet
+     * @param $request
+     * @param $status
+     * @return void
+     */
+    public function updateAdd($request, $status);
 }

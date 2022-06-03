@@ -62,13 +62,17 @@ class AddTimesheetService extends BaseService
      */
     public function updateAddTimesheet($addTimeID, $request)
     {
-        $imgEvidence = $request->old_evidence_image;
-        $path = 'images/';
-        if ($request->evidence_image !== null) {
-            $this->removeFile($request->old_evidence_image , $path);
-            $imgEvidence = $this->uploadFileTo($request->evidence_image, $path)['fileName'];
+        try {
+            $imgEvidence = $request->old_evidence_image;
+            $path = 'images/';
+            if ($request->evidence_image !== null) {
+                $this->removeFile($request->old_evidence_image, $path);
+                $imgEvidence = $this->uploadFileTo($request->evidence_image, $path)['fileName'];
+            }
+            return $this->repository->updateAddTimesheet($addTimeID, $request, $imgEvidence);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        return $this->repository->updateAddTimesheet($addTimeID, $request, $imgEvidence);
     }
 
     /**
@@ -78,7 +82,11 @@ class AddTimesheetService extends BaseService
      */
     public function findIDAddTimesheet($idAddTimesheet)
     {
-        return $this->repository->findIDAddTimesheet($idAddTimesheet);
+        try {
+            return $this->repository->findIDAddTimesheet($idAddTimesheet);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -89,9 +97,13 @@ class AddTimesheetService extends BaseService
      */
     public function deleteAddTimesheet($addTimeID, $evidence)
     {
-        $path = 'images/';
-        $this->removeFile($evidence, $path);
-        return $this->repository->deleteAddTimesheet($addTimeID);
+        try {
+            $path = 'images/';
+            $this->removeFile($evidence, $path);
+            return $this->repository->deleteAddTimesheet($addTimeID);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -102,4 +114,16 @@ class AddTimesheetService extends BaseService
     {
         return $this->repository->getListApprovalTimesheet();
     }
+
+    /**
+     * approval add timesheet
+     * @param $request
+     * @param $status
+     * @return void
+     */
+    public function update($request, $status)
+    {
+        return $this->repository->updateAdd($request, $status);
+    }
+
 }

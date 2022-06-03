@@ -80,4 +80,5 @@ return [
     'id' => 'ID',
     'name' => 'Name',
     'comment' => 'Comment',
+    'approval_All' => 'Approval All',
 ];

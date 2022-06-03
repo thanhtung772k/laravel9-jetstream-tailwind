@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Timesheet\TimesheetRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Timesheet;
+use App\Traits\ManageFile;
 
 /**
  * Class TimeSheetRepositoryEloquent.
@@ -15,6 +16,7 @@ use App\Models\Timesheet;
  */
 class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRepository
 {
+    use ManageFile;
     /**
      * Specify Model class name
      *
@@ -100,56 +102,11 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
                 $checkInHour = $value->check_in;
             }
         }
-        $sub = now()->parse($checkOutHour)->diffInSeconds($checkInHour);
-        $actualWorkingTime = gmdate("H:i:s", $sub);
-        //Convert hours to seconds
-        $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($checkInHour));
-        $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($checkOutHour));
-        //Declare value =0
-        $morning = config('constant.default_number');
-        $afternoon = config('constant.default_number');
-        //Check in before 12h
-        if ((config('constant.twelfth_PM') - $sumIn) >= config('constant.positive_integer')) {
-            if ((config('constant.eight_AM') - $sumIn) > config('constant.positive_integer')) {
-                $sumIn = config('constant.eight_AM');
-            }
-            //checkout before 12h
-            if ((config('constant.twelfth_PM')) - $sumOut > config('constant.positive_integer')) {
-                $morning = $sumOut - $sumIn;
-            } //checkout after 12h
-            else if (((config('constant.thirteem_haftpast_PM')) - $sumOut) > config('constant.positive_integer') && ((config('constant.twelfth_PM')) - $sumOut) <= config('constant.positive_integer')) {
-                $sumOut = config('constant.twelfth_PM');
-                $morning = $sumOut - $sumIn;
-            } //checkout after 13h30
-            else {
-                $morning = config('constant.twelfth_PM') - $sumIn;
-                $afternoon = $sumOut - (config('constant.thirteem_haftpast_PM'));
-            }
-        } //check in after 12h
-        else {
-            //checkin from 12h to 13h30
-            if (((config('constant.thirteem_haftpast_PM')) - $sumIn) > config('constant.positive_integer')) {
-                $sumIn = config('constant.thirteem_haftpast_PM');
-            }
-            //checkin after 17h30
-            if (((config('constant.seventeen_haftpast_PM')) - $sumOut) < config('constant.positive_integer')) {
-                $sumOut = config('constant.seventeen_haftpast_PM');
-            }
-            $afternoon = $sumOut - $sumIn;
-        }
-        // Max paid = 4h
-        $sumSang = ($morning > config('constant.four_hour')) ? config('constant.four_hour') : $morning;
-        $sumChieu = ($afternoon > config('constant.four_hour')) ? config('constant.four_hour') : $afternoon;
-        $sum = $sumSang + $sumChieu;
-        $paidWorkingTime = gmdate("H:i:s", $sum);
-        if (config('constant.eight_AM') - $sumOut > config('constant.positive_integer') || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
-            $actualWorkingTime = null;
-            $paidWorkingTime = null;
-        }
+        $getTimesheet = $this->updateTimesheet($checkInHour,$checkOutHour);
         return $this->model->where('date', $checkOutDate)->where('user_id', $userID)->update([
             'check_out' => $checkOutHour,
-            'actual_working_time' => $actualWorkingTime,
-            'paid_working_time' => $paidWorkingTime,
+            'actual_working_time' => $getTimesheet['actWorking'],
+            'paid_working_time' => $getTimesheet['paidWorking'],
         ]);
     }
 
@@ -158,8 +115,13 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      */
     public function getIDTimesheet($timesheetID)
     {
-        $userID = Auth::id();
-        return $this->model->where('user_id', $userID)->find($timesheetID);
+        try {
+            $userID = Auth::id();
+            return $this->model->where('user_id', $userID)->find($timesheetID);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
     }
 
     /**
@@ -170,7 +132,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     public function dateTimesheet($dateTime)
     {
         $userID = Auth::id();
-        return $this->model->where('date',$dateTime)->where('user_id', $userID)->first();
+        return $this->model->where('date', $dateTime)->where('user_id', $userID)->first();
     }
 
     /**
@@ -189,5 +151,22 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     public function countTimesheet()
     {
         return $this->model->where('user_id', Auth::id())->count();
+    }
+
+    /**
+     * approval timesheet
+     * @param $request
+     * @param $actWorking
+     * @param $paidWorking
+     * @return mixed
+     */
+    public function approval($request, $actWorking, $paidWorking)
+    {
+        return $this->model->find($request->timesheetID)->update([
+            'check_in' => $request->checkInReq,
+            'check_out' => $request->checkOutReq,
+            'actual_working_time' => $actWorking,
+            'paid_working_time' => $paidWorking,
+        ]);
     }
 }

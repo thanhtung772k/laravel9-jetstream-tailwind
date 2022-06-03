@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Services\AddTimesheet\AddTimesheetService;
 use App\Services\Timesheet\TimesheetService;
 use App\Services\User\UserService;
+use PHPUnit\Exception;
+use Illuminate\Support\Facades\DB;
 
 class AddTimesheetController extends Controller
 {
@@ -59,8 +61,12 @@ class AddTimesheetController extends Controller
      */
     public function addTimeSheet(TimesheetRequest $request)
     {
-        $this->addTimeSheetService->createAddTimesheet($request);
-        return redirect()->route('get_create_addtimesheet');
+        try {
+            $this->addTimeSheetService->createAddTimesheet($request);
+            return redirect()->route('get_create_addtimesheet');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -99,10 +105,14 @@ class AddTimesheetController extends Controller
      */
     public function updateAddTimesheet($addTimeID, Request $request)
     {
-        $dateTimesheet = $this->timesheetService->dateTimesheet($request->timesheet_date);
-        $addTimeId = $dateTimesheet->id;
-        $this->addTimeSheetService->updateAddTimesheet($addTimeId, $request);
-        return redirect()->route('get_create_addtimesheet');
+        try {
+            $dateTimesheet = $this->timesheetService->dateTimesheet($request->timesheet_date);
+            $addTimeId = $dateTimesheet->id;
+            $this->addTimeSheetService->updateAddTimesheet($addTimeId, $request);
+            return redirect()->route('get_create_addtimesheet');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -112,9 +122,17 @@ class AddTimesheetController extends Controller
      */
     public function deleteAddTimesheet($addTimeID)
     {
-        $dataByIDAddTimesheet = $this->addTimeSheetService->findIDAddTimesheet($addTimeID);
-        $this->addTimeSheetService->deleteAddTimesheet($addTimeID, $dataByIDAddTimesheet->evidence);
-        return redirect()->route('get_create_addtimesheet');
+        try {
+            if (isset($addTimeID)) {
+                $dataByIDAddTimesheet = $this->addTimeSheetService->findIDAddTimesheet($addTimeID);
+                if (isset($dataByIDAddTimesheet->evidence)) {
+                    $this->addTimeSheetService->deleteAddTimesheet($addTimeID, $dataByIDAddTimesheet->evidence);
+                }
+                return redirect()->route('get_create_addtimesheet');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -129,5 +147,46 @@ class AddTimesheetController extends Controller
             'dataTimesheetApproval' => $dataTimesheetApproval,
             'getInfUser' => $getInfUser,
         ]);
+    }
+
+    /**
+     * get timesheet by id
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAddtimesheetById($id)
+    {
+        return response()->json($this->addTimeSheetService->findIDAddTimesheet($id));
+    }
+
+    /**
+     * approval Additional timesheet
+     * @param Request $request
+     * @param $id
+     * @param $param
+     * @return Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|void
+     */
+    public function approvalOrReject(Request $request, $id, $param = null)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->ajax()) {
+                if ($param == config('constant.status_agree')) {
+                    $this->addTimeSheetService->update($request, config('constant.status_agree'));
+                    $this->timesheetService->approval($request);
+                } elseif ($param == config('constant.status_reject')) {
+                    $this->addTimeSheetService->update($request, config('constant.status_reject'));
+                } else {
+                    return redirect()->back();
+                }
+                DB::commit();
+                return response([
+                    'status' => true
+                ]);
+            }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back();
+        }
     }
 }
