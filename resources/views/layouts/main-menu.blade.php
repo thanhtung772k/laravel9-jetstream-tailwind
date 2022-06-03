@@ -1,4 +1,4 @@
-<div class="nav-menu fixed">
+<div class="nav-menu absolute">
     <div class="w-[256px] bg-[#303c54] flex items-center py-1">
         <a href="" class="text-center w-full left-16">
             <img src="https://ecs.fabbi.io/img/fabbi_logo.031027dd.jpeg" alt="" width="118px" height="50px"
@@ -23,7 +23,7 @@
                     <span>@lang('lang.timesheets')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item">
+                <ul class="nav-menu__sub-item" style="display: none;">
                     <li class="text-center w-full">
                         <a href="{{url('home')}}" class="nav-menu__sub-item--list">@lang('lang.list_timesheets')</a>
                     </li>
@@ -36,7 +36,7 @@
                     <span>@lang('lang.overtime')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item">
+                <ul class="nav-menu__sub-item" style="display: none;">
                     <li class="nav-menu__sub-item--list text-center w-full">
                         @lang('lang.overtime_requests_list')
                     </li>
@@ -54,7 +54,7 @@
                     <span>@lang('lang.add_timesheet')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item">
+                <ul class="nav-menu__sub-item" style="display: none;">
                     <li class="text-center w-full">
                         <a href="{{url('additional-timesheet')}}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_list')</a>
                     </li>
@@ -72,7 +72,7 @@
                     <span>@lang('lang.sab_leave')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item">
+                <ul class="nav-menu__sub-item" style="display: none;">
                     <li class="nav-menu__sub-item--list text-center w-full">
                         @lang('lang.list_timesheets')
                     </li>
