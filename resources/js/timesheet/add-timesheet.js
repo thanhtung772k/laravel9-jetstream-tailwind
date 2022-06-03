@@ -42,6 +42,11 @@ $(document).ready(function () {
     $('#checkboxAll').change(function () {
         var ischeck = $(this).prop('checked');
         $(".checkboxItem").prop('checked', ischeck);
+        if ($(this).is(":checked")) {
+            $('.btn-complete').attr('disabled', false);
+        } else {
+            $('.btn-complete').attr('disabled', true);
+        }
     });
 
     //check each item
@@ -52,6 +57,11 @@ $(document).ready(function () {
                 isExistCheck = true;
             }
         })
+        if (isExistCheck) {
+            $('.btn-complete').attr('disabled', false);
+        } else {
+            $('.btn-complete').attr('disabled', true);
+        }
         if ($(this).prop('checked') == false) {
             $('#checkboxAll').prop('checked', false);
         }
