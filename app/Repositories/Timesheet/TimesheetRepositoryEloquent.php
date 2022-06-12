@@ -7,7 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\Timesheet\TimesheetRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Timesheet;
-use App\Traits\ManageFile;
+use App\Traits\HandleDay;
 
 /**
  * Class TimeSheetRepositoryEloquent.
@@ -16,7 +16,7 @@ use App\Traits\ManageFile;
  */
 class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRepository
 {
-    use ManageFile;
+    use HandleDay;
     /**
      * Specify Model class name
      *
@@ -54,7 +54,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     {
         $fromDate = now()->startOfMonth()->format("Y-m-d");
         $toDate = now()->endOfMonth()->format("Y-m-d");
-        $paginate = $request->paginate ? $request->paginate : 10;
+        $paginate = $request->paginate ? $request->paginate : config('constant.pagination_records');
         if (isset($request->fromDate) && isset($request->toDate) && isset($request->paginate)) {
             $fromDate = $request->fromDate;
             $toDate = $request->toDate;
@@ -165,6 +165,23 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         return $this->model->find($request->timesheetID)->update([
             'check_in' => $request->checkInReq,
             'check_out' => $request->checkOutReq,
+            'actual_working_time' => $actWorking,
+            'paid_working_time' => $paidWorking,
+        ]);
+    }
+
+    /**
+     * update many timesheets
+     * @param $data
+     * @param $actWorking
+     * @param $paidWorking
+     * @return void
+     */
+    public function approvalMany($data, $actWorking, $paidWorking)
+    {
+        return $this->model->find($data->timesheet_id)->update([
+            'check_in' => $data->check_int_request,
+            'check_out' => $data->check_out_request,
             'actual_working_time' => $actWorking,
             'paid_working_time' => $paidWorking,
         ]);

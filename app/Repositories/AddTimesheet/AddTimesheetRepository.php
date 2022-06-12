@@ -68,4 +68,12 @@ interface AddTimesheetRepository extends RepositoryInterface
      * @return void
      */
     public function updateAdd($request, $status);
+
+    /**
+     * update many add timesheet
+     * @param $request
+     * @param $param
+     * @return void
+     */
+    public function updateMany($request, $param);
 }

@@ -40,7 +40,7 @@ Route::middleware([
     Route::get('/additional-timesheet-approval', [AddTimesheetController::class, 'approvalTimesheet'])->name('addtimesheet_approval');
     Route::get('/additional-timesheet-approval/{id}', [AddTimesheetController::class, 'getAddtimesheetById']);
     Route::put('/additional-timesheet-approval/{id}/{param?}', [AddTimesheetController::class, 'approvalOrReject']);
-    Route::put('/additional-timesheet-approvalAll', [AddTimesheetController::class, 'updateAll']);
+    Route::put('/additional-timesheet-approvalAll/{param?}', [AddTimesheetController::class, 'updateAll'])->name('updateAll');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {

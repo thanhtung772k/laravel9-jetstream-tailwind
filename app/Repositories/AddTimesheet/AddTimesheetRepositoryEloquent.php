@@ -152,4 +152,18 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
             'note' => $request->note
         ]);
     }
+
+    /**
+     * update many add timesheet
+     * @param $request
+     * @param $param
+     * @return void
+     */
+    public function updateMany($request, $param)
+    {
+        return $this->model->whereIn('id', $request->addTimeId)->update([
+            'note' => $request->note,
+            'status' => $param
+        ]);
+    }
 }
