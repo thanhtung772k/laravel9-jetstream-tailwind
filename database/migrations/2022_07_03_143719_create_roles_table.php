@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserHasProjectsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateUserHasProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_has_projects', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('project_id');
-            $table->foreignId('role_id');
-            $table->integer('effort')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateUserHasProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_has_projects');
+        Schema::dropIfExists('roles');
     }
 }

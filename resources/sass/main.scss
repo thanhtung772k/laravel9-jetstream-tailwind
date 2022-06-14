@@ -162,8 +162,24 @@
     width: calc(100% - 16rem);
 }
 
-.cus_font-size {
-    font-size: 28px;
+.bg-weekend {
+    background: #f0f8ff !important;
+}
+
+.cus_font-text {
     color: #3c4b64;
     font-weight: 600;
+}
+
+.cus_font-size {
+    font-size: 20px;
+}
+
+.cus_font-color {
+    color: #ea8910;
+}
+
+.pointer-events-auto:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }

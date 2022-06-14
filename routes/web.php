@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\AddTimesheetController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,10 +43,10 @@ Route::middleware([
     Route::put('/additional-timesheet-approval/{id}/{param?}', [AddTimesheetController::class, 'approvalOrReject']);
     Route::put('/additional-timesheet-approvalAll/{param?}', [AddTimesheetController::class, 'updateAll'])->name('updateAll');
     // ........................ route additional project ........................
-    Route::get('/abc', function (){
+    Route::get('/additional-project-list', function (){
         return view('home.add-project.dashboard');
-    })->name('abc');
-
+    })->name('get_project');
+    Route::get('/additional-project-create', [ProjectController::class,'insert'])->name('create_project');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {
