@@ -62,7 +62,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
             $fromDate = $request->fromDate;
             $toDate = now()->endOfMonth()->format("Y-m-d");
         }
-        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->paginate($paginate);
+        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->orderBy('date','desc')->paginate($paginate);
     }
 
     /**
