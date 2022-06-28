@@ -46,7 +46,7 @@ return [
     'to' => 'to',
     'of' => 'of',
     'entries' => 'entries',
-    'early' => 'Về sớm :',
+    'early' => 'Về sớm: ',
     'not_found' => 'Không tìm thấy dữ liệu',
     'overtime_requests_list' => 'Danh sách OT đã tạo',
     'overtime_requests_approval' => 'DS chờ bạn phê duyệt',

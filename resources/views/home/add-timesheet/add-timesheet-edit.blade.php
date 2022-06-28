@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="nav__sub-header absolute w-full">
+    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
         <!-- Page Heading -->
         <header class=" pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 flex justify-center m-auto">
@@ -43,7 +43,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div>
                                 <div class="pt-4 add_timesheet-title">
                                     <label class="">@lang('lang.admin') <span class="text-red-500">*</span></label>

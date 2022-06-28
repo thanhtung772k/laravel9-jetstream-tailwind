@@ -1,4 +1,4 @@
-<div class="nav-menu absolute">
+<div class="nav-menu fixed">
     <div class="w-[256px] bg-[#303c54] flex items-center py-1">
         <a href="" class="text-center w-full left-16">
             <img src="https://ecs.fabbi.io/img/fabbi_logo.031027dd.jpeg" alt="" width="118px" height="50px"

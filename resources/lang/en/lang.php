@@ -46,7 +46,7 @@ return [
     'to' => 'to',
     'of' => 'of',
     'entries' => 'entries',
-    'early' => 'Early :',
+    'early' => 'Early: ',
     'not_found' => 'Data not found',
     'overtime_requests_list' => 'Overtime Request List',
     'overtime_requests_approval' => 'Overtime Request Approval',
