@@ -186,4 +186,13 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
             'paid_working_time' => $paidWorking,
         ]);
     }
+
+    /**
+     * check null checkin
+     * @return void
+     */
+    public function disabledCheckin()
+    {
+        return $this->model->where('user_id', Auth::id())->latest()->first();
+    }
 }

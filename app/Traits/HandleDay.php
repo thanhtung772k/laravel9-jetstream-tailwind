@@ -59,7 +59,7 @@ Trait HandleDay
         $sumAfternoon = ($afternoon > config('constant.four_hour')) ? config('constant.four_hour') : $afternoon;
         $sum = $sumMorning + $sumAfternoon;
         $paidWorkingTime = gmdate("H:i:s", $sum);
-        if (config('constant.eight_AM') - $sumOut > config('constant.positive_integer') ) {
+        if (config('constant.eight_AM') - $sumOut > config('constant.positive_integer') || !isset($checkIn) ) {
             $actualWorkingTime = null;
             $paidWorkingTime = null;
         }

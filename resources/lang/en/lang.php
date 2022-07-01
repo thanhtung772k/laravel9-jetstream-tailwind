@@ -40,7 +40,7 @@ return [
     'update' => 'Update',
     'overtime' => 'Overtime',
     'add_timesheet' => 'Additional Timesheet',
-    'sab_leave' => 'Sabbatical Leave',
+    'add_project' => 'Additional Project',
     'instruction' => 'Instructions for use',
     'showing' => 'Showing',
     'to' => 'to',
@@ -82,4 +82,5 @@ return [
     'comment' => 'Comment',
     'approval_All' => 'Approval All',
     'rejected_All' => 'Rejected All',
+    'project_name' => 'Project Name',
 ];

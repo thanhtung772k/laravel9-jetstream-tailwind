@@ -17,6 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/timesheet/add-timesheet-edit.js', 'public/js/timesheet')
     .sass('resources/sass/main.scss', 'public/css')
     .sass('resources/sass/timesheet/add-timesheet.scss', 'public/css/timesheet')
+    .sass('resources/sass/project/project.scss', 'public/css/project')
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),

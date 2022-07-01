@@ -4,25 +4,6 @@
     </div>
 @endsection
 
-<script>
-//    $(document).ready(function() {
-//     $("#js-btn-checkin").click(function(e) {
-//         // e.preventDefault();
-//         queueMicrotask(() => {
-//             $('#js-btn-checkin').prop('disabled', true);
-
-//         })
-//      });
-//     });
-
-    function handleSubmit(e){
-        e.preventDefault();
-        queueMicrotask(() => {
-            $('#js-btn-checkin').prop('disabled', true);
-        })
-    }
-    
-</script>
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
@@ -44,15 +25,20 @@
             <div class="col-sm- mt-[24px] float-right flex">
                 <form action="{{route('check_in')}}" method="post" class="pr-1.5" onsubmit="return handleSubmit(event)">
                     @csrf
+                    @if($disabledCheckin->check_in || $disabledCheckin->check_out)
+                        @php
+                            $disabled = 'disabled';
+                        @endphp
+                    @else
+                        {{$disabled = ''}}
+                    @endif
                     <input name="checkin_date" type="hidden" value="{{now()->format('Y-m-d')}}">
-                    <input name="checkin_hour" type="hidden" value="{{now()->format('H:i:s')}}">
                     <button type="submit" class="btn btn-primary cus-btn-style bg-[#c2f2ff]"
-                            id="js-btn-checkin" >@lang('lang.checkin')</button>
+                            id="js-btn-checkin" {{$disabled }}>@lang('lang.checkin')</button>
                 </form>
                 <form action="{{route('check_out')}}" method="post">
                     @csrf
                     <input name="checkout_date" type="hidden" value="{{now()->format('Y-m-d')}}">
-                    <input name="checkout_hour" type="hidden" value="{{now()->format('H:i:s')}}">
                     <button type="submit"
                             class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]">@lang('lang.checkout')</button>
                 </form>

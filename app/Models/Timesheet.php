@@ -69,7 +69,7 @@ class Timesheet extends Model
         if (config('constant.seventeen_haftpast_PM') < $sumOut) {
             $sumOut = config('constant.seventeen_haftpast_PM');
         }
-        if ($this->attributes['check_out'] === null || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') ) {
+        if (!isset($this->attributes['check_out']) || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') || !isset($this->attributes['check_in'])) {
             $sumOut = null;
         }
         return $sumOut;
@@ -92,7 +92,7 @@ class Timesheet extends Model
         if (config('constant.twelfth_PM') <= $sumIn && $sumIn <= config('constant.thirteem_haftpast_PM')) {
             $sumIn = config('constant.thirteem_haftpast_PM');
         }
-        if ($this->attributes['check_out'] === null || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer')) {
+        if ( !isset($this->attributes['check_out']) || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer') || !isset($this->attributes['check_in']) ) {
             $sumIn = null;
         }
         return $sumIn;

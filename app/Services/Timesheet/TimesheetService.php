@@ -138,4 +138,13 @@ class TimesheetService extends BaseService
         $getTimesheet = $this->updateTimesheet($data->check_int_request, $data->check_out_request);
         return $this->repository->approvalMany($data, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
     }
+
+    /**
+     * check null checkin
+     * @return void
+     */
+    public function disabledCheckin()
+    {
+        return $this->repository->disabledCheckin();
+    }
 }

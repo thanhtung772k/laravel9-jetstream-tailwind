@@ -69,7 +69,7 @@
             <li class="nav-menu__item">
                 <span>
                     <i class="nav-menu__icon fa-solid fa-clock  pr-3"></i>
-                    <span>@lang('lang.sab_leave')</span>
+                    <span>@lang('lang.add_project')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
                 <ul class="nav-menu__sub-item" style="display: none;">

@@ -40,7 +40,7 @@ return [
     'update' => 'Cập nhật',
     'overtime' => 'Làm thêm (OT)',
     'add_timesheet' => 'Bổ sung công số',
-    'sab_leave' => 'Nghỉ phép',
+    'add_project' => 'Quản lý dự án',
     'instruction' => 'Hướng dẫn sử dụng',
     'showing' => 'Showing',
     'to' => 'to',
@@ -82,4 +82,5 @@ return [
     'comment' => 'Bình luận',
     'approval_All' => 'Duyệt tất cả',
     'rejected_All' => 'Từ chối tất cả',
+    'project_name' => 'Tên dự án',
 ];
