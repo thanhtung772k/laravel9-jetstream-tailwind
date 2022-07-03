@@ -73,11 +73,11 @@
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
                 <ul class="nav-menu__sub-item" style="display: none;">
-                    <li class="nav-menu__sub-item--list text-center w-full">
-                        @lang('lang.list_timesheets')
+                    <li class="text-center w-full">
+                        <a href="{{route('get_project')}}" class="nav-menu__sub-item--list">@lang('lang.project_list')</a>
                     </li>
                     <li class="nav-menu__sub-item--list text-center w-full">
-                        @lang('lang.list_timesheets')
+                        @lang('lang.project_create')
                     </li>
                     <li class="nav-menu__sub-item--list text-center w-full">
                         @lang('lang.list_timesheets')

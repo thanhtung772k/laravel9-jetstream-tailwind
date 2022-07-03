@@ -42,9 +42,9 @@ Route::middleware([
     Route::put('/additional-timesheet-approval/{id}/{param?}', [AddTimesheetController::class, 'approvalOrReject']);
     Route::put('/additional-timesheet-approvalAll/{param?}', [AddTimesheetController::class, 'updateAll'])->name('updateAll');
     // ........................ route additional project ........................
-    Route::get('/abc', function (){
+    Route::get('/additional-project-list', function (){
         return view('home.add-project.dashboard');
-    })->name('abc');
+    })->name('get_project');
 
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');

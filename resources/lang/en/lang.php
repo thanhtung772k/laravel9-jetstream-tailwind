@@ -83,4 +83,9 @@ return [
     'approval_All' => 'Approval All',
     'rejected_All' => 'Rejected All',
     'project_name' => 'Project Name',
+    'project_type' => 'Project Type',
+    'project_list' => 'Project List',
+    'project_create' => 'Project Create',
+    'all' => 'All',
+    'division' => 'Division',
 ];

@@ -83,4 +83,9 @@ return [
     'approval_All' => 'Duyệt tất cả',
     'rejected_All' => 'Từ chối tất cả',
     'project_name' => 'Tên dự án',
+    'project_type' => 'Loại dự án',
+    'project_list' => 'Danh sách dự án',
+    'project_create' => 'Tạo mới dự án',
+    'all' => 'Tất cả',
+    'division' => 'Bộ Phận',
 ];
