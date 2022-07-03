@@ -17,7 +17,7 @@ use App\Http\Controllers\AddTimesheetController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware([
