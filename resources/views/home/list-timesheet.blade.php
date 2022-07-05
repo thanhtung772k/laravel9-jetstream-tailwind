@@ -4,7 +4,6 @@
     </div>
 @endsection
 
-
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
@@ -24,17 +23,22 @@
         </form>
         <div class="relative">
             <div class="col-sm- mt-[24px] float-right flex">
-                <form action="{{route('check_in')}}" method="post" class="pr-1.5">
+                <form action="{{route('check_in')}}" method="post" class="pr-1.5" onsubmit="return handleSubmit(event)">
                     @csrf
+                    @if($disabledCheckin->check_in || $disabledCheckin->check_out)
+                        @php
+                            $disabled = 'disabled';
+                        @endphp
+                    @else
+                        {{$disabled = ''}}
+                    @endif
                     <input name="checkin_date" type="hidden" value="{{now()->format('Y-m-d')}}">
-                    <input name="checkin_hour" type="hidden" value="{{now()->format('H:i:s')}}">
                     <button type="submit" class="btn btn-primary cus-btn-style bg-[#c2f2ff]"
-                            id="js-btn-checkin">@lang('lang.checkin')</button>
+                            id="js-btn-checkin" {{$disabled }}>@lang('lang.checkin')</button>
                 </form>
                 <form action="{{route('check_out')}}" method="post">
                     @csrf
                     <input name="checkout_date" type="hidden" value="{{now()->format('Y-m-d')}}">
-                    <input name="checkout_hour" type="hidden" value="{{now()->format('H:i:s')}}">
                     <button type="submit"
                             class="btn btn-secondary cus-btn-style  bg-[#c5c8cc]">@lang('lang.checkout')</button>
                 </form>
@@ -53,7 +57,10 @@
                     <thead>
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <th scope="col">#</th>
-                        <th scope="col">@lang('lang.date')</th>
+                        <th scope="col">
+                            @lang('lang.date')
+                            <i class="fa-solid fa-caret-down"></i>
+                        </th>
                         <th scope="col">@lang('lang.dayofweek')</th>
                         <th scope="col">@lang('lang.checkin')</th>
                         <th scope="col">@lang('lang.checkout')</th>
@@ -68,7 +75,7 @@
                     </thead>
                     <tbody>
                     @foreach ($data as $index => $value)
-                        <tr class="text-center">
+                        <tr class="text-center @php if($value->created_at->isWeekend()) echo'bg-weekend' @endphp" >
                             <th scope="row">{{$index+1}}</th>
                             <td class="whitespace-nowrap">{{$value->date}}</td>
                             <td class="whitespace-nowrap">{{now()->parse($value->date)->format('l')}}</td>

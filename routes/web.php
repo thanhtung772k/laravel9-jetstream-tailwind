@@ -29,7 +29,7 @@ Route::middleware([
     Route::get('/home', [TimesheetController::class, 'index'])->name('dashboard');
     Route::post('/home-checkin', [TimesheetController::class, 'checkIn'])->name('check_in');
     Route::post('/home-checkout', [TimesheetController::class, 'checkOut'])->name('check_out');
-    // ........................ route over time ........................
+    // ........................ route additional timesheet ........................
     Route::get('/additional-timesheet-create/{id?}', [AddTimesheetController::class, 'insertAddTimesheet'])->name('get_addtimesheet');
     Route::post('/additional-timesheet-list', [AddTimesheetController::class, 'addTimeSheet'])->name('create_addtimesheet');
     Route::get('/additional-timesheet', [AddTimesheetController::class, 'listAddTimesheet'])->name('get_create_addtimesheet');
@@ -41,6 +41,11 @@ Route::middleware([
     Route::get('/additional-timesheet-approval/{id}', [AddTimesheetController::class, 'getAddtimesheetById']);
     Route::put('/additional-timesheet-approval/{id}/{param?}', [AddTimesheetController::class, 'approvalOrReject']);
     Route::put('/additional-timesheet-approvalAll/{param?}', [AddTimesheetController::class, 'updateAll'])->name('updateAll');
+    // ........................ route additional project ........................
+    Route::get('/abc', function (){
+        return view('home.add-project.dashboard');
+    })->name('abc');
+
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {

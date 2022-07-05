@@ -92,4 +92,10 @@ interface TimesheetRepository extends RepositoryInterface
      * @return void
      */
     public function approvalMany($data, $actWorking, $paidWorking);
+
+    /**
+     * check null checkin
+     * @return void
+     */
+    public function disabledCheckin();
 }

@@ -62,7 +62,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
             $fromDate = $request->fromDate;
             $toDate = now()->endOfMonth()->format("Y-m-d");
         }
-        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->paginate($paginate);
+        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->orderBy('date','desc')->paginate($paginate);
     }
 
     /**
@@ -185,5 +185,14 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
             'actual_working_time' => $actWorking,
             'paid_working_time' => $paidWorking,
         ]);
+    }
+
+    /**
+     * check null checkin
+     * @return void
+     */
+    public function disabledCheckin()
+    {
+        return $this->model->where('user_id', Auth::id())->latest()->first();
     }
 }

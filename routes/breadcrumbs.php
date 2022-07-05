@@ -52,3 +52,9 @@ Breadcrumbs::for('add_timesheet-waiting_list', function ($trail) {
     $trail->parent('add_timesheet');
     $trail->push(__('lang.waiting_list'), route('get_create_addtimesheet'));
 });
+
+// Home > Additional Project
+Breadcrumbs::for('add_project', function ($trail) {
+    $trail->parent('home');
+    $trail->push(__('lang.add_project'), route('abc'));
+});

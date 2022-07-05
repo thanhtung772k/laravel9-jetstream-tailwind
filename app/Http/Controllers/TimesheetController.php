@@ -25,9 +25,11 @@ class TimesheetController extends Controller
         $data = $this->timesheetService->searchDateTimesheet($request);
         $dataIDTimesheet = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'));
         $dataCount = $this->timesheetService->countTimesheet();
+        $disabledCheckin = $this->timesheetService->disabledCheckin();
         return view('home.dashboard', [
             'data' => $data,
             'paginate' => $paginateOption,
+            'disabledCheckin' => $disabledCheckin,
         ])->with(compact('fromDate', 'toDate', 'dataCount'));
     }
 
@@ -40,7 +42,7 @@ class TimesheetController extends Controller
     {
         try {
             $checkInDate = $request->input('checkin_date');
-            $checkInHour = $request->input('checkin_hour');
+            $checkInHour = now()->format('H:i:s');
             $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
             return redirect()->back();
         } catch (\Exception $e) {
@@ -57,7 +59,7 @@ class TimesheetController extends Controller
     {
         try {
             $checkOutDate = $request->input('checkout_date');
-            $checkOutHour = $request->input('checkout_hour');
+            $checkOutHour = now()->format('H:i:s');
             $this->timesheetService->checkOutdateTimesheet($checkOutDate, $checkOutHour);
             return redirect()->back();
         } catch (\Exception $e) {

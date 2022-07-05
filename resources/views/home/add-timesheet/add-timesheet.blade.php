@@ -5,7 +5,7 @@
     </div>
 @endsection
 @section('content')
-    <div class="nav__sub-header absolute w-full">
+    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
         <!-- Page Heading -->
         <header class=" shadow pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 flex justify-center m-auto">

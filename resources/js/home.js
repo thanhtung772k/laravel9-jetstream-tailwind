@@ -3,7 +3,8 @@ $(document).ready(function (event) {
     $('.header__list-bar').click(function () {
         $('.nav-menu').toggleClass('menu-items__nav');
         $('.nav__sub-menu').toggleClass('ml-64', 200);
-        $('.fixed.w-full').toggleClass('nav-menu__sub-item-width', 200);
+        $('.fixed.w-full').toggleClass('nav__sub-menu-width', 200);
+        $('.activeWith').toggleClass('nav__sub-menu-width', 200);
         $('.nav__sub-header').toggleClass('w-[1691px]', 200);
     });
     $('.nav-menu__item').click(function () {

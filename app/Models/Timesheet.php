@@ -44,7 +44,7 @@ class Timesheet extends Model
         $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_out']));
         if ($this->attributes['check_in'] === null || $this->attributes['check_out'] === null) {
             $lunchBreak = null;
-        } elseif ((config('constant.thirteem_haftpast_PM') - $sumOut) <= config('constant.positive_integer') && (config('constant.twelfth_PM') - $sumIn) >= config('constant.positive_integer')) {
+        } elseif ((config('constant.thirteem_haftpast_PM') - $sumOut) <= config('constant.positive_integer')) {
             $lunchBreak = config('constant.one_haftpast_hour');
         } elseif ((config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
             $lunchBreak = null;
@@ -69,7 +69,7 @@ class Timesheet extends Model
         if (config('constant.seventeen_haftpast_PM') < $sumOut) {
             $sumOut = config('constant.seventeen_haftpast_PM');
         }
-        if ($this->attributes['check_out'] === null || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
+        if (!isset($this->attributes['check_out']) || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') || !isset($this->attributes['check_in'])) {
             $sumOut = null;
         }
         return $sumOut;
@@ -92,7 +92,7 @@ class Timesheet extends Model
         if (config('constant.twelfth_PM') <= $sumIn && $sumIn <= config('constant.thirteem_haftpast_PM')) {
             $sumIn = config('constant.thirteem_haftpast_PM');
         }
-        if ($this->attributes['check_out'] === null || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer') || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
+        if ( !isset($this->attributes['check_out']) || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer') || !isset($this->attributes['check_in']) ) {
             $sumIn = null;
         }
         return $sumIn;
@@ -107,7 +107,7 @@ class Timesheet extends Model
     {
         $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_in']));
         $sum = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['paid_working_time']));
-        if ($this->attributes['check_in'] === null || $this->attributes['paid_working_time'] === null || (config('constant.thirteem_haftpast_PM') - $sumIn) < config('constant.positive_integer')) {
+        if ($this->attributes['check_in'] === null || $this->attributes['paid_working_time'] === null) {
             $note = null;
         } elseif ($sum !== config('constant.eight_AM')) {
             $sumNote = config('constant.eight_AM') - $sum;
