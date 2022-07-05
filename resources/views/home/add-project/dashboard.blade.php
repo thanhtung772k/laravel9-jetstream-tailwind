@@ -20,8 +20,8 @@
                                 <span class="text-sm">@lang('lang.project_name')</span>
                             </div>
                             <div class="col-sm-5 header-search__text-date">
-                                <div class="input-group date" id="">
-                                    <input class="form-control" placeholder="@lang('lang.project_name')">
+                                <div class="input-group date">
+                                    <input class="form-control" placeholder="@lang('lang.project_name')" name="prjName">
                                 </div>
                             </div>
                         </div>
@@ -30,11 +30,12 @@
                                 <span class="text-sm">@lang('lang.status')</span>
                             </div>
                             <div class="col-sm-4 header-search__text-date">
-                                <div class="input-group date" id="">
-                                    <select class="form-control text-sm" id="FormControlSelect" name="paginate" onchange="this.form.submit()">
-                                        <option value="0">Đang triển khai</option>
-                                        <option value="1">Đã xong</option>
-                                        <option value="0">Chưa triển khai</option>
+                                <div class="input-group date">
+                                    <select class="form-control text-sm" id="FormControlSelect" name="prjStatus">
+                                        <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
+                                        <option value="{{config('constant.status_doing')}}">@lang('lang.developing')</option>
+                                        <option value="{{config('constant.status_done')}}">@lang('lang.done')</option>
+                                        <option value="{{config('constant.status_undeveloped')}}">@lang('lang.undeveloped')</option>
                                     </select>
                                 </div>
                             </div>
@@ -44,25 +45,27 @@
                                 <span class="text-sm">@lang('lang.project_type')</span>
                             </div>
                             <div class="col-sm-4 header-search__text-date">
-                                <div class="input-group date" id="">
-                                    <select class="form-control text-sm" id="FormControlSelect" name="paginate" onchange="this.form.submit()">
-                                        <option value="0">Tất cả</option>
-                                        <option value="1">Đã xong</option>
-                                        <option value="0">Chưa triển khai</option>
+                                <div class="input-group date">
+                                    <select class="form-control text-sm" name="prjTypeID">
+                                        <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
+                                        @foreach($getProjectType as $value)
+                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row pb-4">
                             <div class="col-sm-2 header-search__text-date">
-                                <span class="text-sm">@lang('lang.division')</span>
+                                <span class="text-sm">@lang('lang.department')</span>
                             </div>
                             <div class="col-sm-4 header-search__text-date">
-                                <div class="input-group date" id="">
-                                    <select class="form-control text-sm" id="FormControlSelect" name="paginate" onchange="this.form.submit()">
-                                        <option value="0">Tất cả</option>
-                                        <option value="1">Đã xong</option>
-                                        <option value="0">Chưa triển khai</option>
+                                <div class="input-group date" >
+                                    <select class="form-control text-sm" name="prjDept">
+                                        <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
+                                        @foreach($getDepartment as $value)
+                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

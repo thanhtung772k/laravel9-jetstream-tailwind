@@ -37,12 +37,14 @@ class AddTimesheetService extends BaseService
         return $this->repository->createAddTimesheet($request, $imageName);
     }
 
-    /*
+    /**
      * get list Additional timesheet
+     * @param $request
+     * @return mixed
      */
-    public function getListAddTimesheet()
+    public function getListAddTimesheet($request)
     {
-        return $this->repository->getListAddTimesheet();
+        return $this->repository->getListAddTimesheet($request);
     }
 
     /**
@@ -108,11 +110,12 @@ class AddTimesheetService extends BaseService
 
     /**
      * list approval timsheet
+     * @param $request
      * @return void
      */
-    public function getListApprovalTimesheet()
+    public function getListApprovalTimesheet($request)
     {
-        return $this->repository->getListApprovalTimesheet();
+        return $this->repository->getListApprovalTimesheet($request);
     }
 
     /**

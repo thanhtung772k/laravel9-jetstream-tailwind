@@ -18,12 +18,18 @@ class CreateProjectsTable extends Migration
             $table->string('name', 255)->nullable();
             $table->string('customer', 255)->nullable();
             $table->foreignId('project_type_id');
-            $table->time('vale_contract')->nullable();
-            $table->time('start_date')->nullable();
-            $table->time('end_date')->nullable();
+            $table->unsignedBigInteger('departments_id');
+            $table->integer('vale_contract')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->integer('status')->default(0);
             $table->string('description', 255);
             $table->timestamps();
+            $table->softDeletes(); // add
+        });
+
+        Schema::table('projects', function($table) {
+            $table->foreign('departments_id')->references('id')->on('departments');
         });
     }
 

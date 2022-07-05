@@ -23,9 +23,9 @@
                     <span>@lang('lang.timesheets')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item" style="display: none;">
+                <ul class="nav-menu__sub-item {{ Route::currentRouteNamed( 'dashboard' ) ?  'cus-dis-important' : '' }}" style="display: none;">
                     <li class="text-center w-full">
-                        <a href="{{url('home')}}" class="nav-menu__sub-item--list">@lang('lang.list_timesheets')</a>
+                        <a href="{{url('home')}}" class="nav-menu__sub-item--list {{ Route::currentRouteNamed( 'dashboard' ) ?  'bg-cus-color' : '' }}">@lang('lang.list_timesheets')</a>
                     </li>
                 </ul>
             </li>
@@ -54,15 +54,15 @@
                     <span>@lang('lang.add_timesheet')</span>
                 </span>
                 <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item" style="display: none;">
-                    <li class="text-center w-full">
-                        <a href="{{url('additional-timesheet')}}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_list')</a>
+                <ul class="nav-menu__sub-item {{ Route::currentRouteNamed( 'get_create_addtimesheet' ) ?  'cus-dis-important' : '' }}  {{ Route::currentRouteNamed( 'addtimesheet_approval' ) ?  'cus-dis-important' : '' }} {{ Route::currentRouteNamed( 'get_addtimesheet' ) ?  'cus-dis-important' : '' }}" style="display: none;">
+                    <li class="text-center w-full ">
+                        <a href="{{url('additional-timesheet')}}" class="nav-menu__sub-item--list {{ Route::currentRouteNamed( 'get_create_addtimesheet' ) ?  'bg-cus-color' : '' }}">@lang('lang.add_timesheet_list')</a>
                     </li>
                     <li class="text-center w-full">
-                        <a href="{{route('addtimesheet_approval')}}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_approval')</a>
+                        <a href="{{route('addtimesheet_approval')}}" class="nav-menu__sub-item--list {{ Route::currentRouteNamed( 'addtimesheet_approval' ) ?  'bg-cus-color' : '' }}">@lang('lang.add_timesheet_approval')</a>
                     </li>
                     <li class="text-center w-full">
-                        <a href="{{ route('get_addtimesheet') }}" class="nav-menu__sub-item--list">@lang('lang.add_timesheet_create')</a>
+                        <a href="{{ route('get_addtimesheet') }}" class="nav-menu__sub-item--list {{ Route::currentRouteNamed( 'get_addtimesheet' ) ?  'bg-cus-color' : '' }}">@lang('lang.add_timesheet_create')</a>
                     </li>
                 </ul>
             </li>

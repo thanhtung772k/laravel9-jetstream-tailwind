@@ -61,19 +61,31 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
 
     /**
      * get list Additional timesheet
+     * @param $request
      * @return mixed|void
      */
-    public function getListAddTimesheet()
+    public function getListAddTimesheet($request)
     {
+        $fromDate = now()->startOfMonth()->format("Y-m-d");
+        $toDate = now()->endOfMonth()->format("Y-m-d");
+        if (isset($request->fromDate) && isset($request->toDate)) {
+            $fromDate = $request->fromDate;
+            $toDate = $request->toDate;
+        } elseif ($request->fromDate) {
+            $fromDate = $request->fromDate;
+            $toDate = now()->endOfMonth()->format("Y-m-d");
+        }
         $userID = Auth::id();
         return $this->model->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
             ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
+            ->where('timesheets.date', '>=', $fromDate)->where('timesheets.date', '<=', $toDate)
             ->where('timesheets.user_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name')->get();
     }
 
     /**
      * List detail Additional timesheet
-     * @return mixed|void
+     * @param $timesheetID
+     * @return mixed
      */
     public function getListDetailAddTimesheet($timesheetID)
     {
@@ -129,14 +141,27 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
 
     /**
      * list approval timsheet
-     * @return void
+     * @param $request
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
-    public function getListApprovalTimesheet()
+    public function getListApprovalTimesheet($request)
     {
+        $fromDate = now()->startOfMonth()->format("Y-m-d");
+        $toDate = now()->endOfMonth()->format("Y-m-d");
+        if (isset($request->fromDate) && isset($request->toDate)) {
+            $fromDate = $request->fromDate;
+            $toDate = $request->toDate;
+        } elseif ($request->fromDate) {
+            $fromDate = $request->fromDate;
+            $toDate = now()->endOfMonth()->format("Y-m-d");
+        }
         $userID = Auth::id();
         return $this->model->with('user')->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
-            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')->where('status', config('constant.status_wait'))
-            ->where('add_timesheets.admin_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name', 'timesheets.user_id')->get();
+            ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
+            ->where('status', config('constant.status_wait'))
+            ->where('add_timesheets.admin_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name', 'timesheets.user_id')
+            ->where('add_timesheets.created_at', '>=', $fromDate)->where('add_timesheets.created_at', '<=', $toDate)
+            ->where('timesheets.user_id','like','%'.$request->idName.'%')->get();
     }
 
     /**

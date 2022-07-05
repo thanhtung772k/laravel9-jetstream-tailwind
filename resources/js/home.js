@@ -8,6 +8,7 @@ $(document).ready(function (event) {
         $('.nav__sub-header').toggleClass('w-[1691px]', 200);
     });
     $('.nav-menu__item').click(function () {
+        $('.nav-menu__sub-item').removeClass('cus-dis-important');
         $('.active').children('.nav-menu__sub-item').slideUp(200);
         $('.active').children('.nav-menu__dropToggle').removeClass('menu-item__icon--tranform');
         if ($(this).hasClass('active')) {

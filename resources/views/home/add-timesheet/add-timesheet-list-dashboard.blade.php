@@ -6,7 +6,7 @@
         <!-- Page Heading -->
         <header class="bg-white pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-                <form action="{{route('dashboard')}}" method="GET">
+                <form action="{{route('get_create_addtimesheet')}}" method="GET">
                     <div class="w[110%]">
                         <div class="row">
                             <div class="col-sm-3">

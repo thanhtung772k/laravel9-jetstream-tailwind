@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
 
-class Project extends Model
+class UserHasProject extends Model
 {
     use HasFactory,
         SoftDeletes;
@@ -16,7 +16,7 @@ class Project extends Model
      *
      * @var string
      */
-    protected $table = 'projects';
+    protected $table = 'user_has_projects';
 
     /**
      * The attributes that are mass assignable.
@@ -24,19 +24,11 @@ class Project extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'customer',
-        'project_type_id',
-        'departments_id',
-        'vale_contract',
+        'user_id',
+        'project_id',
+        'role_id',
         'start_date',
         'end_date',
-        'status',
-        'description'
+        'effort'
     ];
-
-    public function projectType()
-    {
-        return $this->belongsTo(ProjectType::class, 'project_type_id');
-    }
 }

@@ -44,11 +44,12 @@ class AddTimesheetController extends Controller
 
     /**
      * index list additional timesheet
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function listAddTimesheet()
+    public function listAddTimesheet(Request $request)
     {
-        $dataAddTimesheet = $this->addTimeSheetService->getListAddTimesheet();
+        $dataAddTimesheet = $this->addTimeSheetService->getListAddTimesheet($request);
         return view('home.add-timesheet.add-timesheet-list-dashboard', [
             'dataAddTimesheet' => $dataAddTimesheet
         ]);
@@ -139,9 +140,13 @@ class AddTimesheetController extends Controller
      * list add-timesheet approval
      * @return Application|Factory|View
      */
-    public function approvalTimesheet()
+    public function approvalTimesheet(Request $request)
     {
-        $dataTimesheetApproval = $this->addTimeSheetService->getListApprovalTimesheet();
+        $fromDate = $request->fromDate;
+        $toDate = $request->toDate;
+        $idName = $request->idName;
+        $dataTimesheetApproval = $this->addTimeSheetService->getListApprovalTimesheet($request);
+        //dd($dataTimesheetApproval);
         $getInfUser = $this->userService->getUser();
         return view('home.add-timesheet.approval.add-timesheet-approval-dashbroad', [
             'dataTimesheetApproval' => $dataTimesheetApproval,

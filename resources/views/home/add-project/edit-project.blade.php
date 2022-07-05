@@ -9,7 +9,7 @@
         <!-- Page Heading -->
         <header class=" shadow pt-[120px] p-8">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 m-auto">
-                <form action="{{route('add_project')}}" method="post">
+                <form action="" method="post">
                     @csrf
                     <div class="row py-8">
                         <div class="col">
@@ -148,11 +148,11 @@
                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.dicription')</span>
                             </div>
                             <div class="header-search__text-date ">
-                            <textarea class="form-control" name="discription"></textarea>
+                                <textarea class="form-control" name="discription"></textarea>
                             </div>
-                        @error('discription')
-                        <div class="text-red-500">{{ $message }}</div>
-                        @enderror
+                            @error('discription')
+                            <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
 
                     </div>

@@ -18,7 +18,7 @@ use App\Http\Controllers\ProjectController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware([
@@ -34,19 +34,20 @@ Route::middleware([
     Route::get('/additional-timesheet-create/{id?}', [AddTimesheetController::class, 'insertAddTimesheet'])->name('get_addtimesheet');
     Route::post('/additional-timesheet-list', [AddTimesheetController::class, 'addTimeSheet'])->name('create_addtimesheet');
     Route::get('/additional-timesheet', [AddTimesheetController::class, 'listAddTimesheet'])->name('get_create_addtimesheet');
-    Route::get('/additional-timesheet-detail/{addTimeID}', [AddTimesheetController::class,'listDetailAddTimesheet'])->name('detail_addtimesheet');
-    Route::get('/additional-timesheet-edit/{addTimeID}', [AddTimesheetController::class,'editAddTimesheet'])->name('edit_addtimesheet');
-    Route::post('/additional-timesheet-edit/{addTimeID}', [AddTimesheetController::class,'updateAddTimesheet'])->name('update_addtimesheet');
+    Route::get('/additional-timesheet-detail/{addTimeID}', [AddTimesheetController::class, 'listDetailAddTimesheet'])->name('detail_addtimesheet');
+    Route::get('/additional-timesheet-edit/{addTimeID}', [AddTimesheetController::class, 'editAddTimesheet'])->name('edit_addtimesheet');
+    Route::post('/additional-timesheet-edit/{addTimeID}', [AddTimesheetController::class, 'updateAddTimesheet'])->name('update_addtimesheet');
     Route::get('/additional-timesheet-delete/{addTimeID}', [AddTimesheetController::class, 'deleteAddTimesheet'])->name('delete_addtimesheet');
     Route::get('/additional-timesheet-approval', [AddTimesheetController::class, 'approvalTimesheet'])->name('addtimesheet_approval');
     Route::get('/additional-timesheet-approval/{id}', [AddTimesheetController::class, 'getAddtimesheetById']);
     Route::put('/additional-timesheet-approval/{id}/{param?}', [AddTimesheetController::class, 'approvalOrReject']);
     Route::put('/additional-timesheet-approvalAll/{param?}', [AddTimesheetController::class, 'updateAll'])->name('updateAll');
     // ........................ route additional project ........................
-    Route::get('/additional-project-list', function (){
-        return view('home.add-project.dashboard');
-    })->name('get_project');
-    Route::get('/additional-project-create', [ProjectController::class,'insert'])->name('create_project');
+    Route::get('/additional-project-list', [ProjectController::class, 'index'])->name('get_project');
+    Route::get('/additional-project-create', [ProjectController::class, 'insert'])->name('create_project');
+    Route::post('/additional-project-add', [ProjectController::class, 'create'])->name('add_project');
+    Route::get('/additional-project-edit', [ProjectController::class, 'edit'])->name('edit_project');
+    Route::get('/additional-project-delete/{addTimeID}', [ProjectController::class, 'deletePrj'])->name('delete_project');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {

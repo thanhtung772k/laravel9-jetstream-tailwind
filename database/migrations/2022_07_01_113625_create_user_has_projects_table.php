@@ -18,8 +18,11 @@ class CreateUserHasProjectsTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('project_id');
             $table->foreignId('role_id');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->integer('effort')->nullable();
             $table->timestamps();
+            $table->softDeletes(); // add
         });
     }
 
