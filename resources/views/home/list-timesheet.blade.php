@@ -25,7 +25,7 @@
             <div class="col-sm- mt-[24px] float-right flex">
                 <form action="{{route('check_in')}}" method="post" class="pr-1.5" onsubmit="return handleSubmit(event)">
                     @csrf
-                    @if($disabledCheckin->check_in || $disabledCheckin->check_out)
+                    @if(isset($disabledCheckin->check_in) || isset($disabledCheckin->check_out))
                         @php
                             $disabled = 'disabled';
                         @endphp

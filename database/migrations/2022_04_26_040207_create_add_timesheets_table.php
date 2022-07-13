@@ -24,6 +24,7 @@ class CreateAddTimesheetsTable extends Migration
             $table->string('evidence', 255)->nullable();
             $table->string('description', 255);
             $table->integer('status')->default(0);
+            $table->string('note', 255)->nullable();
             $table->timestamps();
         });
     }

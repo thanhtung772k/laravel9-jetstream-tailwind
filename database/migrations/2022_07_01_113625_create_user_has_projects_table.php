@@ -14,11 +14,15 @@ class CreateUserHasProjectsTable extends Migration
     public function up()
     {
         Schema::create('user_has_projects', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id');
             $table->foreignId('project_id');
             $table->foreignId('role_id');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->integer('effort')->nullable();
             $table->timestamps();
+            $table->softDeletes(); // add
         });
     }
 

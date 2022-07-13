@@ -6,7 +6,7 @@
         <!-- Page Heading -->
         <header class="bg-white pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-                <form action="{{route('dashboard')}}" method="GET">
+                <form action="{{route('addtimesheet_approval')}}" method="GET">
                     <div class="w[110%]">
                         <div class="row">
                             <div class="col-sm-4">
@@ -16,7 +16,7 @@
                                 <div class="header-search__date">
                                     <section>
                                         <div class="input-group date">
-                                            <input class="form-control" name="id-name">
+                                            <input class="form-control" name="idName">
                                         </div>
                                     </section>
                                 </div>

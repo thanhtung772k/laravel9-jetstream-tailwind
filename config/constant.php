@@ -17,6 +17,9 @@ return [
     'positive_integer' => 0,
     'default_number' => 0,
     'is_admin' => 1,
+    'status_doing' => 1,
+    'status_done' => 2,
+    'status_undeveloped' => 3,
 ]
 
 ?>

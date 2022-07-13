@@ -213,7 +213,7 @@
 
                                     <td>{{$value->user->name}}</td>
 
-                                    <td class="whitespace-nowrap">{{$value->date}}</td>
+                                    <td class="whitespace-nowrap">{{$value->created_at->format('Y-m-d')}}</td>
 
                                     <td>{{$value->check_int_request}}</td>
 

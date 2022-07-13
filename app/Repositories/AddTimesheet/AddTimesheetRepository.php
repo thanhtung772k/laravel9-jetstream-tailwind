@@ -21,9 +21,10 @@ interface AddTimesheetRepository extends RepositoryInterface
 
     /**
      * get list Additional timesheet
+     * @param $request
      * @return mixed
      */
-    public function getListAddTimesheet();
+    public function getListAddTimesheet($request);
 
     /**
      * List detail Additional timesheet
@@ -57,9 +58,10 @@ interface AddTimesheetRepository extends RepositoryInterface
 
     /**
      * list approval timsheet
-     * @return void
+     * @param $request
+     * @return mixed
      */
-    public function getListApprovalTimesheet();
+    public function getListApprovalTimesheet($request);
 
     /**
      * approval add timesheet
