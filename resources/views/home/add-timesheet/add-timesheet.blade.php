@@ -44,9 +44,15 @@
                                 <div class="pt-4 add_timesheet-title">
                                     <label class="">@lang('lang.admin') <span class="text-red-500">*</span></label>
                                     <div class="w-[40%]">
-                                        <select class="form-control text-xs" id="exampleFormControlSelect1"
-                                                name="adminID">
+                                        <select class="form-control text-xs" name="adminID">
                                             @foreach($dataUserAdmin as $valueAdmin)
+                                                @if(isset($valueAdmin->id) == $dataID->admin_id)
+                                                    @php
+                                                        $select = 'selected';
+                                                    @endphp
+                                                @else
+                                                    {{$select = ''}}
+                                                @endif
                                                 <option value="{{$valueAdmin->id}}">{{$valueAdmin->name}}</option>
                                             @endforeach
                                         </select>

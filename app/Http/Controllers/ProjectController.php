@@ -31,7 +31,6 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->all());
         $getProject = $this->projectService->getProject($request);
         $getProjectType = $this->projectTypeService->getProjectType();
         $getDepartment = $this->departmentService->getDepartment();
@@ -76,22 +75,56 @@ class ProjectController extends Controller
             return redirect()->back();
         } catch (\Exception $exception) {
             DB::rollBack();
-            return redirect()->back();
+            return redirect();
         }
     }
 
-    public function edit()
+    /**
+     * view edit project
+     * @param $idPrj
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function edit($idPrj)
     {
         $getLocation = $this->roleService->getLocation();
         $getUsers = $this->userService->getAllUser();
         $getProjectType = $this->projectTypeService->getProjectType();
         $getDepartment = $this->departmentService->getDepartment();
+        $getProjectById = $this->projectService->getProjectById($idPrj);
+        $getUserHasPrjById = $this->userHasProjectService->getUserHasPrjById($idPrj);
         return view('home.add-project.edit-project', [
             'getLocation' => $getLocation,
             'getUsers' => $getUsers,
             'getProjectType' => $getProjectType,
             'getDepartment' => $getDepartment,
+            'getProjectById' => $getProjectById,
+            'getUserHasPrjById' => $getUserHasPrjById
         ]);
+    }
+
+    /**
+     * update Project
+     * @param Request $request
+     * @param $idPrj
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(ProjectRequest $request, $idPrj)
+    {
+        DB::beginTransaction();
+        try {
+            if (count(array_unique($request->userID)) < count($request->userID)) {
+                return redirect()->back()->with('error','Not unique Project');
+            }
+            $this->userHasProjectService->deleteUserHasProject($request, $idPrj);
+            $this->projectService->updateProject($request, $idPrj);
+            $this->userHasProjectService->update($request, $idPrj);
+            $this->userHasProjectService->createOrUpdate($request, $idPrj);
+            DB::commit();
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back();
+        }
     }
 
     /**

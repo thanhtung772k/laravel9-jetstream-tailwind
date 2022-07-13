@@ -90,7 +90,7 @@ return [
     'customer' => 'Customer',
     'all' => 'All',
     'department' => 'Department',
-    'dicription' => 'Dicription',
+    'description' => 'Description',
     'staff' => 'Staff',
     'staff_create' => 'Staff Create',
     'location' => 'Location',

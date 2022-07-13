@@ -30,6 +30,6 @@ $(document).ready(function () {
 
     $('#dateUpdateAddTimesheet').datepicker({
         format: 'yyyy-mm-dd',
-        orientation: "bottom left"
+        orientation: "bottom auto"
     });
 })
