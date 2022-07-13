@@ -174,7 +174,7 @@
                                             <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
                                         </div>
                                         <div class="header-search__text-date ">
-                                            <select class="form-control text-sm" id="selectUser" name="userID[]">
+                                            <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
                                                 @foreach($getUsers as $value)
                                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                                 @endforeach

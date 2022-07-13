@@ -80,18 +80,46 @@ class ProjectController extends Controller
         }
     }
 
-    public function edit()
+    /**
+     * @param $idPrj
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function edit($idPrj)
     {
         $getLocation = $this->roleService->getLocation();
         $getUsers = $this->userService->getAllUser();
         $getProjectType = $this->projectTypeService->getProjectType();
         $getDepartment = $this->departmentService->getDepartment();
+        $getProjectById = $this->projectService->getProjectById($idPrj);
+        $getUserHasPrjById = $this->userHasProjectService->getUserHasPrjById($idPrj);
         return view('home.add-project.edit-project', [
             'getLocation' => $getLocation,
             'getUsers' => $getUsers,
             'getProjectType' => $getProjectType,
             'getDepartment' => $getDepartment,
+            'getProjectById' => $getProjectById,
+            'getUserHasPrjById' => $getUserHasPrjById
         ]);
+    }
+
+    /**
+     * update Project
+     * @param Request $request
+     * @param $idPrj
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $idPrj)
+    {
+        dd($request->all());
+        DB::beginTransaction();
+        try {
+            $this->projectService->updateProject($request, $idPrj);
+            DB::commit();
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back();
+        }
     }
 
     /**

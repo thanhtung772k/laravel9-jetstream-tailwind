@@ -41,6 +41,8 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
      */
     public function createUserHasProject($request, $projectID)
     {
+        //Delete all user of project.
+        $this->model->where('project_id', $projectID)->delete();
         foreach ($request->userID as $key => $value) {
             $this->model->create([
                 'user_id' => $request->userID[$key],
@@ -60,6 +62,16 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
     public function getProject()
     {
         return $this->model->all();
+    }
+
+    /**
+     * get user has project by ID
+     * @param $idPrj
+     * @return void
+     */
+    public function getUserHasPrjById($idPrj)
+    {
+        return $this->model->where('project_id',$idPrj)->get();
     }
 
     /**

@@ -80,7 +80,7 @@ $(document).ready(function () {
     });
     var i = 1;
     let selectLocation = $('#selectLocation').html();
-    let selectUser = $('#selectUser').html();
+    let selectUser = $('.selectUser').html();
     $('body').on('click', '#add_input', function () {
         i++;
         $('#dynamic_input').append(
@@ -89,7 +89,7 @@ $(document).ready(function () {
             '<div class="row pb-4"> ' +
                 '<div class="col-sm-2"> ' +
                     '<div class="header-search__text-date "> ' +
-                    '<select class="form-control text-sm"  name="userID[]" id="selectUser'+i+'"> '
+                    '<select class="form-control text-sm selectUser"  name="userID[]" id="selectUser'+i+'"> '
                         + selectUser +
                     '</select> ' +
                     '</div> ' +
@@ -132,16 +132,17 @@ $(document).ready(function () {
         $('.datepicker-end,.datepicker-start').datepicker({
             format: 'yyyy-mm-dd'
         });
-        $('#selectUser'+i+'').select2({
+        $('.selectUser').select2({
             theme: "bootstrap"
         });
     });
-    $('#selectUser').select2({
+    $('.selectUser').select2({
         theme: "bootstrap"
     });
-    $(document).on('click', '.input_remove', function () {
-        var inputID = $(this).attr('id');
-        $('#row' + inputID + '').remove();
+    $(document).on('click', '.input_remove', function (e) {
+        e.preventDefault();
+        console.log(222222);
+        $(this).parents( "tr" ).remove();
     });
 
 

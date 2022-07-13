@@ -26,6 +26,13 @@ interface UserHasProjectRepository extends RepositoryInterface
     public function getProject();
 
     /**
+     * get user has project by ID
+     * @param $idPrj
+     * @return void
+     */
+    public function getUserHasPrjById($idPrj);
+
+    /**
      * delete user has project
      * @param $idPrj
      * @return mixed
