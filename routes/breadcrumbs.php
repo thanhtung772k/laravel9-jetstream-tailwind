@@ -59,8 +59,26 @@ Breadcrumbs::for('add_project', function ($trail) {
     $trail->push(__('lang.add_project'), route('get_project'));
 });
 
+// Home > Additional Project > List
+Breadcrumbs::for('project-list', function ($trail) {
+    $trail->parent('add_project');
+    $trail->push(__('lang.project_list'), route('create_project'));
+});
+
+// Home > Additional Project > List
+Breadcrumbs::for('project-detail', function ($trail) {
+    $trail->parent('add_project');
+    $trail->push(__('lang.detail'), route('create_project'));
+});
+
 // Home > Additional Project > Create
 Breadcrumbs::for('project-create', function ($trail) {
     $trail->parent('add_project');
     $trail->push(__('lang.create'), route('create_project'));
+});
+
+// Home > Additional Project > Update
+Breadcrumbs::for('project-update', function ($trail) {
+    $trail->parent('add_project');
+    $trail->push(__('lang.update'), route('create_project'));
 });

@@ -46,8 +46,10 @@ Route::middleware([
     Route::get('/additional-project-list', [ProjectController::class, 'index'])->name('get_project');
     Route::get('/additional-project-create', [ProjectController::class, 'insert'])->name('create_project');
     Route::post('/additional-project-add', [ProjectController::class, 'create'])->name('add_project');
-    Route::get('/additional-project-edit', [ProjectController::class, 'edit'])->name('edit_project');
-    Route::get('/additional-project-delete/{addTimeID}', [ProjectController::class, 'deletePrj'])->name('delete_project');
+    Route::get('/additional-project-edit/{projID}', [ProjectController::class, 'edit'])->name('edit_project');
+    Route::get('/additional-project-detail/{projID}', [ProjectController::class, 'detail'])->name('detail_project');
+    Route::post('/additional-project-update/{projID}', [ProjectController::class, 'update'])->name('update_project');
+    Route::get('/additional-project-delete/{projID}', [ProjectController::class, 'deletePrj'])->name('delete_project');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {

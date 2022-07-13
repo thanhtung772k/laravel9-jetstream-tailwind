@@ -35,7 +35,8 @@ $(document).ready(function () {
     });
 
     $('#datepicker,#datepicker-end').datepicker({
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        orientation: "bottom left"
     });
 
     //check all
@@ -80,7 +81,7 @@ $(document).ready(function () {
     });
     var i = 1;
     let selectLocation = $('#selectLocation').html();
-    let selectUser = $('#selectUser').html();
+    let selectUser = $('.selectUser').html();
     $('body').on('click', '#add_input', function () {
         i++;
         $('#dynamic_input').append(
@@ -89,7 +90,7 @@ $(document).ready(function () {
             '<div class="row pb-4"> ' +
                 '<div class="col-sm-2"> ' +
                     '<div class="header-search__text-date "> ' +
-                    '<select class="form-control text-sm"  name="userID[]" id="selectUser'+i+'"> '
+                    '<select class="form-control text-sm selectUser"  name="userID[]" id="selectUser'+i+'"> '
                         + selectUser +
                     '</select> ' +
                     '</div> ' +
@@ -122,8 +123,9 @@ $(document).ready(function () {
                 '<div class="col-sm-1"> ' +
                     '<div class="header-search__text-date "> ' +
                     '<input class="form-control" name="effort[]"> </div> </div>' +
-                    '<div class="col-sm-1 flex items-end"> ' +
+                    '<div class="col-sm-1 flex"> ' +
                     '<div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button> ' +
+                        '<input type="hidden" value="" name="userHasIDOld[]">' +
                     '</div>' +
                     ' </div> ' +
                 '</div>' +
@@ -132,16 +134,18 @@ $(document).ready(function () {
         $('.datepicker-end,.datepicker-start').datepicker({
             format: 'yyyy-mm-dd'
         });
-        $('#selectUser'+i+'').select2({
+        $('.selectUser').select2({
             theme: "bootstrap"
         });
     });
-    $('#selectUser').select2({
+    $('.selectUser').select2({
         theme: "bootstrap"
     });
-    $(document).on('click', '.input_remove', function () {
-        var inputID = $(this).attr('id');
-        $('#row' + inputID + '').remove();
+    $(document).on('click', '.input_remove', function (e) {
+        e.preventDefault();
+        $(this).parents( "tr" ).remove();
+        var values = $("input[name='userHasIDOld[]']").map(function(){return $(this).val();}).get();
+        console.log(values)
     });
 
 

@@ -14,7 +14,7 @@
 
     <div class="flex">
         @include('layouts.main-menu')
-        <div class="nav__sub-menu cus-min-height bg-gray-100 ml-64 relative w-full">
+        <div class="nav__sub-menu cus-min-height bg-gray-100 ml-64 relative w-full bg-content">
             @include('layouts.navigation')
             @yield('content')
         </div>

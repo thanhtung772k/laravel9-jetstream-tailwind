@@ -90,7 +90,7 @@ return [
     'customer' => 'Customer',
     'all' => 'All',
     'department' => 'Department',
-    'dicription' => 'Dicription',
+    'description' => 'Description',
     'staff' => 'Staff',
     'staff_create' => 'Staff Create',
     'location' => 'Location',
@@ -100,4 +100,7 @@ return [
     'developing' => 'Developing',
     'undeveloped' => 'Undeveloped',
     'done' => 'Done',
+    'total_member' => 'Total Member',
+    'inf_detail_prj' => 'Information Detail Project',
+    'inf_member_join' => 'Information Member Join Project',
 ];
