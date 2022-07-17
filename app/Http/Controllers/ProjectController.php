@@ -66,13 +66,16 @@ class ProjectController extends Controller
      */
     public function create(ProjectRequest $request)
     {
+        if (count(array_unique($request->userID)) < count($request->userID)) {
+            return redirect()->back()->with('error','Not unique Project');
+        }
         DB::beginTransaction();
         $this->projectService->createProject($request);
         try {
             $getLastproject = $this->projectService->getLastproject();
             $this->userHasProjectService->createUserHasProject($request, $getLastproject->id);
             DB::commit();
-            return redirect()->back();
+            return route('get_project');
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect();

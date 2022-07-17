@@ -90,7 +90,7 @@ $(document).ready(function () {
             '<div class="row pb-4"> ' +
                 '<div class="col-sm-2"> ' +
                     '<div class="header-search__text-date "> ' +
-                    '<select class="form-control text-sm selectUser"  name="userID[]" id="selectUser'+i+'"> '
+                    '<select class="form-control text-sm selectUser" name="userID[]" id="selectUser'+i+'"> '
                         + selectUser +
                     '</select> ' +
                     '</div> ' +
@@ -123,7 +123,7 @@ $(document).ready(function () {
                 '<div class="col-sm-1"> ' +
                     '<div class="header-search__text-date "> ' +
                     '<input class="form-control" name="effort[]"> </div> </div>' +
-                    '<div class="col-sm-1 flex items-end"> ' +
+                    '<div class="col-sm-1 flex"> ' +
                     '<div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button> ' +
                         '<input type="hidden" value="" name="userHasIDOld[]">' +
                     '</div>' +

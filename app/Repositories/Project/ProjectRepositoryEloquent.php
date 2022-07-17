@@ -100,27 +100,6 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             'start_date' => $request->startDateProject,
             'end_date' => $request->endDateProject,
             'status' => $request->statusProject,
-            'description' => $request->description,
-        ]);
-    }
-
-    /**
-     * updae project
-     * @param $request
-     * @param $idPrj
-     * @return void
-     */
-    public function updateProject($request, $idPr)
-    {
-        return $this->model->find($idPr)->update([
-            'name' => $request->projectName,
-            'customer' => $request->customer,
-            'project_type_id' => $request->projectType,
-            'departments_id' => $request->department,
-            'vale_contract' => $request->valueContract,
-            'start_date' => $request->startDateProject,
-            'end_date' => $request->endDateProject,
-            'status' => $request->statusProject,
             'description' => $request->discription,
         ]);
     }
