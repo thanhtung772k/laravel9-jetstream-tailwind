@@ -24,7 +24,6 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -56,6 +55,49 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
     }
 
     /**
+     * update user join project
+     * @param $request
+     * @param $idPrj
+     * @return mixed
+     */
+    public function update($request, $idPrj)
+    {
+        foreach ($request->userHasIDOld as $key => $value) {
+            if (isset($request->userHasIDOld[$key])) {
+                $this->model->find($request->userHasIDOld[$key])->update([
+                    'user_id' => $request->userID[$key],
+                    'role_id' => $request->locationID[$key],
+                    'start_date' => $request->startDateUser[$key],
+                    'end_date' => $request->endDateUser[$key],
+                    'effort' => $request->effort[$key]
+                ]);
+            }
+        }
+    }
+
+    /**
+     * create or update user join project
+     * @param $request
+     * @param $idPrj
+     * @return mixed
+     */
+    public function createOrUpdate($request, $idPrj)
+    {
+        foreach ($request->userHasIDOld as $key => $value) {
+            if ($request->userHasIDOld[$key] === null) {
+                $this->model->create([
+                    'user_id' => $request->userID[$key],
+                    'project_id' => $idPrj,
+                    'role_id' => $request->locationID[$key],
+                    'start_date' => $request->startDateUser[$key],
+                    'end_date' => $request->endDateUser[$key],
+                    'effort' => $request->effort[$key]
+                ]);
+            }
+        }
+    }
+
+    /**
      * index all project
      * @return mixed
      */
@@ -71,16 +113,19 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
      */
     public function getUserHasPrjById($idPrj)
     {
-        return $this->model->where('project_id',$idPrj)->get();
+        return $this->model->where('project_id', $idPrj)->get();
     }
 
     /**
      * delete user has project
+     * @param $request
      * @param $idPrj
      * @return mixed
      */
-    public function deleteUserHasProject($idPrj)
+    public function deleteUserHasProject($request, $idPrj)
     {
-        return $this->model->find($idPrj)->delete();
+        $this->model->where('project_id', $idPrj)->where(function ($query) use ($request) {
+            return $request->userHasIDOld ? $query->whereNotIn('id', array_filter($request->userHasIDOld)) : '';
+        })->delete();
     }
 }

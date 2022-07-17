@@ -34,6 +34,28 @@ class UserHasProjectService extends BaseService
     }
 
     /**
+     * update user join project
+     * @param $request
+     * @param $idPrj
+     * @return mixed
+     */
+    public function update($request, $idPrj)
+    {
+        return $this->repository->update($request, $idPrj);
+    }
+
+    /**
+     * create or update user join project
+     * @param $request
+     * @param $idPrj
+     * @return mixed
+     */
+    public function createOrUpdate($request, $idPrj)
+    {
+        return $this->repository->createOrUpdate($request, $idPrj);
+    }
+
+    /**
      * index all project
      * @return mixed
      */
@@ -54,11 +76,12 @@ class UserHasProjectService extends BaseService
 
     /**
      * delete user has project
+     * @param $request
      * @param $idPrj
      * @return mixed
      */
-    public function deleteUserHasProject($idPrj)
+    public function deleteUserHasProject($request, $idPrj)
     {
-        return $this->repository->deleteUserHasProject($idPrj);
+        return $this->repository->deleteUserHasProject($request, $idPrj);
     }
 }

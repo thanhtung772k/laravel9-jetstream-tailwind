@@ -145,16 +145,15 @@
                     <div class="row pb-4">
                         <div class="col-sm-3">
                             <div class="header-search__text-date pb-3">
-                                <span class="font-semibold cus_font-text text-sm">@lang('lang.dicription')</span>
+                                <span class="font-semibold cus_font-text text-sm">@lang('lang.description')</span>
                             </div>
                             <div class="header-search__text-date ">
-                            <textarea class="form-control" name="discription"></textarea>
+                                <textarea class="form-control" name="description"></textarea>
                             </div>
-                        @error('discription')
-                        <div class="text-red-500">{{ $message }}</div>
-                        @enderror
+                            @error('description')
+                            <div class="text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
-
                     </div>
 
                     <div class="row py-8">
@@ -166,83 +165,177 @@
                     </div>
 
                     <table id="dynamic_input">
-                        <tr>
-                            <td>
-                                <div class="row pb-4">
-                                    <div class="col-sm-2">
-                                        <div class="header-search__text-date pb-3">
-                                            <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
+                        @php
+                            $oldStartDateUser = old('startDateUser') ?? [];
+                        @endphp
+                        @if($oldStartDateUser == null)
+                            <tr>
+                                <td>
+                                    <div class="row pb-4">
+                                        <div class="col-sm-2">
+                                            <div class="header-search__text-date pb-3">
+                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
+                                            </div>
+                                            <div class="header-search__text-date ">
+                                                <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
+                                                    @foreach($getUsers as $value)
+                                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="header-search__text-date ">
-                                            <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
-                                                @foreach($getUsers as $value)
-                                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
 
 
-                                    <div class="col-sm-2">
-                                        <div class="header-search__text-date pb-3">
-                                            <span class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
+                                        <div class="col-sm-2">
+                                            <div class="header-search__text-date pb-3">
+                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
+                                            </div>
+                                            <div class="header-search__text-date">
+                                                <select class="form-control text-sm" name="locationID[]" id="selectLocation">
+                                                    @foreach($getLocation as $value)
+                                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="header-search__text-date">
-                                            <select class="form-control text-sm" name="locationID[]" id="selectLocation">
-                                                @foreach($getLocation as $value)
-                                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="col-sm-2">
+                                            <div class="header-search__text-date pb-3">
+                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
+                                            </div>
+                                            <div class="header-search__date">
+                                                <section>
+                                                    <div class="input-group date" id="datepicker">
+                                                        <input class="form-control" name="startDateUser[]" readonly style="background-color: #fff">
+                                                        <span class="input-group-append">
+                                                                <span class="input-group-text bg-white">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </span>
+                                                    </div>
+                                                </section>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-sm-2">
-                                        <div class="header-search__text-date pb-3">
-                                            <span class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
-                                        </div>
-                                        <div class="header-search__date">
-                                            <section>
-                                                <div class="input-group date" id="datepicker">
-                                                    <input class="form-control" name="startDateUser[]" readonly style="background-color: #fff">
-                                                    <span class="input-group-append">
-                                                        <span class="input-group-text bg-white">
-                                                            <i class="fa fa-calendar"></i>
+                                        <div class="col-sm-2">
+                                            <div class="header-search__text-date pb-3">
+                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
+                                            </div>
+                                            <div class="header-search__text-date">
+                                                <section>
+                                                    <div class="input-group date" id="datepicker-end">
+                                                        <input class="form-control" id="toDate" name="endDateUser[]" readonly style="background-color: #fff">
+                                                        <span class="input-group-append">
+                                                            <span class="input-group-text bg-white">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                </div>
-                                            </section>
+                                                    </div>
+                                                </section>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-sm-2">
-                                        <div class="header-search__text-date pb-3">
-                                            <span class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
+                                        <div class="col-sm-1">
+                                            <div class="header-search__text-date pb-3">
+                                                <span class="font-semibold cus_font-text text-sm whitespace-nowrap">@lang('lang.effort') (%)</span>
+                                            </div>
+                                            <div class="header-search__text-date">
+                                                <input class="form-control" name="effort[]">
+                                            </div>
                                         </div>
-                                        <div class="header-search__text-date">
-                                            <section>
-                                                <div class="input-group date" id="datepicker-end">
-                                                    <input class="form-control" id="toDate" name="endDateUser[]" readonly style="background-color: #fff">
-                                                    <span class="input-group-append">
-                                                        <span class="input-group-text bg-white">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </span>
-                                                    </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        @else
+                            @foreach($oldStartDateUser as $key => $valueDateUser)
+                                <tr>
+                                    <td>
+                                        <div class="row pb-4">
+                                            <div class="col-sm-2">
+                                                <div class="header-search__text-date pb-3">
+                                                    <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
                                                 </div>
-                                            </section>
-                                        </div>
-                                    </div>
+                                                <div class="header-search__text-date ">
+                                                    <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
+                                                        @foreach($getUsers as $value)
+                                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                    <div class="col-sm-1">
-                                        <div class="header-search__text-date pb-3">
-                                            <span class="font-semibold cus_font-text text-sm whitespace-nowrap">@lang('lang.effort') (%)</span>
+
+                                            <div class="col-sm-2">
+                                                <div class="header-search__text-date pb-3">
+                                                    <span class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
+                                                </div>
+                                                <div class="header-search__text-date">
+                                                    <select class="form-control text-sm" name="locationID[]" id="selectLocation">
+                                                        @foreach($getLocation as $value)
+                                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                                <div class="col-sm-2">
+                                                    <div class="header-search__text-date pb-3">
+                                                        <span class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
+                                                    </div>
+                                                    <div class="header-search__date">
+                                                        <section>
+                                                            <div class="input-group date" id="datepicker">
+                                                                <input class="form-control" name="startDateUser[]" readonly style="background-color: #fff">
+                                                                <span class="input-group-append">
+                                                                    <span class="input-group-text bg-white">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+
+                                                    @error("startDateUser.$key")
+                                                    <div class="text-red-500">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+
+                                            <div class="col-sm-2">
+                                                <div class="header-search__text-date pb-3">
+                                                    <span class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
+                                                </div>
+                                                <div class="header-search__text-date">
+                                                    <section>
+                                                        <div class="input-group date" id="datepicker-end">
+                                                            <input class="form-control" id="toDate" name="endDateUser[]" readonly style="background-color: #fff">
+                                                            <span class="input-group-append">
+                                                                <span class="input-group-text bg-white">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-1">
+                                                <div class="header-search__text-date pb-3">
+                                                    <span class="font-semibold cus_font-text text-sm whitespace-nowrap">@lang('lang.effort') (%)</span>
+                                                </div>
+                                                <div class="header-search__text-date">
+                                                    <input class="form-control" name="effort[]">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-1 flex items-end">
+                                                <div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button>
+                                                    <input type="hidden" value="" name="userHasIDOld[]">
+                                                    </div>
+                                                </div>
+
                                         </div>
-                                        <div class="header-search__text-date">
-                                            <input class="form-control" name="effort[]">
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </table>
 
                     <div class="row pb-8">

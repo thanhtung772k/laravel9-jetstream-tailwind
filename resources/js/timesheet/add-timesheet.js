@@ -35,7 +35,8 @@ $(document).ready(function () {
     });
 
     $('#datepicker,#datepicker-end').datepicker({
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        orientation: "bottom left"
     });
 
     //check all
@@ -124,6 +125,7 @@ $(document).ready(function () {
                     '<input class="form-control" name="effort[]"> </div> </div>' +
                     '<div class="col-sm-1 flex items-end"> ' +
                     '<div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button> ' +
+                        '<input type="hidden" value="" name="userHasIDOld[]">' +
                     '</div>' +
                     ' </div> ' +
                 '</div>' +
@@ -141,8 +143,9 @@ $(document).ready(function () {
     });
     $(document).on('click', '.input_remove', function (e) {
         e.preventDefault();
-        console.log(222222);
         $(this).parents( "tr" ).remove();
+        var values = $("input[name='userHasIDOld[]']").map(function(){return $(this).val();}).get();
+        console.log(values)
     });
 
 

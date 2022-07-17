@@ -46,7 +46,7 @@
                                     <div class="w-[40%]">
                                         <select class="form-control text-xs" name="adminID">
                                             @foreach($dataUserAdmin as $valueAdmin)
-                                                @if($valueAdmin->id == $dataID->admin_id)
+                                                @if(isset($valueAdmin->id) == $dataID->admin_id)
                                                     @php
                                                         $select = 'selected';
                                                     @endphp

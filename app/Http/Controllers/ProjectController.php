@@ -31,7 +31,6 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->all());
         $getProject = $this->projectService->getProject($request);
         $getProjectType = $this->projectTypeService->getProjectType();
         $getDepartment = $this->departmentService->getDepartment();
@@ -76,11 +75,12 @@ class ProjectController extends Controller
             return redirect()->back();
         } catch (\Exception $exception) {
             DB::rollBack();
-            return redirect()->back();
+            return redirect();
         }
     }
 
     /**
+     * view edit project
      * @param $idPrj
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
@@ -108,12 +108,17 @@ class ProjectController extends Controller
      * @param $idPrj
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $idPrj)
+    public function update(ProjectRequest $request, $idPrj)
     {
-        dd($request->all());
         DB::beginTransaction();
         try {
+            if (count(array_unique($request->userID)) < count($request->userID)) {
+                return redirect()->back()->with('error','Not unique Project');
+            }
+            $this->userHasProjectService->deleteUserHasProject($request, $idPrj);
             $this->projectService->updateProject($request, $idPrj);
+            $this->userHasProjectService->update($request, $idPrj);
+            $this->userHasProjectService->createOrUpdate($request, $idPrj);
             DB::commit();
             return redirect()->back();
         } catch (\Exception $exception) {

@@ -37,7 +37,8 @@
                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.customer')</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <select class="form-control text-sm" name="customer" value="{{$getProjectById->customer}}">
+                                <select class="form-control text-sm" name="customer"
+                                        value="{{$getProjectById->customer}}">
                                     <option value="EPU software">EPU software</option>
                                     <option value="THTu Japan">THTu Japan</option>
                                     <option value="NgTu ViT">NgTu ViT</option>
@@ -66,10 +67,12 @@
 
                         <div class="col-sm-3">
                             <div class="header-search__text-date pb-3">
-                                <span class="font-semibold cus_font-text text-sm">@lang('lang.value_contract') (mm)</span>
+                                <span
+                                    class="font-semibold cus_font-text text-sm">@lang('lang.value_contract') (mm)</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <input class="form-control" name="valueContract" value="{{$getProjectById->vale_contract}}">
+                                <input class="form-control" name="valueContract"
+                                       value="{{$getProjectById->vale_contract}}">
                             </div>
                             @error('valueContract')
                             <div class="text-red-500">{{ $message }}</div>
@@ -106,7 +109,8 @@
                             <div class="header-search__date">
                                 <section>
                                     <div class="input-group date" id="datepicker">
-                                        <input class="form-control" name="startDateProject" readonly style="background-color: #fff" value="{{$getProjectById->start_date}}">
+                                        <input class="form-control" name="startDateProject" readonly
+                                               style="background-color: #fff" value="{{$getProjectById->start_date}}">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -127,7 +131,8 @@
                             <div class="header-search__text-date">
                                 <section>
                                     <div class="input-group date" id="datepicker-end">
-                                        <input class="form-control" name="endDateProject" readonly style="background-color: #fff" value="{{$getProjectById->end_date}}">
+                                        <input class="form-control" name="endDateProject" readonly
+                                               style="background-color: #fff" value="{{$getProjectById->end_date}}">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -158,12 +163,12 @@
                     <div class="row pb-4">
                         <div class="col-sm-3">
                             <div class="header-search__text-date pb-3">
-                                <span class="font-semibold cus_font-text text-sm">@lang('lang.dicription')</span>
+                                <span class="font-semibold cus_font-text text-sm">@lang('lang.description')</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <textarea class="form-control" name="discription">{{$getProjectById->description}}</textarea>
+                                <textarea class="form-control" name="description">{{$getProjectById->description}}</textarea>
                             </div>
-                            @error('discription')
+                            @error('description')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -187,29 +192,12 @@
                                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-2">
-                                            <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm whitespace-nowrap">@lang('lang.effort') (%)</span>
-                                            </div>
+                                    <div class="col-sm-2">
+                                        <div class="header-search__text-date pb-3">
+                                            <span
+                                                class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
                                         </div>
                                     </div>
                                 </td>
@@ -235,9 +223,53 @@
                                             </div>
                                         </div>
 
+                                    <div class="col-sm-2">
+                                        <div class="header-search__text-date pb-3">
+                                            <span
+                                                class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
+                                        </div>
+
+                                    <div class="col-sm-2">
+                                        <div class="header-search__text-date pb-3">
+                                            <span
+                                                class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="header-search__text-date">
+                                                <input class="form-control" name="effort[]" value="{{$valueUserHasPrjById->effort}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @foreach($getUserHasPrjById as $valueUserHasPrjById)
+                            <tr>
+                                <td>
+                                    <div class="row pb-4">
+                                        <div class="col-sm-2">
+                                            <div class="header-search__text-date ">
+                                                <select class="form-control text-sm selectUser" name="userID[]">
+                                                    @foreach($getUsers as $value)
+                                                        @if($valueUserHasPrjById->user_id == $value->id)
+                                                            @php
+                                                                $select = 'selected';
+                                                            @endphp
+                                                        @else
+                                                            {{$select = ''}}
+                                                        @endif
+                                                        <option
+                                                            value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="col-sm-2">
                                             <div class="header-search__text-date">
-                                                <select class="form-control text-sm" name="locationID[]" id="selectLocation">
+                                                <select class="form-control text-sm" name="locationID[]"
+                                                        id="selectLocation">
                                                     @foreach($getLocation as $value)
                                                         @if($valueUserHasPrjById->role_id == $value->id)
                                                             @php
@@ -246,7 +278,8 @@
                                                         @else
                                                             {{$select = ''}}
                                                         @endif
-                                                        <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                        <option
+                                                            value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -256,7 +289,9 @@
                                             <div class="header-search__date">
                                                 <section>
                                                     <div class="input-group date" id="datepicker">
-                                                        <input class="form-control" name="startDateUser[]" readonly style="background-color: #fff" value="{{$valueUserHasPrjById->start_date}}">
+                                                        <input class="form-control" name="startDateUser[]" readonly
+                                                               style="background-color: #fff"
+                                                               value="{{$valueUserHasPrjById->start_date}}">
                                                         <span class="input-group-append">
                                                             <span class="input-group-text bg-white">
                                                                 <i class="fa fa-calendar"></i>
@@ -271,7 +306,9 @@
                                             <div class="header-search__text-date">
                                                 <section>
                                                     <div class="input-group date" id="datepicker-end">
-                                                        <input class="form-control" id="toDate" name="endDateUser[]" readonly style="background-color: #fff" value="{{$valueUserHasPrjById->end_date}}">
+                                                        <input class="form-control" id="toDate" name="endDateUser[]"
+                                                               readonly style="background-color: #fff"
+                                                               value="{{$valueUserHasPrjById->end_date}}">
                                                         <span class="input-group-append">
                                                             <span class="input-group-text bg-white">
                                                                 <i class="fa fa-calendar"></i>
@@ -284,13 +321,17 @@
 
                                         <div class="col-sm-1">
                                             <div class="header-search__text-date">
-                                                <input class="form-control" name="effort[]" value="{{$valueUserHasPrjById->effort}}">
+                                                <input class="form-control" name="effort[]"
+                                                       value="{{$valueUserHasPrjById->effort}}">
                                             </div>
                                         </div>
 
                                         <div class="col-sm-1 flex items-end">
                                             <div class="mt-[3px]">
-                                                <a href="" class="text-xs btn btn-outline-danger mt-0.5 input_remove">X</a>
+                                                <span
+                                                    class="text-xs btn btn-outline-danger mt-0.5 input_remove">X</span>
+                                                <input type="hidden" value="{{$valueUserHasPrjById->id}}"
+                                                       name="userHasIDOld[]">
                                             </div>
                                         </div>
                                     </div>
@@ -302,15 +343,14 @@
                     <div class="row pb-8">
                         <div class="col">
                             <div class="header-search__text-date ">
-                                <span class="cus_font-text cus_font-color pointer-events-auto" name="add_input" id="add_input">+ @lang('lang.staff_create')</span>
+                                <span class="cus_font-text cus_font-color pointer-events-auto" name="add_input"
+                                      id="add_input">+ @lang('lang.staff_create')</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="row pt-4">
                         <div class="col-4">
-
-
                         </div>
                         <div class="col-3">
                             <button type="submit"
@@ -337,8 +377,7 @@
     </div>
     <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
     <script>
-        $(document).ready(function() {
-
+        $(document).ready(function () {
         });
     </script>
 @stop

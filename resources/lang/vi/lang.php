@@ -90,7 +90,7 @@ return [
     'customer' => 'Khách hàng',
     'all' => 'Tất cả',
     'department' => 'Phòng ban',
-    'dicription' => 'Mô tả chung',
+    'description' => 'Mô tả chung',
     'staff' => 'Nhân viên',
     'staff_create' => 'Thêm Nhân viên',
     'location' => 'Vị trí',
