@@ -32,6 +32,7 @@ class ProjectRequest extends FormRequest
             'startDateUser.*' => 'required|after:startDateProject|before:endDateProject',
             'endDateUser.*' => 'required|after:startDateProject|before:endDateProject|after:startDateUser.*',
             'effort.*' => 'required|integer|between:1,100',
+            'userID.*' => 'required|distinct',
         ];
     }
 }

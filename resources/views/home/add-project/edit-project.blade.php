@@ -217,48 +217,6 @@
                                                         @else
                                                             {{$select = ''}}
                                                         @endif
-                                                        <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    <div class="col-sm-2">
-                                        <div class="header-search__text-date pb-3">
-                                            <span
-                                                class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
-                                        </div>
-
-                                    <div class="col-sm-2">
-                                        <div class="header-search__text-date pb-3">
-                                            <span
-                                                class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="header-search__text-date">
-                                                <input class="form-control" name="effort[]" value="{{$valueUserHasPrjById->effort}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        @foreach($getUserHasPrjById as $valueUserHasPrjById)
-                            <tr>
-                                <td>
-                                    <div class="row pb-4">
-                                        <div class="col-sm-2">
-                                            <div class="header-search__text-date ">
-                                                <select class="form-control text-sm selectUser" name="userID[]">
-                                                    @foreach($getUsers as $value)
-                                                        @if($valueUserHasPrjById->user_id == $value->id)
-                                                            @php
-                                                                $select = 'selected';
-                                                            @endphp
-                                                        @else
-                                                            {{$select = ''}}
-                                                        @endif
                                                         <option
                                                             value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
                                                     @endforeach
@@ -373,11 +331,6 @@
                 Copyright © 2022 Fabbi JSC. All rights reserved.
             </div>
         </main>
-
     </div>
     <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-        });
-    </script>
 @stop

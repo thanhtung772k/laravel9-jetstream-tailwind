@@ -310,10 +310,10 @@
                                                             <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
                                                         @endforeach
                                                     </select>
-                                                </div> 
-                                                @if (count(array_unique(old('userID'))) < count(old('userID')))
-                                                    @dd(array_unique(old('userID')))
-                                                @endif
+                                                </div>
+                                                @error("userID.$key")
+                                                    <div class="text-red-500">{{ $message }}</div>
+                                                @enderror
 
                                             </div>
 
@@ -402,7 +402,6 @@
                     <div class="row pt-4">
                         <div class="col-4">
 
-
                         </div>
                         <div class="col-3">
                             <button type="submit"
@@ -418,19 +417,14 @@
                     </div>
                 </form>
             </div>
-
         </header>
         <main>
             <div>
                 Copyright © 2022 Fabbi JSC. All rights reserved.
             </div>
         </main>
-
     </div>
     <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
     <script>
-        $(document).ready(function() {
-
-        });
     </script>
 @stop

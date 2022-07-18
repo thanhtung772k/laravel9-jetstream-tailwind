@@ -66,9 +66,16 @@ class ProjectController extends Controller
      */
     public function create(ProjectRequest $request)
     {
-        if (count(array_unique($request->userID)) < count($request->userID)) {
-            return redirect()->back()->with('error','Not unique Project');
-        }
+        $validator = Validator::make(
+            ['userID' =>
+                ['product_id' => 1, 'quantity' => 5],
+                ['product_id' => 1, 'quantity' => 99],
+                ['product_id' => 2, 'quantity' => 1],
+            ],
+            ['products.*.product_id' => 'distinct']
+        );
+
+        dd($validator->passes());
         DB::beginTransaction();
         $this->projectService->createProject($request);
         try {
