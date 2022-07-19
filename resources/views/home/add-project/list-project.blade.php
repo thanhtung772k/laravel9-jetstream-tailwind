@@ -1,6 +1,6 @@
 @section('breadcrumb')
     <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-        {{ Breadcrumbs::render('add_project') }}
+        {{ Breadcrumbs::render('project-list') }}
     </div>
 @endsection
 <div class="p-6  bg-white border-b border-gray-200">
@@ -58,7 +58,7 @@
                                 <td class="whitespace-nowrap">{{ $value->updated_at}}</td>
 
                                 <td class="whitespace-nowrap">
-                                    <a href="" class="text-xs btn btn-outline-primary ">@lang('lang.detail')</a>
+                                    <a href="{{route('detail_project', $value->id)}}" class="text-xs btn btn-outline-primary ">@lang('lang.detail')</a>
                                     <a href="{{route('edit_project', $value->id)}}" class=" text-xs btn btn-outline-info mx-[4px]">@lang('lang.edit')</a>
                                     <a href="{{route('delete_project', $value->id)}}" class="text-xs btn btn-outline-danger ">@lang('lang.delete')</a>
                                 </td>

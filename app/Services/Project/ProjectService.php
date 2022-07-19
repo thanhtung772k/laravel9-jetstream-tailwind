@@ -33,6 +33,16 @@ class ProjectService extends BaseService
     }
 
     /**
+     * Get index project by id
+     * @param $idPrj
+     * @return mixed
+     */
+    public function getProjectById($idPrj)
+    {
+        return $this->repository->getProjectById($idPrj);
+    }
+
+    /**
      * create new project
      * @param $request
      * @return mixed
@@ -52,6 +62,17 @@ class ProjectService extends BaseService
     }
 
     /**
+     * updae project
+     * @param $request
+     * @param $idPrj
+     * @return void
+     */
+    public function updateProject($request, $idPrj)
+    {
+        return $this->repository->updateProject($request, $idPrj);
+    }
+
+    /**
      * delete soft project
      * @param $idPrj
      * @return mixed
@@ -59,5 +80,15 @@ class ProjectService extends BaseService
     public function deleteProject($idPrj)
     {
         return $this->repository->deleteProject($idPrj);
+    }
+
+    /**
+     * detail information project
+     * @param $idPrj
+     * @return mixed
+     */
+    public function detail($idPrj)
+    {
+        return $this->repository->detail($idPrj);
     }
 }

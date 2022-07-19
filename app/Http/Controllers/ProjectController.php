@@ -31,7 +31,6 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->all());
         $getProject = $this->projectService->getProject($request);
         $getProjectType = $this->projectTypeService->getProjectType();
         $getDepartment = $this->departmentService->getDepartment();
@@ -73,6 +72,51 @@ class ProjectController extends Controller
             $getLastproject = $this->projectService->getLastproject();
             $this->userHasProjectService->createUserHasProject($request, $getLastproject->id);
             DB::commit();
+            return redirect()->route('get_project');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect();
+        }
+    }
+
+    /**
+     * view edit project
+     * @param $idPrj
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function edit($idPrj)
+    {
+        $getLocation = $this->roleService->getLocation();
+        $getUsers = $this->userService->getAllUser();
+        $getProjectType = $this->projectTypeService->getProjectType();
+        $getDepartment = $this->departmentService->getDepartment();
+        $getProjectById = $this->projectService->getProjectById($idPrj);
+        $getUserHasPrjById = $this->userHasProjectService->getUserHasPrjById($idPrj);
+        return view('home.add-project.edit-project', [
+            'getLocation' => $getLocation,
+            'getUsers' => $getUsers,
+            'getProjectType' => $getProjectType,
+            'getDepartment' => $getDepartment,
+            'getProjectById' => $getProjectById,
+            'getUserHasPrjById' => $getUserHasPrjById
+        ]);
+    }
+
+    /**
+     * update Project
+     * @param Request $request
+     * @param $idPrj
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(ProjectRequest $request, $idPrj)
+    {
+        DB::beginTransaction();
+        try {
+            $this->userHasProjectService->deleteUserHasProject($request, $idPrj);
+            $this->projectService->updateProject($request, $idPrj);
+            $this->userHasProjectService->update($request, $idPrj);
+            $this->userHasProjectService->createOrUpdate($request, $idPrj);
+            DB::commit();
             return redirect()->back();
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -80,33 +124,35 @@ class ProjectController extends Controller
         }
     }
 
-    public function edit()
-    {
-        $getLocation = $this->roleService->getLocation();
-        $getUsers = $this->userService->getAllUser();
-        $getProjectType = $this->projectTypeService->getProjectType();
-        $getDepartment = $this->departmentService->getDepartment();
-        return view('home.add-project.edit-project', [
-            'getLocation' => $getLocation,
-            'getUsers' => $getUsers,
-            'getProjectType' => $getProjectType,
-            'getDepartment' => $getDepartment,
-        ]);
-    }
-
     /**
      * Delete project
+     * @param Request $request
      * @param $idPrj
      * @return void
      */
-    public function deletePrj($idPrj)
+    public function deletePrj(Request $request, $idPrj)
     {
         try {
             $this->projectService->deleteProject($idPrj);
-            $this->userHasProjectService->deleteUserHasProject($idPrj);
+            $this->userHasProjectService->deleteUserHasProject($request, $idPrj);
             return redirect()->back();
         } catch (\Exception $exception) {
             return redirect()->back();
         }
+    }
+
+    /**
+     * Detail project
+     * @param $idPrj
+     * @return void
+     */
+    public function detail($idPrj)
+    {
+        $detailPrj = $this->projectService->detail($idPrj);
+        $datailUserJoinPrj = $this->userHasProjectService->detail($idPrj);
+        return view('home.add-project.detail-project', [
+            'detailPrj' => $detailPrj,
+            'datailUserJoinPrj' => $datailUserJoinPrj,
+        ]);
     }
 }

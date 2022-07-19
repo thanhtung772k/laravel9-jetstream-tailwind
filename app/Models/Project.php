@@ -39,4 +39,10 @@ class Project extends Model
     {
         return $this->belongsTo(ProjectType::class, 'project_type_id');
     }
+
+    public function depart()
+    {
+        return $this->belongsTo(Department::class, 'departments_id');
+    }
+
 }

@@ -90,7 +90,7 @@ return [
     'customer' => 'Khách hàng',
     'all' => 'Tất cả',
     'department' => 'Phòng ban',
-    'dicription' => 'Mô tả chung',
+    'description' => 'Mô tả chung',
     'staff' => 'Nhân viên',
     'staff_create' => 'Thêm Nhân viên',
     'location' => 'Vị trí',
@@ -100,4 +100,6 @@ return [
     'developing' => 'Đang phát triển',
     'undeveloped' => 'Chưa phát triển',
     'done' => 'Đã xong',
+    'total_member' => 'Tổng Member',
+    'inf_member_join' => 'Thông tin nhân viên tham gia',
 ];

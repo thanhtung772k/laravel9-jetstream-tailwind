@@ -31,4 +31,9 @@ class UserHasProject extends Model
         'end_date',
         'effort'
     ];
+
+    public function userPrj()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

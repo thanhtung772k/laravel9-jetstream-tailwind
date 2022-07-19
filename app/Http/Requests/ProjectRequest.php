@@ -23,12 +23,17 @@ class ProjectRequest extends FormRequest
      */
     public function rules()
     {
+//        dd($this->all());
         return [
-            'projectName' => 'required',
+            'projectName' => 'required|max:255',
             'valueContract' => 'required|integer|between:1,10',
             'startDateProject' => 'required',
             'endDateProject' => 'required|after:startDateProject',
-            'discription' => 'required'
+            'description' => 'required',
+            'startDateUser.*' => 'required|after:startDateProject|before:endDateProject',
+            'endDateUser.*' => 'required|after:startDateProject|before:endDateProject|after:startDateUser.*',
+            'effort.*' => 'required|integer|between:1,100',
+            'userID.*' => 'required|distinct',
         ];
     }
 }

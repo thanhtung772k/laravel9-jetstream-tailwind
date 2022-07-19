@@ -1,11 +1,11 @@
-<div class="nav-menu fixed">
+<div class="nav-menu fixed h-full">
     <div class="w-[256px] bg-[#303c54] flex items-center py-1">
         <a href="" class="text-center w-full left-16">
             <img src="https://ecs.fabbi.io/img/fabbi_logo.031027dd.jpeg" alt="" width="118px" height="50px"
                  class="text-center custom-center">
         </a>
     </div>
-    <div class="nav-menu__background">
+    <div class="nav-menu__background cus-height">
         <ul class="text-sm">
             <li class="nav-menu__item">
                 <span>
@@ -93,7 +93,7 @@
             </li>
         </ul>
     </div>
-    <div class="menu-items__footer h-[56px] bg-[#303c54] pr-4">
+    <div class="menu-items__footer h-[56px] bg-[#303c54] pr-4" style="height: 10vh">
         <i class="fa-solid fa-angle-left text-xl opacity-50"></i>
     </div>
 </div>

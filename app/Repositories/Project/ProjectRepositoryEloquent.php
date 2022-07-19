@@ -54,6 +54,16 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     }
 
     /**
+     * Get index project by id
+     * @param $idPrj
+     * @return mixed
+     */
+    public function getProjectById($idPrj)
+    {
+        return $this->model->find($idPrj);
+    }
+
+    /**
      * create new project
      * @param $request
      * @return mixed
@@ -69,7 +79,28 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             'start_date' => $request->startDateProject,
             'end_date' => $request->endDateProject,
             'status' => $request->statusProject,
-            'description' => $request->discription,
+            'description' => $request->description,
+        ]);
+    }
+
+    /**
+     * updae project
+     * @param $request
+     * @param $idPrj
+     * @return void
+     */
+    public function updateProject($request, $idPr)
+    {
+        return $this->model->find($idPr)->update([
+            'name' => $request->projectName,
+            'customer' => $request->customer,
+            'project_type_id' => $request->projectType,
+            'departments_id' => $request->department,
+            'vale_contract' => $request->valueContract,
+            'start_date' => $request->startDateProject,
+            'end_date' => $request->endDateProject,
+            'status' => $request->statusProject,
+            'description' => $request->description,
         ]);
     }
 
@@ -90,6 +121,17 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
      */
     public function deleteProject($idPrj)
     {
-        return $this->model->find($idPrj)->delete();
+        return $this->model->join('projects_type', 'projects.project_type_id', '=', 'projects_type.id')
+            ->join('departments', 'projects.departments_id', '=', 'departments.id')->find($idPrj);
+    }
+
+    /**
+     * detail information project
+     * @param $idPrj
+     * @return mixed
+     */
+    public function detail($idPrj)
+    {
+        return $this->model->find($idPrj);
     }
 }
