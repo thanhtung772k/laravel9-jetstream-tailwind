@@ -24,39 +24,43 @@ class UserHasProjectService extends BaseService
 
     /**
      * save user join project
+     *
      * @param $request
-     * @param $projectID
+     * @param $id
      * @return mixed
      */
-    public function createUserHasProject($request, $projectID)
+    public function createUserHasProject($request, $id)
     {
-        return $this->repository->createUserHasProject($request, $projectID);
+        return $this->repository->createUserHasProject($request, $id);
     }
 
     /**
      * update user join project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return mixed
      */
-    public function update($request, $idPrj)
+    public function update($request, $id)
     {
-        return $this->repository->update($request, $idPrj);
+        return $this->repository->update($request, $id);
     }
 
     /**
      * create or update user join project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return mixed
      */
-    public function createOrUpdate($request, $idPrj)
+    public function createOrUpdate($request, $id)
     {
-        return $this->repository->createOrUpdate($request, $idPrj);
+        return $this->repository->createOrUpdate($request, $id);
     }
 
     /**
      * index all project
+     *
      * @return mixed
      */
     public function getProject()
@@ -66,32 +70,35 @@ class UserHasProjectService extends BaseService
 
     /**
      * get user has project by ID
-     * @param $idPrj
+     *
+     * @param $id
      * @return void
      */
-    public function getUserHasPrjById($idPrj)
+    public function getUserHasPrjById($id)
     {
-        return $this->repository->getUserHasPrjById($idPrj);
+        return $this->repository->getUserHasPrjById($id);
     }
 
     /**
      * delete user has project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return mixed
      */
-    public function deleteUserHasProject($request, $idPrj)
+    public function deleteUserHasProject($request, $id)
     {
-        return $this->repository->deleteUserHasProject($request, $idPrj);
+        return $this->repository->deleteUserHasProject($request, $id);
     }
 
     /**
      * detail users join project
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function detail($idPrj)
+    public function detail($id)
     {
-        return $this->repository->detail($idPrj);
+        return $this->repository->detail($id);
     }
 }

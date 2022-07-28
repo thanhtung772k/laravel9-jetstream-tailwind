@@ -5,7 +5,7 @@
     </div>
 @endsection
 @section('content')
-    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
+    <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
         <header class=" shadow pt-[120px] p-8">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 m-auto">
@@ -22,7 +22,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.project_name')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->name}}</div>
+                        <div class="carb-body_header-content">{{$project->name}}</div>
                     </div>
                     <div class="col-sm-1">
                     </div>
@@ -30,7 +30,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.department')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->depart->name}}</div>
+                        <div class="carb-body_header-content">{{$project->depart->name}}</div>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.customer')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->customer}}</div>
+                        <div class="carb-body_header-content">{{$project->customer}}</div>
                     </div>
                     <div class="col-sm-1">
                     </div>
@@ -47,9 +47,9 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.status')</label>
                     </div>
                     <div class="col-sm-3">
-                        @if($detailPrj->status == config('constant.status_undeveloped'))
+                        @if($project->status == config('constant.status_undeveloped'))
                             <div class="carb-body_header-content">@lang('lang.undeveloped')</div>
-                        @elseif($detailPrj->status == config('constant.status_doing'))
+                        @elseif($project->status == config('constant.status_doing'))
                             <div class="carb-body_header-content">@lang('lang.developing')</div>
                         @else
                             <div class="carb-body_header-content">@lang('lang.done')</div>
@@ -62,7 +62,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.start_date')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->start_date}}</div>
+                        <div class="carb-body_header-content">{{$project->start_date}}</div>
                     </div>
                     <div class="col-sm-1">
                     </div>
@@ -70,7 +70,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.value_contract')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->vale_contract}}</div>
+                        <div class="carb-body_header-content">{{$project->value_contract}}</div>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.end_date')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->end_date}}</div>
+                        <div class="carb-body_header-content">{{$project->end_date}}</div>
                     </div>
                     <div class="col-sm-1">
                     </div>
@@ -87,7 +87,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.description')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->description}}</div>
+                        <div class="carb-body_header-content">{{$project->description}}</div>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.project_type')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{$detailPrj->projectType->name}}</div>
+                        <div class="carb-body_header-content">{{$project->projectType->name}}</div>
                     </div>
                     <div class="col-sm-1">
                     </div>
@@ -104,7 +104,7 @@
                         <label class="carb-body_header-title cus-with-unset">@lang('lang.total_member')</label>
                     </div>
                     <div class="col-sm-3">
-                        <div class="carb-body_header-content">{{count($datailUserJoinPrj)}}</div>
+                        <div class="carb-body_header-content">{{count($userProjects)}}</div>
                     </div>
                 </div>
 
@@ -129,14 +129,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($datailUserJoinPrj as $key => $value)
+                        @foreach($userProjects as $key => $userProject)
                             <tr>
                                 <th scope="row">{{$key+1}}</th>
-                                <td class="max-w-[100px]">{{$value->name}}</td>
-                                <td class="max-w-[100px]">{{$value->nameRole}}</td>
-                                <td class="max-w-[100px]">{{$value->start_date}}</td>
-                                <td class="max-w-[100px]">{{$value->end_date}}</td>
-                                <td class="max-w-[100px]">{{$value->effort}}</td>
+                                <td class="max-w-[100px]">{{$userProject->name}}</td>
+                                <td class="max-w-[100px]">{{$userProject->nameRole}}</td>
+                                <td class="max-w-[100px]">{{$userProject->start_date}}</td>
+                                <td class="max-w-[100px]">{{$userProject->end_date}}</td>
+                                <td class="max-w-[100px]">{{$userProject->effort}}</td>
 
                             </tr>
                         @endforeach
@@ -147,7 +147,7 @@
                     <div class="col-4">
                     </div>
                     <div class="col-3 text-center">
-                        <a href="{{route('edit_project', $detailPrj->id)}}" class="btn btn-success text-white bg-green-500">
+                        <a href="{{route('edit_project', $project->id)}}" class="btn btn-success text-white bg-green-500">
                             <i class="fa-solid fa-pen-to-square"></i>
                             @lang('lang.edit')
                         </a>

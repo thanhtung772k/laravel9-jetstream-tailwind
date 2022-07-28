@@ -25,7 +25,9 @@ class AddTimesheetController extends Controller
 
     /**
      * get id timesheet and call Users is admin
-     * @param $timesheet_id
+     *
+     * @param Request $request
+     * @param $timesheetID
      * @return Application|Factory|View
      */
     public function insertAddTimesheet(Request $request, $timesheetID = null)
@@ -44,6 +46,7 @@ class AddTimesheetController extends Controller
 
     /**
      * index list additional timesheet
+     *
      * @param Request $request
      * @return Application|Factory|View
      */
@@ -57,6 +60,7 @@ class AddTimesheetController extends Controller
 
     /**
      * create additional timesheet
+     *
      * @param TimesheetRequest $request
      * @return void
      */
@@ -72,6 +76,7 @@ class AddTimesheetController extends Controller
 
     /**
      * List detail Additional timesheet
+     *
      * @param $timesheetID
      * @return Application|Factory|View
      */
@@ -84,7 +89,8 @@ class AddTimesheetController extends Controller
     }
 
     /**
-     * edit Additional timesheet  "timesheet_id" => null
+     * edit Additional timesheet
+     *
      * @param $timesheetID
      * @return Application|Factory|View
      */
@@ -100,6 +106,7 @@ class AddTimesheetController extends Controller
 
     /**
      * update Additional timesheet
+     *
      * @param $addTimeID
      * @param Request $request
      * @return RedirectResponse
@@ -118,6 +125,7 @@ class AddTimesheetController extends Controller
 
     /**
      * delete Additional timesheet
+     *
      * @param $addTimeID
      * @return RedirectResponse
      */
@@ -138,6 +146,7 @@ class AddTimesheetController extends Controller
 
     /**
      * list add-timesheet approval
+     *
      * @return Application|Factory|View
      */
     public function approvalTimesheet(Request $request)
@@ -146,16 +155,16 @@ class AddTimesheetController extends Controller
         $toDate = $request->toDate;
         $idName = $request->idName;
         $dataTimesheetApproval = $this->addTimeSheetService->getListApprovalTimesheet($request);
-        //dd($dataTimesheetApproval);
-        $getInfUser = $this->userService->getUser();
+        $users = $this->userService->getUser();
         return view('home.add-timesheet.approval.add-timesheet-approval-dashbroad', [
             'dataTimesheetApproval' => $dataTimesheetApproval,
-            'getInfUser' => $getInfUser,
+            'users' => $users,
         ]);
     }
 
     /**
      * get timesheet by id
+     *
      * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
@@ -166,6 +175,7 @@ class AddTimesheetController extends Controller
 
     /**
      * approval Additional timesheet
+     *
      * @param Request $request
      * @param $id
      * @param $param
@@ -197,6 +207,7 @@ class AddTimesheetController extends Controller
 
     /**
      * update Additional Timesheets
+     *
      * @param Request $request
      * @param $param
      * @return void
@@ -206,13 +217,13 @@ class AddTimesheetController extends Controller
         DB::beginTransaction();
         try {
             if ($param == config('constant.status_agree')) {
-                $this->addTimeSheetService->updateMany($request, $param);
+                $this->addTimeSheetService->updateManyTimesheet($request, $param);
                 foreach ($request->addTimeId as $id) {
                     $data = $this->addTimeSheetService->findIDAddTimesheet($id);
                     $this->timesheetService->approvalMany($data);
                 }
             } elseif ($param == config('constant.status_reject')) {
-                $this->addTimeSheetService->updateMany($request, $param);
+                $this->addTimeSheetService->updateManyTimesheet($request, $param);
             } else {
                 return redirect()->back();
             }

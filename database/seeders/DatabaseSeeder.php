@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProjectType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TimesheetTableSeeder::class,
+            PositionTableSeeder::class,
+            RoleTableSeeder::class,
+            DepartmentTableSeeder::class,
+            ProjectTypeTableSeeder::class,
         ]);
     }
 }

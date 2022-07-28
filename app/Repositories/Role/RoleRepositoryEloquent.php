@@ -24,7 +24,6 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -35,6 +34,7 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
 
     /**
      * get list Location
+     *
      * @return mixed
      */
     public function getLocation()

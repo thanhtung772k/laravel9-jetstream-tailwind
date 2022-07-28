@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
+    <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
         <header class=" pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 flex justify-center m-auto">
@@ -50,7 +50,7 @@
                                         <select class="form-control text-xs" id="exampleFormControlSelect1"
                                                 name="adminID">
                                             @foreach($dataUserAdmin as $valueAdmin)
-                                                @if($valueAdmin->id == $dataEditAddTimesheet->user_id)
+                                                @if($valueAdmin->id == $dataEditAddTimesheet->admin_id)
                                                     @php
                                                         $select = 'selected';
                                                     @endphp

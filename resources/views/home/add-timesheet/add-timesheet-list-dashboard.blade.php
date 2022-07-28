@@ -2,7 +2,7 @@
 
 @section('content')
     <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
-    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
+    <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
         <header class="bg-white pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">

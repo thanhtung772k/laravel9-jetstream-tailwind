@@ -25,15 +25,15 @@ class ProjectRequest extends FormRequest
     {
 //        dd($this->all());
         return [
-            'projectName' => 'required|max:255',
-            'valueContract' => 'required|integer|between:1,10',
-            'startDateProject' => 'required',
-            'endDateProject' => 'required|after:startDateProject',
+            'project_name' => 'required|max:255',
+            'value_contract' => 'required|integer|between:1,1000',
+            'start_date_project' => 'required',
+            'end_date_project' => 'required|after:start_date_project',
             'description' => 'required',
-            'startDateUser.*' => 'required|after:startDateProject|before:endDateProject',
-            'endDateUser.*' => 'required|after:startDateProject|before:endDateProject|after:startDateUser.*',
+            'start_date_user.*' => 'required|after_or_equal:start_date_project|before:end_date_project',
+            'end_date_user.*' => 'required|after:start_date_project|before_or_equal:end_date_project|after_or_equal:start_date_user.*',
             'effort.*' => 'required|integer|between:1,100',
-            'userID.*' => 'required|distinct',
+            'user_id.*' => 'required|distinct',
         ];
     }
 }

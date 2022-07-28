@@ -13,6 +13,7 @@ interface AddTimesheetRepository extends RepositoryInterface
 {
     /**
      * create Add Timesheet
+     *
      * @param $request
      * @param $imageName
      * @return mixed
@@ -21,6 +22,7 @@ interface AddTimesheetRepository extends RepositoryInterface
 
     /**
      * get list Additional timesheet
+     *
      * @param $request
      * @return mixed
      */
@@ -28,21 +30,24 @@ interface AddTimesheetRepository extends RepositoryInterface
 
     /**
      * List detail Additional timesheet
+     *
      * @return mixed
      */
     public function getListDetailAddTimesheet($timesheetID);
 
     /**
      * update Additional timesheet
-     * @param $addTimeID
+     *
+     * @param $id
      * @param $request
      * @param $imgEvidence
      * @return mixed
      */
-    public function updateAddTimesheet($addTimeID, $request, $imgEvidence);
+    public function updateAddTimesheet($id, $request, $imgEvidence);
 
     /**
      * find Additional timesheet by ID
+     *
      * @param $idAddTimesheet
      * @return mixed
      */
@@ -50,14 +55,16 @@ interface AddTimesheetRepository extends RepositoryInterface
 
     /**
      * delete Additional timesheet
-     * @param $addTimeID
+     *
+     * @param $id
      * @param $evidence
      * @return mixed
      */
-    public function deleteAddTimesheet($addTimeID);
+    public function deleteAddTimesheet($id);
 
     /**
-     * list approval timsheet
+     * list approval timesheet
+     *
      * @param $request
      * @return mixed
      */
@@ -65,17 +72,19 @@ interface AddTimesheetRepository extends RepositoryInterface
 
     /**
      * approval add timesheet
+     *
      * @param $request
      * @param $status
      * @return void
      */
-    public function updateAdd($request, $status);
+    public function updateTimesheet($request, $status);
 
     /**
      * update many add timesheet
+     *
      * @param $request
      * @param $param
      * @return void
      */
-    public function updateMany($request, $param);
+    public function updateManyTimesheet($request, $param);
 }

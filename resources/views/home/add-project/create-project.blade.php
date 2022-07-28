@@ -5,7 +5,7 @@
     </div>
 @endsection
 @section('content')
-    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
+    <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
         <header class=" shadow pt-[120px] p-8">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 m-auto">
@@ -25,9 +25,9 @@
                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.project_name')</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <input class="form-control" name="projectName" value="{{ old('projectName') }}">
+                                <input class="form-control" name="project_name" value="{{ old('project_name') }}">
                             </div>
-                            @error('projectName')
+                            @error('project_name')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -51,8 +51,8 @@
                             </div>
                             <div class="header-search__text-date ">
                                 <select class="form-control text-sm" name="projectType">
-                                    @foreach($getProjectType as $value)
-                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                    @foreach($projectTypes as $projectType)
+                                        <option value="{{$projectType->id}}">{{$projectType->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -63,9 +63,9 @@
                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.value_contract') (mm)</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <input class="form-control" name="valueContract" value="{{ old('valueContract') }}">
+                                <input class="form-control" name="value_contract" value="{{ old('value_contract') }}">
                             </div>
-                            @error('valueContract')
+                            @error('value_contract')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -78,8 +78,8 @@
                             </div>
                             <div class="header-search__text-date ">
                                 <select class="form-control text-sm" name="department">
-                                    @foreach($getDepartment as $value)
-                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                    @foreach($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -93,7 +93,7 @@
                             <div class="header-search__date">
                                 <section>
                                     <div class="input-group date" id="datepicker">
-                                        <input class="form-control" name="startDateProject" value="{{ old('startDateProject') }}" readonly style="background-color: #fff">
+                                        <input class="form-control" name="start_date_project" value="{{ old('start_date_project') }}" readonly style="background-color: #fff">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -102,7 +102,7 @@
                                     </div>
                                 </section>
                             </div>
-                            @error('startDateProject')
+                            @error('start_date_project')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -114,7 +114,7 @@
                             <div class="header-search__text-date">
                                 <section>
                                     <div class="input-group date" id="datepicker-end">
-                                        <input class="form-control" name="endDateProject" value="{{ old('endDateProject') }}" readonly style="background-color: #fff">
+                                        <input class="form-control" name="end_date_project" value="{{ old('end_date_project') }}" readonly style="background-color: #fff">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -123,7 +123,7 @@
                                     </div>
                                 </section>
                             </div>
-                            @error('endDateProject')
+                            @error('end_date_project')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -180,7 +180,7 @@
 
                     <table id="dynamic_input">
                         @php
-                            $oldStartDateUser = old('startDateUser') ?? [];
+                            $oldStartDateUser = old('start_date_user') ?? [];
                         @endphp
                         @if($oldStartDateUser == null)
                             <tr>
@@ -191,9 +191,9 @@
                                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
                                             </div>
                                             <div class="header-search__text-date ">
-                                                <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
-                                                    @foreach($getUsers as $value)
-                                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                                <select class="form-control text-sm selectUser" id="selectUser" name="user_id[]">
+                                                    @foreach($users as $user)
+                                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -206,8 +206,8 @@
                                             </div>
                                             <div class="header-search__text-date">
                                                 <select class="form-control text-sm" name="locationID[]" id="selectLocation">
-                                                    @foreach($getLocation as $value)
-                                                        <option value="{{$value->id}}">{{$value->name}}</option>
+                                                    @foreach($locations as $location)
+                                                        <option value="{{$location->id}}">{{$location->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -219,7 +219,7 @@
                                             <div class="header-search__date">
                                                 <section>
                                                     <div class="input-group date" id="datepicker">
-                                                        <input class="form-control" name="startDateUser[]" readonly style="background-color: #fff">
+                                                        <input class="form-control" name="start_date_user[]" readonly style="background-color: #fff">
                                                         <span class="input-group-append">
                                                                 <span class="input-group-text bg-white">
                                                                     <i class="fa fa-calendar"></i>
@@ -237,7 +237,7 @@
                                             <div class="header-search__text-date">
                                                 <section>
                                                     <div class="input-group date" id="datepicker-end">
-                                                        <input class="form-control" id="toDate" name="endDateUser[]" readonly style="background-color: #fff">
+                                                        <input class="form-control" id="toDate" name="end_date_user[]" readonly style="background-color: #fff">
                                                         <span class="input-group-append">
                                                             <span class="input-group-text bg-white">
                                                                 <i class="fa fa-calendar"></i>
@@ -300,20 +300,20 @@
                                         <div class="row pb-4">
                                             <div class="col-sm-2">
                                                 <div class="header-search__text-date ">
-                                                    <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
-                                                        @foreach($getUsers as $value)
-                                                            @if(old('userID')[$key] == $value->id)
+                                                    <select class="form-control text-sm selectUser" id="selectUser" name="user_id[]">
+                                                        @foreach($users as $user)
+                                                            @if(old('user_id')[$key] == $user->id)
                                                                 @php
                                                                     $select = 'selected';
                                                                 @endphp
                                                             @else
                                                                 {{$select = ''}}
                                                             @endif
-                                                            <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                            <option value="{{$user->id}}" {{$select}}>{{$user->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                @error("userID.$key")
+                                                @error("user_id.$key")
                                                     <div class="text-red-500">{{ $message }}</div>
                                                 @enderror
 
@@ -323,15 +323,15 @@
                                             <div class="col-sm-2">
                                                 <div class="header-search__text-date">
                                                     <select class="form-control text-sm" name="locationID[]" id="selectLocation">
-                                                        @foreach($getLocation as $value)
-                                                            @if(old('locationID')[$key] == $value->id)
+                                                        @foreach($locations as $location)
+                                                            @if(old('locationID')[$key] == $location->id)
                                                                 @php
                                                                     $select = 'selected';
                                                                 @endphp
                                                             @else
                                                                 {{$select = ''}}
                                                             @endif
-                                                            <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                            <option value="{{$location->id}}" {{$select}}>{{$location->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -340,7 +340,7 @@
                                                     <div class="header-search__date">
                                                         <section>
                                                             <div class="input-group date" id="datepicker">
-                                                                <input class="form-control" name="startDateUser[]" value="{{ old('startDateUser')[$key] }}" readonly style="background-color: #fff">
+                                                                <input class="form-control" name="start_date_user[]" value="{{ old('start_date_user')[$key] }}" readonly style="background-color: #fff">
                                                                 <span class="input-group-append">
                                                                     <span class="input-group-text bg-white">
                                                                         <i class="fa fa-calendar"></i>
@@ -349,7 +349,7 @@
                                                             </div>
                                                         </section>
                                                     </div>
-                                                    @error("startDateUser.$key")
+                                                    @error("start_date_user.$key")
                                                     <div class="text-red-500">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -358,7 +358,7 @@
                                                 <div class="header-search__text-date">
                                                     <section>
                                                         <div class="input-group date" id="datepicker-end">
-                                                            <input class="form-control" id="toDate" name="endDateUser[]" value="{{ old('endDateUser')[$key] }}" readonly style="background-color: #fff">
+                                                            <input class="form-control" id="toDate" name="end_date_user[]" value="{{ old('end_date_user')[$key] }}" readonly style="background-color: #fff">
                                                             <span class="input-group-append">
                                                                 <span class="input-group-text bg-white">
                                                                     <i class="fa fa-calendar"></i>
@@ -367,7 +367,7 @@
                                                         </div>
                                                     </section>
                                                 </div>
-                                                @error("endDateUser.$key")
+                                                @error("end_date_user.$key")
                                                 <div class="text-red-500">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -383,7 +383,7 @@
 
                                             <div class="col-sm-1 flex">
                                                 <div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button>
-                                                    <input type="hidden" value="" name="userHasIDOld[]">
+                                                    <input type="hidden" value="" name="user_has_id_old[]">
                                                     </div>
                                                 </div>
 

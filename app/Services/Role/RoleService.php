@@ -24,6 +24,7 @@ class RoleService extends BaseService
 
     /**
      * get list Location
+     *
      * @return mixed
      */
     public function getLocation()

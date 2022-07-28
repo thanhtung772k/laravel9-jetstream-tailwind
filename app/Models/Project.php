@@ -28,7 +28,7 @@ class Project extends Model
         'customer',
         'project_type_id',
         'departments_id',
-        'vale_contract',
+        'value_contract',
         'start_date',
         'end_date',
         'status',

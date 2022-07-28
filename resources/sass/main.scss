@@ -7,7 +7,7 @@
 }
 
 .nav-menu__background {
-    background-color: #3c4b64;
+    background-color: #643c3c;
     height: 770px;
     color: #d8dbe0;
     font-size: 15px;
@@ -61,7 +61,7 @@
 
 .menu-items__list:hover {
     color: #fff;
-    background-color: #321fdb;
+    background-color: #ae1414;
     cursor: pointer;
     text-decoration: none;
 }
@@ -143,18 +143,18 @@
     position: relative;
     padding-left: 52px;
     display: flex;
-    background-color: #3b4659;
+    background-color: #593b3b;
 }
 .nav-menu__sub-item--list:hover {
     color: #fff;
-    background-color: #321fdb;
+    background-color: #ae1414;
     cursor: pointer;
     text-decoration: none;
 }
 
 .nav-menu__item:hover {
     color: #fff;
-    background-color: #321fdb;
+    background-color: #ae1414;
     cursor: pointer;
 }
 
@@ -189,7 +189,19 @@
 }
 
 .bg-cus-color {
-    background-color: #4b5a74;
+    background-color: #744b4b;
+}
+
+.cus-with-unset {
+    width: unset !important;
+}
+
+.bg-content {
+    background: #fffafa !important;
+}
+
+.cus-height {
+    height: 90vh !important;
 }
 
 .cus-with-unset {

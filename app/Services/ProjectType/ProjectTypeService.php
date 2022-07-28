@@ -24,6 +24,7 @@ class ProjectTypeService extends BaseService
 
     /**
      * index project type
+     *
      * @return mixed
      */
     public function getProjectType()

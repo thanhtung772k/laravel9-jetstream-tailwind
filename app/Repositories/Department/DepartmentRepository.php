@@ -13,6 +13,7 @@ interface DepartmentRepository extends RepositoryInterface
 {
     /**
      * get all department
+     *
      * @return mixed
      */
     public function getDepartment();

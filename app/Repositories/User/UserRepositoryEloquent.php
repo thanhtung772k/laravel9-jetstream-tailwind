@@ -36,6 +36,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     /**
      * Index all user the repository
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model[]
      */
     public function getAllUser()
     {
@@ -44,19 +46,81 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     /**
      * get all user admin
+     *
      * @return mixed
      */
     public function getAllUserAdmin()
     {
-        return $this->model->where('is_admin', config('constant.is_admin'))->get();
+        return $this->model->where(
+            'is_admin', config('constant.is_admin')
+        )->get();
     }
 
     /**
      * get info user
+     *
      * @return void
      */
     public function getUser()
     {
-        return $this->model->where('id',Auth::id())->first();
+        return $this->model->where(
+            'id', Auth::id()
+        )->first();
     }
+
+    /**
+     * create new user
+     *
+     * @param $request
+     * @param $passDefault
+     * @return mixed
+     */
+    public function insert($request, $passDefault)
+    {
+        return $this->model->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $passDefault,
+        ]);
+    }
+
+    /**
+     * get last user
+     *
+     * @return mixed
+     */
+    public function getLast()
+    {
+        return $this->model->latest()->first();
+    }
+
+    /**
+     * update information user
+     *
+     * @param $request
+     * @param $id
+     * @return void
+     */
+    public function updateUser($request, $id)
+    {
+        return $this->model->where(
+            'id', $id
+        )->update([
+            'name' => $request->name,
+        ]);
+    }
+
+    /**
+     * Delete user by id resource in storage.
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function deleteUser($id)
+    {
+        return $this->model->where(
+            'id', $id
+        )->delete();
+    }
+
 }

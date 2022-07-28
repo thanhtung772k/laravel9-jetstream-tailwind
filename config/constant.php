@@ -20,6 +20,13 @@ return [
     'status_doing' => 1,
     'status_done' => 2,
     'status_undeveloped' => 3,
+    'VALUE_DEFAULT_NULL' => null,
+    'VALUE_DEFAULT_ZERO' => 0,
+    'VALUE_DEFAULT_ONE' => 1,
+    'VALUE_DEFAULT_NEGATIVE_ONE' => -1,
+    'VALUE_DEFAULT_TWO' => 2,
+    'VALUE_DEFAULT_THREE' => 3,
+    'PAGINATE_VALUE' => 10,
 ]
 
 ?>

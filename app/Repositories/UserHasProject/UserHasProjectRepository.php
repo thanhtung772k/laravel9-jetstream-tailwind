@@ -13,6 +13,7 @@ interface UserHasProjectRepository extends RepositoryInterface
 {
     /**
      * save user join project
+     *
      * @param $request
      * @param $projectID
      * @return mixed
@@ -21,45 +22,51 @@ interface UserHasProjectRepository extends RepositoryInterface
 
     /**
      * update user join project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return mixed
      */
-    public function update($request, $idPrj);
+    public function update($request, $id);
 
     /**
      * create or update user join project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return mixed
      */
-    public function createOrUpdate($request, $idPrj);
+    public function createOrUpdate($request, $id);
 
     /**
      * index all project
+     *
      * @return mixed
      */
     public function getProject();
 
     /**
      * get user has project by ID
-     * @param $idPrj
+     *
+     * @param $id
      * @return void
      */
-    public function getUserHasPrjById($idPrj);
+    public function getUserHasPrjById($id);
 
     /**
      * delete user has project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return mixed
      */
-    public function deleteUserHasProject($request, $idPrj);
+    public function deleteUserHasProject($request, $id);
 
     /**
      * detail users join project
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function detail($idPrj);
+    public function detail($id);
 }

@@ -14,6 +14,7 @@ class TimesheetController extends Controller
 
     /**
      * index end search date Timesheets
+     *
      * @param Request $request
      * @return void
      */
@@ -23,9 +24,10 @@ class TimesheetController extends Controller
         $toDate = $request->toDate;
         $paginateOption = config('constant.select_value');
         $data = $this->timesheetService->searchDateTimesheet($request);
-        $dataIDTimesheet = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'));
+        $dateNow = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'));
         $dataCount = $this->timesheetService->countTimesheet();
-        $disabledCheckin = $this->timesheetService->disabledCheckin();
+        $disabled = $this->timesheetService->dateTimesheetEarly();
+        $disabledCheckin = $dateNow ?: $disabled;
         return view('home.dashboard', [
             'data' => $data,
             'paginate' => $paginateOption,
@@ -35,6 +37,7 @@ class TimesheetController extends Controller
 
     /**
      * checkin date Timesheets
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application
      */
@@ -44,6 +47,7 @@ class TimesheetController extends Controller
             $checkInDate = $request->input('checkin_date');
             $checkInHour = now()->format('H:i:s');
             $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -52,6 +56,7 @@ class TimesheetController extends Controller
 
     /**
      * checkout date Timesheets
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application
      */
@@ -60,7 +65,9 @@ class TimesheetController extends Controller
         try {
             $checkOutDate = $request->input('checkout_date');
             $checkOutHour = now()->format('H:i:s');
-            $this->timesheetService->checkOutdateTimesheet($checkOutDate, $checkOutHour);
+            $timesheet = $this->timesheetService->getTimesheet();
+            $this->timesheetService->checkOutdateTimesheet($timesheet, $checkOutDate, $checkOutHour);
+
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

@@ -23,7 +23,7 @@
         </form>
         <div class="relative">
             <div class="col-sm- mt-[24px] float-right flex">
-                <form action="{{route('check_in')}}" method="post" class="pr-1.5" onsubmit="return handleSubmit(event)">
+                <form action="{{route('check_in')}}" method="post" class="pr-1.5">
                     @csrf
                     @if(isset($disabledCheckin->check_in) || isset($disabledCheckin->check_out))
                         @php
@@ -34,7 +34,7 @@
                     @endif
                     <input name="checkin_date" type="hidden" value="{{now()->format('Y-m-d')}}">
                     <button type="submit" class="btn btn-primary cus-btn-style bg-[#c2f2ff]"
-                            id="js-btn-checkin" {{$disabled }}>@lang('lang.checkin')</button>
+                            id="js-btn-checkin" {{$disabled}}>@lang('lang.checkin')</button>
                 </form>
                 <form action="{{route('check_out')}}" method="post">
                     @csrf
@@ -58,7 +58,6 @@
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <th scope="col">#</th>
                         <th scope="col">
-                            @lang('lang.date')
                             <i class="fa-solid fa-caret-down"></i>
                         </th>
                         <th scope="col">@lang('lang.dayofweek')</th>
@@ -75,39 +74,43 @@
                     </thead>
                     <tbody>
                     @foreach ($data as $index => $value)
-                        <tr class="text-center @php if($value->created_at->isWeekend()) echo'bg-weekend' @endphp" >
+                        <tr class="text-center @php if($value->created_at->isWeekend()) echo'bg-weekend' @endphp">
+
                             <th scope="row">{{$index+1}}</th>
+
                             <td class="whitespace-nowrap">{{$value->date}}</td>
+
                             <td class="whitespace-nowrap">{{now()->parse($value->date)->format('l')}}</td>
 
-                            @if($value->check_in !== null)
-                                <td>{{ $value->check_in }}</td>
-                            @else
-                                <td>-</td>
-                            @endif
+                                @if($value->check_in !== null)
+                                    <td>{{ $value->check_in }}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
 
-                            @if($value->check_out !== null)
-                                <td>{{ $value->check_out }}</td>
-                            @else
-                                <td>-</td>
-                            @endif
+                                @if($value->check_out !== null)
+                                    <td>{{ $value->check_out }}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
+
                             <td>{{ $value->checkin_pay ? gmdate('H:i',$value->checkin_pay) : '-'}}</td>
 
                             <td>{{ $value->checkout_pay ? gmdate('H:i',$value->checkout_pay): '-' }}</td>
 
                             <td>{{ $value->lunch_break_time ? gmdate('H:i',$value->lunch_break_time): '-' }}</td>
 
-                            @if($value->actual_working_time !== null )
-                                <td>{{$value->actual_working_time}}</td>
-                            @else
-                                <td>-</td>
-                            @endif
+                                @if($value->actual_working_time !== null )
+                                    <td>{{$value->actual_working_time}}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
 
-                            @if($value->paid_working_time !== null )
-                                <td>{{$value->paid_working_time}}</td>
-                            @else
-                                <td>-</td>
-                            @endif
+                                @if($value->paid_working_time !== null )
+                                    <td>{{$value->paid_working_time}}</td>
+                                @else
+                                    <td>-</td>
+                                @endif
 
                             <td>{{ $value->note_check ? $value->note_check : '-' }}</td>
 

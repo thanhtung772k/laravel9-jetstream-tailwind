@@ -35,6 +35,7 @@ class DepartmentRepositoryEloquent extends BaseRepository implements DepartmentR
 
     /**
      * get all department
+     *
      * @return mixed
      */
     public function getDepartment()
