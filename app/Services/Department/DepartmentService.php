@@ -27,6 +27,7 @@ class DepartmentService extends BaseService
 
     /**
      * get all department
+     *
      * @return mixed
      */
     public function getDepartment()

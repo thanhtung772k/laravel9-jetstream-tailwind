@@ -27,6 +27,7 @@ class AddTimesheetService extends BaseService
 
     /**
      * create Add Timesheet
+     *
      * @param $request
      * @return mixed
      */
@@ -39,6 +40,7 @@ class AddTimesheetService extends BaseService
 
     /**
      * get list Additional timesheet
+     *
      * @param $request
      * @return mixed
      */
@@ -49,6 +51,7 @@ class AddTimesheetService extends BaseService
 
     /**
      * List detail Additional timesheet
+     *
      * @return mixed
      */
     public function getListDetailAddTimesheet($timesheetID)
@@ -58,6 +61,7 @@ class AddTimesheetService extends BaseService
 
     /**
      * update Additional timesheet
+     *
      * @param $addTimeID
      * @param $request
      * @return mixed
@@ -79,6 +83,7 @@ class AddTimesheetService extends BaseService
 
     /**
      * find Additional timesheet by ID
+     *
      * @param $idAddTimesheet
      * @return mixed
      */
@@ -93,6 +98,7 @@ class AddTimesheetService extends BaseService
 
     /**
      * delete Additional timesheet
+     *
      * @param $addTimeID
      * @param $evidence
      * @return mixed
@@ -109,7 +115,8 @@ class AddTimesheetService extends BaseService
     }
 
     /**
-     * list approval timsheet
+     * list approval timesheet
+     *
      * @param $request
      * @return void
      */
@@ -120,23 +127,25 @@ class AddTimesheetService extends BaseService
 
     /**
      * approval add timesheet
+     *
      * @param $request
      * @param $status
      * @return void
      */
     public function update($request, $status)
     {
-        return $this->repository->updateAdd($request, $status);
+        return $this->repository->updateTimesheet($request, $status);
     }
 
     /**
      * update many add timesheet
+     *
      * @param $request
      * @param $param
      * @return void
      */
-    public function updateMany($request, $param)
+    public function updateManyTimesheet($request, $param)
     {
-        return $this->repository->updateMany($request, $param);
+        return $this->repository->updateManyTimesheet($request, $param);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Enums\Constant;
-use Illuminate\Support\Facades\Storage;
 use Log;
 use Image;
 

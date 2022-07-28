@@ -13,6 +13,7 @@ interface ProjectTypeRepository extends RepositoryInterface
 {
     /**
      * index project type
+     *
      * @return mixed
      */
     public function getProjectType();

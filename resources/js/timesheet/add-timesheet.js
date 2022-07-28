@@ -90,7 +90,7 @@ $(document).ready(function () {
             '<div class="row pb-4"> ' +
                 '<div class="col-sm-2"> ' +
                     '<div class="header-search__text-date "> ' +
-                    '<select class="form-control text-sm selectUser"  name="userID[]" id="selectUser'+i+'"> '
+                    '<select class="form-control text-sm selectUser"  name="user_id[]" id="selectUser'+i+'"> '
                         + selectUser +
                     '</select> ' +
                     '</div> ' +
@@ -106,7 +106,7 @@ $(document).ready(function () {
                     'div class="header-search__date"> ' +
                     '<section> ' +
                     '<div class="input-group date datepicker-start" > ' +
-                    '<input class="form-control" name="startDateUser[]" readonly style="background-color: #fff"> ' +
+                    '<input class="form-control" name="start_date_user[]" readonly style="background-color: #fff"> ' +
                     '<span class="input-group-append"> <span class="input-group-text bg-white"> <i class="fa fa-calendar"></i> </span> </span> ' +
                     '</div>' +
                     ' </section>' +
@@ -116,7 +116,7 @@ $(document).ready(function () {
                     '<div class="header-search__text-date"> ' +
                     '<section> ' +
                     '<div class="input-group date datepicker-end" id="datepicker-end' + i + '"> ' +
-                    '<input class="form-control" name="endDateUser[]" readonly style="background-color: #fff"> ' +
+                    '<input class="form-control" name="end_date_user[]" readonly style="background-color: #fff"> ' +
                     '<span class="input-group-append"> <span class="input-group-text bg-white"> <i class="fa fa-calendar"></i> </span> </span> ' +
                     '</div> </section>' +
                 '</div> ' + '</div> ' +
@@ -125,7 +125,7 @@ $(document).ready(function () {
                     '<input class="form-control" name="effort[]"> </div> </div>' +
                     '<div class="col-sm-1 flex"> ' +
                     '<div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button> ' +
-                        '<input type="hidden" value="" name="userHasIDOld[]">' +
+                        '<input type="hidden" value="" name="user_has_id_old[]">' +
                     '</div>' +
                     ' </div> ' +
                 '</div>' +
@@ -144,7 +144,7 @@ $(document).ready(function () {
     $(document).on('click', '.input_remove', function (e) {
         e.preventDefault();
         $(this).parents( "tr" ).remove();
-        var values = $("input[name='userHasIDOld[]']").map(function(){return $(this).val();}).get();
+        var values = $("input[name='user_has_id_old[]']").map(function(){return $(this).val();}).get();
         console.log(values)
     });
 

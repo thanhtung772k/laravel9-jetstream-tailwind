@@ -35,6 +35,7 @@ class TimesheetService extends BaseService
 
     /**
      * index and search date Timesheet
+     *
      * @param $request
      * @return mixed
      */
@@ -46,6 +47,7 @@ class TimesheetService extends BaseService
 
     /**
      * checkin date Timesheet
+     *
      * @param $checkInDate
      * @param $checkInHour
      * @return mixed
@@ -57,28 +59,38 @@ class TimesheetService extends BaseService
 
     /**
      * checkout date Timesheet
+     *
+     * @param $timesheets
      * @param $checkOutDate
      * @param $checkOutHour
      * @return mixed
      */
-    public function checkOutdateTimesheet($checkOutDate, $checkOutHour)
+    public function checkOutdateTimesheet($timesheets, $checkOutDate, $checkOutHour)
     {
-        return $this->repository->checkOutdateTimesheet($checkOutDate, $checkOutHour);
+        //get check_in from db
+        foreach ($timesheets as $value) {
+            if ($value->date == $checkOutDate) {
+                $checkInHour = $value->check_in;
+            }
+        }
+        return $this->repository->checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour);
     }
 
     /**
      * create new date Timesheet after 0h
+     *
      * @param $date
-     * @param $userID
+     * @param $id
      * @return mixed
      */
-    public function createDate($date, $userID)
+    public function createDate($date, $id)
     {
-        return $this->repository->createDate($date, $userID);
+        return $this->repository->createDate($date, $id);
     }
 
     /**
      * get AddTimesheet Index Service
+     *
      * @param $timesheetID
      * @return mixed
      */
@@ -93,6 +105,7 @@ class TimesheetService extends BaseService
 
     /**
      * get date timesheet now
+     *
      * @param $dateTime
      * @return mixed
      */
@@ -102,7 +115,8 @@ class TimesheetService extends BaseService
     }
 
     /**
-     * get date timsheet early
+     * get date timesheet early
+     *
      * @return mixed
      */
     public function dateTimesheetEarly()
@@ -111,6 +125,8 @@ class TimesheetService extends BaseService
     }
 
     /**
+     * count timesheet
+     *
      * @return mixed
      */
     public function countTimesheet()
@@ -120,6 +136,7 @@ class TimesheetService extends BaseService
 
     /**
      * update timesheet
+     *
      * @return void
      */
     public function approval($request)
@@ -130,6 +147,7 @@ class TimesheetService extends BaseService
 
     /**
      * update many timesheets
+     *
      * @param $data
      * @return void
      */
@@ -137,14 +155,5 @@ class TimesheetService extends BaseService
     {
         $getTimesheet = $this->updateTimesheet($data->check_int_request, $data->check_out_request);
         return $this->repository->approvalMany($data, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
-    }
-
-    /**
-     * check null checkin
-     * @return void
-     */
-    public function disabledCheckin()
-    {
-        return $this->repository->disabledCheckin();
     }
 }

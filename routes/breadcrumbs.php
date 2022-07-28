@@ -82,3 +82,27 @@ Breadcrumbs::for('project-update', function ($trail) {
     $trail->parent('add_project');
     $trail->push(__('lang.update'), route('create_project'));
 });
+
+// Home > User Management
+Breadcrumbs::for('user', function ($trail) {
+    $trail->parent('home');
+    $trail->push(__('lang.user_management'), route('index_user'));
+});
+
+// Home > User Management > List
+Breadcrumbs::for('user-list', function ($trail) {
+    $trail->parent('user');
+    $trail->push(__('lang.list'), route('create_project'));
+});
+
+// Home > User Management > Create
+Breadcrumbs::for('user-create', function ($trail) {
+    $trail->parent('user');
+    $trail->push(__('lang.create'), route('create_project'));
+});
+
+// Home > User Management > Edit
+Breadcrumbs::for('user-edit', function ($trail) {
+    $trail->parent('user');
+    $trail->push(__('lang.edit'), route('create_project'));
+});

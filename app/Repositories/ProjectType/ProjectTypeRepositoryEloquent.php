@@ -34,6 +34,7 @@ class ProjectTypeRepositoryEloquent extends BaseRepository implements ProjectTyp
 
     /**
      * index project type
+     *
      * @return mixed
      */
     public function getProjectType()

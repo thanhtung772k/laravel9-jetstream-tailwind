@@ -35,6 +35,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
 
     /**
      * index all project
+     *
      * @param $request
      * @return mixed
      */
@@ -50,34 +51,36 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
                 return $request->prjTypeID ? $query->where('project_type_id', $request->prjTypeID) : '';
             })->where(function ($query) use ($request) {
                 return $request->prjDept ? $query->where('departments_id', $request->prjDept) : '';
-            })->get();
+            })->orderBy('created_at', 'asc')->get();
     }
 
     /**
      * Get index project by id
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function getProjectById($idPrj)
+    public function getProjectById($id)
     {
-        return $this->model->find($idPrj);
+        return $this->model->find($id);
     }
 
     /**
      * create new project
+     *
      * @param $request
      * @return mixed
      */
     public function createProject($request)
     {
         return $this->model->create([
-            'name' => $request->projectName,
+            'name' => $request->project_name,
             'customer' => $request->customer,
             'project_type_id' => $request->projectType,
             'departments_id' => $request->department,
-            'vale_contract' => $request->valueContract,
-            'start_date' => $request->startDateProject,
-            'end_date' => $request->endDateProject,
+            'value_contract' => $request->value_contract,
+            'start_date' => $request->start_date_project,
+            'end_date' => $request->end_date_project,
             'status' => $request->statusProject,
             'description' => $request->description,
         ]);
@@ -85,20 +88,21 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
 
     /**
      * updae project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return void
      */
-    public function updateProject($request, $idPr)
+    public function updateProject($request, $id)
     {
-        return $this->model->find($idPr)->update([
-            'name' => $request->projectName,
+        return $this->model->find($id)->update([
+            'name' => $request->project_name,
             'customer' => $request->customer,
             'project_type_id' => $request->projectType,
             'departments_id' => $request->department,
-            'vale_contract' => $request->valueContract,
-            'start_date' => $request->startDateProject,
-            'end_date' => $request->endDateProject,
+            'value_contract' => $request->value_contract,
+            'start_date' => $request->start_date_project,
+            'end_date' => $request->end_date_project,
             'status' => $request->statusProject,
             'description' => $request->description,
         ]);
@@ -106,6 +110,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
 
     /**
      * get project latest
+     *
      * @param $request
      * @return mixed
      */
@@ -116,22 +121,24 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
 
     /**
      * delete soft project
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function deleteProject($idPrj)
+    public function deleteProject($id)
     {
         return $this->model->join('projects_type', 'projects.project_type_id', '=', 'projects_type.id')
-            ->join('departments', 'projects.departments_id', '=', 'departments.id')->find($idPrj);
+            ->join('departments', 'projects.departments_id', '=', 'departments.id')->find($id);
     }
 
     /**
      * detail information project
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function detail($idPrj)
+    public function detail($id)
     {
-        return $this->model->find($idPrj);
+        return $this->model->find($id);
     }
 }

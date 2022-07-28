@@ -17,6 +17,7 @@ use App\Traits\HandleDay;
 class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRepository
 {
     use HandleDay;
+
     /**
      * Specify Model class name
      *
@@ -38,72 +39,84 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
 
     /**
      * Index the repository
+     *
+     * @return mixed
      */
     public function getTimesheet()
     {
-        $userID = Auth::id();
-        return $this->model->where('user_id', $userID)->paginate(config('constant.pagination_records'));
+        return $this->model->select('*')
+            ->where(
+                'user_id', Auth::id()
+            )->get();
     }
 
     /**
      * Search date the repository
+     *
      * @param $request
      * @return string
      */
     public function searchDateTimesheet($request)
     {
-        $fromDate = now()->startOfMonth()->format("Y-m-d");
-        $toDate = now()->endOfMonth()->format("Y-m-d");
-        $paginate = $request->paginate ? $request->paginate : config('constant.pagination_records');
-        if (isset($request->fromDate) && isset($request->toDate) && isset($request->paginate)) {
-            $fromDate = $request->fromDate;
-            $toDate = $request->toDate;
-        } elseif ($request->fromDate && $request->paginate) {
-            $fromDate = $request->fromDate;
-            $toDate = now()->endOfMonth()->format("Y-m-d");
-        }
-        return $this->model->select()->where('date', '>=', $fromDate)->where('date', '<=', $toDate)->where('user_id', Auth::id())->orderBy('date','desc')->paginate($paginate);
+        return $this->model->select('*')->where([
+            ['date', '>=', $request->fromDate ?: now()->startOfMonth()->format("Y-m-d")],
+            ['date', '<=', $request->toDate ?: now()->endOfMonth()->format("Y-m-d")],
+            ['user_id', Auth::id()],
+        ])->orderBy(
+            'date', 'desc'
+        )->paginate($request->paginate ?: config('constant.pagination_records'));
     }
 
     /**
      * Search date the repository
+     *
      * @param $checkInDate
      * @param $checkInHour
      * @return string
      */
     public function checkIndateTimesheet($checkInDate, $checkInHour)
     {
-        return $this->model->where('date', $checkInDate)->where('user_id', Auth::id())->update([
+        return $this->model->where(
+            'date', $checkInDate
+        )->where(
+            'user_id', Auth::id()
+        )->update([
             'check_in' => $checkInHour
         ]);
     }
 
-    public function createDate($date, $userID)
+    /**
+     * create new date Timesheet
+     *
+     * @param $date
+     * @param $id
+     * @return mixed
+     */
+    public function createDate($date, $id)
     {
         return $this->model->firstOrCreate([
-            'date' => now()->format("Y-m-d"),
-            'user_id' => $userID
+            'date' => $date,
+            'user_id' => $id
         ]);
     }
 
     /**
      * Search date the repository
+     *
+     * @param $checkInHour
      * @param $checkOutDate
      * @param $checkOutHour
      * @return string
      */
-    public function checkOutdateTimesheet($checkOutDate, $checkOutHour)
+    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour)
     {
-        $userID = Auth::id();
-        $timesheets = Timesheet::select()->where('user_id', $userID)->get();
-        //get check_in from db
-        foreach ($timesheets as $value) {
-            if ($value->date == $checkOutDate) {
-                $checkInHour = $value->check_in;
-            }
-        }
-        $getTimesheet = $this->updateTimesheet($checkInHour,$checkOutHour);
-        return $this->model->where('date', $checkOutDate)->where('user_id', $userID)->update([
+        $getTimesheet = $this->updateTimesheet($checkInHour, $checkOutHour);
+
+        return $this->model->where(
+            'date', $checkOutDate
+        )->where(
+            'user_id', Auth::id()
+        )->update([
             'check_out' => $checkOutHour,
             'actual_working_time' => $getTimesheet['actWorking'],
             'paid_working_time' => $getTimesheet['paidWorking'],
@@ -112,12 +125,17 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
 
     /**
      * Get timeshet by id the repository
+     *
+     * @param $timesheetID
+     * @return \Illuminate\Http\RedirectResponse|mixed
      */
     public function getIDTimesheet($timesheetID)
     {
         try {
             $userID = Auth::id();
-            return $this->model->where('user_id', $userID)->find($timesheetID);
+            return $this->model->where(
+                'user_id', $userID
+            )->find($timesheetID);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -126,35 +144,47 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
 
     /**
      * get timesheet id
+     *
      * @param $dateTime
      * @return mixed
      */
     public function dateTimesheet($dateTime)
     {
         $userID = Auth::id();
-        return $this->model->where('date', $dateTime)->where('user_id', $userID)->first();
+        return $this->model->where(
+            'date', $dateTime
+        )->where(
+            'user_id', $userID
+        )->first();
     }
 
     /**
-     * get date timsheet early
+     * get date timesheet early
+     *
      * @return mixed|void
      */
     public function dateTimesheetEarly()
     {
-        return $this->model->where('user_id', Auth::id())->latest()->first();
+        return $this->model->where(
+            'user_id', Auth::id()
+        )->latest()->first();
     }
 
     /**
      * count date timesheet
+     *
      * @return mixed
      */
     public function countTimesheet()
     {
-        return $this->model->where('user_id', Auth::id())->count();
+        return $this->model->where(
+            'user_id', Auth::id()
+        )->count();
     }
 
     /**
      * approval timesheet
+     *
      * @param $request
      * @param $actWorking
      * @param $paidWorking
@@ -172,6 +202,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
 
     /**
      * update many timesheets
+     *
      * @param $data
      * @param $actWorking
      * @param $paidWorking
@@ -185,14 +216,5 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
             'actual_working_time' => $actWorking,
             'paid_working_time' => $paidWorking,
         ]);
-    }
-
-    /**
-     * check null checkin
-     * @return void
-     */
-    public function disabledCheckin()
-    {
-        return $this->model->where('user_id', Auth::id())->latest()->first();
     }
 }

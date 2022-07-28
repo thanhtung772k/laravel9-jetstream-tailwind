@@ -5,11 +5,11 @@
     </div>
 @endsection
 @section('content')
-    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
+    <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
         <header class=" shadow pt-[120px] p-8">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 m-auto">
-                <form action="{{route('update_project',$getProjectById->id)}}" method="post">
+                <form action="{{route('update_project',$projectById->id)}}" method="post">
                     @csrf
                     <div class="row py-8">
                         <div class="col">
@@ -25,9 +25,9 @@
                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.project_name')</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <input class="form-control" name="projectName" value="{{$getProjectById->name}}">
+                                <input class="form-control" name="project_name" value="{{$projectById->name}}">
                             </div>
-                            @error('projectName')
+                            @error('project_name')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="header-search__text-date ">
                                 <select class="form-control text-sm" name="customer"
-                                        value="{{$getProjectById->customer}}">
+                                        value="{{$projectById->customer}}">
                                     <option value="EPU software">EPU software</option>
                                     <option value="THTu Japan">THTu Japan</option>
                                     <option value="NgTu ViT">NgTu ViT</option>
@@ -52,15 +52,15 @@
                             </div>
                             <div class="header-search__text-date ">
                                 <select class="form-control text-sm" name="projectType">
-                                    @foreach($getProjectType as $value)
-                                        @if($getProjectById->project_type_id == $value->id)
+                                    @foreach($projectTypes as $projectType)
+                                        @if($projectById->project_type_id == $projectType->id)
                                             @php
                                                 $select = 'selected';
                                             @endphp
                                         @else
                                             {{$select = ''}}
                                         @endif
-                                        <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                        <option value="{{$projectType->id}}" {{$select}}>{{$projectType->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -68,13 +68,15 @@
 
                         <div class="col-sm-3">
                             <div class="header-search__text-date pb-3">
-                                <span class="font-semibold cus_font-text text-sm">@lang('lang.value_contract') (mm)</span>
+                                <span
+                                    class="font-semibold cus_font-text text-sm">@lang('lang.value_contract') (mm)</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <input class="form-control" name="valueContract" value="{{$getProjectById->vale_contract}}">
+                                <input class="form-control" name="value_contract"
+                                       value="{{$projectById->value_contract}}">
                             </div>
-                            @error('valueContract')
-                                <div class="text-red-500">{{ $message }}</div>
+                            @error('value_contract')
+                            <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -86,15 +88,15 @@
                             </div>
                             <div class="header-search__text-date ">
                                 <select class="form-control text-sm" name="department">
-                                    @foreach($getDepartment as $value)
-                                        @if($getProjectById->departments_id == $value->id)
+                                    @foreach($departments as $department)
+                                        @if($projectById->departments_id == $department->id)
                                             @php
                                                 $select = 'selected';
                                             @endphp
                                         @else
                                             {{$select = ''}}
                                         @endif
-                                        <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                        <option value="{{$department->id}}" {{$select}}>{{$department->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -108,8 +110,8 @@
                             <div class="header-search__date">
                                 <section>
                                     <div class="input-group date" id="datepicker">
-                                        <input class="form-control" name="startDateProject" readonly
-                                               style="background-color: #fff" value="{{$getProjectById->start_date}}">
+                                        <input class="form-control" name="start_date_project" readonly
+                                               style="background-color: #fff" value="{{$projectById->start_date}}">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -118,7 +120,7 @@
                                     </div>
                                 </section>
                             </div>
-                            @error('startDateProject')
+                            @error('start_date_project')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -130,8 +132,8 @@
                             <div class="header-search__text-date">
                                 <section>
                                     <div class="input-group date" id="datepicker-end">
-                                        <input class="form-control" name="endDateProject" readonly
-                                               style="background-color: #fff" value="{{$getProjectById->end_date}}">
+                                        <input class="form-control" name="end_date_project" readonly
+                                               style="background-color: #fff" value="{{$projectById->end_date}}">
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
@@ -140,7 +142,7 @@
                                     </div>
                                 </section>
                             </div>
-                            @error('endDateProject')
+                            @error('end_date_project')
                             <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
@@ -165,7 +167,8 @@
                                 <span class="font-semibold cus_font-text text-sm">@lang('lang.description')</span>
                             </div>
                             <div class="header-search__text-date ">
-                                <textarea class="form-control" name="description">{{$getProjectById->description}}</textarea>
+                                <textarea class="form-control"
+                                          name="description">{{$projectById->description}}</textarea>
                             </div>
                             @error('description')
                             <div class="text-red-500">{{ $message }}</div>
@@ -184,7 +187,7 @@
 
                     <table id="dynamic_input">
                         @php
-                            $oldStartDateUser = old('startDateUser') ?? [];
+                            $oldStartDateUser = old('start_date_user') ?? [];
                         @endphp
                         @if($oldStartDateUser == null)
                             <tr>
@@ -192,7 +195,8 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
+                                                <span
+                                                    class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
                                             </div>
                                         </div>
 
@@ -225,15 +229,15 @@
                                     </div>
                                 </td>
                             </tr>
-                            @foreach($getUserHasPrjById as $valueUserHasPrjById)
+                            @foreach($userProjects as $userProject)
                                 <tr>
                                     <td>
                                         <div class="row pb-4">
                                             <div class="col-sm-2">
                                                 <div class="header-search__text-date ">
-                                                    <select class="form-control text-sm selectUser" name="userID[]">
-                                                        @foreach($getUsers as $value)
-                                                            @if($valueUserHasPrjById->user_id == $value->id)
+                                                    <select class="form-control text-sm selectUser" name="user_id[]">
+                                                        @foreach($users as $user)
+                                                            @if($userProject->user_id == $user->id)
                                                                 @php
                                                                     $select = 'selected';
                                                                 @endphp
@@ -241,7 +245,7 @@
                                                                 {{$select = ''}}
                                                             @endif
                                                             <option
-                                                                value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                                value="{{$user->id}}" {{$select}}>{{$user->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -251,8 +255,8 @@
                                                 <div class="header-search__text-date">
                                                     <select class="form-control text-sm" name="locationID[]"
                                                             id="selectLocation">
-                                                        @foreach($getLocation as $value)
-                                                            @if($valueUserHasPrjById->role_id == $value->id)
+                                                        @foreach($locations as $location)
+                                                            @if($userProject->role_id == $location->id)
                                                                 @php
                                                                     $select = 'selected';
                                                                 @endphp
@@ -260,7 +264,7 @@
                                                                 {{$select = ''}}
                                                             @endif
                                                             <option
-                                                                value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                                value="{{$location->id}}" {{$select}}>{{$location->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -270,9 +274,9 @@
                                                 <div class="header-search__date">
                                                     <section>
                                                         <div class="input-group date" id="datepicker">
-                                                            <input class="form-control" name="startDateUser[]" readonly
+                                                            <input class="form-control" name="start_date_user[]" readonly
                                                                    style="background-color: #fff"
-                                                                   value="{{$valueUserHasPrjById->start_date}}">
+                                                                   value="{{$userProject->start_date}}">
                                                             <span class="input-group-append">
                                                                 <span class="input-group-text bg-white">
                                                                     <i class="fa fa-calendar"></i>
@@ -287,9 +291,9 @@
                                                 <div class="header-search__text-date">
                                                     <section>
                                                         <div class="input-group date" id="datepicker-end">
-                                                            <input class="form-control" id="toDate" name="endDateUser[]"
+                                                            <input class="form-control" id="toDate" name="end_date_user[]"
                                                                    readonly style="background-color: #fff"
-                                                                   value="{{$valueUserHasPrjById->end_date}}">
+                                                                   value="{{$userProject->end_date}}">
                                                             <span class="input-group-append">
                                                                 <span class="input-group-text bg-white">
                                                                     <i class="fa fa-calendar"></i>
@@ -303,7 +307,7 @@
                                             <div class="col-sm-1">
                                                 <div class="header-search__text-date">
                                                     <input class="form-control" name="effort[]"
-                                                           value="{{$valueUserHasPrjById->effort}}">
+                                                           value="{{$userProject->effort}}">
                                                 </div>
                                             </div>
 
@@ -311,8 +315,8 @@
                                                 <div class="mt-[3px]">
                                                     <span
                                                         class="text-xs btn btn-outline-danger mt-0.5 input_remove">X</span>
-                                                    <input type="hidden" value="{{$valueUserHasPrjById->id}}"
-                                                           name="userHasIDOld[]">
+                                                    <input type="hidden" value="{{$userProject->id}}"
+                                                           name="user_has_id_old[]">
                                                 </div>
                                             </div>
                                         </div>
@@ -325,24 +329,28 @@
                                     <div class="row">
                                         <div class="col-sm-2">
                                             <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
+                                                <span
+                                                    class="font-semibold cus_font-text text-sm">@lang('lang.staff')</span>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-2">
                                             <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
+                                                <span
+                                                    class="font-semibold cus_font-text text-sm">@lang('lang.location')</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
+                                                <span
+                                                    class="font-semibold cus_font-text text-sm">@lang('lang.start_date')</span>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-2">
                                             <div class="header-search__text-date pb-3">
-                                                <span class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
+                                                <span
+                                                    class="font-semibold cus_font-text text-sm">@lang('lang.end_date')</span>
                                             </div>
                                         </div>
 
@@ -360,20 +368,22 @@
                                         <div class="row pb-4">
                                             <div class="col-sm-2">
                                                 <div class="header-search__text-date ">
-                                                    <select class="form-control text-sm selectUser" id="selectUser" name="userID[]">
-                                                        @foreach($getUsers as $value)
-                                                            @if(old('userID')[$key] == $value->id)
+                                                    <select class="form-control text-sm selectUser" id="selectUser"
+                                                            name="user_id[]">
+                                                        @foreach($users as $user)
+                                                            @if(old('user_id')[$key] == $user->id)
                                                                 @php
                                                                     $select = 'selected';
                                                                 @endphp
                                                             @else
                                                                 {{$select = ''}}
                                                             @endif
-                                                            <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                            <option
+                                                                value="{{$user->id}}" {{$select}}>{{$user->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                @error("userID.$key")
+                                                @error("user_id.$key")
                                                 <div class="text-red-500">{{ $message }}</div>
                                                 @enderror
 
@@ -382,16 +392,18 @@
 
                                             <div class="col-sm-2">
                                                 <div class="header-search__text-date">
-                                                    <select class="form-control text-sm" name="locationID[]" id="selectLocation">
-                                                        @foreach($getLocation as $value)
-                                                            @if(old('locationID')[$key] == $value->id)
+                                                    <select class="form-control text-sm" name="locationID[]"
+                                                            id="selectLocation">
+                                                        @foreach($locations as $location)
+                                                            @if(old('locationID')[$key] == $location->id)
                                                                 @php
                                                                     $select = 'selected';
                                                                 @endphp
                                                             @else
                                                                 {{$select = ''}}
                                                             @endif
-                                                            <option value="{{$value->id}}" {{$select}}>{{$value->name}}</option>
+                                                            <option
+                                                                value="{{$location->id}}" {{$select}}>{{$location->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -400,7 +412,9 @@
                                                 <div class="header-search__date">
                                                     <section>
                                                         <div class="input-group date" id="datepicker">
-                                                            <input class="form-control" name="startDateUser[]" value="{{ old('startDateUser')[$key] }}" readonly style="background-color: #fff">
+                                                            <input class="form-control" name="start_date_user[]"
+                                                                   value="{{ old('start_date_user')[$key] }}" readonly
+                                                                   style="background-color: #fff">
                                                             <span class="input-group-append">
                                                                     <span class="input-group-text bg-white">
                                                                         <i class="fa fa-calendar"></i>
@@ -409,7 +423,7 @@
                                                         </div>
                                                     </section>
                                                 </div>
-                                                @error("startDateUser.$key")
+                                                @error("start_date_user.$key")
                                                 <div class="text-red-500">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -418,7 +432,9 @@
                                                 <div class="header-search__text-date">
                                                     <section>
                                                         <div class="input-group date" id="datepicker-end">
-                                                            <input class="form-control" id="toDate" name="endDateUser[]" value="{{ old('endDateUser')[$key] }}" readonly style="background-color: #fff">
+                                                            <input class="form-control" id="toDate" name="end_date_user[]"
+                                                                   value="{{ old('end_date_user')[$key] }}" readonly
+                                                                   style="background-color: #fff">
                                                             <span class="input-group-append">
                                                                 <span class="input-group-text bg-white">
                                                                     <i class="fa fa-calendar"></i>
@@ -427,14 +443,15 @@
                                                         </div>
                                                     </section>
                                                 </div>
-                                                @error("endDateUser.$key")
+                                                @error("end_date_user.$key")
                                                 <div class="text-red-500">{{ $message }}</div>
                                                 @enderror
                                             </div>
 
                                             <div class="col-sm-1">
                                                 <div class="header-search__text-date">
-                                                    <input class="form-control" value="{{ old('effort')[$key] }}" name="effort[]">
+                                                    <input class="form-control" value="{{ old('effort')[$key] }}"
+                                                           name="effort[]">
                                                 </div>
                                                 @error("effort.$key")
                                                 <div class="text-red-500 w-[114px]">{{ $message }}</div>
@@ -442,8 +459,12 @@
                                             </div>
 
                                             <div class="col-sm-1 flex">
-                                                <div class="mt-[3px]"> <button type="button" class="text-xs btn btn-outline-danger mt-0.5 input_remove" name="js-remove-input" id="' + i + '">X</button>
-                                                    <input type="hidden" value="" name="userHasIDOld[]">
+                                                <div class="mt-[3px]">
+                                                    <button type="button"
+                                                            class="text-xs btn btn-outline-danger mt-0.5 input_remove"
+                                                            name="js-remove-input" id="' + i + '">X
+                                                    </button>
+                                                    <input type="hidden" value="" name="user_has_id_old[]">
                                                 </div>
                                             </div>
 

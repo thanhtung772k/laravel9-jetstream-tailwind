@@ -5,6 +5,7 @@ use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\AddTimesheetController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,15 @@ Route::middleware([
     Route::get('/additional-project-detail/{projID}', [ProjectController::class, 'detail'])->name('detail_project');
     Route::post('/additional-project-update/{projID}', [ProjectController::class, 'update'])->name('update_project');
     Route::get('/additional-project-delete/{projID}', [ProjectController::class, 'deletePrj'])->name('delete_project');
+    // ........................ route user management ........................
+    Route::get('/management-user-create', [UserController::class, 'create'])->name('create_user');
+    Route::post('/management-user-create', [UserController::class, 'insert'])->name('insert_user');
+    Route::get('/management-user-index', [UserController::class, 'index'])->name('index_user');
+    Route::get('/management-user-edit/{id}', [UserController::class, 'edit'])->name('edit_user');
+    Route::post('/management-user-update/{id}', [UserController::class, 'update'])->name('update_user');
+    Route::get('/management-user-delete/{id}', [UserController::class, 'delete'])->name('delete_user');
+    Route::get('/management-user-leave', [UserController::class, 'leave'])->name('leave_user');
+    Route::get('/management-user-detail/{id}', [UserController::class, 'detail'])->name('detail_user');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {
@@ -62,7 +72,7 @@ Route::get('/test', function () {
                 $arr[$i] = $tam;
             }
         }
-    return $arr;
-});
+        return $arr;
+    });
 
 

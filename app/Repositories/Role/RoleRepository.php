@@ -13,6 +13,7 @@ interface RoleRepository extends RepositoryInterface
 {
     /**
      * get list Location
+     *
      * @return mixed
      */
     public function getLocation();

@@ -5,12 +5,12 @@
 @endsection
 <script>
     function approvalAddtimesheet(id) {
-        $.get('/additional-timesheet-approval/' + id, function (addtimsheet) {
-            $('#id').val(addtimsheet.id);
-            $('#timesheetID').val(addtimsheet.timesheet_id);
-            $('#checkInReq').val(addtimsheet.check_int_request);
-            $('#checkOutReq').val(addtimsheet.check_out_request);
-            $('#status').val(addtimsheet.status);
+        $.get('/additional-timesheet-approval/' + id, function (addTimesheet) {
+            $('#id').val(addTimesheet.id);
+            $('#timesheetID').val(addTimesheet.timesheet_id);
+            $('#checkInReq').val(addTimesheet.check_int_request);
+            $('#checkOutReq').val(addTimesheet.check_out_request);
+            $('#status').val(addTimesheet.status);
             $('#modalComment').modal('toggle');
         })
 
@@ -48,11 +48,11 @@
     }
 
     function rejectAddtimesheet(id) {
-        $.get('/additional-timesheet-approval/' + id, function (addtimsheet) {
-            $('#id').val(addtimsheet.id);
-            $('#timesheetID').val(addtimsheet.timesheet_id);
-            $('#checkInReq').val(addtimsheet.check_int_request);
-            $('#checkOutReq').val(addtimsheet.check_out_request);
+        $.get('/additional-timesheet-approval/' + id, function (addTimesheet) {
+            $('#id').val(addTimesheet.id);
+            $('#timesheetID').val(addTimesheet.timesheet_id);
+            $('#checkInReq').val(addTimesheet.check_int_request);
+            $('#checkOutReq').val(addTimesheet.check_out_request);
             $('#modalComment').modal('toggle');
         })
 
@@ -200,7 +200,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if($getInfUser->is_admin == config('constant.is_admin') )
+                    @if($users->is_admin == config('constant.is_admin') )
                         @if($dataTimesheetApproval->count() > 0)
                             @foreach($dataTimesheetApproval as $value)
                                 <tr class="text-center">

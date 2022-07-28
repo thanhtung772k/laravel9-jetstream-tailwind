@@ -37,5 +37,6 @@ trait ManageFile
         if ($file) {
             Storage::disk(config('filesystems.default'))->delete($path . $file);
         }
+        return true;
     }
 }

@@ -38,7 +38,9 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
 
     /**
      * create Add Timesheet
+     *
      * @param $request
+     * @param $imageName
      * @return mixed
      */
     public function createAddTimesheet($request, $imageName)
@@ -61,47 +63,52 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
 
     /**
      * get list Additional timesheet
+     *
      * @param $request
      * @return mixed|void
      */
     public function getListAddTimesheet($request)
     {
-        $fromDate = now()->startOfMonth()->format("Y-m-d");
-        $toDate = now()->endOfMonth()->format("Y-m-d");
-        if (isset($request->fromDate) && isset($request->toDate)) {
-            $fromDate = $request->fromDate;
-            $toDate = $request->toDate;
-        } elseif ($request->fromDate) {
-            $fromDate = $request->fromDate;
-            $toDate = now()->endOfMonth()->format("Y-m-d");
-        }
-        $userID = Auth::id();
         return $this->model->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
             ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
-            ->where('timesheets.date', '>=', $fromDate)->where('timesheets.date', '<=', $toDate)
-            ->where('timesheets.user_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name')->get();
+            ->where([
+                ['timesheets.date', '>=', $request->fromDate ?: now()->startOfMonth()->format("Y-m-d")],
+                ['timesheets.date', '<=', $request->toDate ?: now()->endOfMonth()->format("Y-m-d")],
+            ])->where('timesheets.user_id', Auth::id())->select(
+                'add_timesheets.*',
+                'timesheets.date',
+                'users.name'
+            )->get();
     }
 
     /**
      * List detail Additional timesheet
-     * @param $timesheetID
+     *
+     * @param $id
      * @return mixed
      */
-    public function getListDetailAddTimesheet($timesheetID)
+    public function getListDetailAddTimesheet($id)
     {
         return $this->model->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
             ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
-            ->select('add_timesheets.*', 'timesheets.date', 'timesheets.check_in', 'timesheets.check_out', 'users.name')->find($timesheetID);
+            ->select(
+                'add_timesheets.*',
+                'timesheets.date',
+                'timesheets.check_in',
+                'timesheets.check_out',
+                'users.name'
+            )->find($id);
     }
 
     /**
      * update Additional timesheet
-     * @param $addTimeID
+     *
+     * @param $id
      * @param $request
      * @param $imgEvidence
      * @return mixed
      */
-    public function updateAddTimesheet($addTimeID, $request, $imgEvidence)
+    public function updateAddTimesheet($id, $request, $imgEvidence)
     {
         return $this->model->updateOrCreate(
             [
@@ -120,27 +127,30 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
 
     /**
      * find Additional timesheet by ID
-     * @param $addTimeID
+     *
+     * @param $id
      * @return mixed
      */
-    public function findIDAddTimesheet($addTimeID)
+    public function findIDAddTimesheet($id)
     {
-        return $this->model->find($addTimeID);
+        return $this->model->find($id);
     }
 
     /**
      * delete Additional timesheet
-     * @param $addTimeID
+     *
+     * @param $id
      * @param $evidence
      * @return mixed
      */
-    public function deleteAddTimesheet($addTimeID)
+    public function deleteAddTimesheet($id)
     {
-        return $this->model->find($addTimeID)->delete();
+        return $this->model->find($id)->delete();
     }
 
     /**
-     * list approval timsheet
+     * list approval timesheet
+     *
      * @param $request
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|mixed
      */
@@ -156,23 +166,36 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
             $toDate = now()->endOfMonth()->format("Y-m-d");
         }
         $userID = Auth::id();
-        return $this->model->with('user')->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
+        return $this->model->with('user')
+            ->join('timesheets', 'add_timesheets.timesheet_id', '=', 'timesheets.id')
             ->join('users', 'add_timesheets.admin_id', '=', 'users.id')
-            ->where('status', config('constant.status_wait'))
-            ->where('add_timesheets.admin_id', $userID)->select('add_timesheets.*', 'timesheets.date', 'users.name', 'timesheets.user_id')
-            ->where('add_timesheets.created_at', '>=', $fromDate)->where('add_timesheets.created_at', '<=', $toDate)
-            ->where('timesheets.user_id','like','%'.$request->idName.'%')->get();
+            ->where([
+                ['status', config('constant.status_wait')],
+                ['add_timesheets.admin_id', $userID],
+            ])->select(
+                'add_timesheets.*',
+                'timesheets.date',
+                'users.name',
+                'timesheets.user_id'
+            )->where([
+                ['add_timesheets.created_at', '>=', $fromDate],
+                ['add_timesheets.created_at', '<=', $toDate],
+                ['timesheets.user_id', 'like', '%' . $request->idName . '%'],
+            ])->get();
     }
 
     /**
      * approval add timesheet
+     *
      * @param $request
      * @param $status
      * @return void
      */
-    public function updateAdd($request, $status)
+    public function updateTimesheet($request, $status)
     {
-        return $this->model->where('timesheet_id', $request->timesheetID)->update([
+        return $this->model->where(
+            'timesheet_id', $request->timesheetID
+        )->update([
             'status' => $status,
             'note' => $request->note
         ]);
@@ -180,13 +203,16 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
 
     /**
      * update many add timesheet
+     *
      * @param $request
      * @param $param
      * @return void
      */
-    public function updateMany($request, $param)
+    public function updateManyTimesheet($request, $param)
     {
-        return $this->model->whereIn('id', $request->addTimeId)->update([
+        return $this->model->whereIn(
+            'id', $request->addTimeId
+        )->update([
             'note' => $request->note,
             'status' => $param
         ]);

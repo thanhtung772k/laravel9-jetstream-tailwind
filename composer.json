@@ -12,6 +12,7 @@
         "laravel/framework": "^8.75",
         "laravel/jetstream": "^2.7",
         "laravel/sanctum": "^2.11",
+        "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "prettus/l5-repository": "^2.8",
@@ -55,7 +56,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {

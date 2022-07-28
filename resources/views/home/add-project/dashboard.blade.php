@@ -2,7 +2,7 @@
 
 @section('content')
     <script src="{{ asset('css/project/project.css') }}"></script>
-    <div class="nav__sub-header absolute w-full" style="background-color: #ebedef;">
+    <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
         <header class="bg-white pt-[120px]">
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
@@ -21,7 +21,8 @@
                             </div>
                             <div class="col-sm-5 header-search__text-date">
                                 <div class="input-group date">
-                                    <input class="form-control" placeholder="@lang('lang.project_name')" name="prjName">
+                                    <input class="form-control" placeholder="@lang('lang.project_name')" name="prjName"
+                                           value="{{old('prjName')}}">
                                 </div>
                             </div>
                         </div>
@@ -33,9 +34,11 @@
                                 <div class="input-group date">
                                     <select class="form-control text-sm" id="FormControlSelect" name="prjStatus">
                                         <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
-                                        <option value="{{config('constant.status_doing')}}">@lang('lang.developing')</option>
+                                        <option
+                                            value="{{config('constant.status_doing')}}">@lang('lang.developing')</option>
                                         <option value="{{config('constant.status_done')}}">@lang('lang.done')</option>
-                                        <option value="{{config('constant.status_undeveloped')}}">@lang('lang.undeveloped')</option>
+                                        <option
+                                            value="{{config('constant.status_undeveloped')}}">@lang('lang.undeveloped')</option>
                                     </select>
                                 </div>
                             </div>
@@ -48,8 +51,8 @@
                                 <div class="input-group date">
                                     <select class="form-control text-sm" name="prjTypeID">
                                         <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
-                                        @foreach($getProjectType as $value)
-                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @foreach($projectTypes as $projectType)
+                                            <option value="{{$projectType->id}}">{{$projectType->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -60,11 +63,11 @@
                                 <span class="text-sm">@lang('lang.department')</span>
                             </div>
                             <div class="col-sm-4 header-search__text-date">
-                                <div class="input-group date" >
+                                <div class="input-group date">
                                     <select class="form-control text-sm" name="prjDept">
                                         <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
-                                        @foreach($getDepartment as $value)
-                                            <option value="{{$value->id}}">{{$value->name}}</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{$department->id}}">{{$department->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

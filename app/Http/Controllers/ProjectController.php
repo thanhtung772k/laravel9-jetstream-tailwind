@@ -26,41 +26,45 @@ class ProjectController extends Controller
 
     /**
      * Index and search Project
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
-        $getProject = $this->projectService->getProject($request);
-        $getProjectType = $this->projectTypeService->getProjectType();
-        $getDepartment = $this->departmentService->getDepartment();
+        $projects = $this->projectService->getProject($request);
+        $projectTypes = $this->projectTypeService->getProjectType();
+        $departments = $this->departmentService->getDepartment();
         return view('home.add-project.dashboard', [
-            'getProject' => $getProject,
-            'getProjectType' => $getProjectType,
-            'getDepartment' => $getDepartment
+            'projects' => $projects,
+            'projectTypes' => $projectTypes,
+            'departments' => $departments
         ]);
     }
 
     /**
      * Create new project
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function insert()
     {
-        $getLocation = $this->roleService->getLocation();
-        $getUsers = $this->userService->getAllUser();
-        $getProjectType = $this->projectTypeService->getProjectType();
-        $getDepartment = $this->departmentService->getDepartment();
+        $locations = $this->roleService->getLocation();
+        $users = $this->userService->getAllUser();
+        $projectTypes = $this->projectTypeService->getProjectType();
+        $departments = $this->departmentService->getDepartment();
+
         return view('home.add-project.create-project', [
-            'getLocation' => $getLocation,
-            'getUsers' => $getUsers,
-            'getProjectType' => $getProjectType,
-            'getDepartment' => $getDepartment,
+            'locations' => $locations,
+            'users' => $users,
+            'projectTypes' => $projectTypes,
+            'departments' => $departments,
         ]);
     }
 
     /**
      * Create new project
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -81,41 +85,44 @@ class ProjectController extends Controller
 
     /**
      * view edit project
-     * @param $idPrj
+     *
+     * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit($idPrj)
+    public function edit($id)
     {
-        $getLocation = $this->roleService->getLocation();
-        $getUsers = $this->userService->getAllUser();
-        $getProjectType = $this->projectTypeService->getProjectType();
-        $getDepartment = $this->departmentService->getDepartment();
-        $getProjectById = $this->projectService->getProjectById($idPrj);
-        $getUserHasPrjById = $this->userHasProjectService->getUserHasPrjById($idPrj);
+        $locations = $this->roleService->getLocation();
+        $users = $this->userService->getAllUser();
+        $projectTypes = $this->projectTypeService->getProjectType();
+        $departments = $this->departmentService->getDepartment();
+        $projectById = $this->projectService->getProjectById($id);
+        $userProjects = $this->userHasProjectService->getUserHasPrjById($id);
+
         return view('home.add-project.edit-project', [
-            'getLocation' => $getLocation,
-            'getUsers' => $getUsers,
-            'getProjectType' => $getProjectType,
-            'getDepartment' => $getDepartment,
-            'getProjectById' => $getProjectById,
-            'getUserHasPrjById' => $getUserHasPrjById
+            'locations' => $locations,
+            'users' => $users,
+            'projectTypes' => $projectTypes,
+            'departments' => $departments,
+            'projectById' => $projectById,
+            'userProjects' => $userProjects,
         ]);
     }
 
     /**
      * update Project
+     *
      * @param Request $request
-     * @param $idPrj
+     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProjectRequest $request, $idPrj)
+    public function update(ProjectRequest $request, $id)
     {
         DB::beginTransaction();
         try {
-            $this->userHasProjectService->deleteUserHasProject($request, $idPrj);
-            $this->projectService->updateProject($request, $idPrj);
-            $this->userHasProjectService->update($request, $idPrj);
-            $this->userHasProjectService->createOrUpdate($request, $idPrj);
+            $this->userHasProjectService->deleteUserHasProject($request, $id);
+            $this->projectService->updateProject($request, $id);
+            $this->userHasProjectService->update($request, $id);
+            $this->userHasProjectService->createOrUpdate($request, $id);
             DB::commit();
             return redirect()->back();
         } catch (\Exception $exception) {
@@ -126,15 +133,17 @@ class ProjectController extends Controller
 
     /**
      * Delete project
+     *
      * @param Request $request
-     * @param $idPrj
+     * @param $id
      * @return void
      */
-    public function deletePrj(Request $request, $idPrj)
+    public function deletePrj(Request $request, $id)
     {
         try {
-            $this->projectService->deleteProject($idPrj);
-            $this->userHasProjectService->deleteUserHasProject($request, $idPrj);
+            $this->projectService->deleteProject($id);
+            $this->userHasProjectService->deleteUserHasProject($request, $id);
+
             return redirect()->back();
         } catch (\Exception $exception) {
             return redirect()->back();
@@ -143,16 +152,18 @@ class ProjectController extends Controller
 
     /**
      * Detail project
-     * @param $idPrj
+     *
+     * @param $id
      * @return void
      */
-    public function detail($idPrj)
+    public function detail($id)
     {
-        $detailPrj = $this->projectService->detail($idPrj);
-        $datailUserJoinPrj = $this->userHasProjectService->detail($idPrj);
+        $project = $this->projectService->detail($id);
+        $userProjects = $this->userHasProjectService->detail($id);
+
         return view('home.add-project.detail-project', [
-            'detailPrj' => $detailPrj,
-            'datailUserJoinPrj' => $datailUserJoinPrj,
+            'project' => $project,
+            'userProjects' => $userProjects,
         ]);
     }
 }

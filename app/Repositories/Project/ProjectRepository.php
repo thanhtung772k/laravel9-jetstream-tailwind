@@ -13,6 +13,7 @@ interface ProjectRepository extends RepositoryInterface
 {
     /**
      * index all project
+     *
      * @param $request
      * @return mixed
      */
@@ -20,13 +21,15 @@ interface ProjectRepository extends RepositoryInterface
 
     /**
      * Get index project by id
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function getProjectById($idPrj);
+    public function getProjectById($id);
 
     /**
      * create new project
+     *
      * @param $request
      * @return mixed
      */
@@ -34,29 +37,33 @@ interface ProjectRepository extends RepositoryInterface
 
     /**
      * updae project
+     *
      * @param $request
-     * @param $idPrj
+     * @param $id
      * @return void
      */
     public function updateProject($request, $idPr);
 
     /**
      * get project latest
+     *
      * @return mixed
      */
     public function getLastproject();
 
     /**
      * delete soft project
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function deleteProject($idPrj);
+    public function deleteProject($id);
 
     /**
      * detail information project
-     * @param $idPrj
+     *
+     * @param $id
      * @return mixed
      */
-    public function detail($idPrj);
+    public function detail($id);
 }

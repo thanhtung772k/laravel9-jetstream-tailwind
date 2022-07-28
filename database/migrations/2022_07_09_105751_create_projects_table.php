@@ -19,7 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('customer', 255)->nullable();
             $table->foreignId('project_type_id');
             $table->unsignedBigInteger('departments_id');
-            $table->integer('vale_contract')->nullable();
+            $table->integer('value_contract')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('status')->default(0);
