@@ -98,4 +98,16 @@ class UserService extends BaseService
     {
         return $this->repository->deleteUser($id);
     }
+
+    /**
+     * get all user
+     *
+     * @param $date
+     * @param $employee_code
+     * @return void
+     */
+    public function index($date, $employee_code)
+    {
+        return $this->repository->index($date, $employee_code);
+    }
 }

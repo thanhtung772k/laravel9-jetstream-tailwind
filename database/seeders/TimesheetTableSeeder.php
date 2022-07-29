@@ -34,7 +34,7 @@ class TimesheetTableSeeder extends Seeder
                 $start->addDay();
                 Timesheet::factory()->count(1)->create(['user_id' => $user->id, 'date' => now()->parse($dates[$i])->format("Y-m-d")]);
             }
-            UserDetail::factory()->create(['user_id' => $user->id]);
+            UserDetail::factory()->create(['user_id' => $user->id,'employee_code'=>$user->id]);
         });
     }
 }

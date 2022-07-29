@@ -139,4 +139,5 @@ return [
     'male' => 'Male',
     'female' => 'FeMale',
     'employee_leave' => 'Employee leave',
+    'employee_code' => 'Employee code'
 ];

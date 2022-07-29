@@ -148,17 +148,17 @@
 <div class="p-6  bg-white border-b border-gray-200">
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
-            <select class="form-control text-sm" id="FormControlSelect" name="paginate" onchange="this.form.submit()">
-                {{--                @foreach($paginate as $key => $value)--}}
-                {{--                    @if(app('request')->input('paginate') == $value)--}}
-                {{--                        @php--}}
-                {{--                            $select = 'selected';--}}
-                {{--                        @endphp--}}
-                {{--                    @else--}}
-                {{--                        {{$select = ''}}--}}
-                {{--                    @endif--}}
-                {{--                    <option value="{{$value}}" {{$select}}>{{$value}}</option>--}}
-                {{--                @endforeach--}}
+            <select class="form-control text-sm" name="paginate" onchange="this.form.submit()">
+                @foreach($paginate as $key => $value)
+                    @if(app('request')->input('paginate') == $value)
+                        @php
+                            $select = 'selected';
+                        @endphp
+                    @else
+                        {{$select = ''}}
+                    @endif
+                    <option value="{{$value}}" {{$select}}>{{$value}}</option>
+                @endforeach
             </select>
         </div>
         <div class="relative">
@@ -293,7 +293,7 @@
             </div>
         </form>
         @if(count($dataTimesheetApproval) > config('constant.default_number') )
-            <div class="flex justify-center">
+            <div class="flex justify-center pt-3.5">
             </div>
         @else
             <div class="flex justify-center">
