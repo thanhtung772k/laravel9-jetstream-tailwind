@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Kyslik\ColumnSortable\Sortable;
 
 
 class Timesheet extends Model
 {
     use HasFactory;
+    use Sortable;
 
     /**
      * The table associated with the model.
@@ -24,6 +26,16 @@ class Timesheet extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'date',
+        'check_in',
+        'check_out',
+        'actual_working_time',
+        'paid_working_time',
+        'note',
+        'user_id'
+    ];
+
+    public $sortable  = [
         'date',
         'check_in',
         'check_out',

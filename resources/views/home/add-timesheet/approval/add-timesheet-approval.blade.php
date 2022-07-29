@@ -251,10 +251,6 @@
                                 </tr>
                             @endforeach
                         @endif
-                    @else
-                        <div class="flex justify-center">
-                            @lang('lang.not_found')
-                        </div>
                     @endif
                     </tbody>
                 </table>
