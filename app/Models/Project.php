@@ -27,7 +27,7 @@ class Project extends Model
         'name',
         'customer',
         'project_type_id',
-        'departments_id',
+        'department_id',
         'value_contract',
         'start_date',
         'end_date',
@@ -42,7 +42,7 @@ class Project extends Model
 
     public function depart()
     {
-        return $this->belongsTo(Department::class, 'departments_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
 }

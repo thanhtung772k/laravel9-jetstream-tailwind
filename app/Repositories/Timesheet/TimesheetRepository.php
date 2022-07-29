@@ -14,9 +14,10 @@ interface TimesheetRepository extends RepositoryInterface
     /**
      * Index the repository
      *
+     * @param $id
      * @return mixed
      */
-    public function getTimesheet();
+    public function getTimesheet($id);
 
     /**
      * Search date the repository
@@ -33,9 +34,10 @@ interface TimesheetRepository extends RepositoryInterface
      *
      * @param $checkInDate
      * @param $checkInHour
+     * @param $id
      * @return mixed
      */
-    public function checkIndateTimesheet($checkInDate, $checkInHour);
+    public function checkIndateTimesheet($checkInDate, $checkInHour, $id);
 
     /**
      * checkout date the repository
@@ -43,9 +45,10 @@ interface TimesheetRepository extends RepositoryInterface
      * @param $checkInHour
      * @param $checkOutDate
      * @param $checkOutHour
+     * @param $userId
      * @return mixed
      */
-    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour);
+    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId);
 
     /**
      * create new date Timesheet
@@ -60,9 +63,10 @@ interface TimesheetRepository extends RepositoryInterface
      * Get timeshet by id the repository
      *
      * @param $timesheetID
+     * @param $userID
      * @return mixed
      */
-    public function getIDTimesheet($timesheetID);
+    public function getIDTimesheet($timesheetID, $userID);
 
     /**
      * get date timesheet now
@@ -89,12 +93,14 @@ interface TimesheetRepository extends RepositoryInterface
     /**
      * approval timesheet
      *
-     * @param $request
      * @param $actWorking
      * @param $paidWorking
+     * @param $timesheetID
+     * @param $checkInReq
+     * @param $checkOutReq
      * @return mixed
      */
-    public function approval($request, $actWorking, $paidWorking);
+    public function approval($actWorking, $paidWorking, $timesheetID, $checkInReq, $checkOutReq);
 
     /**
      * update many timesheets

@@ -89,7 +89,7 @@
                             <div class="header-search__text-date ">
                                 <select class="form-control text-sm" name="department">
                                     @foreach($departments as $department)
-                                        @if($projectById->departments_id == $department->id)
+                                        @if($projectById->department_id == $department->id)
                                             @php
                                                 $select = 'selected';
                                             @endphp

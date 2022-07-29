@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Services\AddTimesheet\AddTimesheetService;
 use App\Services\Timesheet\TimesheetService;
 use App\Services\User\UserService;
+use Illuminate\Support\Facades\Auth;
 use PHPUnit\Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -32,8 +33,9 @@ class AddTimesheetController extends Controller
      */
     public function insertAddTimesheet(Request $request, $timesheetID = null)
     {
+        $userID = Auth::id();
         if (isset($timesheetID)) {
-            $dataID = $this->timesheetService->getIDTimesheet($request->id);
+            $dataID = $this->timesheetService->getIDTimesheet($request->id, $userID);
         } else {
             $dataID = $this->timesheetService->dateTimesheetEarly($request->id);
         }
@@ -52,10 +54,14 @@ class AddTimesheetController extends Controller
      */
     public function listAddTimesheet(Request $request)
     {
+        $fromDate = $request->fromDate;
+        $toDate = $request->toDate;
         $dataAddTimesheet = $this->addTimeSheetService->getListAddTimesheet($request);
+        $paginateOption = config('constant.select_value');
         return view('home.add-timesheet.add-timesheet-list-dashboard', [
-            'dataAddTimesheet' => $dataAddTimesheet
-        ]);
+            'dataAddTimesheet' => $dataAddTimesheet,
+            'paginate' => $paginateOption,
+        ])->with(compact('fromDate', 'toDate'));
     }
 
     /**
@@ -156,10 +162,12 @@ class AddTimesheetController extends Controller
         $idName = $request->idName;
         $dataTimesheetApproval = $this->addTimeSheetService->getListApprovalTimesheet($request);
         $users = $this->userService->getUser();
+        $paginateOption = config('constant.select_value');
         return view('home.add-timesheet.approval.add-timesheet-approval-dashbroad', [
             'dataTimesheetApproval' => $dataTimesheetApproval,
             'users' => $users,
-        ]);
+            'paginate' => $paginateOption,
+        ])->with(compact('fromDate', 'toDate', 'idName'));
     }
 
     /**
@@ -188,7 +196,7 @@ class AddTimesheetController extends Controller
             if ($request->ajax()) {
                 if ($param == config('constant.status_agree')) {
                     $this->addTimeSheetService->update($request, $param);
-                    $this->timesheetService->approval($request);
+                    $this->timesheetService->approval($request->timesheetID, $request->checkInReq, $request->checkOutReq);
                 } elseif ($param == config('constant.status_reject')) {
                     $this->addTimeSheetService->update($request, $param);
                 } else {

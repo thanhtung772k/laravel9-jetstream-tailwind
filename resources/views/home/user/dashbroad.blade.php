@@ -17,7 +17,7 @@
                         </div>
                         <div class="row pb-4">
                             <div class="col-sm-2 header-search__text-date">
-                                <span class="text-sm">@lang('lang.id')</span>
+                                <span class="text-sm">@lang('lang.employee_code')</span>
                             </div>
                             <div class="col-sm-5 header-search__text-date">
                                 <div class="input-group date">

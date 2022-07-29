@@ -15,7 +15,7 @@ class CreateUserDetailsTable extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->string('member_id', 255);
+            $table->integer('employee_code');
             $table->date('date_of_birth');
             $table->string('home_town', 255)->nullable();
             $table->string('current_residence', 255)->nullable();
@@ -24,7 +24,7 @@ class CreateUserDetailsTable extends Migration
             $table->date('time_start');
             $table->string('member_company', 255);
             $table->unsignedBigInteger('position_id')->nullable();
-            $table->unsignedBigInteger('departments_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->string('japanese', 255)->nullable();
             $table->string('avatar', 255)->nullable();
@@ -46,7 +46,7 @@ class CreateUserDetailsTable extends Migration
 
         Schema::table('user_details', function($table) {
             $table->foreign('position_id')->references('id')->on('positions');
-            $table->foreign('departments_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('user_id')->references('id')->on('users');
         });

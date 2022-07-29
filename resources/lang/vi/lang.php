@@ -138,4 +138,5 @@ return [
     'male' => 'Nam',
     'female' => 'Nữ',
     'employee_leave' => 'Nhân viên nghỉ việc',
+    'employee_code' => 'Mã nhân trung'
 ];

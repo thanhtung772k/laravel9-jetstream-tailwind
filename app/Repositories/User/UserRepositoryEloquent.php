@@ -123,4 +123,24 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         )->delete();
     }
 
+    /**
+     * get all user
+     *
+     * @param $date
+     * @param $employee_code
+     * @return void
+     */
+    public function index($date, $employee_code)
+    {
+        return $this->model->join('timesheets', 'users.id', '=', 'timesheets.user_id')
+            ->join('user_details', 'users.id', '=', 'user_details.user_id')
+            ->select('timesheets.date',
+                'timesheets.id as time_id',
+                'timesheets.user_id as user_id',
+                'user_details.employee_code'
+            )->where([
+                ['timesheets.date', $date],
+                ['user_details.employee_code', $employee_code]
+            ])->get();
+    }
 }

@@ -40,13 +40,14 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     /**
      * Index the repository
      *
+     * @param $id
      * @return mixed
      */
-    public function getTimesheet()
+    public function getTimesheet($id)
     {
         return $this->model->select('*')
             ->where(
-                'user_id', Auth::id()
+                'user_id', $id
             )->get();
     }
 
@@ -72,14 +73,15 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      *
      * @param $checkInDate
      * @param $checkInHour
+     * @param $id
      * @return string
      */
-    public function checkIndateTimesheet($checkInDate, $checkInHour)
+    public function checkIndateTimesheet($checkInDate, $checkInHour, $id)
     {
         return $this->model->where(
             'date', $checkInDate
         )->where(
-            'user_id', Auth::id()
+            'user_id', $id
         )->update([
             'check_in' => $checkInHour
         ]);
@@ -106,16 +108,16 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      * @param $checkInHour
      * @param $checkOutDate
      * @param $checkOutHour
+     * @param $userId
      * @return string
      */
-    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour)
+    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId)
     {
         $getTimesheet = $this->updateTimesheet($checkInHour, $checkOutHour);
-
         return $this->model->where(
             'date', $checkOutDate
         )->where(
-            'user_id', Auth::id()
+            'user_id', $userId
         )->update([
             'check_out' => $checkOutHour,
             'actual_working_time' => $getTimesheet['actWorking'],
@@ -127,12 +129,12 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      * Get timeshet by id the repository
      *
      * @param $timesheetID
+     * @param $userID
      * @return \Illuminate\Http\RedirectResponse|mixed
      */
-    public function getIDTimesheet($timesheetID)
+    public function getIDTimesheet($timesheetID, $userID)
     {
         try {
-            $userID = Auth::id();
             return $this->model->where(
                 'user_id', $userID
             )->find($timesheetID);
@@ -185,16 +187,18 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
     /**
      * approval timesheet
      *
-     * @param $request
      * @param $actWorking
      * @param $paidWorking
+     * @param $timesheetID
+     * @param $checkInReq
+     * @param $checkOutReq
      * @return mixed
      */
-    public function approval($request, $actWorking, $paidWorking)
+    public function approval($actWorking, $paidWorking, $timesheetID, $checkInReq, $checkOutReq)
     {
-        return $this->model->find($request->timesheetID)->update([
-            'check_in' => $request->checkInReq,
-            'check_out' => $request->checkOutReq,
+        return $this->model->find($timesheetID)->update([
+            'check_in' => $checkInReq,
+            'check_out' => $checkOutReq,
             'actual_working_time' => $actWorking,
             'paid_working_time' => $paidWorking,
         ]);

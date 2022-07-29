@@ -7,21 +7,21 @@
     <div class="flex justify-between">
         <div class="form-group w-[72px] ">
             <select class="form-control text-sm" id="FormControlSelect" name="paginate" onchange="this.form.submit()">
-{{--                @foreach($paginate as $key => $value)--}}
-{{--                    @if(app('request')->input('paginate') == $value)--}}
-{{--                        @php--}}
-{{--                            $select = 'selected';--}}
-{{--                        @endphp--}}
-{{--                    @else--}}
-{{--                        {{$select = ''}}--}}
-{{--                    @endif--}}
-{{--                    <option value="{{$value}}" {{$select}}>{{$value}}</option>--}}
-{{--                @endforeach--}}
+                @foreach($paginate as $key => $value)
+                    @if(app('request')->input('paginate') == $value)
+                        @php
+                            $select = 'selected';
+                        @endphp
+                    @else
+                        {{$select = ''}}
+                    @endif
+                    <option value="{{$value}}" {{$select}}>{{$value}}</option>
+                @endforeach
             </select>
         </div>
         <div class="relative">
             <div class="col-sm- mt-[24px] float-right flex whitespace-nowrap">
-                <span class="text-sm text-right absolute right-2.5">@lang('lang.showing') 1 @lang('lang.to') 10 @lang('lang.of') 25 @lang('lang.entries')</span>
+                <span class="text-sm text-right absolute right-2.5">@lang('lang.showing') {{$dataAddTimesheet->firstItem()}} @lang('lang.to') {{$dataAddTimesheet->lastItem()}} @lang('lang.of') {{count($dataAddTimesheet)}} @lang('lang.entries')</span>
             </div>
         </div>
 
@@ -75,7 +75,7 @@
                                     @endif
                                 </td>
 
-                                <td class="row min-w-[200px]">
+                                <td class="row min-w-[200px] flex justify-center">
                                     @if($value->status == 0)
                                         <a href="{{route('detail_addtimesheet', $value->id)}}" class="text-xs btn btn-outline-primary ">@lang('lang.detail')</a>
                                         <a href="{{route('edit_addtimesheet', $value->id)}}" class=" text-xs btn btn-outline-info mx-[4px]">@lang('lang.edit')</a>
@@ -92,8 +92,13 @@
             </div>
         </div>
             @if(count($dataAddTimesheet) > 0 )
-                <div class="flex justify-center">
-                   </div>
+                <div class="flex justify-center pt-3.5">
+                    @php
+                        $fromDate ? $fromDate : '';
+                        $toDate ? $toDate : '';
+                    @endphp
+                    {{ $dataAddTimesheet->appends([ 'fromDate' => $fromDate,'toDate' => $toDate,'paginate' => app('request')->input('paginate') ])->links("pagination::bootstrap-4") }}
+               </div>
             @else
             <div class="flex justify-center">
                 @lang('lang.not_found')

@@ -65,4 +65,12 @@ interface UserRepository extends RepositoryInterface
      */
     public function deleteUser($id);
 
+    /**
+     * get all user
+     *
+     * @param $date
+     * @param $employee_code
+     * @return void
+     */
+    public function index($date, $employee_code);
 }

@@ -15,12 +15,12 @@ class UserDetailFactory extends Factory
     public function definition()
     {
         return [
-            'member_id' => $this->faker->uuid(),
+            'employee_code' => $this->faker->uuid(),
             'date_of_birth' => $this->faker->date(),
             'time_start' => now(),
             'member_company' => $this->faker->company(),
             'position_id' => rand(1,2),
-            'departments_id' => rand(1,2),
+            'department_id' => rand(1,2),
             'role_id' => rand(1,2),
             'phone' => $this->faker->e164PhoneNumber(),
             'passport' => $this->faker->creditCardNumber(),

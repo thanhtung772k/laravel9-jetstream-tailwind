@@ -78,7 +78,7 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
                 'add_timesheets.*',
                 'timesheets.date',
                 'users.name'
-            )->get();
+            )->paginate($request->paginate ?: config('constant.pagination_records'));
     }
 
     /**
