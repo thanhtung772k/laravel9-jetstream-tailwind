@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Services\UserDetail\UserDetailService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kyslik\ColumnSortable\Sortable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,6 +23,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use HasRoles;
     use SoftDeletes;
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +36,12 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin'
+    ];
+
+    protected $sortable = [
+        'id',
+        'name',
+        'email'
     ];
 
     /**
@@ -68,5 +77,10 @@ class User extends Authenticatable
     public function project()
     {
         return $this->hasMany(Project::class, 'project_id');
+    }
+
+    public function detail()
+    {
+        return $this->hasOne(UserDetail::class);
     }
 }

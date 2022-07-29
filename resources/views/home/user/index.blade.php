@@ -11,14 +11,14 @@
                     <thead>
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <th scope="col">#</th>
-                        <th scope="col">@lang('lang.id')</th>
-                        <th scope="col">@lang('lang.name')</th>
-                        <th scope="col">@lang('lang.email')</th>
+                        <th scope="col">@sortablelink('member_id',  __('lang.id'))</th>
+                        <th scope="col">@sortablelink('name', __('lang.name'))</th>
+                        <th scope="col">@sortablelink('email', __('lang.email'))</th>
                         <th scope="col">@lang('lang.phone')</th>
                         <th scope="col">@lang('lang.department')</th>
                         <th scope="col">@lang('lang.position')</th>
                         <th scope="col">@lang('lang.location')</th>
-                        <th scope="col">@lang('lang.start_date')</th>
+                        <th scope="col">@sortablelink('time_start', __('lang.start_date'))</th>
                         <th scope="col">@lang('lang.action')</th>
                     </tr>
                     </thead>

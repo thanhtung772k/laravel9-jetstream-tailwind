@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kyslik\ColumnSortable\Sortable;
 
 class UserDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Sortable;
 
     /**
      * The table associated with the model.
@@ -51,6 +53,21 @@ class UserDetail extends Model
         'gender'
     ];
 
+    protected $sortable = [
+        'member_id',
+        'date_of_birth',
+    ];
+
+    public function nameSortable($query, $direction)
+    {
+       return $query->orderBy('name', $direction);
+    }
+
+    public function emailSortable($query, $direction)
+    {
+        return $query->orderBy('email', $direction);
+    }
+
     public function depart()
     {
         return $this->belongsTo(Department::class, 'departments_id');
@@ -58,7 +75,7 @@ class UserDetail extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function position()
