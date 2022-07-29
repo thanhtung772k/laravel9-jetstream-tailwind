@@ -80,23 +80,25 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
      */
     public function getAll($request)
     {
-        return $this->model->join('users', 'user_details.user_id', '=', 'users.id')
+        return $this->model
+            ->join('users', 'user_details.user_id', '=', 'users.id')
             ->join('departments', 'user_details.departments_id', '=', 'departments.id')
             ->select(
                 'user_details.*',
                 'user_details.id as userDetailId',
                 'users.*'
-            )->where(
+            )
+            ->where(
                 'user_details.member_id', 'like', '%' . $request->user_id . '%'
             )->where(
                 'users.name', 'like', '%' . $request->user_name . '%'
             )->where(function ($query) use ($request) {
                 return $request->location ? $query->where('role_id', $request->location) : '';
-            })->where(function ($query) use ($request) {
+            })
+            ->where(function ($query) use ($request) {
                 return $request->dept ? $query->where('departments_id', $request->dept) : '';
-            })->orderBy(
-                'member_id', 'asc'
-            )->paginate(config('constant.PAGINATE_VALUE'));
+            })
+            ->sortable()->paginate(config('constant.PAGINATE_VALUE'));
     }
 
     /**

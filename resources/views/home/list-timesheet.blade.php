@@ -58,7 +58,7 @@
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <th scope="col">#</th>
                         <th scope="col">
-                            <i class="fa-solid fa-caret-down"></i>
+                            @sortablelink('date', __('lang.date'))
                         </th>
                         <th scope="col">@lang('lang.dayofweek')</th>
                         <th scope="col">@lang('lang.checkin')</th>
