@@ -53,12 +53,12 @@ class TimesheetService extends BaseService
      *
      * @param $checkInDate
      * @param $checkInHour
-     * @param $userId
+     * @param $id
      * @return mixed
      */
-    public function checkinDateTimesheet($checkInDate, $checkInHour, $userId)
+    public function checkIndateTimesheet($checkInDate, $checkInHour, $id)
     {
-        return $this->repository->checkinDateTimesheet($checkInDate, $checkInHour, $userId);
+        return $this->repository->checkIndateTimesheet($checkInDate, $checkInHour, $id);
     }
 
     /**
@@ -70,7 +70,7 @@ class TimesheetService extends BaseService
      * @param $userId
      * @return mixed
      */
-    public function checkoutDateTimesheet($timesheets, $checkOutDate, $checkOutHour, $userId)
+    public function checkOutdateTimesheet($timesheets, $checkOutDate, $checkOutHour, $userId)
     {
         //get check_in from db
         foreach ($timesheets as $value) {
@@ -78,19 +78,19 @@ class TimesheetService extends BaseService
                 $checkInHour = $value->check_in;
             }
         }
-        return $this->repository->checkoutDateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId);
+        return $this->repository->checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId);
     }
 
     /**
      * create new date Timesheet after 0h
      *
      * @param $date
-     * @param $userId
+     * @param $id
      * @return mixed
      */
-    public function createDate($date, $userId)
+    public function createDate($date, $id)
     {
-        return $this->repository->createDate($date, $userId);
+        return $this->repository->createDate($date, $id);
     }
 
     /**
@@ -100,10 +100,10 @@ class TimesheetService extends BaseService
      * @param $userID
      * @return mixed
      */
-    public function timesheetById($timesheetID, $userID)
+    public function getIDTimesheet($timesheetID, $userID)
     {
         try {
-            return $this->repository->timesheetById($timesheetID, $userID);
+            return $this->repository->getIDTimesheet($timesheetID, $userID);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

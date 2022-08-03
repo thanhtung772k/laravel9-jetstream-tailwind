@@ -180,7 +180,7 @@ class AddTimesheetRepositoryEloquent extends BaseRepository implements AddTimesh
             )->where([
                 ['add_timesheets.created_at', '>=', $fromDate],
                 ['add_timesheets.created_at', '<=', $toDate],
-                ['timesheets.user_id', 'like', '%' . $request->idOrName . '%'],
+                ['timesheets.user_id', 'like', '%' . $request->idName . '%'],
             ])->get();
     }
 

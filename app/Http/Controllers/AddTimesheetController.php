@@ -35,7 +35,7 @@ class AddTimesheetController extends Controller
     {
         $userID = Auth::id();
         if (isset($timesheetID)) {
-            $dataID = $this->timesheetService->timesheetById($request->id, $userID);
+            $dataID = $this->timesheetService->getIDTimesheet($request->id, $userID);
         } else {
             $dataID = $this->timesheetService->dateTimesheetEarly($request->id);
         }
@@ -159,7 +159,7 @@ class AddTimesheetController extends Controller
     {
         $fromDate = $request->fromDate;
         $toDate = $request->toDate;
-        $idOrName = $request->idOrName;
+        $idName = $request->idName;
         $dataTimesheetApproval = $this->addTimeSheetService->getListApprovalTimesheet($request);
         $users = $this->userService->getUser();
         $paginateOption = config('constant.select_value');
@@ -167,7 +167,7 @@ class AddTimesheetController extends Controller
             'dataTimesheetApproval' => $dataTimesheetApproval,
             'users' => $users,
             'paginate' => $paginateOption,
-        ])->with(compact('fromDate', 'toDate', 'idOrName'));
+        ])->with(compact('fromDate', 'toDate', 'idName'));
     }
 
     /**
