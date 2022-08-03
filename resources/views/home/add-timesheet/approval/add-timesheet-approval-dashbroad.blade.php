@@ -16,7 +16,7 @@
                                 <div class="header-search__date">
                                     <section>
                                         <div class="input-group date">
-                                            <input class="form-control" name="idName">
+                                            <input class="form-control" name="idOrName">
                                         </div>
                                     </section>
                                 </div>

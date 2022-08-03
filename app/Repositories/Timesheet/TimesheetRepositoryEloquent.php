@@ -73,15 +73,15 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      *
      * @param $checkInDate
      * @param $checkInHour
-     * @param $id
+     * @param $userId
      * @return string
      */
-    public function checkIndateTimesheet($checkInDate, $checkInHour, $id)
+    public function checkinDateTimesheet($checkInDate, $checkInHour, $userId)
     {
         return $this->model->where(
             'date', $checkInDate
         )->where(
-            'user_id', $id
+            'user_id', $userId
         )->update([
             'check_in' => $checkInHour
         ]);
@@ -111,7 +111,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      * @param $userId
      * @return string
      */
-    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId)
+    public function checkoutDateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId)
     {
         $getTimesheet = $this->updateTimesheet($checkInHour, $checkOutHour);
         return $this->model->where(
@@ -132,7 +132,7 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      * @param $userID
      * @return \Illuminate\Http\RedirectResponse|mixed
      */
-    public function getIDTimesheet($timesheetID, $userID)
+    public function timesheetById($timesheetID, $userID)
     {
         try {
             return $this->model->where(

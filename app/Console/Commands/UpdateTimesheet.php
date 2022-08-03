@@ -49,11 +49,11 @@ class UpdateTimesheet extends Command
         DB::beginTransaction();
         try {
             $timekeepings = $timekeepingService->groupBy();
-            $maxAndMin = ['max', 'min'];
+            $maxAndMins = ['max', 'min'];
             //Group by employee_code for status = 0
-            foreach ($maxAndMin as $mm) {
+            foreach ($maxAndMins as $maxAndMin) {
                 foreach ($timekeepings as $key => $timekeeping) {
-                    $maxAndMinSums[$key][$mm] = $timekeepingService->maxOrMin($key, $mm);
+                    $maxAndMinSums[$key][$maxAndMin] = $timekeepingService->maxOrMin($key, $maxAndMin);
                 }
             }
             foreach ($maxAndMinSums as $key => $maxAndMinSum) {
@@ -72,19 +72,19 @@ class UpdateTimesheet extends Command
                     //Update status = 1
                     $timekeepingService->updateStatus($key);
                     //get data timesheet by id and userID
-                    $timesheetById = $timesheetService->getIDTimesheet($value->time_id, $value->user_id);
+                    $timesheetById = $timesheetService->timesheetById($value->time_id, $value->user_id);
                     // Min = Max (only 1 data)
                     if (isset($minMaxValueToSec)) {
                         //checkIn = null
                         if (!isset($timesheetById->check_in)) {
                             //Checkout = null
                             if (!isset($timesheetById->check_out)) {
-                                $timesheetService->checkIndateTimesheet($date, $minValue, $timesheetById->user_id);
+                                $timesheetService->checkinDateTimesheet($date, $minValue, $timesheetById->user_id);
                             } else {
                                 $checkoutToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_out));
                                 if ($minMaxValueToSec > $checkoutToSec) {
-                                    $timesheet = $timesheetService->getTimesheet($value->user_id);
-                                    $timesheetService->checkOutdateTimesheet($timesheet, $date, $minValue, $timesheetById->user_id);
+                                    $timesheets = $timesheetService->getTimesheet($value->user_id);
+                                    $timesheetService->checkoutDateTimesheet($timesheets, $date, $minValue, $timesheetById->user_id);
                                 } else {
                                     $timesheetService->approval($timesheetById->id, $minValue, $timesheetById->check_out);
                                 }
