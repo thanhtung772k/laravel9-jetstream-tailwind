@@ -21,10 +21,10 @@ interface TimekeepingRepository extends RepositoryInterface
     /**
      * get max or min timekeeping
      *
-     * @param $id
+     * @param $employeeCode
      * @return mixed
      */
-    public function maxOrMin($id, $method);
+    public function maxOrMin($employeeCode, $method);
 
     /**
      * update status

@@ -33,12 +33,14 @@ class TimekeepingService extends BaseService
     }
 
     /**
-     * @param $id
+     * select min and max
+     *
+     * @param $employeeCode
      * @return mixed
      */
-    public function maxOrMin($id, $method)
+    public function maxOrMin($employeeCode, $method)
     {
-        return $this->repository->maxOrMin($id, $method);
+        return $this->repository->maxOrMin($employeeCode, $method);
     }
 
     /**

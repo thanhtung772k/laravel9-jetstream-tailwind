@@ -45,10 +45,10 @@ class TimesheetController extends Controller
     public function checkIn(Request $request)
     {
         try {
-            $id = Auth::id();
+            $userId = Auth::id();
             $checkInDate = $request->input('checkin_date');
             $checkInHour = now()->format('H:i:s');
-            $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour, $id);
+            $this->timesheetService->checkinDateTimesheet($checkInDate, $checkInHour, $userId);
 
             return redirect()->back();
         } catch (\Exception $e) {
@@ -69,7 +69,7 @@ class TimesheetController extends Controller
             $checkOutDate = $request->input('checkout_date');
             $checkOutHour = now()->format('H:i:s');
             $timesheet = $this->timesheetService->getTimesheet($userId);
-            $this->timesheetService->checkOutdateTimesheet($timesheet, $checkOutDate, $checkOutHour, $userId);
+            $this->timesheetService->checkoutDateTimesheet($timesheet, $checkOutDate, $checkOutHour, $userId);
 
             return redirect()->back();
         } catch (\Exception $e) {

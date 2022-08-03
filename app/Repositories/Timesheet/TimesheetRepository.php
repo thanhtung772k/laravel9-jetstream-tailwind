@@ -34,10 +34,10 @@ interface TimesheetRepository extends RepositoryInterface
      *
      * @param $checkInDate
      * @param $checkInHour
-     * @param $id
+     * @param $userId
      * @return mixed
      */
-    public function checkIndateTimesheet($checkInDate, $checkInHour, $id);
+    public function checkinDateTimesheet($checkInDate, $checkInHour, $userId);
 
     /**
      * checkout date the repository
@@ -48,16 +48,16 @@ interface TimesheetRepository extends RepositoryInterface
      * @param $userId
      * @return mixed
      */
-    public function checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId);
+    public function checkoutDateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId);
 
     /**
      * create new date Timesheet
      *
      * @param $date
-     * @param $id
+     * @param $userId
      * @return mixed
      */
-    public function createDate($date, $id);
+    public function createDate($date, $userId);
 
     /**
      * Get timeshet by id the repository
@@ -66,7 +66,7 @@ interface TimesheetRepository extends RepositoryInterface
      * @param $userID
      * @return mixed
      */
-    public function getIDTimesheet($timesheetID, $userID);
+    public function timesheetById($timesheetID, $userID);
 
     /**
      * get date timesheet now
