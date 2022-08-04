@@ -69,8 +69,8 @@ interface UserRepository extends RepositoryInterface
      * get all user
      *
      * @param $date
-     * @param $employee_code
+     * @param $employeeCode
      * @return void
      */
-    public function index($date, $employee_code);
+    public function index($date, $employeeCode);
 }

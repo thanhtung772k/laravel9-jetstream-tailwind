@@ -72,9 +72,10 @@ interface TimesheetRepository extends RepositoryInterface
      * get date timesheet now
      *
      * @param $dateTime
+     * @param $userID
      * @return mixed
      */
-    public function dateTimesheet($dateTime);
+    public function dateTimesheet($dateTime, $userID);
 
     /**
      * get date timesheet early

@@ -120,7 +120,7 @@ class AddTimesheetController extends Controller
     public function updateAddTimesheet($addTimeID, Request $request)
     {
         try {
-            $dateTimesheet = $this->timesheetService->dateTimesheet($request->timesheet_date);
+            $dateTimesheet = $this->timesheetService->dateTimesheet($request->timesheet_date, Auth::id());
             $addTimeId = $dateTimesheet->id;
             $this->addTimeSheetService->updateAddTimesheet($addTimeId, $request);
             return redirect()->route('get_create_addtimesheet');

@@ -127,10 +127,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      * get all user
      *
      * @param $date
-     * @param $employee_code
+     * @param $employeeCode
      * @return void
      */
-    public function index($date, $employee_code)
+    public function index($date, $employeeCode)
     {
         return $this->model->join('timesheets', 'users.id', '=', 'timesheets.user_id')
             ->join('user_details', 'users.id', '=', 'user_details.user_id')
@@ -140,7 +140,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 'user_details.employee_code'
             )->where([
                 ['timesheets.date', $date],
-                ['user_details.employee_code', $employee_code]
+                ['user_details.employee_code', $employeeCode]
             ])->get();
     }
 }

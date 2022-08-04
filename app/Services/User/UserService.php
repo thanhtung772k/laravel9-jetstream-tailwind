@@ -103,11 +103,11 @@ class UserService extends BaseService
      * get all user
      *
      * @param $date
-     * @param $employee_code
+     * @param $employeeCode
      * @return void
      */
-    public function index($date, $employee_code)
+    public function index($date, $employeeCode)
     {
-        return $this->repository->index($date, $employee_code);
+        return $this->repository->index($date, $employeeCode);
     }
 }

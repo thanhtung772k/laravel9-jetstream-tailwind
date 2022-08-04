@@ -25,20 +25,12 @@ class TimekeepingService extends BaseService
     /**
      * group by timekeeping by eployee_code
      *
+     * @param $code
      * @return void
      */
-    public function groupBy()
+    public function groupBy($code)
     {
-        return $this->repository->groupBy();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function maxOrMin($id, $method)
-    {
-        return $this->repository->maxOrMin($id, $method);
+        return $this->repository->groupBy($code);
     }
 
     /**

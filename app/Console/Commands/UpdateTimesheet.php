@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\Timekeeping\TimekeepingService;
+use App\Services\UserDetail\UserDetailService;
 use Illuminate\Console\Command;
 use App\Services\User\UserService;
 use App\Services\Timesheet\TimesheetService;
@@ -42,117 +43,44 @@ class UpdateTimesheet extends Command
      *
      * @param UserService $userService
      * @param TimesheetService $timesheetService
+     * @param TimekeepingService $timekeepingService
+     * @param UserDetailService $userDetailService
      * @return int
      */
-    public function handle(UserService $userService, TimesheetService $timesheetService, TimekeepingService $timekeepingService)
+    public function handle(UserService $userService, TimesheetService $timesheetService, TimekeepingService $timekeepingService, UserDetailService $userDetailService)
     {
         DB::beginTransaction();
         try {
-            $timekeepings = $timekeepingService->groupBy();
-            $maxAndMin = ['max', 'min'];
-            //Group by employee_code for status = 0
-            foreach ($maxAndMin as $mm) {
-                foreach ($timekeepings as $key => $timekeeping) {
-                    $maxAndMinSums[$key][$mm] = $timekeepingService->maxOrMin($key, $mm);
-                }
-            }
-            foreach ($maxAndMinSums as $key => $maxAndMinSum) {
-                $date = now()->parse($maxAndMinSum['min'])->format('Y-m-d');
-                //Min timesheet
-                $minValue = now()->parse($maxAndMinSum['min'])->format('H:i:s');
-                $minValueToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($minValue));
-                //Max timesheet
-                $maxValue = now()->parse($maxAndMinSum['max'])->format('H:i:s');
-                $maxValueToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($maxValue));
-                //only 1 data => min=max
-                if ($minValueToSec == $maxValueToSec) {
-                    $minMaxValueToSec = $minValueToSec;
-                }
-                foreach ($userService->index($date, $key) as $value) {
-                    //Update status = 1
-                    $timekeepingService->updateStatus($key);
-                    //get data timesheet by id and userID
-                    $timesheetById = $timesheetService->getIDTimesheet($value->time_id, $value->user_id);
-                    // Min = Max (only 1 data)
-                    if (isset($minMaxValueToSec)) {
-                        //checkIn = null
-                        if (!isset($timesheetById->check_in)) {
-                            //Checkout = null
-                            if (!isset($timesheetById->check_out)) {
-                                $timesheetService->checkIndateTimesheet($date, $minValue, $timesheetById->user_id);
-                            } else {
-                                $checkoutToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_out));
-                                if ($minMaxValueToSec > $checkoutToSec) {
-                                    $timesheet = $timesheetService->getTimesheet($value->user_id);
-                                    $timesheetService->checkOutdateTimesheet($timesheet, $date, $minValue, $timesheetById->user_id);
+            $users = $userService->getAllUser();
+            foreach ($users as $user) {
+                $userDetail = $userDetailService->detail($user->id);
+                if (isset($userDetail)) {
+                    $code = $userDetail->employee_code;
+                    $dateTimekeeping = $timekeepingService->groupBy($code);
+                    if (count($dateTimekeeping) > 0) {
+                        $min = min($dateTimekeeping);
+                        $max = max($dateTimekeeping);
+                        $date = now()->format('Y-m-d');
+                        $timesheet = $timesheetService->dateTimesheet($date, $user->id);
+                        $minTime = now()->parse($min)->format('H:i:s');
+                        $maxTime = now()->parse($max)->format('H:i:s');
+                        if ($min == $max) {
+                            if ($date == now()->parse($min)->format('Y-m-d')) {
+                                if (!isset($timesheet->check_in) && !isset($timesheet->check_out)) {
+                                    $timesheetService->checkIndateTimesheet($date, $minTime, $timesheet->user_id);
                                 } else {
-                                    $timesheetService->approval($timesheetById->id, $minValue, $timesheetById->check_out);
-                                }
-                            }
-                            //checkin != null
-                        } else {
-                            $checkinToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_in));
-                            if (!isset($timesheetById->check_out)) {
-                                //checkout = null
-                                if ($minMaxValueToSec < $checkinToSec) {
-                                    $timesheetService->approval($timesheetById->id, $minValue, $timesheetById->check_in);
-                                } else {
-                                    $timesheetService->approval($timesheetById->id, $timesheetById->check_in, $minValue);
-                                }
-                            } else {
-                                $checkoutToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_out));
-                                //MinMax < checkIn < checkout
-                                if ($minMaxValueToSec < $checkinToSec) {
-                                    $timesheetService->approval($timesheetById->id, $minValue, $timesheetById->check_out);
-                                    // checkIn < checkout < MinMax
-                                } else if ($minMaxValueToSec > $checkoutToSec) {
-                                    $timesheetService->approval($timesheetById->id, $timesheetById->check_in, $minValue);
-                                    //checkIn < MinMax < checkout
-                                } else {
-                                    $timesheetService->approval($timesheetById->id, $timesheetById->check_in, $timesheetById->check_out);
-                                }
-                            }
-                        }
-                        //Min != Max (2 or more data )
-                    } else {
-                        //Checkout = null
-                        if (!isset($timesheetById->check_in)) {
-                            if (!isset($timesheetById->check_out)) {
-                                $timesheetService->approval($timesheetById->id, $minValue, $maxValue);
-                            } else {
-                                $checkoutToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_out));
-                                if ($maxValueToSec > $checkoutToSec) {
-                                    $timesheetService->approval($timesheetById->id, $minValue, $maxValue);
-                                } else {
-                                    $timesheetService->approval($timesheetById->id, $minValue, $timesheetById->check_out);
+                                    $value = $this->checkTimesheet($minTime, $maxTime, $timesheet->check_in, $timesheet->check_out);
+                                    $timesheetService->approval($timesheet->id, $value['Checkin'], $value['Checkout']);
                                 }
                             }
                         } else {
-                            $checkinToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_in));
-                            if (!isset($timesheetById->check_out)) {
-                                if ($minValueToSec < $checkinToSec) {
-                                    $timesheetService->approval($timesheetById->id, $minValue, $maxValue);
-                                } else {
-                                    $timesheetService->approval($timesheetById->id, $timesheetById->check_in, $maxValue);
-                                }
-                            } else {
-                                $checkoutToSec = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($timesheetById->check_out));
-                                if ($minValueToSec < $checkinToSec) {
-                                    if ($maxValueToSec > $checkoutToSec) {
-                                        $timesheetService->approval($timesheetById->id, $minValue, $maxValue);
-                                    } else {
-                                        $timesheetService->approval($timesheetById->id, $minValue, $timesheetById->check_out);
-                                    }
-                                } else {
-                                    if ($maxValueToSec > $checkoutToSec) {
-                                        $timesheetService->approval($timesheetById->id, $timesheetById->check_in, $maxValue);
-                                    } else {
-                                        $timesheetService->approval($timesheetById->id, $timesheetById->check_in, $timesheetById->check_out);
-                                    }
-                                }
+                            if ($date == now()->parse($min)->format('Y-m-d')) {
+                                $value = $this->checkTimesheet($minTime, $maxTime, $timesheet->check_in, $timesheet->check_out);
+                                $timesheetService->approval($timesheet->id, $value['Checkin'], $value['Checkout']);
                             }
                         }
                     }
+                    $timekeepingService->updateStatus($code);
                 }
             }
             DB::commit();

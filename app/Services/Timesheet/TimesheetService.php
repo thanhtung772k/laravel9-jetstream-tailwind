@@ -113,11 +113,12 @@ class TimesheetService extends BaseService
      * get date timesheet now
      *
      * @param $dateTime
+     * @param $userID
      * @return mixed
      */
-    public function dateTimesheet($dateTime)
+    public function dateTimesheet($dateTime, $userID)
     {
-        return $this->repository->dateTimesheet($dateTime);
+        return $this->repository->dateTimesheet($dateTime, $userID);
     }
 
     /**

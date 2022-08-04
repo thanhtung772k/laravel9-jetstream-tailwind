@@ -36,29 +36,15 @@ class TimekeepingRepositoryEloquent extends BaseRepository implements Timekeepin
     /**
      * group by timekeeping by eployee_code
      *
+     * @param $code
      * @return void
      */
-    public function groupBy()
+    public function groupBy($code)
     {
-        return $this->model->where(
-            'status', config('constant.VALUE_DEFAULT_ZERO')
-        )->pluck('id', 'employee_code');
-    }
-
-    /**
-     * select min or max
-     *
-     * @param $id
-     * @param $method
-     * @return mixed
-     */
-    public function maxOrMin($id, $method)
-    {
-        return $this->model->where(
-            'employee_code', $id
-        )->where(
-            'status', config('constant.VALUE_DEFAULT_ZERO')
-        )->$method('date_time');
+        return $this->model->where([
+            ['employee_code', $code],
+            ['status', 0]
+        ])->pluck('date_time')->toArray();
     }
 
     /**
@@ -72,7 +58,7 @@ class TimekeepingRepositoryEloquent extends BaseRepository implements Timekeepin
         return $this->model->where(
             'employee_code', $employeeCode
         )->update([
-            'status' => config('constant.VALUE_DEFAULT_ONE')
+            'status' => 1
         ]);
     }
 }

@@ -14,17 +14,10 @@ interface TimekeepingRepository extends RepositoryInterface
     /**
      * group by timekeeping by eployee_code
      *
+     * @param $code
      * @return void
      */
-    public function groupBy();
-
-    /**
-     * get max or min timekeeping
-     *
-     * @param $id
-     * @return mixed
-     */
-    public function maxOrMin($id, $method);
+    public function groupBy($code);
 
     /**
      * update status

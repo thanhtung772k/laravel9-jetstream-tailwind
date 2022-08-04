@@ -148,11 +148,11 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
      * get timesheet id
      *
      * @param $dateTime
+     * @param $userID
      * @return mixed
      */
-    public function dateTimesheet($dateTime)
+    public function dateTimesheet($dateTime, $userID)
     {
-        $userID = Auth::id();
         return $this->model->where(
             'date', $dateTime
         )->where(

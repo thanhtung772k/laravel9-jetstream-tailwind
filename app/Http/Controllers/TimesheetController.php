@@ -21,11 +21,12 @@ class TimesheetController extends Controller
      */
     public function index(Request $request)
     {
+        $userID = Auth::id();
         $fromDate = $request->fromDate;
         $toDate = $request->toDate;
         $paginateOption = config('constant.select_value');
         $data = $this->timesheetService->searchDateTimesheet($request);
-        $dateNow = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'));
+        $dateNow = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'), $userID);
         $dataCount = $this->timesheetService->countTimesheet();
         $disabled = $this->timesheetService->dateTimesheetEarly();
         $disabledCheckin = $dateNow ?: $disabled;
