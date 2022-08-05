@@ -110,4 +110,14 @@ class UserService extends BaseService
     {
         return $this->repository->index($date, $employeeCode);
     }
+
+    /**
+     * join user detail
+     *
+     * @return mixed
+     */
+    public function joinUserDetail()
+    {
+        return $this->repository->joinUserDetail();
+    }
 }

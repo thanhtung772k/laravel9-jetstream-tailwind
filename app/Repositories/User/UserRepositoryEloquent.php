@@ -143,4 +143,17 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 ['user_details.employee_code', $employeeCode]
             ])->get();
     }
+
+    /**
+     * join user detail
+     *
+     * @return mixed
+     */
+    public function joinUserDetail()
+    {
+        return $this->model->leftJoin('user_details', 'users.id', '=', 'user_details.user_id')
+            ->select('users.*',
+                'user_details.employee_code'
+            )->get();
+    }
 }

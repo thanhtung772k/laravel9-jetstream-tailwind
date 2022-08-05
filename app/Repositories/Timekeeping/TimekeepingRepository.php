@@ -17,7 +17,7 @@ interface TimekeepingRepository extends RepositoryInterface
      * @param $code
      * @return void
      */
-    public function groupBy($code);
+    public function groupDate($code);
 
     /**
      * update status

@@ -28,9 +28,9 @@ class TimekeepingService extends BaseService
      * @param $code
      * @return void
      */
-    public function groupBy($code)
+    public function groupDate($code)
     {
-        return $this->repository->groupBy($code);
+        return $this->repository->groupDate($code);
     }
 
     /**

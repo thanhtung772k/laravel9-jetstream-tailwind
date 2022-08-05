@@ -73,4 +73,11 @@ interface UserRepository extends RepositoryInterface
      * @return void
      */
     public function index($date, $employeeCode);
+
+    /**
+     * join user detail
+     *
+     * @return mixed
+     */
+    public function joinUserDetail();
 }

@@ -39,11 +39,11 @@ class TimekeepingRepositoryEloquent extends BaseRepository implements Timekeepin
      * @param $code
      * @return void
      */
-    public function groupBy($code)
+    public function groupDate($code)
     {
         return $this->model->where([
             ['employee_code', $code],
-            ['status', 0]
+            ['status', config('constant.STATUS_NOT_UPDATED')]
         ])->pluck('date_time')->toArray();
     }
 
@@ -58,7 +58,7 @@ class TimekeepingRepositoryEloquent extends BaseRepository implements Timekeepin
         return $this->model->where(
             'employee_code', $employeeCode
         )->update([
-            'status' => 1
+            'status' => config('constant.STATUS_UPDATE_DONE')
         ]);
     }
 }

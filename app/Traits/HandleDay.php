@@ -84,8 +84,8 @@ trait HandleDay
     {
         $time = array_filter([$minValue, $maxValue, $checkIn, $checkOut]);
         return [
-            'Checkin' => min($time),
-            'Checkout' => max($time),
+            'checkin' => min($time),
+            'checkout' => max($time),
         ];
     }
 }

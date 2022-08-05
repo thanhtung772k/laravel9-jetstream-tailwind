@@ -51,12 +51,11 @@ class UpdateTimesheet extends Command
     {
         DB::beginTransaction();
         try {
-            $users = $userService->getAllUser();
+            $users = $userService->joinUserDetail();
             foreach ($users as $user) {
-                $userDetail = $userDetailService->detail($user->id);
-                if (isset($userDetail)) {
-                    $code = $userDetail->employee_code;
-                    $dateTimekeeping = $timekeepingService->groupBy($code);
+                $code = $user->employee_code;
+                if (isset($code)) {
+                    $dateTimekeeping = $timekeepingService->groupDate($code);
                     if (count($dateTimekeeping) > 0) {
                         $min = min($dateTimekeeping);
                         $max = max($dateTimekeeping);
@@ -69,14 +68,14 @@ class UpdateTimesheet extends Command
                                 if (!isset($timesheet->check_in) && !isset($timesheet->check_out)) {
                                     $timesheetService->checkIndateTimesheet($date, $minTime, $timesheet->user_id);
                                 } else {
-                                    $value = $this->checkTimesheet($minTime, $maxTime, $timesheet->check_in, $timesheet->check_out);
-                                    $timesheetService->approval($timesheet->id, $value['Checkin'], $value['Checkout']);
+                                    $valueCheckTimesheet = $this->checkTimesheet($minTime, $maxTime, $timesheet->check_in, $timesheet->check_out);
+                                    $timesheetService->approval($timesheet->id, $valueCheckTimesheet['checkin'], $valueCheckTimesheet['checkout']);
                                 }
                             }
                         } else {
                             if ($date == now()->parse($min)->format('Y-m-d')) {
-                                $value = $this->checkTimesheet($minTime, $maxTime, $timesheet->check_in, $timesheet->check_out);
-                                $timesheetService->approval($timesheet->id, $value['Checkin'], $value['Checkout']);
+                                $valueCheckTimesheet = $this->checkTimesheet($minTime, $maxTime, $timesheet->check_in, $timesheet->check_out);
+                                $timesheetService->approval($timesheet->id, $valueCheckTimesheet['checkin'], $valueCheckTimesheet['checkout']);
                             }
                         }
                     }
