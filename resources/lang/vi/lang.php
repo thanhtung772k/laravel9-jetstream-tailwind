@@ -142,4 +142,6 @@ return [
     'personnel_status' => 'Tình hình nhân sự',
     'free' => 'Đang rảnh',
     'working' => 'Đang làm việc',
+    'list_user' => 'Danh sách nhân sự',
+    'chart_user' => 'Biểu đổ nhân sự',
 ];

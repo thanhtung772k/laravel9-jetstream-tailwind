@@ -143,4 +143,6 @@ return [
     'personnel_status' => 'Personnel status',
     'free' => 'Free',
     'working' => 'Working',
+    'list_user' => 'List User',
+    'chart_user' => 'Chart User',
 ];

@@ -12,10 +12,10 @@
             <div class="row pt-[50px] pl-6">
                 <div class="col-2">
                     <span class="cursor-pointer text-[#4f5d73] cus-font-style"
-                          id="js-list-staff">Danh sach nhan su</span>
+                          id="js-list-staff">@lang('lang.list_user')</span>
                 </div>
                 <div class="col text-[#4f5d73]">
-                    <span class="cursor-pointer" id="js-chart-user">Bieu do nhan su</span>
+                    <span class="cursor-pointer" id="js-chart-user">@lang('lang.chart_user')</span>
                 </div>
             </div>
             <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8 m-auto hidden" id="chart-user">
