@@ -138,5 +138,8 @@ return [
     'male' => 'Nam',
     'female' => 'Nữ',
     'employee_leave' => 'Nhân viên nghỉ việc',
-    'employee_code' => 'Mã nhân trung'
+    'employee_code' => 'Mã nhân trung',
+    'personnel_status' => 'Tình hình nhân sự',
+    'free' => 'Đang rảnh',
+    'working' => 'Đang làm việc',
 ];

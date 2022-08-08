@@ -159,4 +159,15 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
                 'project_id', $id
             )->get();
     }
+
+
+    /**
+     * get all user working
+     *
+     * @return mixed
+     */
+    public function working()
+    {
+        return $this->model->groupBy('user_id')->pluck('user_id')->toArray();
+    }
 }

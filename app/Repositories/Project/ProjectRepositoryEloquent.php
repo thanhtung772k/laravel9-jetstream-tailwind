@@ -128,7 +128,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     public function deleteProject($id)
     {
         return $this->model->join('projects_type', 'projects.project_type_id', '=', 'projects_type.id')
-            ->join('departments', 'projects.department_id', '=', 'departments.id')->find($id);
+            ->join('departments', 'projects.department_id', '=', 'departments.id')->find($id)->delete();
     }
 
     /**

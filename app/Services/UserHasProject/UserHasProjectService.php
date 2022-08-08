@@ -101,4 +101,15 @@ class UserHasProjectService extends BaseService
     {
         return $this->repository->detail($id);
     }
+
+
+    /**
+     * get all user working
+     *
+     * @return mixed
+     */
+    public function working()
+    {
+        return $this->repository->working();
+    }
 }

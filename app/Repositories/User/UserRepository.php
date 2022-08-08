@@ -80,4 +80,12 @@ interface UserRepository extends RepositoryInterface
      * @return mixed
      */
     public function joinUserDetail();
+
+    /**
+     * get all user free
+     *
+     * @param $userWorking
+     * @return void
+     */
+    public function free($userWorking);
 }

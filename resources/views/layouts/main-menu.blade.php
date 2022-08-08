@@ -81,8 +81,8 @@
                     <li class="text-center w-full">
                         <a href="{{route('create_project')}}" class="nav-menu__sub-item--list">@lang('lang.project_create')</a>
                     </li>
-                    <li class="nav-menu__sub-item--list text-center w-full">
-                        @lang('lang.employee_leave')
+                    <li class="text-center w-full">
+                        <a href="{{route('chart_status')}}" class="nav-menu__sub-item--list">@lang('lang.personnel_status')</a>
                     </li>
                 </ul>
             </li>

@@ -156,4 +156,15 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 'user_details.employee_code'
             )->get();
     }
+
+    /**
+     * get all user free
+     *
+     * @param $userWorking
+     * @return void
+     */
+    public function free($userWorking)
+    {
+        return $this->model->whereNotIn('id',$userWorking)->get();
+    }
 }

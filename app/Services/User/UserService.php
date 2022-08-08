@@ -120,4 +120,15 @@ class UserService extends BaseService
     {
         return $this->repository->joinUserDetail();
     }
+
+    /**
+     * get all user free
+     *
+     * @param $userWorking
+     * @return void
+     */
+    public function free($userWorking)
+    {
+        return $this->repository->free($userWorking);
+    }
 }

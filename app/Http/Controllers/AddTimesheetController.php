@@ -121,8 +121,7 @@ class AddTimesheetController extends Controller
     {
         try {
             $dateTimesheet = $this->timesheetService->dateTimesheet($request->timesheet_date, Auth::id());
-            $addTimeId = $dateTimesheet->id;
-            $this->addTimeSheetService->updateAddTimesheet($addTimeId, $request);
+            $this->addTimeSheetService->updateAddTimesheet($dateTimesheet->id, $request);
             return redirect()->route('get_create_addtimesheet');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

@@ -52,6 +52,7 @@ Route::middleware([
     Route::get('/additional-project-detail/{projID}', [ProjectController::class, 'detail'])->name('detail_project');
     Route::post('/additional-project-update/{projID}', [ProjectController::class, 'update'])->name('update_project');
     Route::get('/additional-project-delete/{projID}', [ProjectController::class, 'deletePrj'])->name('delete_project');
+    Route::get('/management-user-chart', [ProjectController::class, 'chartStatus'])->name('chart_status');
     // ........................ route user management ........................
     Route::get('/management-user-create', [UserController::class, 'create'])->name('create_user');
     Route::post('/management-user-create', [UserController::class, 'insert'])->name('insert_user');
@@ -80,7 +81,7 @@ Route::get('/test', function () {
 
     foreach ($dateArray as $item) {
         echo $item . '</br>';
-    }  
+    }
 });
 
 
