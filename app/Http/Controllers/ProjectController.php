@@ -166,4 +166,21 @@ class ProjectController extends Controller
             'userProjects' => $userProjects,
         ]);
     }
+
+    /**
+     * Chart user status: free or working
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function chartStatus()
+    {
+        $title = [__('lang.free'), __('lang.working')];
+        $userWorking = $this->userHasProjectService->working();
+        $userFrees = $this->userService->free($userWorking);
+        $dataUser= [count($userFrees), count($userWorking)];
+        return view('home.user.chart_user_status', [
+            'title' => json_encode($title),
+            'dataUser' => json_encode($dataUser),
+        ]);
+    }
 }

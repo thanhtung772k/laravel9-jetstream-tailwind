@@ -6,10 +6,11 @@ use App\Enums\Constant;
 use Log;
 use Image;
 
-Trait HandleDay
+trait HandleDay
 {
     /**
      * update timesheet when it have new checkin, checkout
+     *
      * @param $checkIn
      * @param $checkOut
      * @return array
@@ -58,7 +59,7 @@ Trait HandleDay
         $sumAfternoon = ($afternoon > config('constant.four_hour')) ? config('constant.four_hour') : $afternoon;
         $sum = $sumMorning + $sumAfternoon;
         $paidWorkingTime = gmdate("H:i:s", $sum);
-        if (config('constant.eight_AM') - $sumOut > config('constant.positive_integer') || !isset($checkIn) ) {
+        if (config('constant.eight_AM') - $sumOut > config('constant.positive_integer') || !isset($checkIn)) {
             $actualWorkingTime = null;
             $paidWorkingTime = null;
         }
@@ -67,6 +68,24 @@ Trait HandleDay
             'checkOut' => $checkOut,
             'actWorking' => $actualWorkingTime,
             'paidWorking' => $paidWorkingTime,
+        ];
+    }
+
+    /**
+     * Check para => Maximum and Minimum
+     *
+     * @param $minValue
+     * @param $maxValue
+     * @param $checkIn
+     * @param $checkOut
+     * @return void
+     */
+    public function checkTimesheet($minValue, $maxValue, $checkIn, $checkOut)
+    {
+        $time = array_filter([$minValue, $maxValue, $checkIn, $checkOut]);
+        return [
+            'checkin' => min($time),
+            'checkout' => max($time),
         ];
     }
 }

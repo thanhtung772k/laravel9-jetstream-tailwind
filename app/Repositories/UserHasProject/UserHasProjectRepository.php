@@ -69,4 +69,11 @@ interface UserHasProjectRepository extends RepositoryInterface
      * @return mixed
      */
     public function detail($id);
+
+    /**
+     * get all user working
+     *
+     * @return mixed
+     */
+    public function working();
 }

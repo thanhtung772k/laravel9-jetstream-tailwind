@@ -85,7 +85,7 @@
     cursor: pointer;
 }
 
-.menu-items__footer:hover i{
+.menu-items__footer:hover i {
     opacity: 1;
     cursor: pointer;
 }
@@ -145,6 +145,7 @@
     display: flex;
     background-color: #593b3b;
 }
+
 .nav-menu__sub-item--list:hover {
     color: #fff;
     background-color: #ae1414;
@@ -214,4 +215,10 @@
 
 .cus-height {
     height: 90vh !important;
+}
+
+.cus-font-style {
+    border-color: #4f5d73;
+    font-weight: 700;
+    border-bottom-width: 4px;
 }

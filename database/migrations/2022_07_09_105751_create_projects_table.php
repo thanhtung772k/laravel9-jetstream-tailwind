@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('name', 255)->nullable();
             $table->string('customer', 255)->nullable();
             $table->foreignId('project_type_id');
-            $table->unsignedBigInteger('departments_id');
+            $table->unsignedBigInteger('department_id');
             $table->integer('value_contract')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
@@ -29,7 +29,7 @@ class CreateProjectsTable extends Migration
         });
 
         Schema::table('projects', function($table) {
-            $table->foreign('departments_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 

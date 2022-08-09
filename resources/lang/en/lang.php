@@ -139,4 +139,10 @@ return [
     'male' => 'Male',
     'female' => 'FeMale',
     'employee_leave' => 'Employee leave',
+    'employee_code' => 'Employee code',
+    'personnel_status' => 'Personnel status',
+    'free' => 'Free',
+    'working' => 'Working',
+    'list_user' => 'List User',
+    'chart_user' => 'Chart User',
 ];

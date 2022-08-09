@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\Timesheet\TimesheetService;
+use Illuminate\Support\Facades\Auth;
 
 class TimesheetController extends Controller
 {
@@ -20,11 +21,12 @@ class TimesheetController extends Controller
      */
     public function index(Request $request)
     {
+        $userID = Auth::id();
         $fromDate = $request->fromDate;
         $toDate = $request->toDate;
         $paginateOption = config('constant.select_value');
         $data = $this->timesheetService->searchDateTimesheet($request);
-        $dateNow = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'));
+        $dateNow = $this->timesheetService->dateTimesheet(now()->format('Y-m-d'), $userID);
         $dataCount = $this->timesheetService->countTimesheet();
         $disabled = $this->timesheetService->dateTimesheetEarly();
         $disabledCheckin = $dateNow ?: $disabled;
@@ -44,9 +46,10 @@ class TimesheetController extends Controller
     public function checkIn(Request $request)
     {
         try {
+            $id = Auth::id();
             $checkInDate = $request->input('checkin_date');
             $checkInHour = now()->format('H:i:s');
-            $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour);
+            $this->timesheetService->checkIndateTimesheet($checkInDate, $checkInHour, $id);
 
             return redirect()->back();
         } catch (\Exception $e) {
@@ -63,10 +66,11 @@ class TimesheetController extends Controller
     public function checkOut(Request $request)
     {
         try {
+            $userId = Auth::id();
             $checkOutDate = $request->input('checkout_date');
             $checkOutHour = now()->format('H:i:s');
-            $timesheet = $this->timesheetService->getTimesheet();
-            $this->timesheetService->checkOutdateTimesheet($timesheet, $checkOutDate, $checkOutHour);
+            $timesheet = $this->timesheetService->getTimesheet($userId);
+            $this->timesheetService->checkOutdateTimesheet($timesheet, $checkOutDate, $checkOutHour, $userId);
 
             return redirect()->back();
         } catch (\Exception $e) {

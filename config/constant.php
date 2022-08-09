@@ -27,6 +27,8 @@ return [
     'VALUE_DEFAULT_TWO' => 2,
     'VALUE_DEFAULT_THREE' => 3,
     'PAGINATE_VALUE' => 10,
+    'STATUS_UPDATE_DONE' => 1,
+    'STATUS_NOT_UPDATED' => 0,
 ]
 
 ?>

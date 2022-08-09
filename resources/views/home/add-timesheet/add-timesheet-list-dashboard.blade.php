@@ -16,8 +16,8 @@
                                 <div class="header-search__date">
                                     <section>
                                         <div class="input-group date" id="datepicker">
-                                            <input class="form-control" id="fromDate" name="fromDate"
-                                                   placeholder="{{now()->startOfMonth()->format('Y-m-d')}}">
+                                            <input class="form-control bg-white" id="fromDate" name="fromDate"
+                                                   placeholder="{{now()->startOfMonth()->format('Y-m-d')}}" readonly>
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>
@@ -35,7 +35,7 @@
                                 <div class="header-search__text-date">
                                     <section>
                                         <div class="input-group date" id="datepicker-end">
-                                            <input class="form-control" id="toDate" name="toDate">
+                                            <input class="form-control bg-white" id="toDate" name="toDate" readonly>
                                             <span class="input-group-append">
                                         <span class="input-group-text bg-white">
                                             <i class="fa fa-calendar"></i>

@@ -27,10 +27,13 @@ class TimesheetService extends BaseService
 
     /**
      * get Timesheet Index Service
+     *
+     * @param $id
+     * @return mixed
      */
-    public function getTimesheet()
+    public function getTimesheet($id)
     {
-        return $this->repository->getTimesheet();
+        return $this->repository->getTimesheet($id);
     }
 
     /**
@@ -50,11 +53,12 @@ class TimesheetService extends BaseService
      *
      * @param $checkInDate
      * @param $checkInHour
+     * @param $id
      * @return mixed
      */
-    public function checkIndateTimesheet($checkInDate, $checkInHour)
+    public function checkIndateTimesheet($checkInDate, $checkInHour, $id)
     {
-        return $this->repository->checkIndateTimesheet($checkInDate, $checkInHour);
+        return $this->repository->checkIndateTimesheet($checkInDate, $checkInHour, $id);
     }
 
     /**
@@ -63,9 +67,10 @@ class TimesheetService extends BaseService
      * @param $timesheets
      * @param $checkOutDate
      * @param $checkOutHour
+     * @param $userId
      * @return mixed
      */
-    public function checkOutdateTimesheet($timesheets, $checkOutDate, $checkOutHour)
+    public function checkOutdateTimesheet($timesheets, $checkOutDate, $checkOutHour, $userId)
     {
         //get check_in from db
         foreach ($timesheets as $value) {
@@ -73,7 +78,7 @@ class TimesheetService extends BaseService
                 $checkInHour = $value->check_in;
             }
         }
-        return $this->repository->checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour);
+        return $this->repository->checkOutdateTimesheet($checkInHour, $checkOutDate, $checkOutHour, $userId);
     }
 
     /**
@@ -92,12 +97,13 @@ class TimesheetService extends BaseService
      * get AddTimesheet Index Service
      *
      * @param $timesheetID
+     * @param $userID
      * @return mixed
      */
-    public function getIDTimesheet($timesheetID)
+    public function getIDTimesheet($timesheetID, $userID)
     {
         try {
-            return $this->repository->getIDTimesheet($timesheetID);
+            return $this->repository->getIDTimesheet($timesheetID, $userID);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -107,11 +113,12 @@ class TimesheetService extends BaseService
      * get date timesheet now
      *
      * @param $dateTime
+     * @param $userID
      * @return mixed
      */
-    public function dateTimesheet($dateTime)
+    public function dateTimesheet($dateTime, $userID)
     {
-        return $this->repository->dateTimesheet($dateTime);
+        return $this->repository->dateTimesheet($dateTime, $userID);
     }
 
     /**
@@ -139,10 +146,10 @@ class TimesheetService extends BaseService
      *
      * @return void
      */
-    public function approval($request)
+    public function approval($timesheetID, $checkInReq, $checkOutReq)
     {
-        $getTimesheet = $this->updateTimesheet($request->checkInReq, $request->checkOutReq);
-        return $this->repository->approval($request, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
+        $timesheets = $this->updateTimesheet($checkInReq, $checkOutReq);
+        return $this->repository->approval($timesheets['actWorking'], $timesheets['paidWorking'], $timesheetID, $checkInReq, $checkOutReq);
     }
 
     /**
@@ -153,7 +160,7 @@ class TimesheetService extends BaseService
      */
     public function approvalMany($data)
     {
-        $getTimesheet = $this->updateTimesheet($data->check_int_request, $data->check_out_request);
-        return $this->repository->approvalMany($data, $getTimesheet['actWorking'], $getTimesheet['paidWorking']);
+        $timesheets = $this->updateTimesheet($data->check_int_request, $data->check_out_request);
+        return $this->repository->approvalMany($data, $timesheets['actWorking'], $timesheets['paidWorking']);
     }
 }

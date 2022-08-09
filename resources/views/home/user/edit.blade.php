@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="row pt-2">
                                         <div class="col-sm-6 p-0">
-                                            <input class="form-control" name="user_id" value="{{$userById->member_id}}" disabled>
+                                            <input class="form-control" name="user_id" value="{{$userById->employee_code}}" disabled>
                                         </div>
                                     </div>
                                     @error('user_id')
@@ -220,7 +220,7 @@
                                 <div class="col-sm-7 text-sm">
                                     <select class="form-control text-sm" name="dept">
                                         @foreach($departments as $key => $department)
-                                            <option value="{{$department->id}}" {{ $userById->departments_id == $department->id ? 'selected' : '' }} >{{$department->name}}</option>
+                                            <option value="{{$department->id}}" {{ $userById->department_id == $department->id ? 'selected' : '' }} >{{$department->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

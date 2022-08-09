@@ -11,7 +11,7 @@
                     <thead>
                     <tr class="text-center items-center whitespace-nowrap text-xs">
                         <th scope="col">#</th>
-                        <th scope="col">@sortablelink('member_id',  __('lang.id'))</th>
+                        <th scope="col">@sortablelink('employee_code',  __('lang.employee_code'))</th>
                         <th scope="col">@sortablelink('name', __('lang.name'))</th>
                         <th scope="col">@sortablelink('email', __('lang.email'))</th>
                         <th scope="col">@lang('lang.phone')</th>
@@ -27,7 +27,7 @@
                         <tr class="text-center" >
                             <th scope="row">{{$index+1}}</th>
 
-                            <td class="max-w-[100px]">{{$value->member_id}}</td>
+                            <td class="max-w-[100px]">{{$value->employee_code}}</td>
 
                             <td class="max-w-[140px]">{{$value->name}}</td>
 

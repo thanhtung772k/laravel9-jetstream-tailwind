@@ -26,7 +26,7 @@ class UserDetail extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'member_id',
+        'employee_code',
         'date_of_birth',
         'home_town',
         'current_residence',
@@ -35,7 +35,7 @@ class UserDetail extends Model
         'time_start',
         'member_company',
         'position_id',
-        'departments_id',
+        'department_id',
         'role_id',
         'japanese',
         'avatar',
@@ -54,7 +54,7 @@ class UserDetail extends Model
     ];
 
     protected $sortable = [
-        'member_id',
+        'employee_code',
         'date_of_birth',
     ];
 
@@ -70,7 +70,7 @@ class UserDetail extends Model
 
     public function depart()
     {
-        return $this->belongsTo(Department::class, 'departments_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     public function user()

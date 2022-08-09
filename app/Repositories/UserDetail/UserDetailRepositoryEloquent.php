@@ -44,7 +44,7 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
     {
 
         return $this->model->create([
-            'member_id' => $request->user_id,
+            'employee_code' => $request->user_id,
             'date_of_birth' => $request->date_of_birth,
             'home_town' => $request->homeTown,
             'current_residence' => $request->currentResidence,
@@ -53,7 +53,7 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
             'time_start' => $request->time_start,
             'member_company' => $request->member_comp,
             'position_id' => $request->position,
-            'departments_id' => $request->dept,
+            'department_id' => $request->dept,
             'role_id' => $request->location,
             'japanese' => $request->japanese,
             'avatar' => $avatar,
@@ -82,21 +82,21 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
     {
         return $this->model
             ->join('users', 'user_details.user_id', '=', 'users.id')
-            ->join('departments', 'user_details.departments_id', '=', 'departments.id')
+            ->join('departments', 'user_details.department_id', '=', 'departments.id')
             ->select(
                 'user_details.*',
                 'user_details.id as userDetailId',
                 'users.*'
             )
             ->where(
-                'user_details.member_id', 'like', '%' . $request->user_id . '%'
+                'user_details.employee_code', 'like', '%' . $request->user_id . '%'
             )->where(
                 'users.name', 'like', '%' . $request->user_name . '%'
             )->where(function ($query) use ($request) {
                 return $request->location ? $query->where('role_id', $request->location) : '';
             })
             ->where(function ($query) use ($request) {
-                return $request->dept ? $query->where('departments_id', $request->dept) : '';
+                return $request->dept ? $query->where('department_id', $request->dept) : '';
             })
             ->sortable()->paginate(config('constant.PAGINATE_VALUE'));
     }
@@ -110,7 +110,7 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
     public function userById($id)
     {
         return $this->model->join('users', 'user_details.user_id', '=', 'users.id')
-            ->join('departments', 'user_details.departments_id', '=', 'departments.id')
+            ->join('departments', 'user_details.department_id', '=', 'departments.id')
             ->select(
                 'user_details.*',
                 'user_details.id as userDetailId',
@@ -137,7 +137,7 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
             'time_start' => $request->time_start,
             'member_company' => $request->member_comp,
             'position_id' => $request->position,
-            'departments_id' => $request->dept,
+            'department_id' => $request->dept,
             'role_id' => $request->location,
             'japanese' => $request->japanese,
             'avatar' => $imgEvidence,
@@ -176,21 +176,21 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
     {
         return $this->model->onlyTrashed()
             ->join('users', 'user_details.user_id', '=', 'users.id')
-            ->join('departments', 'user_details.departments_id', '=', 'departments.id')
+            ->join('departments', 'user_details.department_id', '=', 'departments.id')
             ->select(
                 'user_details.*',
                 'user_details.id as userDetailId',
                 'users.*'
             )->where(
-                'user_details.member_id', 'like', '%' . $request->user_id . '%'
+                'user_details.employee_code', 'like', '%' . $request->user_id . '%'
             )->where(
                 'users.name', 'like', '%' . $request->user_name . '%'
             )->where(function ($query) use ($request) {
                 return $request->location ? $query->where('role_id', $request->location) : '';
             })->where(function ($query) use ($request) {
-                return $request->dept ? $query->where('departments_id', $request->dept) : '';
+                return $request->dept ? $query->where('department_id', $request->dept) : '';
             })->orderBy(
-                'member_id', 'asc'
+                'employee_code', 'asc'
             )->paginate(config('constant.PAGINATE_VALUE'));
     }
 

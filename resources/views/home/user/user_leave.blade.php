@@ -27,7 +27,7 @@
                         <tr class="text-center" >
                             <th scope="row">{{$index+1}}</th>
 
-                            <td class="max-w-[100px]">{{$value->member_id}}</td>
+                            <td class="max-w-[100px]">{{$value->employee_code}}</td>
 
                             <td class="max-w-[140px]">{{$value->name}}</td>
 

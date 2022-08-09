@@ -7,6 +7,7 @@ use App\Http\Controllers\AddTimesheetController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,7 @@ Route::middleware([
     Route::get('/additional-project-detail/{projID}', [ProjectController::class, 'detail'])->name('detail_project');
     Route::post('/additional-project-update/{projID}', [ProjectController::class, 'update'])->name('update_project');
     Route::get('/additional-project-delete/{projID}', [ProjectController::class, 'deletePrj'])->name('delete_project');
+    Route::get('/management-user-chart', [ProjectController::class, 'chartStatus'])->name('chart_status');
     // ........................ route user management ........................
     Route::get('/management-user-create', [UserController::class, 'create'])->name('create_user');
     Route::post('/management-user-create', [UserController::class, 'insert'])->name('insert_user');
@@ -63,16 +65,23 @@ Route::middleware([
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {
-    $arr = [3, 6, 5, 1, 2];
-    for ($i = 0; $i < (count($arr) - 1); $i++)
-        for ($j = $i + 1; $j < count($arr); $j++) {
-            if ($arr[$i] > $arr[$j]) {
-                $tam = $arr[$j];
-                $arr[$j] = $arr[$i];
-                $arr[$i] = $tam;
-            }
-        }
-        return $arr;
-    });
+    $min_epoch = strtotime(now()->format('y-m-d 00:00:00'));
+    $max_epoch = strtotime(now()->format('y-m-d 23:59:59'));
+    $dateArray=[];
+    foreach (range(1, 200) as $date) {
+        $hour = rand($min_epoch, $max_epoch);
+        $dateArray[] = date("Y-m-d H:i:s", $hour);
+    }
+    function compareDate($date1, $date2)
+    {
+        return strtotime($date1) - strtotime($date2);
+    }
+
+    usort($dateArray, "compareDate");
+
+    foreach ($dateArray as $item) {
+        echo $item . '</br>';
+    }
+});
 
 

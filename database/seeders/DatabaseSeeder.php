@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            TimesheetTableSeeder::class,
             PositionTableSeeder::class,
             RoleTableSeeder::class,
             DepartmentTableSeeder::class,
             ProjectTypeTableSeeder::class,
+            TimesheetTableSeeder::class,
+            TimekeepingTableSeeder::class,
         ]);
     }
 }

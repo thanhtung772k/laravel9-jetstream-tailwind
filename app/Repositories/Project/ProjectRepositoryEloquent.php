@@ -42,7 +42,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     public function getProject($request)
     {
         return $this->model->join('projects_type', 'projects.project_type_id', '=', 'projects_type.id')
-            ->join('departments', 'projects.departments_id', '=', 'departments.id')
+            ->join('departments', 'projects.department_id', '=', 'departments.id')
             ->select('projects.*', 'projects_type.name as namePrj', 'departments.name as nameDept')
             ->where('projects.name', 'like', '%' . $request->prjName . '%')
             ->where(function ($query) use ($request) {
@@ -50,7 +50,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             })->where(function ($query) use ($request) {
                 return $request->prjTypeID ? $query->where('project_type_id', $request->prjTypeID) : '';
             })->where(function ($query) use ($request) {
-                return $request->prjDept ? $query->where('departments_id', $request->prjDept) : '';
+                return $request->prjDept ? $query->where('department_id', $request->prjDept) : '';
             })->orderBy('created_at', 'asc')->get();
     }
 
@@ -77,7 +77,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             'name' => $request->project_name,
             'customer' => $request->customer,
             'project_type_id' => $request->projectType,
-            'departments_id' => $request->department,
+            'department_id' => $request->department,
             'value_contract' => $request->value_contract,
             'start_date' => $request->start_date_project,
             'end_date' => $request->end_date_project,
@@ -99,7 +99,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
             'name' => $request->project_name,
             'customer' => $request->customer,
             'project_type_id' => $request->projectType,
-            'departments_id' => $request->department,
+            'department_id' => $request->department,
             'value_contract' => $request->value_contract,
             'start_date' => $request->start_date_project,
             'end_date' => $request->end_date_project,
@@ -128,7 +128,7 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     public function deleteProject($id)
     {
         return $this->model->join('projects_type', 'projects.project_type_id', '=', 'projects_type.id')
-            ->join('departments', 'projects.departments_id', '=', 'departments.id')->find($id);
+            ->join('departments', 'projects.department_id', '=', 'departments.id')->find($id)->delete();
     }
 
     /**
