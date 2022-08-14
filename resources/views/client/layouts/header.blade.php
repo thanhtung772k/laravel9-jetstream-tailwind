@@ -2,7 +2,7 @@
     <div class="theme-header-area mb-5 mt-[20px]">
         <div class="container">
             <div class="row items-center">
-                <div class="col-lg-3">
+                <div class="col-lg-3 flex justify-between">
                     <div class="logo theme-logo text-left">
                         <h1 class="text-logo flex items-center">
                             <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/12/logo-epu-inkythuatso-14-15-47-22.jpg" alt="" class="h-24">
@@ -11,15 +11,28 @@
                             </a>
                         </h1>
                     </div>
+                    
+                    <div class="reposive-header-icon-search text-[30px] hidden">
+                        <a href="#" class="menu-item pr-6">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </div>
+                    <div class="mobile-menu-btn text-[30px]">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
                 </div>
-
+                <script>
+                    $(document).ready(function (event) {
+                        $('.mobile-menu-btn').click(function(){
+                            $('#primary-menu').slideToggle();
+                        });
+                    });
+                </script>
                 <div class="col-lg-6 nav-design-two">
                     <div class="nav-menu-wrapper-two">
-                        <div class="container">
-                            <div class="elior-responsive-menu"></div>
                             <div class="mainmenu">
                                 <div class="menu-main-menu-container m-0 p-0">
-                                    <ul id="primary-menu" class="menu flex justify-between">
+                                    <ul id="primary-menu" class="menu justify-between">
                                         <li class="menu-item relative">
                                             <a href="" aria-current="page" class="menu-item text-[#000] text-[17px] font-medium">
                                                 Home
@@ -77,13 +90,12 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-2 flex justify-end items-center">
-                    <div class="text-[19px]">
+                    <div class="header-icon-search text-[19px]">
                         <a href="#" class="menu-item pr-6">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </a>

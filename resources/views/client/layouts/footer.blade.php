@@ -34,18 +34,18 @@
                     <div class="my-[35px]">
                         <div class="footer-menu">
                             <div class="menu-footer-nav-container ">
-                                <ul class="menu flex justify-center">
-                                    <li id="menu-item-923" class="menu-item">
-                                        <a href="" aria-current="page" class="px-[18px] menu-item font-medium">Home</a>
+                                <ul class="footer-menu-list flex justify-center">
+                                    <li id="menu-item-923" class="footer-menu-list__name">
+                                        <a href="" aria-current="page" class="px-[18px] font-medium">Home</a>
                                     </li>
-                                    <li id="menu-item-925" class="menu-item">
-                                        <a href="" class="px-[18px] menu-item font-medium">About</a></li>
-                                    <li id="menu-item-924" class="menu-item">
-                                        <a href="" class="px-[18px] menu-item font-medium">Blog</a></li>
-                                    <li id="menu-item-926" class="menu-item">
-                                        <a href="" class="px-[18px] menu-item font-medium">Contact</a></li>
-                                    <li id="menu-item-709" class="menu-item">
-                                        <a href="" class="px-[18px] menu-item font-medium">Buy Theme</a></li>
+                                    <li id="menu-item-925" class="footer-menu-list__name">
+                                        <a href="" class="px-[18px] font-medium">About</a></li>
+                                    <li id="menu-item-924" class="footer-menu-list__name">
+                                        <a href="" class="px-[18px] font-medium">Blog</a></li>
+                                    <li id="menu-item-926" class="footer-menu-list__name">
+                                        <a href="" class="px-[18px] font-medium">Contact</a></li>
+                                    <li id="menu-item-709" class="footer-menu-list__name">
+                                        <a href="" class="px-[18px] font-medium">Buy Theme</a></li>
                                 </ul>
                             </div>
                         </div>

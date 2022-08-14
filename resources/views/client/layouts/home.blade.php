@@ -9,7 +9,7 @@
                     <div class="elementor-element">
                         <div class="elementor-widget-container">
                             <div class="theme_post_grid__Slider">
-                                <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/thumb-philippines.jpg" style="width: 100%; height: 650px; border-radius: 24px;">
+                                <img class="theme-post__banner" src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/thumb-philippines.jpg" style="">
                             </div>
                         </div>
                     </div>
@@ -20,21 +20,21 @@
 
     <section class="flex justify-center mb-5 mt-[100px]">
         <div class="max-w-[1170px] w-full">
-            <div class="row">
-                <div class="col-8">
+            <div class="row post">
+                <div class="col-8 post-list-wapper">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 post-list-content">
                             <div class="post-grid-wrapper mb-[40px]">
                                 <div class="post-gridthumbnail">
                                     <a href="">
-                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="w-full h-[294px] rounded-3xl object-cover">
+                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="post-gridthumbnail__img w-full h-[294px] rounded-3xl object-cover">
                                     </a>
                                     <div class="grid-two-meta flex">
-                                        <div class="text-[18px] pr-[18px]">
+                                        <div class="grid-two-meta__like pr-[18px]">
                                             <i class="fa-solid fa-fire-flame-curved"></i>
                                             <span class="font-medium">50</span>
                                         </div>
-                                        <div class="text-[18px]">
+                                        <div class="grid-two-meta__comment">
                                             <i class="fa-solid fa-comment"></i>
                                             <span class="font-medium">1</span>
                                         </div>
@@ -43,14 +43,14 @@
 
                                 <div class="post-grid-content">
                                     <div class="mt-[30px] mb-[13px]">
-                                        <div class="category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
+                                        <div class="post-grid-content__btn category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
                                             <a href="" class="category-box">
                                                 <i class="fa-solid fa-tag rotate-90"></i>
                                                 Business
                                             </a>
                                         </div>
                                     </div>
-                                    <h3 class="post-title">
+                                    <h3 class="post-grid-content__title">
                                         <a href="" class="hover:no-underline hover:text-[#FF4063]">12 Use Cases Unlocking True Business Potential</a>
                                     </h3>
                                     <div class="post-excerpt-box">
@@ -71,11 +71,11 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 post-list-content ">
                             <div class="post-grid-wrapper mb-[40px]">
                                 <div class="post-gridthumbnail">
                                     <a href="">
-                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="w-full h-[294px] rounded-3xl object-cover">
+                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="post-gridthumbnail__img w-full h-[294px] rounded-3xl object-cover">
                                     </a>
                                     <div class="grid-two-meta flex">
                                         <div class="text-[18px] pr-[18px]">
@@ -91,14 +91,14 @@
 
                                 <div class="post-grid-content">
                                     <div class="mt-[30px] mb-[13px]">
-                                        <div class="category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
+                                        <div class=" post-grid-content__btn category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
                                             <a href="" class="category-box">
                                                 <i class="fa-solid fa-tag rotate-90"></i>
                                                 Business
                                             </a>
                                         </div>
                                     </div>
-                                    <h3 class="post-title">
+                                    <h3 class="post-grid-content__title">
                                         <a href="" class="hover:no-underline hover:text-[#FF4063]">12 Use Cases Unlocking True Business Potential</a>
                                     </h3>
                                     <div class="post-excerpt-box">
@@ -119,11 +119,11 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 post-list-content">
                             <div class="post-grid-wrapper mb-[40px]">
                                 <div class="post-gridthumbnail">
                                     <a href="">
-                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="w-full h-[294px] rounded-3xl object-cover">
+                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="post-gridthumbnail__img w-full h-[294px] rounded-3xl object-cover">
                                     </a>
                                     <div class="grid-two-meta flex">
                                         <div class="text-[18px] pr-[18px]">
@@ -139,14 +139,14 @@
 
                                 <div class="post-grid-content">
                                     <div class="mt-[30px] mb-[13px]">
-                                        <div class="category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
+                                        <div class="post-grid-content__btn category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
                                             <a href="" class="category-box">
                                                 <i class="fa-solid fa-tag rotate-90"></i>
                                                 Business
                                             </a>
                                         </div>
                                     </div>
-                                    <h3 class="post-title">
+                                    <h3 class="post-grid-content__title">
                                         <a href="" class="hover:no-underline hover:text-[#FF4063]">12 Use Cases Unlocking True Business Potential</a>
                                     </h3>
                                     <div class="post-excerpt-box">
@@ -167,11 +167,11 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 post-list-content">
                             <div class="post-grid-wrapper mb-[40px]">
                                 <div class="post-gridthumbnail">
                                     <a href="">
-                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="w-full h-[294px] rounded-3xl object-cover">
+                                        <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene.jpg" alt="" class="post-gridthumbnail__img w-full h-[294px] rounded-3xl object-cover">
                                     </a>
                                     <div class="grid-two-meta flex">
                                         <div class="text-[18px] pr-[18px]">
@@ -187,14 +187,14 @@
 
                                 <div class="post-grid-content">
                                     <div class="mt-[30px] mb-[13px]">
-                                        <div class="category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
+                                        <div class="post-grid-content__btn category-box text-white w-[128px] h-[40px] rounded-[12px] bg-[#ff40631a] flex justify-center items-center text-[16px] font-medium">
                                             <a href="" class="category-box">
                                                 <i class="fa-solid fa-tag rotate-90"></i>
                                                 Business
                                             </a>
                                         </div>
                                     </div>
-                                    <h3 class="post-title">
+                                    <h3 class="post-grid-content__title">
                                         <a href="" class="hover:no-underline hover:text-[#FF4063]">12 Use Cases Unlocking True Business Potential</a>
                                     </h3>
                                     <div class="post-excerpt-box">
@@ -217,7 +217,7 @@
 
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 post-popular-wapper">
                     <div class="leading-none font-extrabold text-[24px] mb-[35px]">Popular Posts</div>
 
                     <div class="post-popular">
