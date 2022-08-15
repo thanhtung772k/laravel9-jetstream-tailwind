@@ -11,7 +11,7 @@
                             </a>
                         </h1>
                     </div>
-                    
+
                     <div class="reposive-header-icon-search text-[30px] hidden">
                         <a href="#" class="menu-item pr-6">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -34,7 +34,7 @@
                                 <div class="menu-main-menu-container m-0 p-0">
                                     <ul id="primary-menu" class="menu justify-between">
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[17px] font-medium">
+                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
                                                 Home
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
                                             </a>
@@ -47,7 +47,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[17px] font-medium">
+                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
                                                 Header Styles
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
                                             </a>
@@ -60,7 +60,7 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[17px] font-medium">
+                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
                                                 Features
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
                                             </a>
@@ -73,10 +73,10 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a class="menu-item text-[#000] text-[17px] font-medium">Lifestyle</a>
+                                            <a class="menu-item text-[#000] text-[20px] font-medium">Lifestyle</a>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[17px] font-medium">
+                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
                                                 Shop
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
                                             </a>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="col-2 flex justify-end items-center">
+                <div class="col-lg-3 flex justify-end items-center">
                     <div class="header-icon-search text-[19px]">
                         <a href="#" class="menu-item pr-6">
                             <i class="fa-solid fa-magnifying-glass"></i>

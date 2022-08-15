@@ -22,6 +22,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('client.layouts.home');
 });
+Route::get('/detail', function () {
+    return view('client.layouts.detail');
+});
 
 Route::middleware([
     'auth:sanctum',

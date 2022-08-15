@@ -141,7 +141,9 @@ $desktop-width: 1024px;
     cursor: pointer;
 }
 
-.footer-menu-list {}
+.footer-menu-list li{
+    display: inline-block;
+}
 
 .copyright-text {
     @include mobile {

@@ -30,11 +30,10 @@
 
                     </div>
 
-
                     <div class="my-[35px]">
                         <div class="footer-menu">
                             <div class="menu-footer-nav-container ">
-                                <ul class="footer-menu-list flex justify-center">
+                                <ul class="footer-menu-list">
                                     <li id="menu-item-923" class="footer-menu-list__name">
                                         <a href="" aria-current="page" class="px-[18px] font-medium">Home</a>
                                     </li>
