@@ -3,9 +3,9 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/client/detail.css') }}">
     <section>
-        <div class="row">
-            <div class="col-7">
-                <header class="row">
+        <div class="row post-detail-wapper">
+            <div class="col-7 post-detail-wapper__column">
+                <div class="row">
                     <div class="post-detail">
                         <div class="post-detail__img mb-[40px]">
                             <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene-770x470.jpg"
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                </header>
+                </div>
                 <div class="row">
                     <div class="post-content w-full">
                         <p>
@@ -152,7 +152,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row bg-[#f9f9f9] mt-[100px] rounded-[24px]">
+                <div class="row bg-[#f9f9f9] mt-[100px] rounded-[24px] post-comment-wapper">
                     <div class="post-comment p-[30px] w-full">
                         <header>
                             <div class="post-comment__title">
@@ -254,14 +254,85 @@
                                 </li>
                             </ul>
                         </header>
-                        <form action="">
+                        <form action="" class="pt-[22px]">
+                            <div class="post-comment__title">
+                                <p>Leave a Reply</p>
+                            </div>
+                            <div class="py-[20px] row">
+                                <div class="col-md-6 py-[10px]">
+                                    <input class="form-control py-3.5" name="form_name">
+                                </div>
+                                <div class="col-md-6 py-[10px]">
+                                    <input class="form-control py-3.5" name="form_email">
+                                </div>
+                            </div>
+                            <div class="row py-[10px]">
+                                <div class="col-md-12">
+                                    <input class="form-control py-3.5" name="form_website">
+                                </div>
+                            </div>
+                            <div class="row py-[10px]">
+                                <div class="col-md-12">
+                                    <textarea class="form-control h-[245px] rounded-3xl" name="description" placeholder="Enter Comments"></textarea>
+                                </div>
+                            </div>
+                            <div class="row py-[10px]">
+                                <div class="col-md-12">
+                                    <input type="submit" class="bg-[#FF4063] w-full py-[16px] px-[28px] rounded-3xl text-white hover:bg-[#279EFF] hover:cursor-pointer" value="Post Comment">
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-5">
-                <div class="row"></div>
-                <div class="row"></div>
+            <div class="col-5 post-category-wapper">
+                <div class="pl-[70px] post-category">
+                    <form class="row">
+                        <div class="col-md-12">
+                            <label class="text-[30px] font-semibold mb-[20px]" for="Search">Search</label>
+                        </div>
+                        <div class="row col-md-12 ">
+                            <div class="col-md-9 py-[10px]">
+                                <input class="form-control py-3 rounded-[14px]" name="form_name">
+                            </div>
+                            <div class="col-md-3 py-[10px]">
+                                <input type="submit" class="bg-[#FF4063] flex justify-center w-full py-[16px] px-[23px] rounded-[14px] text-white hover:bg-[#279EFF] hover:cursor-pointer" value="Search">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row mt-[47px]">
+                        <div class="col-md-12">
+                            <label class="text-[30px] font-semibold mb-[20px]" for="Search">Categories</label>
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="category-menu">
+                                <li class="flex justify-between mb-[16px]">
+                                    <a href="" class="font-semibold text-xl">Business</a>
+                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">2</span>
+                                </li>
+                                <li class="flex justify-between mb-[16px]">
+                                    <a href="" class="font-semibold text-xl">Business</a>
+                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">2</span>
+                                </li>
+                                <li class="flex justify-between mb-[16px]">
+                                    <a href="" class="font-semibold text-xl">Business</a>
+                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">2</span>
+                                </li>
+                                <li class="flex justify-between mb-[16px]">
+                                    <a href="" class="font-semibold text-xl">Business</a>
+                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">2</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mt-[35px]">
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2022/02/ads-design.png" alt="" height="353" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

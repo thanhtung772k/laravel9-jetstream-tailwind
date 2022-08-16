@@ -25,6 +25,9 @@ Route::get('/', function () {
 Route::get('/detail', function () {
     return view('client.layouts.detail');
 });
+Route::get('/category', function () {
+    return view('client.layouts.category');
+});
 
 Route::middleware([
     'auth:sanctum',
