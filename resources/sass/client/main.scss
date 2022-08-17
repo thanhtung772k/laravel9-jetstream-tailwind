@@ -87,7 +87,9 @@ $desktop-width: 1024px;
     }
 }
 
-.menu-item a {
+.menu-item span {
+    font-size: 20px;
+    font-weight: 500;
     @include mobile {
         color: #fff !important;
         font-size: 23px;
@@ -101,7 +103,7 @@ $desktop-width: 1024px;
     }
 }
 
-.menu-item a i {
+.menu-item span i {
     @include mobile {
         display: none;
     }
@@ -114,14 +116,12 @@ $desktop-width: 1024px;
 .menu li {
     @include mobile {
         padding-top: 12px;
-        padding-bottom: 12px;
         padding-left: 30px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     @include tablet {
         padding-top: 12px;
-        padding-bottom: 12px;
         padding-left: 30px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -129,7 +129,8 @@ $desktop-width: 1024px;
 
 .menu-item:hover,
 .footer-menu-list__name a:hover,
-.category-box {
+.category-box,
+.sub-menu li a:hover {
     text-decoration: none;
     color: #FF4063;
     cursor: pointer;
@@ -229,7 +230,14 @@ $desktop-width: 1024px;
 
 .menu-item:hover .sub-menu {
     display: block;
+    @include mobile {
+        display: none;
+    }
+    @include tablet {
+        display: none;
+    }
 }
+
 
 .text-logo {}
 
@@ -248,6 +256,33 @@ $desktop-width: 1024px;
     box-shadow: 0 0 15px rgb(0 0 0 / 7%);
     border-radius: 12px;
     display: none;
+    @include mobile {
+        left: 0;
+        top: 0;
+        z-index: 0;
+        padding: 0;
+        color: #fff;
+        background: #252525;
+        position: unset;
+    }
+    @include tablet {
+        left: 0;
+        top: 0;
+        z-index: 0;
+        padding: 0;
+        color: #fff;
+        background: #252525;
+        position: unset;
+    }
+    li a {
+        @include mobile {
+            display: flex;
+        }
+        @include tablet {
+            display: flex;
+            font-size: 23px;
+        }
+    }
 }
 
 .sub-menu::before {

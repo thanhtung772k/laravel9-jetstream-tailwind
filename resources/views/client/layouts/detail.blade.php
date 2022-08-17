@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/client/detail.css') }}">
     <section>
-        <div class="row post-detail-wapper">
+        <div class="row post-detail-wapper p-0">
             <div class="col-7 post-detail-wapper__column">
                 <div class="row">
                     <div class="post-detail">
@@ -65,7 +65,7 @@
                             spell since the 1970s. In his Businessweek piece, Peter Coy largely agrees, writing, “In all
                             probability … the U.S. will continue to wrestle with ‘secular
                         </p>
-                        <div class=" my-[30px] ">
+                        <div class="my-[30px] text-center">
                             <div class="post-content__img px-[10px]">
                                 <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/thumb_citydays.jpg"
                                      alt="">
@@ -93,7 +93,7 @@
                             again—but even the slightly dangerous-sounding ones conjure up something specific. That
                             definiteness offers an appealing sense
                         </p>
-                        <div class="my-[30px]">
+                        <div class="my-[30px] text-center">
                             <div class="post-content__img px-[10px]">
                                 <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/winter-leaf.jpg"
                                      alt="">

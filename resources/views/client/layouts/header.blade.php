@@ -21,71 +21,64 @@
                         <i class="fa-solid fa-bars"></i>
                     </div>
                 </div>
-                <script>
-                    $(document).ready(function (event) {
-                        $('.mobile-menu-btn').click(function(){
-                            $('#primary-menu').slideToggle();
-                        });
-                    });
-                </script>
                 <div class="col-lg-6 nav-design-two">
                     <div class="nav-menu-wrapper-two">
                             <div class="mainmenu">
                                 <div class="menu-main-menu-container m-0 p-0">
                                     <ul id="primary-menu" class="menu justify-between">
-                                        <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
+                                        <li class="menu-item relative" id="home">
+                                            <span>
                                                 Home
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
-                                                <li class="menu-item "><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
+                                            </span>
+                                            <ul class="sub-menu hidden">
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
+                                                <li class=""><a href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
+                                            <span>
                                                 Header Styles
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
-                                                <li class="menu-item "><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
+                                            </span>
+                                            <ul class="sub-menu hidden">
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
+                                                <li class=""><a href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
+                                            <span>
                                                 Features
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
-                                                <li class="menu-item "><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
+                                            </span>
+                                            <ul class="sub-menu hidden">
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
+                                                <li class=""><a href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a class="menu-item text-[#000] text-[20px] font-medium">Lifestyle</a>
+                                            <span>Lifestyle</span>
                                         </li>
                                         <li class="menu-item relative">
-                                            <a href="" aria-current="page" class="menu-item text-[#000] text-[20px] font-medium">
+                                            <span>
                                                 Shop
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
-                                            </a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
-                                                <li class="menu-item pb-2.5"><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
-                                                <li class="menu-item "><a class="menu-item" href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
+                                            </span>
+                                            <ul class="sub-menu hidden">
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
+                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
+                                                <li class=""><a href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
                                             </ul>
                                         </li>
                                     </ul>
