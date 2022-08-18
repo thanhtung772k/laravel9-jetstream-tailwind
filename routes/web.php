@@ -20,7 +20,13 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('client.layouts.home');
+});
+Route::get('/detail', function () {
+    return view('client.layouts.detail');
+});
+Route::get('/category', function () {
+    return view('client.layouts.category');
 });
 
 Route::middleware([

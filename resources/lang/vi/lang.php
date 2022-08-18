@@ -144,4 +144,5 @@ return [
     'working' => 'Đang làm việc',
     'list_user' => 'Danh sách nhân sự',
     'chart_user' => 'Biểu đổ nhân sự',
+    'login' => 'Đăng nhập',
 ];

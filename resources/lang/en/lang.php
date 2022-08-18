@@ -145,4 +145,5 @@ return [
     'working' => 'Working',
     'list_user' => 'List User',
     'chart_user' => 'Chart User',
+    'login' => 'Login',
 ];

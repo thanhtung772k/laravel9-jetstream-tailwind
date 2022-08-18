@@ -1,0 +1,329 @@
+/* Mixin */
+$mobile-width: 480px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+    @media (max-width: #{$tablet-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
+.post-detail-wapper {
+    @include mobile {
+        display: block;
+    }
+    @include tablet {
+        display: block;
+    }
+    &__column {
+        @include mobile {
+            max-width: 100%;
+        }
+        @include tablet {
+            max-width: 100%;
+        }
+    }
+}
+
+.post-detail {
+    &-banner {
+        label {
+            @include mobile {
+                font-size: 24px;
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+            @include tablet {
+                font-size: 35px
+            }
+        }
+        @include mobile {
+            padding: 0 15px;
+        }
+        @include tablet {
+            padding: 0 15px;
+        }
+    }
+    @include mobile {
+        padding: 0 15px;
+    }
+    @include tablet {
+        padding: 0 15px;
+    }
+    &__img img {
+        height: auto;
+        width: 100%;
+        border-radius: 24px;
+    }
+
+    &__tag
+    {
+        @include mobile {
+            padding: 12px 25px;
+            width: 128px;
+            font-size: 15px;
+        }
+        @include tablet {
+            padding: 12px 25px;
+            width: 128px;
+            font-size: 15px;
+        }
+        a {
+            text-decoration: none;
+            color: #FF4063;
+        }
+    }
+
+    &__author-content {
+        margin-left: 12px
+    }
+
+    &__title h1:hover {
+        text-decoration: none;
+        color: #FF4063;
+        cursor: pointer;
+    }
+
+    &__title h1 {
+        @include mobile {
+            font-size: 22px;
+        }
+        @include tablet {
+            font-size: 31px;
+        }
+        font-size: 46px;
+        font-weight: 700;
+    }
+    &__continue p {
+        font-size: 23px;
+        line-height: 1.5;
+        color: #555555;
+        margin: 0 0 20px 0;
+        font-family: "Nunito";
+        font-weight: normal;
+        text-align: inherit;
+    }
+    .continue-hover:hover {
+        color: #279EFF;
+        cursor: pointer;
+    }
+}
+
+.post-detail__author {
+    &-img img {
+        @include mobile {
+            width: 50px;
+        }
+        border-radius: 100%;
+        width: 64px;
+        height: auto;
+    }
+
+    &-name {
+        @include mobile {
+            font-size: 16px;
+        }
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 700;
+        margin: 0;
+        color: #3E3E3E;
+    }
+
+    &-date {
+        @include mobile {
+            font-size: 13px;
+        }
+        font-size: 16px;
+        line-height: 1.7;
+        color: #838383;
+        font-weight: 600;
+    }
+}
+
+.post-content {
+    @include mobile {
+        padding: 0 15px;
+    }
+    @include tablet {
+        padding: 0 15px;
+    }
+    border-bottom: 1px solid #eeeeee;
+    p {
+        @include mobile {
+            font-size: 18px;
+        }
+        font-size: 23px;
+        line-height: 1.5;
+        color: #555555;
+        margin: 0 0 20px 0;
+        font-family: "Nunito";
+        font-weight: normal;
+        text-align: inherit;
+    }
+
+    h2 {
+        @include mobile {
+            font-size: 20px;
+        }
+        font-size: 30px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    &__img {
+        display: inline-block;
+       img {
+           @include mobile {
+               width: 100%;
+               max-width: 100%;
+               height: auto;
+           }
+
+           @include tablet {
+               width: 100%;
+               max-width: 223px;
+               height: 245px;
+           }
+           width: 100%;
+           max-width: 275px;
+           height: 300px;
+           border-radius: 22px;
+           object-fit: cover;
+           object-position: center top;
+       }
+    }
+
+    blockquote {
+        background: #f9f9f9;
+        border-radius: 24px;
+        i {
+            font-size: 50px;
+            padding-left: 75px;
+            color: #FF4063;
+            opacity: 0.2;
+        }
+        p {
+            @include mobile {
+                padding: 0 35px 25px 35px;
+                font-size: 18px;
+            }
+            text-align: center;
+            padding: 10px 75px 55px 75px;
+            font-size: 26px;
+        }
+    }
+    ul li::marker {
+        color: #FF4063;
+    }
+}
+
+.post-comment-wapper {
+    @include mobile {
+        margin: 40px 0;
+    }
+    @include tablet {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+.post-comment {
+    @include mobile {
+        padding: 16px;
+    }
+    &__title {
+        border-bottom: 1px solid #eeeeee;
+        p {
+            font-size: 28px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+    }
+}
+
+.post-comment__list {
+    &-content .border-author {
+        border-bottom: 1px solid #eeeeee;
+        margin-left: 80px;
+    }
+    &-content .line-hight-cus {
+        line-height: 2.6;
+    }
+    &-name {
+        color: #252525;
+        font-weight: 700;
+    }
+    &-date {
+        color: #555555;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1818em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+    &-replyBtn span:hover {
+        background: #279EFF;
+        color: #fff;
+        cursor: pointer;
+    }
+    &-replyBtn span {
+        @include mobile {
+            padding: 10px 10px;
+        }
+        @include tablet {
+            padding: 10px 10px;
+        }
+        color: #252a37;
+        background: #fff;
+        display: inline-flex;
+        padding: 10px 30px;
+        line-height: 1;
+        border-radius: 12px;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+        border: 1px solid #ded9d9;
+    }
+}
+
+.category-menu li a:hover {
+    text-decoration: none;
+    color: #FF4063;
+    cursor: pointer;
+}
+
+.post-category-wapper {
+    @include mobile {
+        max-width: 100%;
+    }
+    @include tablet {
+        max-width: 100%;
+    }
+}
+
+.post-category {
+    @include mobile {
+        padding-left: 0;
+    }
+
+    @include tablet {
+        padding-left: 0;
+    }
+}

@@ -22,6 +22,5 @@ $(document).ready(function (event) {
             $(this).children('.nav-menu__sub-item').slideDown();
             $(this).addClass('active');
         }
-
     });
 });
