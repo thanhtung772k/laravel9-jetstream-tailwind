@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('image', 255)->nullable();
             $table->integer('status')->default(0);
+            $table->string('slug', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
