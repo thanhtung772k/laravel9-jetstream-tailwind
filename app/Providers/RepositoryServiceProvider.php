@@ -34,6 +34,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\Position\PositionRepository::class, \App\Repositories\Position\PositionRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\UserDetail\UserDetailRepository::class, \App\Repositories\UserDetail\UserDetailRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\Timekeeping\TimekeepingRepository::class, \App\Repositories\Timekeeping\TimekeepingRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\Category\CategoryRepository::class, \App\Repositories\Category\CategoryRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\Comment\CommentRepository::class, \App\Repositories\Comment\CommentRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\Post\PostRepository::class, \App\Repositories\Post\PostRepositoryEloquent::class);
         //:end-bindings:
     }
 }
