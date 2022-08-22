@@ -11,5 +11,17 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface PostRepository extends RepositoryInterface
 {
-    //
+    /**
+     * show all list post
+     *
+     * @return void
+     */
+    public function index();
+
+    /**
+     * insert a new post
+     *
+     * @return void
+     */
+    public function insert($request, $imgPost, $status);
 }

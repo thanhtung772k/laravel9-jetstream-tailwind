@@ -23,7 +23,6 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +31,15 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    /**
+     * get all category
+     *
+     * @return void
+     */
+    public function getAll()
+    {
+        return $this->model->all();
+    }
+
 }

@@ -21,4 +21,14 @@ class CategoryService extends BaseService
     {
         return CategoryRepository::class;
     }
+
+    /**
+     * get all category
+     *
+     * @return void
+     */
+    public function getAll()
+    {
+        return $this->repository->getAll();
+    }
 }

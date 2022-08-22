@@ -6,6 +6,7 @@ use App\Http\Controllers\CommandController;
 use App\Http\Controllers\AddTimesheetController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -68,12 +69,16 @@ Route::middleware([
     Route::get('/management-user-delete/{id}', [UserController::class, 'delete'])->name('delete_user');
     Route::get('/management-user-leave', [UserController::class, 'leave'])->name('leave_user');
     Route::get('/management-user-detail/{id}', [UserController::class, 'detail'])->name('detail_user');
+    // ........................ route user management ........................
+    Route::get('/management-post-index', [PostController::class, 'index'])->name('index_post');
+    Route::get('/management-post-create', [PostController::class, 'create'])->name('create_post');
+    Route::post('/management-post-create', [PostController::class, 'insert'])->name('insert_post');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {
     $min_epoch = strtotime(now()->format('y-m-d 00:00:00'));
     $max_epoch = strtotime(now()->format('y-m-d 23:59:59'));
-    $dateArray=[];
+    $dateArray = [];
     foreach (range(1, 200) as $date) {
         $hour = rand($min_epoch, $max_epoch);
         $dateArray[] = date("Y-m-d H:i:s", $hour);

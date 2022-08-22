@@ -108,6 +108,22 @@
 
             <li class="nav-menu__item">
                 <span>
+                    <i class="nav-menu__icon fa-solid fa-file-pen pr-3"></i>
+                    <span>@lang('client/lang.post_management')</span>
+                </span>
+                <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
+                <ul class="nav-menu__sub-item" style="display: none;">
+                    <li class="text-center w-full">
+                        <a href="{{route('index_post')}}" class="nav-menu__sub-item--list">@lang('client/lang.post_list')</a>
+                    </li>
+                    <li class="text-center w-full">
+                        <a href="{{route('create_post')}}" class="nav-menu__sub-item--list">@lang('client/lang.post_create')</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-menu__item">
+                <span>
                     <i class="nav-menu__icon fa-solid fa-file pr-3"></i>
                     <span>@lang('lang.instruction')</span>
                 </span>

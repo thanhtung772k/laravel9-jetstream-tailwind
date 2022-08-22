@@ -11,5 +11,10 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CategoryRepository extends RepositoryInterface
 {
-    //
+    /**
+     * get all category
+     *
+     * @return void
+     */
+    public function getAll();
 }

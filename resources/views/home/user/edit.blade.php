@@ -281,8 +281,7 @@
                                         <input type="hidden" name="old_evidence_image" value="{{$userById->avatar}}">
                                         @if(isset($userById->avatar))
                                             <div class="old_image">
-                                                <img src="{{asset('storage/avatarUser')}}/{{$userById->avatar}}"
-                                                     width="100" height="100">
+                                                <img src="{{asset('storage/avatarUser')}}/{{$userById->avatar}}" width="100" height="100">
                                             </div>
                                         @else
                                             <div class="old_image">

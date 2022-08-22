@@ -29,6 +29,8 @@ return [
     'PAGINATE_VALUE' => 10,
     'STATUS_UPDATE_DONE' => 1,
     'STATUS_NOT_UPDATED' => 0,
+    'STATUS_PUBLIC' => 1,
+    'STATUS_DRAFF' => 0,
 ]
 
 ?>
