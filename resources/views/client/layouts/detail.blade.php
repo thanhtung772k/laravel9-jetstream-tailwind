@@ -95,8 +95,7 @@
                         </p>
                         <div class="my-[30px] text-center">
                             <div class="post-content__img px-[10px]">
-                                <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/winter-leaf.jpg"
-                                     alt="">
+                                <img src='https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/winter-leaf.jpg'>
                             </div>
                         </div>
                         <p>

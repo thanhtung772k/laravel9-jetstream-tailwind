@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Department;
 use App\Models\Position;
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\UserDetail;
 use Database\Factories\TimesheetFactory;
@@ -35,6 +36,7 @@ class TimesheetTableSeeder extends Seeder
                 Timesheet::factory()->count(1)->create(['user_id' => $user->id, 'date' => now()->parse($dates[$i])->format("Y-m-d")]);
             }
             UserDetail::factory()->create(['user_id' => $user->id,'employee_code'=>$user->id]);
+            Post::factory()->create(['author_id' => $user->id, 'category_id'=>rand(1,2)]);
         });
     }
 }
