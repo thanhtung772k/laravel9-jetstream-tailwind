@@ -16,6 +16,7 @@ return [
     'post_management' => 'Post Management',
     'post_list' => 'Post List',
     'title' => 'Title',
+    'slug' => 'Slug',
     'img' => 'Image',
     'category' => 'Category',
     'author' => 'Author',

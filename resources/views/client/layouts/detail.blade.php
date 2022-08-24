@@ -6,7 +6,7 @@
         <div class="row post-detail-wapper p-0">
             <div class="col-7 post-detail-wapper__column">
                 <div class="row">
-                    <div class="post-detail">
+                    <div class="post-detail w-full">
                         <div class="post-detail__img mb-[40px]">
                             <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene-770x470.jpg"
                                  alt="" class="">

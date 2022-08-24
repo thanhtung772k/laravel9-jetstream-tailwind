@@ -17,48 +17,44 @@
                         </div>
                         <div class="row pb-4">
                             <div class="col-sm-2 header-search__text-date">
-                                <span class="text-sm">@lang('lang.employee_code')</span>
+                                <span class="text-sm">@lang('client/lang.title')</span>
                             </div>
                             <div class="col-sm-5 header-search__text-date">
                                 <div class="input-group date">
-                                    <input class="form-control" name="user_id" value="{{ request()->get('user_id') }}">
+                                    <input class="form-control" name="title" value="{{ request()->get('title') }}">
                                 </div>
                             </div>
                         </div>
                         <div class="row pb-4">
                             <div class="col-sm-2 header-search__text-date">
-                                <span class="text-sm">@lang('lang.name')</span>
-                            </div>
-                            <div class="col-sm-5 header-search__text-date">
-                                <div class="input-group date">
-                                    <input class="form-control" name="user_name" value="{{ request()->get('user_name') }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pb-4">
-                            <div class="col-sm-2 header-search__text-date">
-                                <span class="text-sm">@lang('lang.location')</span>
+                                <span class="text-sm">@lang('client/lang.category')</span>
                             </div>
                             <div class="col-sm-4 header-search__text-date">
                                 <div class="input-group date">
-                                    <select class="form-control text-sm" name="location">
+                                    <select class="form-control text-sm" name="category">
                                         <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}" {{ request()->get('category') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row pb-4">
                             <div class="col-sm-2 header-search__text-date">
-                                <span class="text-sm">@lang('lang.department')</span>
+                                <span class="text-sm">@lang('lang.status')</span>
                             </div>
                             <div class="col-sm-4 header-search__text-date">
-                                <div class="input-group date" >
-                                    <select class="form-control text-sm" name="dept">
-                                        <option value="{{config('constant.default_number')}}">@lang('lang.all')</option>
+                                <div class="input-group date">
+                                    <select class="form-control text-sm" name="status">
+                                        <option value="{{config('constant.default_number')}}" {{ request()->get('status') == config('constant.default_number') ? 'selected' : '' }}>@lang('lang.all')</option>
+                                        <option value="{{config('constant.STATUS_PUBLIC')}}" {{ request()->get('status') == config('constant.STATUS_PUBLIC') ? 'selected' : '' }}>Public</option>
+                                        <option value="{{config('constant.STATUS_DRAFF')}}" {{ request()->get('status') == config('constant.STATUS_DRAFF') ? 'selected' : '' }}>Draff</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row text-center">
                             <div class="col center">
                                 <button type="submit" class="btn btn-primary cus-btn-style bg-[#c2f2ff]"
@@ -79,7 +75,6 @@
                     </div>
                 </div>
             </div>
-
         </main>
     </div>
 @stop

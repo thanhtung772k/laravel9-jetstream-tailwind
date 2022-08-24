@@ -70,4 +70,12 @@ interface UserDetailRepository extends RepositoryInterface
      * @return mixed
      */
     public function detail($id);
+
+    /**
+     * Update or create info User
+     *
+     * @param $info
+     * @return void
+     */
+    public function updateInfo($info);
 }

@@ -145,4 +145,5 @@ return [
     'list_user' => 'Danh sách nhân sự',
     'chart_user' => 'Biểu đổ nhân sự',
     'login' => 'Đăng nhập',
+    'view_more' => 'Hiển thị',
 ];

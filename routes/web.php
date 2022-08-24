@@ -73,6 +73,10 @@ Route::middleware([
     Route::get('/management-post-index', [PostController::class, 'index'])->name('index_post');
     Route::get('/management-post-create', [PostController::class, 'create'])->name('create_post');
     Route::post('/management-post-create', [PostController::class, 'insert'])->name('insert_post');
+    Route::get('/management-post-edit/{id}', [PostController::class, 'edit'])->name('edit_post');
+    Route::post('/management-post-edit/{id}', [PostController::class, 'update'])->name('update_post');
+    Route::get('/management-post-delete/{id}', [PostController::class, 'delete'])->name('delete_post');
+    Route::get('/management-post-detail/{id}', [PostController::class, 'detail'])->name('detail_post');
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {

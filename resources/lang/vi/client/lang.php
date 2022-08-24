@@ -16,6 +16,7 @@ return [
     'post_management' => 'Quản Lý bài viết',
     'post_list' => 'Danh sách bài viết',
     'title' => 'Tiêu đề',
+    'slug' => 'Slug',
     'img' => 'Hình ảnh',
     'category' => 'Loại bài viết',
     'author' => 'Tác giả',

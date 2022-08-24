@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="bg-[#FF4063] text-[17px] text-white w-[150px] h-[50px] rounded-[50px] header-login transition duration-300 flex justify-center items-center">
-                        <a href="" class="transition duration-300">
+                        <a href="{{route('login')}}" class="transition duration-300">
                             <i class="fa-solid fa-right-to-bracket pr-1.5"></i>
                             <span>
                                  @lang('lang.login')

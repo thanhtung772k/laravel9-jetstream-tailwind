@@ -39,17 +39,17 @@
                                 <td class="whitespace-nowrap">{{now()->parse($post->created_at)->format('Y-m-d')}}</td>
 
                                 <td class="whitespace-nowrap">
-                                    @if($post->status == 0)
-                                        Draff
+                                    @if($post->status == config('constant.STATUS_DRAFF'))
+                                        <span class="text-xs px-1 bg-cancel text-white rounded">Draff</span>
                                     @else
-                                        Public
+                                        <span class="text-xs px-1 bg-accept text-white rounded">Public</span>
                                     @endif
                                 </td>
 
                                 <td class="whitespace-nowrap">
-                                    <a href="" class="text-xs btn btn-outline-primary ">@lang('client/lang.detail')</a>
-                                    <a href="" class=" text-xs btn btn-outline-info mx-[4px]">@lang('client/lang.update')</a>
-                                    <a href="" class="text-xs btn btn-outline-danger ">@lang('client/lang.delete')</a>
+                                    <a href="{{route('detail_post', $post->id)}}" class="text-xs btn btn-outline-primary ">@lang('lang.view_more')</a>
+                                    <a href="{{route('edit_post', $post->id)}}" class=" text-xs btn btn-outline-info mx-[4px]">@lang('client/lang.update')</a>
+                                    <a href="{{route('delete_post', $post->id)}}" class="text-xs btn btn-outline-danger ">@lang('client/lang.delete')</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -59,3 +59,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
+
