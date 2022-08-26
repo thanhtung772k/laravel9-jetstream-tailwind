@@ -9,9 +9,13 @@ use App\Services\UserDetail\UserDetailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Traits\ManageFile;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    use ManageFile;
+
     public function __construct()
     {
         $this->postService = app(PostService::class);
@@ -105,6 +109,7 @@ class PostController extends Controller
             return redirect()->route('index_post');
         } catch (\Exception $exception) {
             DB::rollBack();
+            dd($exception);
             return redirect()->back()->withInput()->withErrors();
         }
     }
@@ -137,5 +142,28 @@ class PostController extends Controller
         return view('home.post.detail', [
             'post' => $post
         ]);
+    }
+
+    /**
+     * Upload Image Ckeditor
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function uploadImage(Request $request)
+    {
+            $valiadateResult = Validator::make
+            (
+                $request->all(),
+                [
+                    'upload' => 'nullable|alpha_num|mimes:jpeg,jpg,png|max:2048',
+                ]
+            );
+        if($request->hasFile('upload')) {
+            $path = 'uploadPost';
+            $imgPost = $this->uploadFileTo($request->file('upload'), $path)['fileName'];
+            $url = asset('storage/'.$path.'/'.$imgPost);
+            return response()->json(['fileName' => $imgPost, 'uploaded'=> 1 ,'url'=> $url]);
+        }
     }
 }

@@ -191,18 +191,6 @@
 
                             <div>
                                 <div class="pt-4 add_timesheet-title">
-                                    <label>@lang('client/lang.content') <span class="text-red-500">*</span></label>
-                                    <div>
-                                        <textarea class="form-control min-h-[270px]" name="content" rows="3">{{$post->content}}</textarea>
-                                    </div>
-                                    @error('reason')
-                                    <div class="text-red-500">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="pt-4 add_timesheet-title">
                                     <label>@lang('client/lang.about_author')</label>
                                     <div>
                                         <textarea class="form-control" name="author" rows="3">{{$author->author_info}}</textarea>
@@ -213,6 +201,33 @@
                                 </div>
                             </div>
 
+                            <div class="">
+                                <div class="pt-4 add_timesheet-title">
+                                    <label>@lang('client/lang.content') <span class="text-red-500">*</span></label>
+                                    <div id="container" class=" w-full">
+                                        <textarea class="form-control min-h-[270px]" id="editor" name="content">{{$post->content}}</textarea>
+                                    </div>
+                                    @error('reason')
+                                    <div class="text-red-500">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <style>
+                                #container {
+                                    max-width: 100%;
+                                    margin: 20px auto;
+                                }
+                                .ck-editor__editable[role="textbox"] {
+                                    /* editing area */
+                                    min-height: 200px;
+                                    max-width: 680px;
+                                }
+                                .ck-content .image {
+                                    /* block images */
+                                    max-width: 80%;
+                                    margin: 20px auto;
+                                }
+                            </style>
                             <div>
                                 <div class="row pt-4">
                                     <div class="col-2">
@@ -243,4 +258,19 @@
     </div>
     <script src="{{ asset('js/timesheet/post.js') }}"></script>
     <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ), {
+                ckfinder:{
+                    uploadUrl: '{{ route('ckeditor.upload').'?_token='.csrf_token() }}'
+                }
+            } )
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @stop

@@ -111,7 +111,7 @@
                             trying to sell a gated compound.
                         </p>
                         <blockquote>
-                            <i class="fa-solid fa-quote-left"></i>
+                            <i class="fa-solid fa-quote-left post-content__icon"></i>
                             <p>
                                 A designer knows he has achieved perfection not when there is nothing left to add, but
                                 when there is nothing left to take away.

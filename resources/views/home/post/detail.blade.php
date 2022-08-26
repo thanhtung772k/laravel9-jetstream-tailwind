@@ -44,6 +44,7 @@
                             </div>
                             <div class="row">
                                 <div class="post-content w-full">
+                                    {!!$post->content!!}
                                     <p>
                                         Struggling to sell one multi-million dollar home currently on the market won’t stop actress
                                         and singer Jennifer Lopez from expanding her property collection. Lopez has reportedly added
