@@ -7,6 +7,7 @@ use App\Http\Controllers\AddTimesheetController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\client\HomeController;
 
 
 /*
@@ -20,9 +21,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('client.layouts.home');
-});
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/detail', function () {
     return view('client.layouts.detail');
 });

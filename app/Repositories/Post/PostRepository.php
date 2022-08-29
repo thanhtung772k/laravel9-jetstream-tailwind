@@ -65,4 +65,11 @@ interface PostRepository extends RepositoryInterface
      * @return void
      */
     public function detail($id);
+
+    /**
+     * show all public post
+     *
+     * @return void
+     */
+    public function publicPost();
 }

@@ -126,6 +126,22 @@ $desktop-width: 1024px;
     color: #279EFF;
     cursor: pointer;
   }
+
+  &__about {
+    &-author img {
+      width: 120px;
+      min-width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    &-title span {
+      line-height: 1.5;
+      color: #555555;
+      font-family: "Nunito";
+      font-size:23px
+    }
+  }
 }
 
 .post-detail__author {
@@ -135,7 +151,8 @@ $desktop-width: 1024px;
     }
     border-radius: 100%;
     width: 64px;
-    height: auto;
+    max-width: 64px;
+    height: 64px;
   }
 
   &-name {
@@ -223,9 +240,42 @@ $desktop-width: 1024px;
     opacity: 0.2;
   }
 
+  figure {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    img {
+      width: 100%;
+      min-height: 500px;
+      border-radius: 22px;
+      object-fit: cover;
+      object-position: center top;
+    }
+  }
+
+  blockquote::before {
+    content: "\201C";
+    font-family: Georgia, serif;
+    font-size: 75px;
+    font-weight: bold;
+    color: #FF4063;
+    position: absolute;
+    left: 10px;
+    top: 2px;
+    opacity: 0.2;
+  }
+
   blockquote {
     background: #f9f9f9;
     border-radius: 24px;
+    display: block;
+    padding: 40px 20px 15px 45px;
+    margin: 0 0 20px;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #666;
+    text-align: justify;
 
     p {
       @include mobile {

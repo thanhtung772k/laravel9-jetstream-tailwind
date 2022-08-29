@@ -135,4 +135,19 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
             ->select('posts.*', 'categories.name as categoryName', 'users.name as authorName')
             ->find($id);
     }
+
+    /**
+     * show all public post
+     *
+     * @return void
+     */
+    public function publicPost()
+    {
+        return $this->model->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->join('users', 'posts.author_id', '=', 'users.id')
+            ->select('posts.*', 'categories.name as categoryName', 'users.name as authorName')
+            ->where(
+                'status', config('constant.STATUS_PUBLIC')
+            )->get();
+    }
 }

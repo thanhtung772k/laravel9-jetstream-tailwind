@@ -22,8 +22,7 @@
                         </div>
                         <div class="post-detail__author mt-[25px] mb-[50px] flex items-start">
                             <div class="post-detail__author-img">
-                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=45&d=mm&r=g"
-                                     alt="">
+                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=200&d=mm&r=g" alt="">
                             </div>
                             <div class="post-detail__author-content ml-[18px] mt-[10px]">
                                 <div class="post-detail__author-name">
@@ -93,11 +92,9 @@
                             again—but even the slightly dangerous-sounding ones conjure up something specific. That
                             definiteness offers an appealing sense
                         </p>
-                        <div class="my-[30px] text-center">
-                            <div class="post-content__img px-[10px]">
-                                <img src='https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/winter-leaf.jpg'>
-                            </div>
-                        </div>
+                        <figure class="my-[30px] text-center">
+                                <img src="http://laravel9.test/storage/uploadPost/1661738820.jpg">
+                        </figure>
                         <p>
                             Anyway, let’s get to that fun. A very joyful book to read about the decade is Frederick
                             Lewis Allen’s Only Yesterday: An Informal History of the 1920s, which Allen—a blueblood
@@ -111,7 +108,6 @@
                             trying to sell a gated compound.
                         </p>
                         <blockquote>
-                            <i class="fa-solid fa-quote-left post-content__icon"></i>
                             <p>
                                 A designer knows he has achieved perfection not when there is nothing left to add, but
                                 when there is nothing left to take away.
@@ -151,7 +147,29 @@
                         </p>
                     </div>
                 </div>
-                <div class="row bg-[#f9f9f9] mt-[100px] rounded-[24px] post-comment-wapper">
+
+                <div class="row bg-[#f9f9f9] mt-[60px] rounded-[24px] post-comment-wapper">
+                    <div class="post-comment p-[30px] w-full">
+                        <div class="post-detail__about flex items-start">
+                            <div class="post-detail__about-author">
+                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=200&d=mm&r=g" alt="">
+                            </div>
+                            <div class="post-detail__author-content ml-[18px] mt-[10px]">
+                                <div class="post-detail__about-title ">
+                                    <span>About Author</span>
+                                </div>
+                                <div class="post-detail__author-name mb-[6px]">
+                                    <span class="text-[24px]">Thor Odinson</span>
+                                </div>
+                                <div class="post-detail__about-title">
+                                    <span class="text-[20px]">Hello! My name is Thor Odinson!, Actively writing articles for this blog . I really like tutorials and illustrations, stay alert next tutorials.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bg-[#f9f9f9] mt-[60px] rounded-[24px] post-comment-wapper">
                     <div class="post-comment p-[30px] w-full">
                         <header>
                             <div class="post-comment__title">

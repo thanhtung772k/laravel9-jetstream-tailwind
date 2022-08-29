@@ -29,7 +29,11 @@
                                     </div>
                                     <div class="post-detail__author mt-[25px] mb-[50px] flex items-start">
                                         <div class="post-detail__author-img">
-                                            <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=45&d=mm&r=g" alt="">
+                                            @if(isset($author->avatar))
+                                                <img src="{{asset('storage/avatarUser')}}/{{$author->avatar}}" alt="">
+                                            @else
+                                                <img src="{{asset('storage/avatarUser/default.jpg')}}" alt="">
+                                            @endif
                                         </div>
                                         <div class="post-detail__author-content ml-[18px] mt-[10px]">
                                             <div class="post-detail__author-name">
@@ -118,7 +122,6 @@
                                         trying to sell a gated compound.
                                     </p>
                                     <blockquote>
-                                        <i class="fa-solid fa-quote-left"></i>
                                         <p>
                                             A designer knows he has achieved perfection not when there is nothing left to add, but
                                             when there is nothing left to take away.

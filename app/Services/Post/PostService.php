@@ -117,4 +117,14 @@ class PostService extends BaseService
     {
         return $this->repository->detail($id);
     }
+
+    /**
+     * show all public post
+     *
+     * @return void
+     */
+    public function publicPost()
+    {
+        return $this->repository->publicPost();
+    }
 }

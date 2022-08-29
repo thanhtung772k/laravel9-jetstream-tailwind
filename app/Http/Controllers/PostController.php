@@ -139,8 +139,10 @@ class PostController extends Controller
     public function detail($id)
     {
         $post = $this->postService->detail($id);
+        $author = $this->userDetailService->detail($post->author_id);
         return view('home.post.detail', [
-            'post' => $post
+            'post' => $post,
+            'author' => $author
         ]);
     }
 
@@ -152,13 +154,13 @@ class PostController extends Controller
      */
     public function uploadImage(Request $request)
     {
-            $valiadateResult = Validator::make
-            (
-                $request->all(),
-                [
-                    'upload' => 'nullable|alpha_num|mimes:jpeg,jpg,png|max:2048',
-                ]
-            );
+        $valiadateResult = Validator::make
+        (
+            $request->all(),
+            [
+                'upload' => 'nullable|alpha_num|mimes:jpeg,jpg,png|max:2048',
+            ]
+        );
         if($request->hasFile('upload')) {
             $path = 'uploadPost';
             $imgPost = $this->uploadFileTo($request->file('upload'), $path)['fileName'];
