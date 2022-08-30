@@ -4,12 +4,12 @@
             <div class="row items-center">
                 <div class="col-lg-3 flex justify-between">
                     <div class="logo theme-logo text-left">
-                        <h1 class="text-logo flex items-center">
-                            <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/12/logo-epu-inkythuatso-14-15-47-22.jpg" alt="" class="h-24">
-                            <a href="#" class="font-bold text-4xl hover:no-underline text-[#0056b3]">
-                                EPU
-                            </a>
-                        </h1>
+                        <a href="{{route('client.index')}}" class="font-bold text-4xl hover:no-underline text-[#0056b3]">
+                            <h1 class="text-logo flex items-center">
+                                    <img src="https://inkythuatso.com/uploads/thumbnails/800/2021/12/logo-epu-inkythuatso-14-15-47-22.jpg" alt="" class="h-24">
+                                    EPU
+                            </h1>
+                        </a>
                     </div>
 
                     <div class="reposive-header-icon-search text-[30px] hidden">

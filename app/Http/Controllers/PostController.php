@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Services\Category\CategoryService;
 use App\Services\Post\PostService;
 use App\Services\User\UserService;
@@ -58,6 +59,7 @@ class PostController extends Controller
     /**
      * insert a new post
      *
+     * @param Request $request
      * @return void
      */
     public function insert(Request $request)
@@ -149,23 +151,20 @@ class PostController extends Controller
     /**
      * Upload Image Ckeditor
      *
-     * @param Request $request
+     * @param PostRequest $request
      * @return void
      */
-    public function uploadImage(Request $request)
+    public function uploadImage(PostRequest $request)
     {
-        $valiadateResult = Validator::make
-        (
-            $request->all(),
-            [
-                'upload' => 'nullable|alpha_num|mimes:jpeg,jpg,png|max:2048',
-            ]
-        );
-        if($request->hasFile('upload')) {
-            $path = 'uploadPost';
-            $imgPost = $this->uploadFileTo($request->file('upload'), $path)['fileName'];
-            $url = asset('storage/'.$path.'/'.$imgPost);
-            return response()->json(['fileName' => $imgPost, 'uploaded'=> 1 ,'url'=> $url]);
+        try {
+            if ($request->uploadImage) {
+                $path = 'uploadPost';
+                $imgPost = $this->uploadFileTo($request->uploadImage, $path)['fileName'];
+                $url = asset('storage/' . $path . '/' . $imgPost);
+                return response()->json(['fileName' => $imgPost, 'uploaded' => 1, 'url' => $url]);
+            }
+        } catch (\Exception $exception) {
+            return redirect()->back()->withInput()->withErrors();
         }
     }
 }

@@ -72,4 +72,12 @@ interface PostRepository extends RepositoryInterface
      * @return void
      */
     public function publicPost();
+
+    /**
+     * sho detail post with slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function slugPostDetail($slug);
 }

@@ -150,4 +150,21 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
                 'status', config('constant.STATUS_PUBLIC')
             )->get();
     }
+
+    /**
+     * sho detail post with slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function slugPostDetail($slug)
+    {
+        return $this->model->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->join('users', 'posts.author_id', '=', 'users.id')
+            ->select('posts.*', 'categories.name as categoryName', 'users.name as authorName')
+            ->where([
+                ['status', config('constant.STATUS_PUBLIC')],
+                ['posts.slug',$slug]
+            ])->first();
+    }
 }

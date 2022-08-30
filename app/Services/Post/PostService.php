@@ -46,15 +46,9 @@ class PostService extends BaseService
     {
         $path = 'imgPost';
         $imgPost = $this->uploadFileTo($request->evidence_image, $path)['fileName'];
-        $status = config('constant.STATUS_DRAFF');
-        if ($request->toggleBtn) {
-            $status = config('constant.STATUS_PUBLIC');
-        }
-        if (isset($request->slug)) {
-            $slug = Str::slug($request->slug);
-        } else {
-            $slug = Str::slug($request->title);
-        }
+        $request->toggleBtn ? $status = config('constant.STATUS_PUBLIC') : $status = config('constant.STATUS_DRAFF');
+        isset($request->slug) ? $slug = Str::slug($request->slug) : $slug = Str::slug($request->title);
+
         return $this->repository->insert($request, $imgPost, $status, $slug);
     }
 
@@ -84,15 +78,9 @@ class PostService extends BaseService
             $this->removeFile($request->old_evidence_image, $path);
             $imgEvidence = $this->uploadFileTo($request->evidence_image, $path)['fileName'];
         }
-        $status = config('constant.STATUS_DRAFF');
-        if ($request->toggleBtn) {
-            $status = config('constant.STATUS_PUBLIC');
-        }
-        if (isset($request->slug)) {
-            $slug = Str::slug($request->slug);
-        } else {
-            $slug = Str::slug($request->title);
-        }
+        $request->toggleBtn ? $status = config('constant.STATUS_PUBLIC') : $status = config('constant.STATUS_DRAFF');
+        isset($request->slug) ? $slug = Str::slug($request->slug) : $slug = Str::slug($request->title);
+
         return $this->repository->updatePost($request, $id, $status, $imgEvidence, $slug);
     }
 
@@ -126,5 +114,16 @@ class PostService extends BaseService
     public function publicPost()
     {
         return $this->repository->publicPost();
+    }
+
+    /**
+     * sho detail post with slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function slugPostDetail($slug)
+    {
+        return $this->repository->slugPostDetail($slug);
     }
 }

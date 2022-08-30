@@ -31,4 +31,14 @@ class CategoryService extends BaseService
     {
         return $this->repository->getAll();
     }
+
+    /**
+     * count all category
+     *
+     * @return void
+     */
+    public function countCategory()
+    {
+        return $this->repository->countCategory();
+    }
 }

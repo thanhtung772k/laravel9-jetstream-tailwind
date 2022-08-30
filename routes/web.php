@@ -7,7 +7,7 @@ use App\Http\Controllers\AddTimesheetController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\Client\HomeController;
 
 
 /*
@@ -21,10 +21,8 @@ use App\Http\Controllers\client\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/detail', function () {
-    return view('client.layouts.detail');
-});
+Route::get('/', [HomeController::class, 'index'])->name('client.index');
+Route::get('/detail/{slug}', [HomeController::class, 'detail'])->name('client.detail_post');
 Route::get('/category', function () {
     return view('client.layouts.category');
 });
@@ -80,10 +78,10 @@ Route::middleware([
 });
 Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
 Route::get('/test', function () {
-    $x= 3;
-    $y= 3;
-    $sum =     (2*2 + 4*2 + 2*2 + 2.5*2 + 3.5*4  + 4*3 + 3*2 + 2*3 + 3*2 + 1.5*3 + 3*3 + 3*2 + 3.5*2 + 4*2 + 3.5*2 + 3*2 + 4*2 + 2*2 + 3.5*2 + 4*2+ 2*3 + 3*2 + 4*2 +4*2 +3*2 + 4*2+3*3 + 3*2 +4*2+ 2.5*2 + 4*2+3*2 + 3.5*2 + 4 + 3*3 + 4*3 + 3.5*2 + 4*3 + 4*2 + 4*2 + 3.5 + 4*2 + 3.5*3 + 3*2 + 4*2 + 3.5*3 + 4*2 + 4*2+ 4*2+ 4*2 + 3.5*2 + 4*4*3 + $x*5 + $y*14)/144;
-    $sumTung = (12 + 14 + 4 + 5 + 8 + 6 + 8 + 7 + 12 + 2 + 7.5 + 5 + 9 + 7 + 7 + 6 + 4 + 8 + 4 + 8 + 5 + 8 + 10.5 + 8 + 6 + 8 + 4 + 7 + 7 + 7 +8 + 8 + 12 + 3 + 6 + 9 + 8 +6 + 10.5 + 7+4 + 8 + 5 + 12 +7 + 7 + 7 + 6 + 6 + 7.5 + 4 +14 + 14 + 14+ $x*5 + $y*14)/144;
+    $x = 3;
+    $y = 4;
+    $sum = (2 * 2 + 4 * 2 + 2 * 2 + 2.5 * 2 + 3.5 * 4 + 4 * 3 + 3 * 2 + 2 * 3 + 3 * 2 + 1.5 * 3 + 3 * 3 + 3 * 2 + 3.5 * 2 + 4 * 2 + 3.5 * 2 + 3 * 2 + 4 * 2 + 2 * 2 + 3.5 * 2 + 4 * 2 + 2 * 3 + 3 * 2 + 4 * 2 + 4 * 2 + 3 * 2 + 4 * 2 + 3 * 3 + 3 * 2 + 4 * 2 + 2.5 * 2 + 4 * 2 + 3 * 2 + 3.5 * 2 + 4 + 3 * 3 + 4 * 3 + 3.5 * 2 + 4 * 3 + 4 * 2 + 4 * 2 + 3.5 + 4 * 2 + 3.5 * 3 + 3 * 2 + 4 * 2 + 3.5 * 3 + 4 * 2 + 4 * 2 + 4 * 2 + 4 * 2 + 3.5 * 2 + 4 * 4 * 3 + $x * 5 + $y * 14) / 144;
+    $sumTung = (12 + 14 + 4 + 5 + 8 + 6 + 8 + 7 + 12 + 2 + 7.5 + 5 + 9 + 7 + 7 + 6 + 4 + 8 + 4 + 8 + 5 + 8 + 10.5 + 8 + 6 + 8 + 4 + 7 + 7 + 7 + 8 + 8 + 12 + 3 + 6 + 9 + 8 + 6 + 10.5 + 7 + 4 + 8 + 5 + 12 + 7 + 7 + 7 + 6 + 6 + 7.5 + 4 + 14 + 14 + 14 + $x * 5 + $y * 14) / 144;
     return $sum;
 });
 

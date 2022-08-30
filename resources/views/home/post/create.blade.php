@@ -4,6 +4,9 @@
         {{ Breadcrumbs::render('add_timesheet-create') }}
     </div>
 @endsection
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/timesheet/post.css') }}">
+@endpush
 @section('content')
     <div class="nav__sub-header absolute w-full" style="background-color: #fffafa;">
         <!-- Page Heading -->
@@ -73,77 +76,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <style>
-                                .switch {
-                                    position: relative;
-                                    display: inline-block;
-                                    width: 90px;
-                                    height: 36px;
-                                }
-
-                                .switch input {
-                                    display: none;
-                                }
-
-                                .slider {
-                                    position: absolute;
-                                    cursor: pointer;
-                                    top: 0;
-                                    left: 0;
-                                    right: 0;
-                                    bottom: 0;
-                                    background-color: #ca2222;
-                                    -webkit-transition: .4s;
-                                    transition: .4s;
-                                    border-radius: 6px;
-                                }
-
-                                .slider:before {
-                                    position: absolute;
-                                    content: "";
-                                    height: 34px;
-                                    width: 32px;
-                                    top: 1px;
-                                    left: 1px;
-                                    right: 1px;
-                                    bottom: 1px;
-                                    background-color: white;
-                                    transition: 0.4s;
-                                    border-radius: 6px;
-                                }
-
-                                input:checked + .slider {
-                                    background-color: #2ab934;
-                                }
-
-                                input:focus + .slider {
-                                    box-shadow: 0 0 1px #2196F3;
-                                }
-
-                                input:checked + .slider:before {
-                                    -webkit-transform: translateX(26px);
-                                    -ms-transform: translateX(26px);
-                                    transform: translateX(55px);
-                                }
-
-                                .slider:after {
-                                    content: 'Draff';
-                                    color: white;
-                                    display: block;
-                                    position: absolute;
-                                    transform: translate(-10%, -50%);
-                                    top: 50%;
-                                    left: 50%;
-                                    font-size: 10px;
-                                    font-family: Verdana, sans-serif;
-                                }
-
-                                input:checked + .slider:after {
-                                    content: 'Public';
-                                    transform: translate(-90%, -50%);
-                                }
-                            </style>
-
                             <div>
                                 <div class="row pt-4 add_timesheet-title">
                                     <div class="col-6">
@@ -192,23 +124,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <style>
-                                #container {
-                                    max-width: 100%;
-                                    margin: 20px auto;
-                                }
-                                .ck-editor__editable[role="textbox"] {
-                                    /* editing area */
-                                    min-height: 200px;
-                                    max-width: 680px;
-                                }
-                                .ck-content .image {
-                                    /* block images */
-                                    max-width: 80%;
-                                    margin: 20px auto;
-                                }
-                            </style>
-
+                            <input id="routeToken" type="hidden" value="{{ route('ckeditor.upload').'?_token='.csrf_token() }}" >
                             <div>
                                 <div class="row pt-4">
                                     <div class="col-2">
@@ -241,20 +157,4 @@
     <script src="{{ asset('js/timesheet/post.js') }}"></script>
     <script src="{{ asset('js/timesheet/add-timesheet.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-                ckfinder:{
-                    uploadUrl: '{{ route('ckeditor.upload').'?_token='.csrf_token() }}'
-                }
-            } )
-            .then( editor => {
-                console.log( editor );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
-
-
 @stop

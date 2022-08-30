@@ -23,7 +23,6 @@ class ProjectRequest extends FormRequest
      */
     public function rules()
     {
-//        dd($this->all());
         return [
             'project_name' => 'required|max:255',
             'value_contract' => 'required|integer|between:1,1000',

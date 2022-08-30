@@ -464,7 +464,7 @@ $desktop-width: 1024px;
     &-img img {
         width: 40px;
         border-radius: 12px;
-        height: auto;
+        height: 40px;
 
         @include mobile {
             width: 50px;

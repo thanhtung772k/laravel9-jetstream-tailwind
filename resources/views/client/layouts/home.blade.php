@@ -27,7 +27,7 @@
                             <div class="col-lg-6 post-list-content">
                                 <div class="post-grid-wrapper mb-[40px]">
                                     <div class="post-gridthumbnail">
-                                        <a href="">
+                                        <a href="{{route('client.detail_post',$post->slug)}}">
                                             <img src="{{asset('storage/imgPost')}}/{{$post->image}}" alt="" class="post-gridthumbnail__img w-full h-[294px] rounded-3xl object-cover">
                                         </a>
                                         <div class="grid-two-meta flex">
@@ -52,14 +52,18 @@
                                             </div>
                                         </div>
                                         <h3 class="post-grid-content__title">
-                                            <a href="" class="hover:no-underline hover:text-[#FF4063]">{{$post->title}}</a>
+                                            <a href="{{route('client.detail_post',$post->slug)}}" class="hover:no-underline hover:text-[#FF4063]">{{$post->title}}</a>
                                         </h3>
                                         <div class="post-excerpt-box">
                                             <p>Struggling to sell one multi-million dollar home currently on the market won’t stop actress and rently on the market won’t stop actress and</p>
                                         </div>
                                         <div class="post-author flex">
                                             <div class="post-author-img">
-                                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=33&d=mm&r=g" alt="" loading="lazy">
+                                                @if(isset($post->avatarUser))
+                                                    <img src="{{asset('storage/avatarUser')}}/{{$post->avatarUser}}" alt="" loading="lazy">
+                                                @else
+                                                    <img src="{{asset('storage/avatarUser/default.jpg')}}" alt="">
+                                                @endif
                                             </div>
                                             <div class="post-author-name">
                                                 <h4 class="post-author-name__title">

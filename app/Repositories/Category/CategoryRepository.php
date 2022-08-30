@@ -17,4 +17,11 @@ interface CategoryRepository extends RepositoryInterface
      * @return void
      */
     public function getAll();
+
+    /**
+     * count all category
+     *
+     * @return void
+     */
+    public function countCategory();
 }
