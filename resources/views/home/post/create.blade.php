@@ -30,7 +30,7 @@
                                         </section>
                                     </div>
                                 </div>
-                                @error('timesheet_id')
+                                @error('title')
                                 <div class="text-red-500">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -46,13 +46,8 @@
                                         </section>
                                     </div>
                                 </div>
-                                @error('timesheet_id')
-                                <div class="text-red-500">{{ $message }}</div>
-                                @enderror
                             </div>
-                            <script>
 
-                            </script>
                             <div>
                                 <div class="row pt-4 add_timesheet-title">
                                     <div class="col-6">
@@ -109,6 +104,17 @@
                                         <textarea class="form-control" name="author" rows="3">{{$author->author_info}}</textarea>
                                     </div>
                                     @error('reason')
+                                    <div class="text-red-500">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div>
+                                <div class="pt-4 add_timesheet-title">
+                                    <label>@lang('lang.description')</label>
+                                    <div>
+                                        <textarea class="form-control" name="description" rows="3"></textarea>
+                                    </div>
+                                    @error('description')
                                     <div class="text-red-500">{{ $message }}</div>
                                     @enderror
                                 </div>

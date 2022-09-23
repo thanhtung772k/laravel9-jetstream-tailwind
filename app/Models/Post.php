@@ -23,6 +23,7 @@ class Post extends Model
         'category_id',
         'image',
         'status',
-        'slug'
+        'slug',
+        'description'
     ];
 }

@@ -24,4 +24,12 @@ interface CategoryRepository extends RepositoryInterface
      * @return void
      */
     public function countCategory();
+
+    /**
+     * find category by slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function findCategory($slug);
 }

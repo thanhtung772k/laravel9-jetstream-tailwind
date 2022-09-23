@@ -32,7 +32,7 @@
                                             @if(isset($author->avatar))
                                                 <img src="{{asset('storage/avatarUser')}}/{{$author->avatar}}" alt="">
                                             @else
-                                                <img src="{{asset('storage/avatarUser/default.jpg')}}" alt="">
+                                                <img src="{{asset('upload/default.jpg')}}" alt="">
                                             @endif
                                         </div>
                                         <div class="post-detail__author-content ml-[18px] mt-[10px]">

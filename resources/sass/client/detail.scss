@@ -395,3 +395,21 @@ $desktop-width: 1024px;
     padding-left: 0;
   }
 }
+
+span {
+  .plan-purchase {
+    &-sub {
+      font-size: 10px;
+    }
+    font-size: 12px;
+  }
+
+
+  .cancel-plan {
+    font-size: 12px;
+  }
+
+  .cancel-plan-sub {
+    font-size: 10px;
+  }
+}

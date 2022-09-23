@@ -11,7 +11,6 @@
                             </h1>
                         </a>
                     </div>
-
                     <div class="reposive-header-icon-search text-[30px] hidden">
                         <a href="#" class="menu-item pr-6">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -31,25 +30,16 @@
                                                 Home
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
                                             </span>
-                                            <ul class="sub-menu hidden">
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
-                                                <li class=""><a href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
-                                            </ul>
                                         </li>
                                         <li class="menu-item relative">
                                             <span>
-                                                Header Styles
+                                                Category
                                                 <i class="fa-solid fa-angle-down text-xs"></i>
                                             </span>
                                             <ul class="sub-menu hidden">
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/" aria-current="page">Home Blog Slider</a></li>
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-two/">Home Blog Carousel</a></li>
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-three/">Home Grid : 2 Columns</a></li>
-                                                <li class=" pb-2.5"><a href="https://flawlessdigitalagency.com/elior/home-four/">Home Grid : 3 Columns</a></li>
-                                                <li class=""><a href="https://flawlessdigitalagency.com/elior/home-five/">Home Grid : 4 Columns</a></li>
+                                                @foreach($categories as $category)
+                                                    <li class=" pb-2.5"><a href="{{route('client.category_post', $category->slug)}}" aria-current="page">{{$category->name}}</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
                                         <li class="menu-item relative">

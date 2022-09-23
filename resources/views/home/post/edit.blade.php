@@ -133,6 +133,18 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <div class="pt-4 add_timesheet-title">
+                                    <label>@lang('lang.description')</label>
+                                    <div>
+                                        <textarea class="form-control" name="description" rows="3">{{$post->description}}</textarea>
+                                    </div>
+                                    @error('reason')
+                                    <div class="text-red-500">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="">
                                 <div class="pt-4 add_timesheet-title">
                                     <label>@lang('client/lang.content') <span class="text-red-500">*</span></label>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\CommandController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Livewire\HomeComponent;
 
 
 /*
@@ -21,11 +23,14 @@ use App\Http\Controllers\Client\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('client.index');
-Route::get('/detail/{slug}', [HomeController::class, 'detail'])->name('client.detail_post');
-Route::get('/category', function () {
-    return view('client.layouts.category');
-});
+Route::get('/', function (){
+    return view('client.layouts.home');
+})->name('client.index');
+Route::get('/detail/{slug}', function (){
+    return view('client.layouts.detail');
+})->name('client.detail_post');
+Route::get('/category/{slug}', [HomeController::class, 'category'])->name('client.category_post');
+Route::post('/comment-post-create', [CommentController::class, 'comment'])->name('client.comment');
 
 Route::middleware([
     'auth:sanctum',
@@ -75,10 +80,12 @@ Route::middleware([
     Route::get('/management-post-delete/{id}', [PostController::class, 'delete'])->name('delete_post');
     Route::get('/management-post-detail/{id}', [PostController::class, 'detail'])->name('detail_post');
     Route::post('/management-post-uploadImage', [PostController::class, 'uploadImage'])->name('ckeditor.upload');
+    // ........................ Comment ........................
+
 });
-Route::get('batch_01', [CommandController::class, 'insert'])->name('batch_01');
+Route::get('batch_01', App\Http\Livewire\User\UserIndex::class)->name('batch_01');
 Route::get('/test', function () {
-    $x = 3;
+    $x = 4;
     $y = 4;
     $sum = (2 * 2 + 4 * 2 + 2 * 2 + 2.5 * 2 + 3.5 * 4 + 4 * 3 + 3 * 2 + 2 * 3 + 3 * 2 + 1.5 * 3 + 3 * 3 + 3 * 2 + 3.5 * 2 + 4 * 2 + 3.5 * 2 + 3 * 2 + 4 * 2 + 2 * 2 + 3.5 * 2 + 4 * 2 + 2 * 3 + 3 * 2 + 4 * 2 + 4 * 2 + 3 * 2 + 4 * 2 + 3 * 3 + 3 * 2 + 4 * 2 + 2.5 * 2 + 4 * 2 + 3 * 2 + 3.5 * 2 + 4 + 3 * 3 + 4 * 3 + 3.5 * 2 + 4 * 3 + 4 * 2 + 4 * 2 + 3.5 + 4 * 2 + 3.5 * 3 + 3 * 2 + 4 * 2 + 3.5 * 3 + 4 * 2 + 4 * 2 + 4 * 2 + 4 * 2 + 3.5 * 2 + 4 * 4 * 3 + $x * 5 + $y * 14) / 144;
     $sumTung = (12 + 14 + 4 + 5 + 8 + 6 + 8 + 7 + 12 + 2 + 7.5 + 5 + 9 + 7 + 7 + 6 + 4 + 8 + 4 + 8 + 5 + 8 + 10.5 + 8 + 6 + 8 + 4 + 7 + 7 + 7 + 8 + 8 + 12 + 3 + 6 + 9 + 8 + 6 + 10.5 + 7 + 4 + 8 + 5 + 12 + 7 + 7 + 7 + 6 + 6 + 7.5 + 4 + 14 + 14 + 14 + $x * 5 + $y * 14) / 144;

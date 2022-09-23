@@ -31,6 +31,7 @@ return [
     'STATUS_NOT_UPDATED' => 0,
     'STATUS_PUBLIC' => 1,
     'STATUS_DRAFF' => 2,
+    'USER_DEFAULT_GUEST' => 0,
 ]
 
 ?>

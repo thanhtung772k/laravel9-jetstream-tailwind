@@ -71,7 +71,7 @@ interface PostRepository extends RepositoryInterface
      *
      * @return void
      */
-    public function publicPost();
+    public function publicPost($id);
 
     /**
      * sho detail post with slug
@@ -80,4 +80,18 @@ interface PostRepository extends RepositoryInterface
      * @return void
      */
     public function slugPostDetail($slug);
+
+    /**
+     * get all top 4 most interested posts
+     *
+     * @return mixed
+     */
+    public function allPopularPost();
+
+    /**
+     * get all top 4 latest posts
+     *
+     * @return mixed
+     */
+    public function allNewPost();
 }

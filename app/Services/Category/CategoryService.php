@@ -41,4 +41,15 @@ class CategoryService extends BaseService
     {
         return $this->repository->countCategory();
     }
+
+    /**
+     * find category by slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function findCategory($slug)
+    {
+        return $this->repository->findCategory($slug);
+    }
 }

@@ -111,9 +111,9 @@ class PostService extends BaseService
      *
      * @return void
      */
-    public function publicPost()
+    public function publicPost($id)
     {
-        return $this->repository->publicPost();
+        return $this->repository->publicPost($id);
     }
 
     /**
@@ -125,5 +125,26 @@ class PostService extends BaseService
     public function slugPostDetail($slug)
     {
         return $this->repository->slugPostDetail($slug);
+    }
+
+
+    /**
+     * get all top 4 most interested posts
+     *
+     * @return mixed
+     */
+    public function allPopularPost()
+    {
+        return $this->repository->allPopularPost();
+    }
+
+    /**
+     * get all top 4 latest posts
+     *
+     * @return mixed
+     */
+    public function allNewPost()
+    {
+        return $this->repository->allNewPost();
     }
 }

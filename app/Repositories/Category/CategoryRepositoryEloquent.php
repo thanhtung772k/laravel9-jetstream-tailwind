@@ -56,4 +56,17 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
             },
         ])->get();
     }
+
+    /**
+     * find category by slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function findCategory($slug)
+    {
+        return $this->model->where([
+            'slug' => $slug
+        ])->first();
+    }
 }

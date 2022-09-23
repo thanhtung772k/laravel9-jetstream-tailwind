@@ -53,7 +53,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
                 'title', 'like', '%' . $request->title . '%'
             )->where(
                 'author_id', Auth::id()
-            )->orderBy('created_at', 'asc')->get();
+            )->orderBy('created_at', 'asc')->get()->array();
     }
 
     /**
@@ -74,7 +74,8 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
             'author_id' => Auth::id(),
             'image' => $imgPost,
             'status' => $status,
-            'slug' => $slug
+            'slug' => $slug,
+            'description' => $request->description
         ]);
     }
 
@@ -107,7 +108,8 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
             'category_id' => $request->category,
             'image' => $imgPost,
             'status' => $status,
-            'slug' => $slug
+            'slug' => $slug,
+            'description' => $request->description
         ]);
     }
 
@@ -141,12 +143,18 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
      *
      * @return void
      */
-    public function publicPost()
+    public function publicPost($id = null)
     {
         return $this->model->join('categories', 'posts.category_id', '=', 'categories.id')
             ->join('users', 'posts.author_id', '=', 'users.id')
-            ->select('posts.*', 'categories.name as categoryName', 'users.name as authorName')
-            ->where(
+            ->select(
+                'posts.*',
+                'categories.name as categoryName',
+                'categories.slug as categorySlug',
+                'users.name as authorName'
+            )->where(function ($query) use ($id) {
+                return $id ? $query->where('category_id', $id) : '';
+            })->where(
                 'status', config('constant.STATUS_PUBLIC')
             )->get();
     }
@@ -164,7 +172,36 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
             ->select('posts.*', 'categories.name as categoryName', 'users.name as authorName')
             ->where([
                 ['status', config('constant.STATUS_PUBLIC')],
-                ['posts.slug',$slug]
+                ['posts.slug', $slug]
             ])->first();
+    }
+
+    /**
+     * get all top 4 most interested posts
+     *
+     * @return mixed
+     */
+    public function allPopularPost()
+    {
+        return $this->model->all()
+            ->where(
+                'status', config('constant.STATUS_PUBLIC')
+            )->pluck('post_id')->flatten()->unique()->count();
+    }
+
+    /**
+     * get all top 4 latest posts
+     *
+     * @return mixed
+     */
+    public function allNewPost()
+    {
+        return $this->model
+            ->where(
+                'status', config('constant.STATUS_PUBLIC')
+            )->orderBy(
+                'created_at','desc'
+            )->take(4)
+            ->get();
     }
 }

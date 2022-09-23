@@ -6,191 +6,59 @@
         <div class="row mb-[100px] post-detail-banner">
             <div class="col-12 theme-breacrumb-title pl-0 bg-[#f9f9f9] rounded-[24px]">
                 <label class="text-[45px] font-bold mb-[20px] py-[45px] pl-[30px]" for="Search">Category :
-                    Lifestyle</label>
+                    {{$category->name}}</label>
             </div>
         </div>
         <div class="row post-detail-wapper">
             <div class="col-7 post-detail-wapper__column">
-                <div class="row mb-[100px]">
-                    <div class="post-detail">
-                        <div class="post-detail__img mb-[40px]">
-                            <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene-770x470.jpg"
-                                 alt="" class="">
-                        </div>
-                        <div class="post-detail__tag w-[160px] bg-[#ffecef] rounded-[14px]  py-[16px] px-[33px] text-[18px]">
-                            <a href="" class="">
-                                <i class="fa-solid fa-tag rotate-90"></i>
-                                Business
-                            </a>
-                        </div>
-                        <div class="post-detail__title pt-2">
-                            <h1>12 Use Cases Unlocking True Business Potential</h1>
-                        </div>
-                        <div class="post-detail__author mt-[25px] mb-[30px] flex items-start">
-                            <div class="post-detail__author-img">
-                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=45&d=mm&r=g"
-                                     alt="">
+                @foreach($posts as $post)
+                    <div class="row mb-[100px]">
+                        <div class="post-detail">
+                            <div class="post-detail__img mb-[40px]">
+                                <img src="{{asset('storage/imgPost')}}/{{$post->image}}" alt=""
+                                     class="post-gridthumbnail__img w-full max-h-[294px] rounded-3xl object-cover">
                             </div>
-                            <div class="post-detail__author-content ml-[18px] mt-[10px]">
-                                <div class="post-detail__author-name">
-                                    <span>Thor Odinson</span>
-                                </div>
-                                <div class="post-detail__author-date">
-                                    <span>July 10, 2021</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-detail__continue">
-                            <p>
-                                Struggling to sell one multi-million dollar home currently on the market won’t stop
-                                actress and singer Jennifer Lopez from expanding her property collection. Lopez has
-                                reportedly added to her real estate holdings an eight-plus acre estate in Bel-Air
-                                anchored by a multi-level mansion.
-                            </p>
-                            <div class="continue-hover text-[#8f8f8f]">
-                                <a class="font-semibold text-2xl">
-                                    Continue Reading
-                                    <i class="fa-solid fa-arrow-right text-[#FF4063] text-[20px]"></i>
+                            <div class="post-detail__tag w-[160px] bg-[#ffecef] rounded-[14px]  py-[16px] px-[33px] text-[18px]">
+                                <a href="" class="">
+                                    <i class="fa-solid fa-tag rotate-90"></i>
+                                    {{$post->categoryName}}
                                 </a>
+                            </div>
+                            <div class="post-detail__title pt-2">
+                                <h1>{{$post->title}}</h1>
+                            </div>
+                            <div class="post-detail__author mt-[25px] mb-[30px] flex items-start">
+                                <div class="post-detail__author-img">
+                                    @if(isset($post->avatarUser))
+                                        <img src="{{asset('storage/avatarUser')}}/{{$post->avatarUser}}"
+                                             alt="" loading="lazy">
+                                    @else
+                                        <img src="{{asset('upload/default.jpg')}}" alt="">
+                                    @endif
+                                </div>
+                                <div class="post-detail__author-content ml-[18px] mt-[10px]">
+                                    <div class="post-detail__author-name">
+                                        <span>{{$post->authorName}}</span>
+                                    </div>
+                                    <div class="post-detail__author-date">
+                                        <span>{{now()->parse($post->created_at)->isoFormat('MMMM D, Y')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-detail__continue">
+                                <p>
+                                    {{$post->description}}
+                                </p>
+                                <div class="continue-hover text-[#8f8f8f]">
+                                    <a href="{{route('client.detail_post',$post->slug)}}" class="font-semibold text-2xl">
+                                        Continue Reading
+                                        <i class="fa-solid fa-arrow-right text-[#FF4063] text-[20px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-[100px]">
-                    <div class="post-detail">
-                        <div class="post-detail__img mb-[40px]">
-                            <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene-770x470.jpg"
-                                 alt="" class="">
-                        </div>
-                        <div class="post-detail__tag w-[160px] bg-[#ffecef] rounded-[14px]  py-[16px] px-[33px] text-[18px]">
-                            <a href="" class="">
-                                <i class="fa-solid fa-tag rotate-90"></i>
-                                Business
-                            </a>
-                        </div>
-                        <div class="post-detail__title pt-2">
-                            <h1>12 Use Cases Unlocking True Business Potential</h1>
-                        </div>
-                        <div class="post-detail__author mt-[25px] mb-[30px] flex items-start">
-                            <div class="post-detail__author-img">
-                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=45&d=mm&r=g"
-                                     alt="">
-                            </div>
-                            <div class="post-detail__author-content ml-[18px] mt-[10px]">
-                                <div class="post-detail__author-name">
-                                    <span>Thor Odinson</span>
-                                </div>
-                                <div class="post-detail__author-date">
-                                    <span>July 10, 2021</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-detail__continue">
-                            <p>
-                                Struggling to sell one multi-million dollar home currently on the market won’t stop
-                                actress and singer Jennifer Lopez from expanding her property collection. Lopez has
-                                reportedly added to her real estate holdings an eight-plus acre estate in Bel-Air
-                                anchored by a multi-level mansion.
-                            </p>
-                            <div class="continue-hover text-[#8f8f8f]">
-                                <a class="font-semibold text-2xl">
-                                    Continue Reading
-                                    <i class="fa-solid fa-arrow-right text-[#FF4063] text-[20px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-[100px]">
-                    <div class="post-detail">
-                        <div class="post-detail__img mb-[40px]">
-                            <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene-770x470.jpg"
-                                 alt="" class="">
-                        </div>
-                        <div class="post-detail__tag w-[160px] bg-[#ffecef] rounded-[14px]  py-[16px] px-[33px] text-[18px]">
-                            <a href="" class="">
-                                <i class="fa-solid fa-tag rotate-90"></i>
-                                Business
-                            </a>
-                        </div>
-                        <div class="post-detail__title pt-2">
-                            <h1>12 Use Cases Unlocking True Business Potential</h1>
-                        </div>
-                        <div class="post-detail__author mt-[25px] mb-[30px] flex items-start">
-                            <div class="post-detail__author-img">
-                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=45&d=mm&r=g"
-                                     alt="">
-                            </div>
-                            <div class="post-detail__author-content ml-[18px] mt-[10px]">
-                                <div class="post-detail__author-name">
-                                    <span>Thor Odinson</span>
-                                </div>
-                                <div class="post-detail__author-date">
-                                    <span>July 10, 2021</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-detail__continue">
-                            <p>
-                                Struggling to sell one multi-million dollar home currently on the market won’t stop
-                                actress and singer Jennifer Lopez from expanding her property collection. Lopez has
-                                reportedly added to her real estate holdings an eight-plus acre estate in Bel-Air
-                                anchored by a multi-level mansion.
-                            </p>
-                            <div class="continue-hover text-[#8f8f8f]">
-                                <a class="font-semibold text-2xl">
-                                    Continue Reading
-                                    <i class="fa-solid fa-arrow-right text-[#FF4063] text-[20px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-[100px]">
-                    <div class="post-detail">
-                        <div class="post-detail__img mb-[40px]">
-                            <img src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/07/lake-scene-770x470.jpg"
-                                 alt="" class="">
-                        </div>
-                        <div class="post-detail__tag w-[160px] bg-[#ffecef] rounded-[14px]  py-[16px] px-[33px] text-[18px]">
-                            <a href="" class="">
-                                <i class="fa-solid fa-tag rotate-90"></i>
-                                Business
-                            </a>
-                        </div>
-                        <div class="post-detail__title pt-2">
-                            <h1>12 Use Cases Unlocking True Business Potential</h1>
-                        </div>
-                        <div class="post-detail__author mt-[25px] mb-[30px] flex items-start">
-                            <div class="post-detail__author-img">
-                                <img src="https://secure.gravatar.com/avatar/4baf8d27f33c75151b378befcd1ca61f?s=45&d=mm&r=g"
-                                     alt="">
-                            </div>
-                            <div class="post-detail__author-content ml-[18px] mt-[10px]">
-                                <div class="post-detail__author-name">
-                                    <span>Thor Odinson</span>
-                                </div>
-                                <div class="post-detail__author-date">
-                                    <span>July 10, 2021</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="post-detail__continue">
-                            <p>
-                                Struggling to sell one multi-million dollar home currently on the market won’t stop
-                                actress and singer Jennifer Lopez from expanding her property collection. Lopez has
-                                reportedly added to her real estate holdings an eight-plus acre estate in Bel-Air
-                                anchored by a multi-level mansion.
-                            </p>
-                            <div class="continue-hover text-[#8f8f8f]">
-                                <a class="font-semibold text-2xl">
-                                    Continue Reading
-                                    <i class="fa-solid fa-arrow-right text-[#FF4063] text-[20px]"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
             <div class="col-5 post-category-wapper">
