@@ -22,6 +22,27 @@ class Comment extends Model
         'content',
         'name',
         'email',
-        'website'
+        'website',
+        'user_id'
     ];
+
+    /**
+     * The belongs to Relationship
+     *
+     * @var array
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The belongs to Relationship
+     *
+     * @var array
+     */
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
 }

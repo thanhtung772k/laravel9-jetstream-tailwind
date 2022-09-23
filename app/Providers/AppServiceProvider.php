@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
+use App\Services\Category\CategoryService;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema; // add
+use Illuminate\Support\Facades\Schema;
+
+// add
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,8 +30,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(CategoryService $categoryService)
     {
         Schema::defaultStringLength(191); // add: default varchar(191)
+        View::composer(['client.layouts.header'], function ($view) use ($categoryService) {
+            $categoryService = $categoryService->countCategory();
+            $view->with([
+                'categories' => $categoryService,
+            ]);
+        });
     }
 }

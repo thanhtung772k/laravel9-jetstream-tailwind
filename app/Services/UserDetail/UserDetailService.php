@@ -116,4 +116,15 @@ class UserDetailService extends BaseService
     {
         return $this->repository->detail($id);
     }
+
+    /**
+     * Update or create info User
+     *
+     * @param $info
+     * @return void
+     */
+    public function updateInfo($info)
+    {
+        return $this->repository->updateInfo($info);
+    }
 }

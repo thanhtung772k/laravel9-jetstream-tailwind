@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('client.layouts.css')
+    @livewireStyles
 </head>
 <body class="font-sans antialiased">
 @include('client.layouts.header')
@@ -45,5 +46,7 @@
 @include('client.layouts.script')
 
 @stack('modals')
+
+@livewireScripts
 </body>
 </html>

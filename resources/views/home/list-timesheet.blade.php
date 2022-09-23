@@ -74,7 +74,7 @@
                     </thead>
                     <tbody>
                     @foreach ($data as $index => $value)
-                        <tr class="text-center @php if($value->created_at->isWeekend()) echo'bg-weekend' @endphp">
+                        <tr class="text-center @php if(now()->parse($value->date)->isWeekend()) echo'bg-weekend' @endphp">
 
                             <th scope="row">{{$index+1}}</th>
 

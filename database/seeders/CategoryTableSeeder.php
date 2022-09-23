@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class CategoryTableSeeder extends Seeder
     {
         $arr = ['Business', 'World', 'Design', 'Lifestyle'];
         foreach ($arr as $key => $value) {
-            Category::factory()->count(1)->create(['name' => $value]);
+            Category::factory()->count(1)->create(['name' => $value, 'slug' => Str::slug($value)]);
         }
     }
 }

@@ -27,7 +27,6 @@
                                         </div>
                                     </section>
                                 </div>
-
                             </div>
                             <div class="col-sm-3">
                                 <div class="header-search__text-date">

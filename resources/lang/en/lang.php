@@ -146,4 +146,5 @@ return [
     'list_user' => 'List User',
     'chart_user' => 'Chart User',
     'login' => 'Login',
+    'view_more' => 'View more',
 ];

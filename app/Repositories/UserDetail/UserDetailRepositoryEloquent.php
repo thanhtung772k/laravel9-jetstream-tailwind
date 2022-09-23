@@ -2,6 +2,7 @@
 
 namespace App\Repositories\UserDetail;
 
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Models\UserDetail;
@@ -205,5 +206,21 @@ class UserDetailRepositoryEloquent extends BaseRepository implements UserDetailR
         return $this->model->where(
             'user_id', $id
         )->first();
+    }
+
+    /**
+     * Update or create info User
+     *
+     * @param $info
+     * @return void
+     */
+    public function updateInfo($info)
+    {
+        return $this->model
+            ->where(
+                'user_id', Auth::id()
+            )->update([
+                'author_info' => $info
+            ]);
     }
 }

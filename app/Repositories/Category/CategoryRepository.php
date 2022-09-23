@@ -11,5 +11,25 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface CategoryRepository extends RepositoryInterface
 {
-    //
+    /**
+     * get all category
+     *
+     * @return void
+     */
+    public function getAll();
+
+    /**
+     * count all category
+     *
+     * @return void
+     */
+    public function countCategory();
+
+    /**
+     * find category by slug
+     *
+     * @param $slug
+     * @return void
+     */
+    public function findCategory($slug);
 }

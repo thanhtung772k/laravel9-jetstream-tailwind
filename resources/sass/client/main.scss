@@ -329,6 +329,23 @@ $desktop-width: 1024px;
     background-color: #279EFF;
 }
 
+@mixin widget() {
+    margin-bottom: 0px;
+    padding-right: 15px;
+    padding: 5px 200px 6px 5px;
+    color: #fff!important;
+    font-size: 24px;
+}
+
+.widget-title {
+    @include widget;
+    background: linear-gradient(to right, #118FA6 , #fff);
+    &-2 {
+        @include widget;
+        background: linear-gradient(to right, #F58722, #fff);
+    }
+}
+
 .post {
     @include mobile {
         display: block;
@@ -464,7 +481,7 @@ $desktop-width: 1024px;
     &-img img {
         width: 40px;
         border-radius: 12px;
-        height: auto;
+        height: 40px;
 
         @include mobile {
             width: 50px;
