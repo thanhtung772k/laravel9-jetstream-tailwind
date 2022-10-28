@@ -32,6 +32,7 @@ return [
     'STATUS_PUBLIC' => 1,
     'STATUS_DRAFF' => 2,
     'USER_DEFAULT_GUEST' => 0,
+    'now' => now()->format('Y-m-d'),
 ]
 
 ?>
