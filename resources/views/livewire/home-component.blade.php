@@ -1,6 +1,4 @@
-<?php
-/** @see \App\Http\Livewire\HomeComponent */
-?><section class="elementor-section">
+<section class="elementor-section">
     <div class="elementor-container">
         <div class="elementor-column">
             <div class="elementor-widget-wrap">
@@ -8,7 +6,7 @@
                     <div class="elementor-widget-container">
                         <div class="theme_post_grid__Slider">
                             <img class="theme-post__banner"
-                                 src="https://flawlessdigitalagency.com/elior/wp-content/uploads/2021/10/thumb-philippines.jpg"
+                                 src="https://www.teahub.io/photos/full/46-462038_blog-hero-banner-sketch.jpg"
                                  style="">
                         </div>
                     </div>
@@ -17,7 +15,6 @@
         </div>
     </div>
 </section>
-
 <section class="flex justify-center mb-5 mt-[100px]" wire:loading.remove>
     <div class="max-w-[1170px] w-full">
         <div class="row post">
@@ -49,8 +46,12 @@
                                         </div>
                                     </div>
                                     <h3 class="post-grid-content__title">
-{{--                                        href="{{route('client.detail_post',$post->slug)}}"--}}
-                                        <button class="hover:no-underline hover:text-[#FF4063]" wire:click="getSlug({{ $post->slug}})">{{$post->title}}</button>
+                                        <a class="hover:no-underline hover:text-[#FF4063]"
+                                           href="{{route('client.detail_post',$post->slug)}}"
+                                            {{request()->is(route('client.detail_post',$post->slug)) ? 'active': '' }}>
+                                            {{$post->title}}
+                                        </a>
+{{--                                        <button class="hover:no-underline hover:text-[#FF4063]" wire:click="getSlug({{ $post->slug}})" :wire:key="$post->index">{{$post->title}}</button>--}}
                                     </h3>
                                     <div class="post-excerpt-box">
                                         <p>{{$post->description}}</p>
@@ -81,7 +82,7 @@
 
             <div class="col-4 post-popular-wapper">
                 <div class="mb-[32px]">
-                    <div class="leading-none font-extrabold text-[24px] mb-[15px] widget-title">New Posts</div>
+                    <div class="leading-none font-extrabold text-[24px] mb-4 widget-title">New Posts</div>
                     @foreach($newPosts as $newPost)
                         <div class="post-popular ">
                             <div class="mr-[12px]">
@@ -105,7 +106,7 @@
                     @endforeach
                 </div>
 
-                <div class="leading-none font-extrabold text-[24px] mb-[15px] widget-title-2">Popular Posts</div>
+                <div class="leading-none font-extrabold text-[24px] mb-4 widget-title-2">Popular Posts</div>
                 @foreach($popularPosts as $popularPost)
                     <div class="post-popular">
                         <div class="mr-[12px]">
@@ -128,7 +129,6 @@
                 @endforeach
 
             </div>
-
         </div>
     </div>
 </section>

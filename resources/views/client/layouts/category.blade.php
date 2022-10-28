@@ -84,22 +84,12 @@
                         </div>
                         <div class="col-md-12">
                             <ul class="category-menu">
-                                <li class="flex justify-between mb-[16px]">
-                                    <a href="" class="font-semibold text-xl">Business</a>
-                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">2</span>
-                                </li>
-                                <li class="flex justify-between mb-[16px]">
-                                    <a href="" class="font-semibold text-xl">Culture</a>
-                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">99+</span>
-                                </li>
-                                <li class="flex justify-between mb-[16px]">
-                                    <a href="" class="font-semibold text-xl">Design</a>
-                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">6</span>
-                                </li>
-                                <li class="flex justify-between mb-[16px]">
-                                    <a href="" class="font-semibold text-xl">Lifestyle</a>
-                                    <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">2</span>
-                                </li>
+                                @foreach($categories as $category)
+                                    <li class="flex justify-between mb-[16px]">
+                                        <a href="" class="font-semibold text-xl">{{$category->name}}</a>
+                                        <span class="h-[35px] bg-[#FF4063] text-white w-[40px] mr-[30px] leading-[35px] text-center text-[20px] rounded-xl">{{$category->posts_count}}</span>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
