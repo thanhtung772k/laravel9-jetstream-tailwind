@@ -118,6 +118,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function deleteUser($id)
     {
+        $id = 'abc';
         return $this->model->where(
             'id', $id
         )->delete();

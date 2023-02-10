@@ -2,6 +2,7 @@
 
 namespace App\Services\Timesheet;
 
+use App\Models\Timesheet;
 use App\Repositories\Timesheet\TimesheetRepository;
 use App\Services\BaseService;
 use App\Traits\HandleDay;
@@ -46,6 +47,18 @@ class TimesheetService extends BaseService
     {
 
         return $this->repository->searchDateTimesheet($request);
+    }
+
+    /**
+     * index and search date Timesheet
+     *
+     * @param $request
+     * @return mixed
+     */
+    public function searchDateTimesheetUser($request, $id)
+    {
+
+        return $this->repository->searchDateTimesheetUser($request, $id);
     }
 
     /**
@@ -148,7 +161,7 @@ class TimesheetService extends BaseService
      */
     public function approval($timesheetID, $checkInReq, $checkOutReq)
     {
-        $timesheets = $this->updateTimesheet($checkInReq, $checkOutReq);
+        $timesheets = $this->updateTimesheetApp($checkInReq, $checkOutReq);
         return $this->repository->approval($timesheets['actWorking'], $timesheets['paidWorking'], $timesheetID, $checkInReq, $checkOutReq);
     }
 
@@ -160,7 +173,7 @@ class TimesheetService extends BaseService
      */
     public function approvalMany($data)
     {
-        $timesheets = $this->updateTimesheet($data->check_int_request, $data->check_out_request);
+        $timesheets = $this->updateTimesheetApp($data->check_int_request, $data->check_out_request);
         return $this->repository->approvalMany($data, $timesheets['actWorking'], $timesheets['paidWorking']);
     }
 }

@@ -68,6 +68,17 @@ class TimesheetRepositoryEloquent extends BaseRepository implements TimesheetRep
         )->paginate($request->paginate ?: config('constant.pagination_records'));
     }
 
+    public function searchDateTimesheetUser($request, $id)
+    {
+        return $this->model->select('*')->where([
+            ['date', '>=', $request->fromDate ?: now()->startOfMonth()->format("Y-m-d")],
+            ['date', '<=', $request->toDate ?: now()->endOfMonth()->format("Y-m-d")],
+            ['user_id', $id],
+        ])->sortable()->orderBy(
+            'date', 'desc'
+        )->paginate($request->paginate ?: config('constant.pagination_records'));   
+    }
+
     /**
      * Search date the repository
      *

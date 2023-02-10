@@ -44,6 +44,7 @@ class Insert extends Command
     {
         $users = $userservice->getAllUser();
         $date = now()->format("Y-m-d");
+        //$date = '2023-02-03';
         if (count($users) > 0) {
             foreach ($users as $user) {
                 $timesheetService->createDate($date, $user->id);

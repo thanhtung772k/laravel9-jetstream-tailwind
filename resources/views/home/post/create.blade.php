@@ -101,7 +101,7 @@
                                 <div class="pt-4 add_timesheet-title">
                                     <label>@lang('client/lang.about_author')</label>
                                     <div>
-                                        <textarea class="form-control" name="author" rows="3">{{$author->author_info}}</textarea>
+                                        <textarea class="form-control" name="author" rows="3">{{isset($author->author_info) ? $author->author_info : ''}}</textarea>
                                     </div>
                                     @error('reason')
                                     <div class="text-red-500">{{ $message }}</div>

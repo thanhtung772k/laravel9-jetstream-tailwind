@@ -111,7 +111,6 @@ class PostController extends Controller
             return redirect()->route('index_post');
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             return redirect()->back()->withInput()->withErrors();
         }
     }

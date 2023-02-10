@@ -17,6 +17,18 @@ Breadcrumbs::for('timesheet-list', function ($trail) {
     $trail->push(__('lang.list_timesheets'), route('dashboard'));
 });
 
+// Home > Timesheet >management
+Breadcrumbs::for('timesheet-management', function ($trail) {
+    $trail->parent('home');
+    $trail->push(__('management'), route('management'));
+});
+
+// Home >management > Detail
+Breadcrumbs::for('timesheet-detail', function ($trail) {
+    $trail->parent('timesheet-management');
+    $trail->push(__('detail'), route('management'));
+});
+
 // Home > Additional Timesheet
 Breadcrumbs::for('add_timesheet', function ($trail) {
     $trail->parent('home');

@@ -11,7 +11,7 @@
             $('#checkInReq').val(addTimesheet.check_int_request);
             $('#checkOutReq').val(addTimesheet.check_out_request);
             $('#status').val(addTimesheet.status);
-            $('#modalComment').modal('toggle');
+            // $('#modalComment').modal('toggle');
         })
 
         $('#addTimesheetApprovalForm').submit(function (e) {
@@ -53,7 +53,7 @@
             $('#timesheetID').val(addTimesheet.timesheet_id);
             $('#checkInReq').val(addTimesheet.check_int_request);
             $('#checkOutReq').val(addTimesheet.check_out_request);
-            $('#modalComment').modal('toggle');
+            //$('#modalComment').modal('toggle');
         })
 
         $('#addTimesheetApprovalForm').submit(function (e) {
@@ -208,7 +208,6 @@
                                         <input type="checkbox" class="checkboxItem rounded" name="item[]"
                                                value="{{$value->id}}">
                                     </td>
-
                                     <td>{{ $value->user_id }}</td>
 
                                     <td>{{$value->user->name}}</td>

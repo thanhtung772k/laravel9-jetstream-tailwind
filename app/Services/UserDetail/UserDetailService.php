@@ -71,17 +71,13 @@ class UserDetailService extends BaseService
      */
     public function update($request, $id)
     {
-        try {
-            $imgEvidence = $request->old_evidence_image;
-            $path = 'avatarUser/';
-            if ($request->evidence_image !== null) {
-                $this->removeFile($request->old_evidence_image, $path);
-                $imgEvidence = $this->uploadFileTo($request->evidence_image, $path)['fileName'];
-            }
-            return $this->repository->updateDetail($request, $id, $imgEvidence);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+        $imgEvidence = $request->old_evidence_image;
+        $path = 'avatarUser/';
+        if ($request->evidence_image !== null) {
+            $this->removeFile($request->old_evidence_image, $path);
+            $imgEvidence = $this->uploadFileTo($request->evidence_image, $path)['fileName'];
         }
+        return $this->repository->updateDetail($request, $id, $imgEvidence);
     }
 
     /**

@@ -30,6 +30,16 @@ interface TimesheetRepository extends RepositoryInterface
     public function searchDateTimesheet($request);
 
     /**
+     * Search date the repository
+     *
+     * @param $fromDate
+     * @param $toDate
+     * @param $paginate
+     * @return mixed
+     */
+    public function searchDateTimesheetUser($request, $id);
+
+    /**
      * checkin date the repository
      *
      * @param $checkInDate

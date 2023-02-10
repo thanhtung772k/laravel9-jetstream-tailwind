@@ -23,6 +23,7 @@ class Timekeeping extends Model
      */
     protected $fillable = [
         'employee_code',
-        'date_time'
+        'date_time',
+        'date'
     ];
 }

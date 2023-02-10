@@ -160,7 +160,6 @@ class ProjectController extends Controller
     {
         $project = $this->projectService->detail($id);
         $userProjects = $this->userHasProjectService->detail($id);
-
         return view('home.add-project.detail-project', [
             'project' => $project,
             'userProjects' => $userProjects,

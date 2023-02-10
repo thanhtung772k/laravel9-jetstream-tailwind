@@ -79,6 +79,7 @@ class HomeController extends Controller
     {
         $category = $this->categoryService->findCategory($slug);
         $posts = $this->postService->publicPost($category->id);
+        $categories = $this->categoryService->countCategory();
         foreach ($posts as $post) {
             $author = $this->userDetailService->detail($post->author_id);
             $post['avatarUser'] = $author->avatar;
@@ -86,6 +87,7 @@ class HomeController extends Controller
         return view('client.layouts.category', [
             'posts' => $posts,
             'category' => $category,
+            'categories' => $categories,
         ]);
     }
 }
