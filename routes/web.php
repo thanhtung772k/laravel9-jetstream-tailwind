@@ -3,7 +3,6 @@
 use App\Http\Controllers\Client\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TimesheetController;
-use App\Http\Controllers\CommandController;
 use App\Http\Controllers\AddTimesheetController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -26,9 +25,7 @@ use App\Http\Livewire\HomeComponent;
 Route::get('/', function (){
     return view('client.layouts.home');
 })->name('client.index');
-Route::get('/detail/{slug}', function (){
-    return view('client.layouts.detail');
-})->name('client.detail_post');
+Route::get('/detail/{slug}', [HomeController::class, 'detail'])->name('client.detail_post');
 Route::get('/category/{slug}', [HomeController::class, 'category'])->name('client.category_post');
 Route::post('/comment-post-create', [CommentController::class, 'comment'])->name('client.comment');
 
@@ -39,6 +36,9 @@ Route::middleware([
 ])->group(function () {
     // ........................ route home .............................
     Route::get('/home', [TimesheetController::class, 'index'])->name('dashboard');
+    Route::get('/home-management', [TimesheetController::class, 'management'])->name('management');
+    Route::get('/home-management-history/{id?}/{date?}', [TimesheetController::class, 'history'])->name('history');
+    Route::get('/home-management/{id}', [TimesheetController::class, 'timesheetUser'])->name('timesheet_user');
     Route::post('/home-checkin', [TimesheetController::class, 'checkIn'])->name('check_in');
     Route::post('/home-checkout', [TimesheetController::class, 'checkOut'])->name('check_out');
     // ........................ route additional timesheet ........................
@@ -71,7 +71,7 @@ Route::middleware([
     Route::get('/management-user-delete/{id}', [UserController::class, 'delete'])->name('delete_user');
     Route::get('/management-user-leave', [UserController::class, 'leave'])->name('leave_user');
     Route::get('/management-user-detail/{id}', [UserController::class, 'detail'])->name('detail_user');
-    // ........................ route user management ........................
+    // ........................ route post management ........................
     Route::get('/management-post-index', [PostController::class, 'index'])->name('index_post');
     Route::get('/management-post-create', [PostController::class, 'create'])->name('create_post');
     Route::post('/management-post-create', [PostController::class, 'insert'])->name('insert_post');

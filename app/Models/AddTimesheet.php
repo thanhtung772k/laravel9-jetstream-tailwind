@@ -37,6 +37,11 @@ class AddTimesheet extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function timesheet()
+    {
+        return $this->belongsTo(Timesheet::class, 'timesheet_id');
+    }
+
     /**
      * Get additional timesheet's confirm information.
      * @return string

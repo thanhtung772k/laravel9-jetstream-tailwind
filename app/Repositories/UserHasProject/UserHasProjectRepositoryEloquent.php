@@ -168,6 +168,11 @@ class UserHasProjectRepositoryEloquent extends BaseRepository implements UserHas
      */
     public function working()
     {
-        return $this->model->groupBy('user_id')->pluck('user_id')->toArray();
+        $data = $this->model->groupBy('user_id')
+            ->where([
+                ['end_date','>=', config('constant.now')],
+                ['start_date','<=', config('constant.now')]
+            ])->pluck('user_id')->toArray();
+        return $data;
     }
 }

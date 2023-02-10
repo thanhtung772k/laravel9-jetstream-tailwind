@@ -3,8 +3,14 @@
     "/js/home.js": "/js/home.js",
     "/js/timesheet/add-timesheet.js": "/js/timesheet/add-timesheet.js",
     "/js/timesheet/add-timesheet-edit.js": "/js/timesheet/add-timesheet-edit.js",
-    "/css/app.css": "/css/app.css",
+    "/js/timesheet/project.js": "/js/timesheet/project.js",
+    "/js/timesheet/post.js": "/js/timesheet/post.js",
+    "/js/client/main.js": "/js/client/main.js",
+    "/css/client/main.css": "/css/client/main.css",
     "/css/project/project.css": "/css/project/project.css",
+    "/css/timesheet/post.css": "/css/timesheet/post.css",
     "/css/timesheet/add-timesheet.css": "/css/timesheet/add-timesheet.css",
-    "/css/main.css": "/css/main.css"
+    "/css/main.css": "/css/main.css",
+    "/css/app.css": "/css/app.css",
+    "/css/client/detail.css": "/css/client/detail.css"
 }

@@ -10,7 +10,11 @@
             <li class="nav-menu__item">
                 <span>
                     <i class="nav-menu__icon fa-solid fa-gauge-high pr-3 "></i>
-                    <a href="{{url('home')}}" class="nav-menu__item">@lang('lang.dashboard')</a>
+                    @if (Auth::user()->is_admin == 1)
+                        <a href="{{ route('management') }}" class="nav-menu__item">@lang('lang.dashboard')</a>
+                    @else
+                        <a href="{{url('home')}}" class="nav-menu__item">@lang('lang.dashboard')</a>
+                    @endif
                 </span>
             </li>
             <li class="nav-menu__item-head">
@@ -27,6 +31,11 @@
                     <li class="text-center w-full">
                         <a href="{{url('home')}}" class="nav-menu__sub-item--list {{ Route::currentRouteNamed( 'dashboard' ) ?  'bg-cus-color' : '' }}">@lang('lang.list_timesheets')</a>
                     </li>
+                    @if (Auth::user()->is_admin == 1)
+                        <li class="text-center w-full">
+                            <a href="{{ route('management') }}" class="nav-menu__sub-item--list {{ Route::currentRouteNamed( 'management' ) ?  'bg-cus-color' : '' }}">Managent Timesheet</a>
+                        </li>
+                    @endif
                 </ul>
             </li>
 
@@ -67,44 +76,46 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="nav-menu__item">
-                <span>
-                    <i class="nav-menu__icon fa-solid fa-file  pr-3"></i>
-                    <span>@lang('lang.add_project')</span>
-                </span>
-                <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item" style="display: none;">
-                    <li class="text-center w-full">
-                        <a href="{{route('get_project')}}" class="nav-menu__sub-item--list">@lang('lang.project_list')</a>
-                    </li>
-                    <li class="text-center w-full">
-                        <a href="{{route('create_project')}}" class="nav-menu__sub-item--list">@lang('lang.project_create')</a>
-                    </li>
-                    <li class="text-center w-full">
-                        <a href="{{route('chart_status')}}" class="nav-menu__sub-item--list">@lang('lang.personnel_status')</a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-menu__item">
-                <span>
-                    <i class="nav-menu__icon fa-solid fa-user-group pr-3"></i>
-                    <span>@lang('lang.user_management')</span>
-                </span>
-                <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
-                <ul class="nav-menu__sub-item" style="display: none;">
-                    <li class="text-center w-full">
-                        <a href="{{route('index_user')}}" class="nav-menu__sub-item--list">@lang('lang.project_list')</a>
-                    </li>
-                    <li class="text-center w-full">
-                        <a href="{{route('create_user')}}" class="nav-menu__sub-item--list">@lang('lang.project_create')</a>
-                    </li>
-                    <li class="text-center w-full">
-                        <a href="{{route('leave_user')}}" class="nav-menu__sub-item--list">@lang('lang.employee_leave')</a>
-                    </li>
-                </ul>
-            </li>
+            @if (Auth::user()->is_admin == 1)
+                <li class="nav-menu__item">
+                    <span>
+                        <i class="nav-menu__icon fa-solid fa-file  pr-3"></i>
+                        <span>@lang('lang.add_project')</span>
+                    </span>
+                    <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
+                    <ul class="nav-menu__sub-item" style="display: none;">
+                        <li class="text-center w-full">
+                            <a href="{{route('get_project')}}" class="nav-menu__sub-item--list">@lang('lang.project_list')</a>
+                        </li>
+                        <li class="text-center w-full">
+                            <a href="{{route('create_project')}}" class="nav-menu__sub-item--list">@lang('lang.project_create')</a>
+                        </li>
+                        <li class="text-center w-full">
+                            <a href="{{route('chart_status')}}" class="nav-menu__sub-item--list">@lang('lang.personnel_status')</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+            @if (Auth::user()->is_admin == 1)
+                <li class="nav-menu__item">
+                    <span>
+                        <i class="nav-menu__icon fa-solid fa-user-group pr-3"></i>
+                        <span>@lang('lang.user_management')</span>
+                    </span>
+                    <i class="nav-menu__dropToggle fa-solid fa-angle-left text-xs pr-3 float-right relative top-3.5"></i>
+                    <ul class="nav-menu__sub-item" style="display: none;">
+                        <li class="text-center w-full">
+                            <a href="{{route('index_user')}}" class="nav-menu__sub-item--list">List Users</a>
+                        </li>
+                        <li class="text-center w-full">
+                            <a href="{{route('create_user')}}" class="nav-menu__sub-item--list">Create new Employee</a>
+                        </li>
+                        <li class="text-center w-full">
+                            <a href="{{route('leave_user')}}" class="nav-menu__sub-item--list">@lang('lang.employee_leave')</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
 
             <li class="nav-menu__item">
                 <span>

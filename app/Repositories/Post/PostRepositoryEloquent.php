@@ -53,7 +53,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
                 'title', 'like', '%' . $request->title . '%'
             )->where(
                 'author_id', Auth::id()
-            )->orderBy('created_at', 'asc')->get()->array();
+            )->orderBy('created_at', 'asc')->get();
     }
 
     /**

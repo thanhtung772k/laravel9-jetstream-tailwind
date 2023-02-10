@@ -54,7 +54,7 @@ class Timesheet extends Model
     {
         $sumIn = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_in']));
         $sumOut = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['check_out']));
-        if ($this->attributes['check_in'] === null || $this->attributes['check_out'] === null) {
+        if ($this->attributes['check_in'] === null || $this->attributes['check_out'] === null || now()->parse($this->attributes['date'])->isWeekend()) {
             $lunchBreak = null;
         } elseif ((config('constant.thirteem_haftpast_PM') - $sumOut) <= config('constant.positive_integer')) {
             $lunchBreak = config('constant.one_haftpast_hour');
@@ -81,7 +81,7 @@ class Timesheet extends Model
         if (config('constant.seventeen_haftpast_PM') < $sumOut) {
             $sumOut = config('constant.seventeen_haftpast_PM');
         }
-        if (!isset($this->attributes['check_out']) || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') || !isset($this->attributes['check_in'])) {
+        if (!isset($this->attributes['check_out']) || config('constant.eight_AM') - $sumOut >= config('constant.positive_integer') || !isset($this->attributes['check_in']) || now()->parse($this->attributes['date'])->isWeekend()) {
             $sumOut = null;
         }
         return $sumOut;
@@ -104,10 +104,24 @@ class Timesheet extends Model
         if (config('constant.twelfth_PM') <= $sumIn && $sumIn <= config('constant.thirteem_haftpast_PM')) {
             $sumIn = config('constant.thirteem_haftpast_PM');
         }
-        if ( !isset($this->attributes['check_out']) || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer') || !isset($this->attributes['check_in']) ) {
+        if ( !isset($this->attributes['check_out']) || (config('constant.eight_AM') - $sumOut) >= config('constant.positive_integer') || !isset($this->attributes['check_in']) || now()->parse($this->attributes['date'])->isWeekend()) {
             $sumIn = null;
         }
         return $sumIn;
+    }
+
+    public function getPaidWorkDayAttribute()
+    {
+        if (now()->parse($this->attributes['date'])->isWeekend() && $this->attributes['paid_working_time'] == null) {
+            return null;
+        }
+        if ($this->attributes['paid_working_time'] != null) {
+            $second = now()->parse(config('constant.midnight'))->diffInSeconds(now()->parse($this->attributes['paid_working_time']));
+        } else {
+            $second = 0;
+        }
+        $paid = $second / 28800;
+        return round($paid, 1);
     }
 
     /**

@@ -1,0 +1,32 @@
+version: "2.13.0"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: 12345
+    volumes:
+      - dir-site:/var/lib/mysql
+
+  php:
+    image: tung_nt
+    build :
+      dockerfile: Dockerfile
+    container_name: laravel
+    ports:
+      - "8000:8000"
+    hostname: laravel
+    working_dir: /project
+    volumes:
+      - ./:/project  
+    depends_on:
+      - db
+    entrypoint: ./wait-for-it.sh db:3306 -- bash ./docker/laravel.sh  
+    links:
+      - db
+volumes:
+  dir-site:
