@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6bc57cd3272b23a1382e985a6f4a860",
+    "content-hash": "cd6aab243e08e5dddbe8c6f555b4624e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2281,16 +2281,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v2.10.8",
+            "version": "v2.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "4cc5dedaab1e9512efb4d528fde67df98e9b465a"
+                "reference": "fa0441bf82f1674beecb3a8ad8a4ae428736ed18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/4cc5dedaab1e9512efb4d528fde67df98e9b465a",
-                "reference": "4cc5dedaab1e9512efb4d528fde67df98e9b465a",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/fa0441bf82f1674beecb3a8ad8a4ae428736ed18",
+                "reference": "fa0441bf82f1674beecb3a8ad8a4ae428736ed18",
                 "shasum": ""
             },
             "require": {
@@ -2342,7 +2342,11 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/livewire/livewire/tree/v2.10.8"
+=======
+                "source": "https://github.com/livewire/livewire/tree/v2.10.7"
+>>>>>>> develop
             },
             "funding": [
                 {
@@ -2350,7 +2354,11 @@
                     "type": "github"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-21T22:28:25+00:00"
+=======
+            "time": "2022-08-08T13:52:53+00:00"
+>>>>>>> develop
         },
         {
             "name": "mobiledetect/mobiledetectlib",
